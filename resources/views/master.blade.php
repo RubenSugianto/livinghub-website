@@ -32,20 +32,20 @@
         }
 
         header {
+            position: fixed;
+            top: -10px;
             width: 100%;
-            background: #fff;
-            padding: 15px 20px;
+            background: #000; 
+            padding: 10px 20px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
+            z-index: 1000; 
         }
 
-        .logo {
-            margin-right: auto;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            position: relative;
+        .logo img {
+            width: 130px; 
+            height: auto;
         }
 
         .logo:hover {
@@ -54,13 +54,14 @@
 
         nav {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end; 
             align-items: center;
             gap: 35px;
+          
         }
 
         nav a {
-            color: #333;
+            color: #fff; 
             font-size: 20px;
             font-weight: 500;
             text-decoration: none;
@@ -76,7 +77,7 @@
             left: 50%;
             height: 3px;
             width: 0;
-            background: #0C0908;
+            background: #4A4AC4; 
             border-radius: 12px;
             transition: all 0.4s ease;
             transform: translateX(-50%);
@@ -100,7 +101,6 @@
             padding: 8px 18px;
             width: fit-content;
             border: 0;
-            margin-left: 30px;
         }
 
         .navbutton:hover {
@@ -141,17 +141,20 @@
         .fa-user-circle {
             margin-left: 30px;
             cursor: pointer;
+            color: #fff; 
         }
 
         main {
+            margin-top: 80px; 
             flex: 1;
+            padding: 20px;
         }
 
         footer {
             width: 100%;
-            background: #000;
-            padding: 40px 0px;
-            color: white;
+            background: #000; 
+            padding: 30px 0; 
+            color: #fff; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -160,40 +163,40 @@
 
         .footer-content {
             width: 100%;
-            max-width: 1200px;
+            max-width: 2000px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
+            padding: 0 30px; 
         }
 
         .footer-description {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: flex-start;
-            max-width: 400px;
+            max-width: 500px;
             text-align: justify;
-            margin-right: 40px;
+            margin-top: 30px;
+            margin-right: 100px;
         }
 
         .footer-description img {
-            height: 50px;
-            margin-right: 35px;
+            height: 100px;
+            margin-right: 0;
+            margin-bottom: 20px;
             transition: color 0.4s ease;
-        }
-
-        .footer-description img:hover {
-            filter: invert(44%) sepia(78%) saturate(2481%) hue-rotate(222deg) brightness(96%) contrast(106%);
         }
 
         .footer-section {
             flex: 1;
             min-width: 150px;
-            padding: 10px;
+            padding: 20px;
+            margin-top: 20px; 
         }
 
         .footer-section p {
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .footer-section .city-links {
@@ -203,7 +206,7 @@
         }
 
         .footer-section a {
-            color: white;
+            color: #fff; 
             text-decoration: none;
             position: relative;
             padding: 2px 0;
@@ -216,7 +219,7 @@
             left: 0;
             height: 2px;
             width: 0;
-            background: #4A4AC4;
+            background: #4A4AC4; 
             border-radius: 12px;
             transition: all 0.4s ease;
         }
@@ -233,12 +236,12 @@
 
         .social-icons i {
             font-size: 30px;
-            color: white;
+            color: #fff; 
             transition: color 0.4s ease;
         }
 
         .social-icons i:hover {
-            color: #4A4AC4;
+            color: #4A4AC4; 
         }
 
         .footer-bottom {
@@ -248,29 +251,33 @@
             text-align: center;
             margin-top: 30px;
         }
+    
     </style>
+        @yield('styles')
 </head>
 <body>
     <header>
-        <div class="logo">
-            Living HUB
-        </div>
-        <nav>
-            <a href="{{ route('register') }}">Register</a>
-            <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('dijual') }}">Dijual</a>
-            <a href="{{ route('disewa') }}">Disewa</a>
-            <a href="{{ route('simulasikpr') }}">Simulasi KPR</a>
-            <button class="navbutton" role="button">Tambah Properti</button>
-            <div class="dropdown">
-                <i class='fa fa-user-circle' style='font-size:36px;'></i>
-                <div class="dropdown-content">
-                    <a href="#">Favorites</a>
-                    <a href="#">Like</a>
-                    <a href="#">Logout</a>
+        <div class="footer-content">
+            <a href="{{ route('home') }}" class="logo">
+                <img src="Logoo.png" alt="Logo">
+            </a>
+            <nav>
+                <a href="{{ route('register') }}">Register</a>
+                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('dijual') }}">Dijual</a>
+                <a href="{{ route('disewa') }}">Disewa</a>
+                <a href="{{ route('simulasikpr') }}">Simulasi KPR</a>
+                <button class="navbutton" role="button">Tambah Properti</button>
+                <div class="dropdown">
+                    <i class='fa fa-user-circle' style='font-size:36px;'></i>
+                    <div class="dropdown-content">
+                        <a href="#">Favorites</a>
+                        <a href="#">Like</a>
+                        <a href="#">Login</a>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
     <main>
         @yield('content')
@@ -278,7 +285,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-description">
-                <img src="/resources/logo.png" alt="Living HUB Logo">
+            <img src="Logoo.png" alt="Logo">
                 <p>Living HUB merupakan platform jual, beli dan sewa properti terkemuka di Indonesia yang memberikan layanan kepada pengguna sejak 2024. Living HUB berkomitmen menjadikan pengalaman jual beli properti Anda semudah mungkin dengan fitur-fitur yang kami sediakan.</p>
             </div>
             <div class="footer-section">
