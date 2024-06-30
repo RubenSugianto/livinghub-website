@@ -35,4 +35,4 @@ class SimulasikprController extends Controller
 
     return view('hasilkpr', compact('cicilan_per_bulan', 'cicilan_per_tahun', 'jumlah_pinjaman', 'tenor'));
     }
-}
+} 
