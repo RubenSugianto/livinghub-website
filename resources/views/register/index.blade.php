@@ -6,14 +6,14 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <main class="form-registration">
-                    <h1 class="h3 mb-3 fw-normal text-center">Registration Form</h1>
+                    <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
                 <form action="/register" method="post">
                     @csrf
                     <div class="form-floating">
-                        <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
-                        <label for="name">Name</label>
+                        <input type="text" name="fullname" class="form-control rounded-top @error('fullname') is-invalid @enderror" id="fullname" placeholder="Name" required value="{{ old('fullname') }}">
+                        <label for="fullname">Full Name</label>
 
-                        @error('name')
+                        @error('fullname')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -54,10 +54,44 @@
                             </div>
                         @enderror
                     </div>
-                    
-                    <button class="btn btn-primary w-100 py-2 mt-4" type="submit">Register</button>
+
+                    <div class="form-floating">
+                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone') }}">
+                        <label for="phone">Phone</label>
+                        @error('phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-floating">
+                        <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                            <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                        <label for="gender">Gender</label>
+                        @error('gender')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age') }}">
+                        <label for="age">Age</label>
+                        @error('age')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <small class="d-block text-center mt-4">Sudah memiliki akun? <a class= "text-black" href="/login">Login</a></small>
+                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Register</button>
                 </form>
-                <small class="d-block text-center mt-3">Already Registered? <a href="/login">Login</a></small>
             </main>
         </div> 
     </div>

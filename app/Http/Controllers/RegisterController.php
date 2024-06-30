@@ -14,10 +14,13 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
+            'fullname' => 'required|max:255|unique:users',
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
-            'email'=> 'required|email:dns|unique:users',
-            'password'=> 'required|min:5|max:255'
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:5|max:255',
+            'phone' => ['required', 'unique:users', 'regex:/^\d{12}$/'],
+            'gender' => 'required',
+            'age' => 'required|integer|min:0'
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);
