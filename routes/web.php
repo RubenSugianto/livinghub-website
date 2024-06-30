@@ -13,8 +13,9 @@ Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simul
 Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
 
 
-Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->name('register');
-Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store']);
+Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store'])->middleware('guest');
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login');
-Route::post('/login', [App\Http\Controllers\LoginController::class, 'authenticate']);
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [App\Http\Controllers\LoginController::class, 'authenticate'])->middleware('guest');
+Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
