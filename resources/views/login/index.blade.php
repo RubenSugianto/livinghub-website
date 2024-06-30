@@ -20,7 +20,7 @@
         @endif
 
         <main class="form-signin mb-10">
-            <h1 class="h3 mb-3 fw-normal text-center">Please login</h1>
+            <h1 class="h3 mb-3 fw-normal text-center">Log In</h1>
                 <form action="login" method="post">
                     @csrf
 
@@ -40,9 +40,9 @@
                     <label for="password">Password</label>
                     </div>
                     
-                    <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                    <small class="d-block text-center mt-4">Belum memiliki akun? <a class="text-black" href="/register">Register</a></small>
+                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Login</button>
                 </form>
-                <small class="d-block text-center mt-3">Not registered? <a href="/register">Register Now!</a></small>
         </main>
         </div> 
     </div>

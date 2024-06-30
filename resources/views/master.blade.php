@@ -262,7 +262,6 @@
                 <img src="Logoo.png" alt="Logo">
             </a>
             <nav>
-                <a href="{{ route('register') }}">Register</a>
                 <a href="{{ route('home') }}">Home</a>
                 <a href="{{ route('dijual') }}">Dijual</a>
                 <a href="{{ route('disewa') }}">Disewa</a>
@@ -273,7 +272,7 @@
                     <div class="dropdown-content">
                         <a href="#">Favorites</a>
                         <a href="#">Like</a>
-                        <a href="#">Login</a>
+                        <a href="login">Login</a>
                     </div>
                 </div>
             </nav>
