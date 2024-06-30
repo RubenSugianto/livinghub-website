@@ -30,6 +30,12 @@
     .simulasi-kpr-container h1 {
         text-align: center;
         margin-bottom: 20px;
+    
+    }
+
+    .simulasi-kpr-container p {
+        font-size: 18px; 
+        margin-bottom: 15px;
     }
 
     .simulasi-kpr-container button {
@@ -58,7 +64,7 @@
         cursor: pointer;
         border: none;
         transition: background-color 0.3s ease;
-        margin-top: 20px; /* Tambahkan margin-top di sini */
+        margin-top: 20px; 
     }
 
     .simulasi-kpr-container button:hover {
