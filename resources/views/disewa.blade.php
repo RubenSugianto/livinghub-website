@@ -4,5 +4,5 @@
 
 @section('content')
     <h2>Properti Disewa</h2>
-    <p>propertiiiiiii disewa</p>
+    <p>propertiiiiiii disewaaaaaaa</p>
 @endsection
