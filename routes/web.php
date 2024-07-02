@@ -19,3 +19,5 @@ Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [App\Http\Controllers\LoginController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
+
+Route::get('/lihatprofile', [App\Http\Controllers\ProfileController::class, 'index'])->name('lihatprofile');
