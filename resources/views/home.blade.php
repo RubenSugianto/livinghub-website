@@ -197,7 +197,7 @@
 </div>
 
 <!-- Search and filter buttons -->
-<div class="search-bar">
+<div class="search-bar mb-5">
     <img src="LogooB.png" alt="Living HUB Logo" width="400"> 
     <div class="input-group">
         <input type="text" placeholder="Cari properti disini..">
@@ -328,6 +328,26 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- Render Data to Card -->
+<div class="container">
+        <div class="row">
+            @foreach($properties as $property)
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="position-absolute px-3 py-2 text-white" style="background-color : rgba(0,0,0,0.7)"><p class = "text-white text-decoration-none">Rp {{ $property->price }}</p></div>
+                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $property->name }}</h5>
+                        <p class="card-text">{{ $property->location }}</p>
+                        <p class="card-text">LB: {{ $property->buildingArea }} m2</p>
+                        <p class="card-text">LS: {{ $property->surfaceArea }} m2</p>
+                    </div>                  
+                </div>
+            </div>
+            @endforeach
+    </div>
 </div>
 
 <script>

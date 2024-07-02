@@ -273,19 +273,36 @@
                         <a href="#">Favorites</a>
                         <a href="#">Like</a>
                         @auth
+                            <form action="/logout" method="post" style="margin: 0;">
+                                @csrf
+                                <button type="submit" style="background: none; border: none; color: black; padding: 12px 16px; width: 100%; text-align: left; cursor: pointer;">
+                                    Logout
+                                </button>
+                            </form>
+                        @else
+                            <a href="/login">Login</a>
+                        @endauth
+                    </div>
+                </div>
+
+                <!-- <div class="dropdown">
+                    <i class='fa fa-user-circle' style='font-size:36px;'></i>
+                    <div class="dropdown-content">
+                        <a href="#">Favorites</a>
+                        <a href="#">Like</a>
+                        @auth
                             <a>
                                 <form action="/logout" method="post">
                                     @csrf
                                     <button type="submit">Logout</button>
                                 </form>
                             </a>
-                           
-                            <!-- <a href="/logout">Logout</a> -->
+                        
                         @else
                             <a href="/login">Login</a>
                         @endauth
                     </div>
-                </div>
+                </div> -->
                 @auth
                     <div class="text-white">Welcome back, {{ auth()->user()->username }}</div>
                 @endauth
