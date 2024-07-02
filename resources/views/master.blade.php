@@ -26,6 +26,7 @@
         body {
             background: whitesmoke;
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -33,7 +34,7 @@
 
         header {
             position: fixed;
-            top: -10px;
+            top: 0px;
             width: 100%;
             background: #000; 
             padding: 10px 20px;
@@ -250,6 +251,13 @@
             padding-top: 20px;
             text-align: center;
             margin-top: 30px;
+        }
+        .full-width-rectangle {
+            width: 102.1%;
+            height: 350px;
+            background-color: black;
+            margin: -20px;
+            padding: 0px; */
         }
     
     </style>
