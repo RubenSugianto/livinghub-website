@@ -13,4 +13,9 @@ class HomeController extends Controller
             'properties' => Property::all()
         ]);
     }
+    public function show($id) {
+        return view('property', [
+            "property" => Property::findOrFail($id)
+        ]);
+    }
 }
