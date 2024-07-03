@@ -335,6 +335,7 @@
         <div class="row">
             @foreach($properties as $property)
             <div class="col-md-4 mb-3">
+              <a href="/property/{{ $property->id }}" class="text-decoration-none">
                 <div class="card">
                     <div class="position-absolute px-3 py-2 text-white" style="background-color : rgba(0,0,0,0.7)"><p class = "text-white text-decoration-none">Rp {{ $property->price }}</p></div>
                     <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name}}">
@@ -345,6 +346,7 @@
                         <p class="card-text">LS: {{ $property->surfaceArea }} m2</p>
                     </div>                  
                 </div>
+              </a>
             </div>
             @endforeach
     </div>
