@@ -162,8 +162,163 @@
     .modal-dialog.modal-lg {
         max-width: 40%; 
     }
-
     
+      body {
+      font-family: "Lexend", sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #393232;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .card-list {
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .card {
+      background-color: #FFF;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      overflow: hidden;
+      padding: 1.25rem;
+      position: relative;
+      transition: 0.15s ease-in;
+    }
+    .card:hover, .card:focus-within {
+      box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .card-image {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .card-image::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%; 
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      z-index: 1;
+    }
+
+    .price-badge {
+      position: absolute;
+      bottom: 10px; 
+      left: 10px;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      z-index: 2; 
+    }
+
+    .card-body {
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .icon-button {
+      border: 0;
+      background-color: #fff;
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      font-size: 1.25rem;
+      transition: 0.25s ease;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+      z-index: 2; 
+      cursor: pointer;
+      color: #565656;
+      position: absolute;
+      top: -10px;
+      right: 0;
+    }
+
+    .icon-button svg {
+      width: 1em;
+      height: 1em;
+    }
+
+    .icon-button:hover, .icon-button:focus {
+      background-color: #EC4646;
+      color: #FFF;
+    }
+
+    .icon-button.liked {
+      background-color: #EC4646;
+      color: #FFF;
+    }
+
+    .icon-button.liked:hover {
+      background-color: #EC4646;
+      color: #FFF;
+    }
+
+
+
+    .card-footer {
+      margin-top: 1.25rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      color: #787878;
+    }
+    .card-meta:first-child:after {
+      display: block;
+      content: "";
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: currentcolor;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+    }
+    .card-meta svg {
+      flex-shrink: 0;
+      width: 1em;
+      height: 1em;
+      margin-right: 0.25em;
+    }
+
+
 
 </style>
 @endsection
@@ -331,26 +486,108 @@
 </div>
 
 <!-- Render Data to Card -->
-<div class="container">
-        <div class="row">
-            @foreach($properties as $property)
-            <div class="col-md-4 mb-3">
-              <a href="/property/{{ $property->id }}" class="text-decoration-none">
-                <div class="card">
-                    <div class="position-absolute px-3 py-2 text-white" style="background-color : rgba(0,0,0,0.7)"><p class = "text-white text-decoration-none">Rp {{ $property->price }}</p></div>
-                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $property->name }}</h5>
-                        <p class="card-text">{{ $property->location }}</p>
-                        <p class="card-text">LB: {{ $property->buildingArea }} m2</p>
-                        <p class="card-text">LS: {{ $property->surfaceArea }} m2</p>
-                    </div>                  
+
+<div class="container mt-4">
+    <div class="row">
+        @foreach($properties as $property)
+        <div class="col-md-4 mb-3">
+            <div class="card property-card" data-property-id="{{ $property->id }}">
+                <div class="card-image position-relative">
+                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name }}">
+                    <div class="price-badge">
+                        <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
+                    </div>
                 </div>
-              </a>
+                <div class="card-body">
+                    <div class="card-title d-flex justify-content-between">
+                        <h5>{{ $property->name }}</h5>
+                        @auth
+                        <button class="icon-button like-button @if($property->isLikedBy(auth()->user())) liked @endif" data-property-id="{{ $property->id }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z"/>
+                            </svg>
+                        </button>
+                        @endauth
+                    </div>
+                    <p class="card-text">{{ $property->location }}</p>
+                    <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
+                    <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
+                </div>
+                <div class="card-footer">
+                    <div class="card-meta d-flex justify-content-between">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span class="likes-count">{{ $property->likedByUsers()->count() }}</span>
+                        </span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm0-4H7v-2h5v2zm5 4h-3v-2h3v2zm0-4h-3v-2h3v2z"/>
+                            </svg>
+                            @if ($property->published_at)
+                                {{ \Carbon\Carbon::parse($property->published_at)->format('d/m/Y') }}
+                            @endif
+                        </span>
+                    </div>
+                </div>
             </div>
-            @endforeach
+        </div>
+        @endforeach
     </div>
 </div>
+
+@endsection
+
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const propertyCards = document.querySelectorAll('.property-card');
+
+    propertyCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const propertyId = card.getAttribute('data-property-id');
+            window.location.href = `/properties/${propertyId}`;
+        });
+    });
+
+    document.querySelectorAll('.like-button').forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const propertyId = this.getAttribute('data-property-id');
+            const currentButton = this;
+
+            fetch(`/like/${propertyId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); 
+                if (data.status === 'liked') {
+                    currentButton.classList.add('liked');
+                } else if (data.status === 'unliked') {
+                    currentButton.classList.remove('liked');
+                }
+                const likesCountElement = currentButton.closest('.property-card').querySelector('.likes-count');
+                if (likesCountElement) {
+                    likesCountElement.textContent = data.likes_count;
+                }
+            })
+            .catch(error => {
+                console.error('Error toggling like:', error);
+            });
+        });
+    });
+});
+</script>
+
+
 
 <script>
   function resetFilters() {
