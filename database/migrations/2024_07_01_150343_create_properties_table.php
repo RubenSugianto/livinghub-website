@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('properties', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained(); 
-            // $table->foreignUuid('user_id');
-            // $table->uuid('user_id')->nullable(false);
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained();
             $table->string('name');
             $table->integer('price');
             $table->string('location');
@@ -28,8 +25,6 @@ return new class extends Migration
             $table->integer('buildingArea');
             $table->string('status');
             $table->string('type');
-            // $table->string('slug')->unique();
-            // $table->string('image')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
