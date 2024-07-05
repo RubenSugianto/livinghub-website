@@ -7,12 +7,9 @@ use App\Http\Controllers\DisewaController;
 use App\Http\Controllers\SimulasikprController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PropertyController;
-
-// Home Route
+// web.php
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// Property Routes
-Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
+Route::get('/property/{property}', [PropertyController::class, 'show'])->name('property.show');
 
 // Other Routes
 Route::get('/dijual', [DijualController::class, 'index'])->name('dijual');

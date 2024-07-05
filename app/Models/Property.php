@@ -11,6 +11,9 @@ class Property extends Model
 {
     use HasFactory;
 
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     protected $guarded = ['id'];
 
     public function user(): BelongsTo
@@ -27,4 +30,9 @@ class Property extends Model
     {
         return $this->likedByUsers()->where('user_id', $user->id)->exists();
     }
+
+    public function getRouteKeyName()
+    {
+        return 'id'; // Ensure this matches your primary key field
+    } 
 }
