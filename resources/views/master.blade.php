@@ -61,6 +61,11 @@
             gap: 35px;
           
         }
+        @media (max-width: 768px) {
+    nav {
+        justify-content: flex-start; /* Ubah posisi navbar ke kiri */
+    }
+}
 
         nav a {
             color: #fff !important; 
