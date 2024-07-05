@@ -13,6 +13,10 @@ class PropertyController extends Controller
         return view('properties.index', compact('properties'));
     }
 
+    public function show(Property $property)
+    {
+        return view('property', compact('property'));
+    }
     public function create()
     {
         return view('properties.create');
@@ -22,8 +26,7 @@ class PropertyController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'price' => 'required|numeric',
+              'price' => 'required|numeric',
             'buildingArea' => 'required|numeric',
             'surfaceArea' => 'required|numeric',
             'published_at' => 'nullable|date',
@@ -34,19 +37,12 @@ class PropertyController extends Controller
         return redirect()->route('properties.index')->with('success', 'Property created successfully.');
     }
 
-    public function show($id)
+    public function edit(Property $property)
     {
-        $property = Property::findOrFail($id);
-        return view('properties.show', compact('property'));
-    }
-
-    public function edit($id)
-    {
-        $property = Property::findOrFail($id);
         return view('properties.edit', compact('property'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Property $property)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -57,15 +53,13 @@ class PropertyController extends Controller
             'published_at' => 'nullable|date',
         ]);
 
-        $property = Property::findOrFail($id);
         $property->update($request->all());
 
         return redirect()->route('properties.index')->with('success', 'Property updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(Property $property)
     {
-        $property = Property::findOrFail($id);
         $property->delete();
 
         return redirect()->route('properties.index')->with('success', 'Property deleted successfully.');
