@@ -8,19 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function __construct()
+    public function toggleLike(Property $property)
     {
-        $this->middleware('auth');
-    }
-
-    public function toggleLike(Request $request, $propertyId)
-    {
-        $property = Property::find($propertyId);
-
-        if (!$property) {
-            return response()->json(['status' => 'error', 'message' => 'Property not found'], 404);
-        }
-
         $user = Auth::user();
 
         if ($property->isLikedBy($user)) {
