@@ -494,18 +494,10 @@
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>
-     
                     </div>
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{ $property->name }}</h5>
-                            @auth
-                            <button class="icon-button like-button @if($property->isLikedBy(auth()->user())) liked @endif" data-property-id="{{ $property->id }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 3C4.239 3 2 5.216 2 7.95c0 2.207.875 7.445 9.488 12.74a.985.985 0 0 0 1.024 0C21.125 15.395 22 10.157 22 7.95 22 5.216 19.761 3 17 3s-5 3-5 3-2.239-3-5-3z"/>
-                                </svg>
-                            </button>
-                            @endauth
                         </div>
                         <p class="card-text">{{ $property->location }}</p>
                         <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
@@ -513,12 +505,6 @@
                     </div>
                     <div class="card-footer">
                         <div class="card-meta d-flex justify-content-between">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                                <span class="likes-count">{{ $property->likedByUsers()->count() }}</span>
-                            </span>
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm0-4H7v-2h5v2zm5 4h-3v-2h3v2zm0-4h-3v-2h3v2z"/>
@@ -535,7 +521,8 @@
         @endforeach
     </div>
 </div>
-@endsection
+
+
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -547,47 +534,11 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `/properties/${propertyId}`;
         });
     });
-
-    document.querySelectorAll('.like-button').forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const propertyId = this.getAttribute('data-property-id');
-            const currentButton = this;
-
-            fetch(`/like/${propertyId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({})
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'liked') {
-                    currentButton.classList.add('liked');
-                } else if (data.status === 'unliked') {
-                    currentButton.classList.remove('liked');
-                }
-                const likesCountElement = currentButton.closest('.property-card').querySelector('.likes-count');
-                if (likesCountElement) {
-                    likesCountElement.textContent = data.likes_count;
-                }
-            })
-            .catch(error => {
-                console.error('Error toggling like:', error);
-            });
-        });
-    });
 });
-</script>
 
-
-<script>
-  function resetFilters() {
+function resetFilters() {
     document.getElementById('filterForm').reset();
     document.querySelectorAll('.btn-group-toggle .btn').forEach(btn => btn.classList.remove('active'));
-  }
+}
 </script>
 @endsection

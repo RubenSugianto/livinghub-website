@@ -1,13 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DijualController;
 use App\Http\Controllers\DisewaController;
-use App\Http\Controllers\SimulasikprController;
-use App\Http\Controllers\LikeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
-// web.php
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SimulasikprController;
+use Illuminate\Support\Facades\Route;
+
+// Home Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/property/{property}', [PropertyController::class, 'show'])->name('property.show');
 
@@ -18,12 +21,18 @@ Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simul
 Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
 
 // Auth Routes
-Route::get('/register', [App\Http\Controllers\RegisterController::class, 'index'])->name('register')->middleware('guest');
-Route::post('/register', [App\Http\Controllers\RegisterController::class, 'store'])->middleware('guest');
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [App\Http\Controllers\LoginController::class, 'authenticate'])->middleware('guest');
-Route::post('/logout', [App\Http\Controllers\LoginController::class, 'logout']);
-Route::get('/lihatprofile', [App\Http\Controllers\ProfileController::class, 'index'])->name('lihatprofile');
+Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('lihatprofile');
 
-// Like Property
-Route::post('/like/{property}', [LikeController::class, 'toggleLike'])->name('property.like')->middleware('auth');
+
+// Add Property Routes
+Route::get('/properties/add', [PropertyController::class, 'add'])->name('property.add')->middleware('auth');
+Route::post('/properties', [PropertyController::class, 'store'])->name('property.store')->middleware('auth');
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
+Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
+Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
+Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('property.destroy')->middleware('auth');
