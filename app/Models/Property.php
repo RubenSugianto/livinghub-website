@@ -1,11 +1,12 @@
 <?php
+// app/Models/Property.php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Property extends Model
 {
@@ -16,19 +17,20 @@ class Property extends Model
 
     protected $guarded = ['id'];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->id)) {
+                $model->id = (string) Str::uuid();
+            }
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function likedByUsers(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'property_user_likes', 'property_id', 'user_id')->withTimestamps();
-    }
-
-    public function isLikedBy($user): bool
-    {
-        return $this->likedByUsers()->where('user_id', $user->id)->exists();
     }
 
     public function getRouteKeyName()

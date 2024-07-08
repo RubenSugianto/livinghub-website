@@ -59,13 +59,7 @@
             justify-content: flex-end; 
             align-items: center;
             gap: 35px;
-          
         }
-        @media (max-width: 768px) {
-    nav {
-        justify-content: flex-start; /* Ubah posisi navbar ke kiri */
-    }
-}
 
         nav a {
             color: #fff !important; 
@@ -125,13 +119,14 @@
             position: absolute;
             right: 0;
             background-color: #f9f9f9;
+            color: #000;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             z-index: 1;
             min-width: 160px;
         }
 
         .dropdown-content a {
-            color: black;
+            color: black !important; /* Ensure dropdown text is black */
             padding: 12px 16px;
             text-decoration: none;
             display: block;
@@ -263,7 +258,7 @@
             height: 350px;
             background-color: black;
             margin: -20px;
-            padding: 0px; */
+            padding: 0px; 
         }
     
     </style>
@@ -280,7 +275,7 @@
                 <a href="{{ route('dijual') }}">Dijual</a>
                 <a href="{{ route('disewa') }}">Disewa</a>
                 <a href="{{ route('simulasikpr') }}">Simulasi KPR</a>
-                <button class="navbutton" role="button">Tambah Properti</button>
+                <button class="navbutton" role="button" onclick="location.href='{{ route('property.add') }}'">Tambah Properti</button>
                 <div class="dropdown">
                     <i class='fa fa-user-circle' style='font-size:36px;'></i>
                     <div class="dropdown-content">
