@@ -126,7 +126,7 @@
         }
 
         .dropdown-content a {
-            color: black !important; /* Ensure dropdown text is black */
+            color: black !important;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
@@ -260,6 +260,8 @@
             margin: -20px;
             padding: 0px; 
         }
+
+        
     
     </style>
         @yield('styles')

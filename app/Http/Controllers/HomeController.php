@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $properties = Property::all();
+        $properties = Property::paginate(20); 
         return view('home', compact('properties'));
     }
 }

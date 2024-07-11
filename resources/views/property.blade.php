@@ -6,9 +6,10 @@
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-8">
-                <a href="/" class="back-button">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
+            <a href="javascript:history.back()" class="back-button">
+             <i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
                 </a>
+
                 <div class="image-container">
                     <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="img-fluid" alt="{{ $property->name }}">
                 </div>

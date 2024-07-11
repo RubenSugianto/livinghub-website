@@ -4,6 +4,7 @@
 
 @section('styles')
 <style>
+
     .carousel-item img {
         max-height: 400px; 
         width: 100%;
@@ -42,23 +43,12 @@
         opacity: 1; 
     }
 
-    
-    .search-bar {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    .search-bar img {
-        display: block;
-        margin: 0 auto 10px auto; 
-    }
-
     .search-bar .input-group {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 30%; 
-        margin: 0 auto; 
+        margin: 0 auto;
         border: 2px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
@@ -69,23 +59,29 @@
         padding: 10px;
         border: none;
         outline: none;
+        min-width: 0; 
     }
 
     .search-bar button {
-        padding: 10px 20px;
-        background: none; 
-        color: black; 
+        padding: 10px;
+        background: none;
+        color: black;
         border: none;
         cursor: pointer;
+        min-width: 50px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .search-bar button:hover {
-        color: #4A4AC4;  
+        color: #4A4AC4;
     }
 
     .search-bar button.filter-button:hover {
-        color: #4A4AC4; 
+        color: #4A4AC4;
     }
+
 
     .btn-group-toggle .btn {
     border: 1px solid #ccc;
@@ -171,6 +167,8 @@
       align-items: center;
       justify-content: center;
       color: #393232;
+      margin: 0;
+      padding-top: 10px; 
     }
 
     img {
@@ -191,6 +189,7 @@
       padding: 1.25rem;
       position: relative;
       transition: 0.15s ease-in;
+      margin: 10px;
     }
     .card:hover, .card:focus-within {
       box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
@@ -298,6 +297,7 @@
       display: flex;
       align-items: center;
       color: #787878;
+      
     }
     .card-meta:first-child:after {
       display: block;
@@ -316,6 +316,93 @@
       margin-right: 0.25em;
     }
 
+
+    :root {
+      --primary: #23adad;
+      --greyLight: #23adade1;
+      --greyLight-2: #cbe0dd;
+      --greyDark: #2d4848;
+      --btnColor: #5E5DF0;
+    }
+
+    html {
+      box-sizing: border-box;
+      font-size: 70%; 
+      overflow-y: scroll;
+      font-family: "Poppins", sans-serif;
+      letter-spacing: 0.6px;
+      line-height: 1.4;
+      -webkit-user-select: none;
+      backface-visibility: hidden;
+      -webkit-font-smoothing: subpixel-antialiased;
+    }
+
+    .page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 5rem;
+      margin: 3rem auto;
+      border-radius: 0.6rem;
+      background: #ffffff;
+      box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+      width: fit-content;
+    }
+
+    .page__numbers,
+    .page__btn,
+    .page__dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.8rem;
+      font-size: 1.6rem; 
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .page__dots {
+      width: 3rem; 
+      height: 3rem; 
+      color: var(--greyLight);
+      cursor: initial;
+    }
+
+    .page__numbers {
+      width: 3rem; 
+      height: 3rem; 
+      border-radius: 0.4rem;
+      color: var(--greyDark); 
+
+      &:hover {
+        color: #ffffff !important;
+        background: #5E5DF0 !important;
+      }
+
+      &.active {
+        color: #ffffff !important;
+        background: #5E5DF0 !important;
+        font-weight: 600 !important;
+        border: 1px solid var(--primary) !important;
+      }
+    }
+
+    .page__btn {
+      color: var(--btnColor);
+      pointer-events: none;
+
+      &.active {
+        color: var(--btnColor);
+        pointer-events: initial;
+
+        &:hover {
+          color: var(--primary) !important;
+        }
+      }
+    }
+  
 
 
 </style>
@@ -351,7 +438,7 @@
 
 <!-- Search and filter buttons -->
 <div class="search-bar mb-5">
-    <img src="LogooB.png" alt="Living HUB Logo" width="400"> 
+<img src="LogooB.png" alt="Living HUB Logo" width="400" style="display: block; margin: auto;">
     <div class="input-group">
         <input type="text" placeholder="Cari properti disini..">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -481,12 +568,11 @@
   </div>
 </div>
 
-<!-- Render Data to Card -->
-
+<!-- Properties Section -->
 <div class="container mt-4">
     <div class="row">
         @foreach($properties as $property)
-        <div class="col-md-4 mb-3">
+        <div class="col-md-3 mb-3">
             <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
@@ -521,6 +607,32 @@
         @endforeach
     </div>
 </div>
+
+<!-- Pagination Section -->
+@if ($properties->lastPage() > 1)
+    @if ($properties->currentPage() > 3)
+        <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
+        @if($properties->currentPage() > 4)
+            <div class="page__dots">...</div>
+        @endif
+    @endif
+
+    @for ($i = max($properties->currentPage() - 2, 1); $i <= min($properties->currentPage() + 2, $properties->lastPage()); $i++)
+        <button class="page__numbers {{ $properties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $properties->url($i) }}'">{{ $i }}</button>
+    @endfor
+
+    @if ($properties->currentPage() < $properties->lastPage() - 2)
+        @if($properties->currentPage() < $properties->lastPage() - 3)
+            <div class="page__dots">...</div>
+        @endif
+        <button class="page__numbers" onclick="window.location='{{ $properties->url($properties->lastPage()) }}'">{{ $properties->lastPage() }}</button>
+    @endif
+
+    <!-- Next Page Button -->
+    <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
+@endif
+@endsection
+
 
 
 @section('scripts')
