@@ -36,3 +36,6 @@ Route::get('/properties/{property}', [PropertyController::class, 'show'])->name(
 Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
 Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
 Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('property.destroy')->middleware('auth');
+
+// Search
+Route::get('/search', [PropertyController::class, 'search'])->name('search');

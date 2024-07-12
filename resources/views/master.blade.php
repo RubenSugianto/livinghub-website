@@ -325,63 +325,74 @@
         
     </main>
     <footer>
-        <div class="footer-content">
-            <div class="footer-description">
+    <div class="footer-content">
+        <div class="footer-description">
             <img src="Logoo.png" alt="Logo">
-                <p>Living HUB merupakan platform jual, beli dan sewa properti terkemuka di Indonesia yang memberikan layanan kepada pengguna sejak 2024. Living HUB berkomitmen menjadikan pengalaman jual beli properti Anda semudah mungkin dengan fitur-fitur yang kami sediakan.</p>
-            </div>
-            <div class="footer-section">
-                <p>Jakarta</p>
-                <div class="city-links">
-                    <a href="#">Jakarta Pusat</a>
-                    <a href="#">Jakarta Utara</a>
-                    <a href="#">Jakarta Barat</a>
-                    <a href="#">Jakarta Selatan</a>
-                    <a href="#">Jakarta Timur</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <p>Bogor</p>
-                <div class="city-links">
-                    <a href="#">Kota Bogor</a>
-                    <a href="#">Kabupaten Bogor</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <p>Depok</p>
-                <div class="city-links">
-                    <a href="#">Kota Depok</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <p>Tangerang</p>
-                <div class="city-links">
-                    <a href="#">Kota Tangerang</a>
-                    <a href="#">Kota Tangerang Selatan</a>
-                    <a href="#">Kabupaten Tangerang</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <p>Bekasi</p>
-                <div class="city-links">
-                    <a href="#">Kota Bekasi</a>
-                    <a href="#">Kabupaten Bekasi</a>
-                </div>
+            <p>Living HUB merupakan platform jual, beli dan sewa properti terkemuka di Indonesia yang memberikan layanan kepada pengguna sejak 2024. Living HUB berkomitmen menjadikan pengalaman jual beli properti Anda semudah mungkin dengan fitur-fitur yang kami sediakan.</p>
+        </div>
+
+        <div class="footer-section">
+            <p>Jakarta</p>
+            <div class="city-links">
+                <a href="{{ route('search', ['kota' => 'Jakarta Pusat']) }}">Jakarta Pusat</a>
+                <a href="{{ route('search', ['kota' => 'Jakarta Utara']) }}">Jakarta Utara</a>
+                <a href="{{ route('search', ['kota' => 'Jakarta Barat']) }}">Jakarta Barat</a>
+                <a href="{{ route('search', ['kota' => 'Jakarta Selatan']) }}">Jakarta Selatan</a>
+                <a href="{{ route('search', ['kota' => 'Jakarta Timur']) }}">Jakarta Timur</a>
             </div>
         </div>
-        <div class="social-icons">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-            <i class="fa fa-facebook-square" aria-hidden="true"></i>
-            <i class="fa fa-twitter" aria-hidden="true"></i>
+
+        <div class="footer-section">
+            <p>Bogor</p>
+            <div class="city-links">
+                <a href="{{ route('search', ['kota' => 'Kota Bogor']) }}">Kota Bogor</a>
+                <a href="{{ route('search', ['kota' => 'Kabupaten Bogor']) }}">Kabupaten Bogor</a>
+            </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Living HUB. All rights reserved.</p>
+
+        <div class="footer-section">
+            <p>Depok</p>
+            <div class="city-links">
+                <a href="{{ route('search', ['kota' => 'Kota Depok']) }}">Kota Depok</a>
+            </div>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    @yield('scripts')
+
+        <div class="footer-section">
+            <p>Tangerang</p>
+            <div class="city-links">
+                <a href="{{ route('search', ['kota' => 'Kota Tangerang']) }}">Kota Tangerang</a>
+                <a href="{{ route('search', ['kota' => 'Kota Tangerang Selatan']) }}">Kota Tangerang Selatan</a>
+                <a href="{{ route('search', ['kota' => 'Kabupaten Tangerang']) }}">Kabupaten Tangerang</a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <p>Bekasi</p>
+            <div class="city-links">
+                <a href="{{ route('search', ['kota' => 'Kota Bekasi']) }}">Kota Bekasi</a>
+                <a href="{{ route('search', ['kota' => 'Kabupaten Bekasi']) }}">Kabupaten Bekasi</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-icons">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 Living HUB. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+@yield('scripts')
+
 </body>
 </html>

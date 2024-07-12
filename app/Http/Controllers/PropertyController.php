@@ -96,4 +96,90 @@ class PropertyController extends Controller
 
         return redirect()->route('home')->with('success', 'Property deleted successfully.');
     }
-}
+    public function search(Request $request)
+    {
+        $query = Property::query();
+    
+        // Filter based on various fields
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                      ->orWhere('location', 'LIKE', "%{$search}%")
+                      ->orWhere('description', 'LIKE', "%{$search}%")
+                      ->orWhere('price', 'LIKE', "%{$search}%")
+                      ->orWhere('status', 'LIKE', "%{$search}%")
+                      ->orWhere('type', 'LIKE', "%{$search}%");
+            });
+        }
+    
+        // Additional filters based on individual fields
+        if ($request->has('status') && $request->input('status') != '') {
+            $status = $request->input('status');
+            $query->where('status', $status);
+        }
+    
+        if ($request->has('bedrooms') && $request->input('bedrooms') != '') {
+            $bedrooms = $request->input('bedrooms');
+            switch ($bedrooms) {
+                case '1 Kamar':
+                    $query->where('bedroom', 1);
+                    break;
+                case '2 Kamar':
+                    $query->where('bedroom', 2);
+                    break;
+                case '3 Kamar':
+                    $query->where('bedroom', 3);
+                    break;
+                case '3+ Kamar':
+                    $query->where('bedroom', '>=', 3);
+                    break;
+            }
+        }
+    
+        if ($request->has('bathrooms') && $request->input('bathrooms') != '') {
+            $bathrooms = $request->input('bathrooms');
+            switch ($bathrooms) {
+                case '1 Kamar':
+                    $query->where('bathroom', 1);
+                    break;
+                case '2 Kamar':
+                    $query->where('bathroom', 2);
+                    break;
+                case '3 Kamar':
+                    $query->where('bathroom', 3);
+                    break;
+                case '3+ Kamar':
+                    $query->where('bathroom', '>=', 3);
+                    break;
+            }
+        }
+    
+        if (($request->has('land_size_min') && $request->input('land_size_min') != '') || ($request->has('land_size_max') && $request->input('land_size_max') != '')) {
+            $landSizeMin = $request->input('land_size_min', 0);
+            $landSizeMax = $request->input('land_size_max', PHP_INT_MAX);
+            $query->whereBetween('surfaceArea', [$landSizeMin, $landSizeMax]);
+        }
+    
+        if (($request->has('building_size_min') && $request->input('building_size_min') != '') || ($request->has('building_size_max') && $request->input('building_size_max') != '')) {
+            $buildingSizeMin = $request->input('building_size_min', 0);
+            $buildingSizeMax = $request->input('building_size_max', PHP_INT_MAX);
+            $query->whereBetween('buildingArea', [$buildingSizeMin, $buildingSizeMax]);
+        }
+    
+        if ($request->has('property_type') && $request->input('property_type') != '') {
+            $propertyType = $request->input('property_type');
+            $query->where('type', $propertyType);
+        }
+        
+        if ($request->has('kota')) {
+            $kota = $request->input('kota');
+            $query->where('location', 'LIKE', "%{$kota}%");
+        }
+        
+        $properties = $query->paginate(2); // Paginate with 10 items per page
+    
+        return view('search-results', compact('properties'));
+    }
+    
+}    
