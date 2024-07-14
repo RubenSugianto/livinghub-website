@@ -37,4 +37,8 @@ class Property extends Model
     {
         return 'id'; // Ensure this matches your primary key field
     } 
+
+    public function propertyImage() {
+        return $this->hasMany(PropertyImage::class);
+    }
 }
