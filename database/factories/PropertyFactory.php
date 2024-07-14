@@ -1,27 +1,40 @@
 <?php
 
-namespace App\Models;
+namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use App\Models\User;
 
-class Property extends Model
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Property>
+ */
+class PropertyFactory extends Factory
 {
-    use HasFactory;
-
-    protected $keyType = 'string';
-    public $incrementing = false;
-
-    protected $guarded = ['id'];
-
-    public function user(): BelongsTo
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
-        return $this->belongsTo(User::class);
+        return [
+            'id' => (string) Str::uuid(),
+            'user_id' => User::factory(),
+            'name' => $this->faker->word,
+            'price' => $this->faker->numberBetween(1000000, 1000000000),
+            'location' => $this->faker->address,
+            'description' => $this->faker->paragraph,
+            'bedroom' => $this->faker->numberBetween(1, 5),
+            'bathroom' => $this->faker->numberBetween(1, 5),
+            'electricity' => $this->faker->numberBetween(100, 5000),
+            'surfaceArea' => $this->faker->numberBetween(100, 5000),
+            'buildingArea' => $this->faker->numberBetween(100, 5000),
+            'status' => $this->faker->randomElement(['dijual', 'disewa']),
+            'type' => $this->faker->randomElement(['rumah', 'apartemen']),
+            'published_at' => $this->faker->optional()->dateTime,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
     }
-
-    public function getRouteKeyName()
-    {
-        return 'id'; // Ensure this matches your primary key field
-    } 
 }

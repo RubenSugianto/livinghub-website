@@ -10,9 +10,27 @@
              <i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
                 </a>
 
-                <div class="image-container">
-                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="img-fluid" alt="{{ $property->name }}">
+                <div id="propertyCarousel" class="carousel slide image-container" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach($propertyImages as $index => $image)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <img src="{{ asset($image->images) }}" class="d-block w-100 img-fluid" alt="Property Image">
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#propertyCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#propertyCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
+
+                <!-- <div class="image-container">
+                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="img-fluid" alt="{{ $property->name }}">
+                </div> -->
 
                 <div class="tags">
                     <span class="tag">{{ $property->status }}</span>
