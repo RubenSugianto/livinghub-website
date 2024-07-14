@@ -3,13 +3,27 @@
 @section('title', 'Tambah Properti')
 
 @section('content')
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <div class="alert" id="form-alert" style="display:none;">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   Harap isi semua detail sebelum lanjut ke halaman selanjutnya.
 </div>
+
+
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
-    <form id="propertyForm" action="{{ route('property.store') }}" method="POST">
+    <form id="propertyForm" action="{{ route('property.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="formbold-steps">
             <ul>
@@ -28,6 +42,10 @@
                 <li class="formbold-step-menu4">
                     <span>4</span>
                     Informasi Tambahan
+                </li>
+                <li class="formbold-step-menu5">
+                    <span>5</span>
+                    Gambar
                 </li>
             </ul>
         </div>
@@ -106,13 +124,34 @@
                 </div>
             </div>
             <div>
-                <label for="type" class="formbold-form-label">Tipe</label>
-                <select class="formbold-form-input" id="type" name="type" required>
+                <label for="typeProperty" class="formbold-form-label">Tipe Properti</label>
+                <select class="formbold-form-input" id="typeProperty" name="typeProperty" required>
                     <option value="Rumah">Rumah</option>
                     <option value="Apartemen">Apartemen</option>
                 </select>
             </div>
+            <div>
+                <label for="typeDocument" class="formbold-form-label">Tipe Dokumen</label>
+                <select class="formbold-form-input" id="typeDocument" name="typeDocument" required>
+                    <option value="SHM">SHM</option>
+                    <option value="SHGB">SHGB</option>
+                    <option value="SHGU">SHGU</option>
+                    <option value="Hak Pakai">Hak Pakai</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+                <input type="text" class="formbold-form-input" id="customType" name="customType" placeholder="Isi tipe dokumen lainnya" style="display: none; margin-top: 10px;">
+            </div>
+
         </div>
+
+        <div class="formbold-form-step-5">
+            <div class="formgroup">
+                <label for="images" class="formbold-form-label">Upload Gambar (Maksimal 10 Gambar)</label>
+                <input type="file" class="form-control" id="images" name="images[]" multiple required onchange="previewImages(event)">
+            </div>
+        </div>
+
+        <div id="imagePreview" class="formbold-image-preview"></div>
 
         <div class="formbold-form-btn-wrapper">
             <button type="button" class="formbold-back-btn" id="back" style="display: none;">Sebelumnya</button>
@@ -127,8 +166,8 @@
         const nextBtn = document.getElementById('next');
         const backBtn = document.getElementById('back');
         const submitBtn = document.getElementById('submit');
-        const steps = document.querySelectorAll('.formbold-form-step-1, .formbold-form-step-2, .formbold-form-step-3, .formbold-form-step-4');
-        const stepMenus = document.querySelectorAll('.formbold-step-menu1, .formbold-step-menu2, .formbold-step-menu3, .formbold-step-menu4');
+        const steps = document.querySelectorAll('.formbold-form-step-1, .formbold-form-step-2, .formbold-form-step-3, .formbold-form-step-4, .formbold-form-step-5');
+        const stepMenus = document.querySelectorAll('.formbold-step-menu1, .formbold-step-menu2, .formbold-step-menu3, .formbold-step-menu4, .formbold-step-menu5');
         let currentStep = 0;
 
         const detailedLocations = {
@@ -209,13 +248,54 @@
         // Handle form submission
         const propertyForm = document.getElementById('propertyForm');
         propertyForm.addEventListener('submit', function (event) {
+            const typeSelect = document.getElementById('typeDocument');
+            const customTypeInput = document.getElementById('customType');
+
+            if (typeSelect.value === 'Lainnya') {
+                typeSelect.value = customTypeInput.value;
+            }
+            
             const allFieldsFilled = Array.from(document.querySelectorAll('input[required], select[required], textarea[required]')).every(field => field.value.trim() !== '');
             if (!allFieldsFilled) {
                 event.preventDefault(); 
                 document.getElementById('form-alert').style.display = 'block'; 
             }
         });
+
+        const typeSelect = document.getElementById('typeDocument');
+        const customTypeInput = document.getElementById('customType');
+
+        typeSelect.addEventListener('change', function () {
+            if (typeSelect.value === 'Lainnya') {
+                customTypeInput.style.display = 'block';
+                customTypeInput.required = true;  // Make the custom input field required when shown
+            } else {
+                customTypeInput.style.display = 'none';
+                customTypeInput.required = false; // Make sure it's not required when hidden
+            }
+        });
     });
+
+    function previewImages(event) {
+        const files = event.target.files;
+
+        const imagePreview = document.getElementById('imagePreview');
+        imagePreview.innerHTML = ''; // Clear previous previews
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('formbold-preview-image');
+                imagePreview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
 
     </script>
 </div>
@@ -328,14 +408,16 @@
 .formbold-form-step-1,
 .formbold-form-step-2,
 .formbold-form-step-3,
-.formbold-form-step-4 {
+.formbold-form-step-4,
+.formbold-form-step-5 {
     display: none;
 }
 
 .formbold-form-step-1.active,
 .formbold-form-step-2.active,
 .formbold-form-step-3.active,
-.formbold-form-step-4.active {
+.formbold-form-step-4.active,
+.formbold-form-step-5.active {
     display: block;
 }
 
@@ -413,6 +495,22 @@
 .closebtn:hover {
   color: black;
 }
+
+.formbold-image-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.formbold-preview-image {
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
 </style>
 
 @endsection
