@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Property;
+use App\Models\PropertyImage;
+use App\Models\Document;
 use Illuminate\Support\Str;
 
 class PropertyController extends Controller
@@ -17,7 +19,9 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
-        return view('property', compact('property'));
+        $propertyImages = PropertyImage::where('property_id', $property->id)->get();
+
+        return view('property', compact('property', 'propertyImages'));
     }
 
     public function add()
@@ -38,8 +42,11 @@ class PropertyController extends Controller
             'surfaceArea' => 'required|integer',
             'buildingArea' => 'required|integer',
             'status' => 'required|string',
-            'type' => 'required|string',
+            'typeProperty' => 'required|string',
+            'typeDocument' => 'required|string',
             'published_at' => 'nullable|date',
+            'images' => 'required|array|max:10',
+            'images.*' => 'required|image|mimes:png,jpg,jpeg,webp'
         ]);
 
         $property = new Property();
@@ -55,10 +62,35 @@ class PropertyController extends Controller
         $property->surfaceArea = $request->surfaceArea;
         $property->buildingArea = $request->buildingArea;
         $property->status = $request->status;
-        $property->type = $request->type;
+        $property->type = $request->typeProperty;
         $property->published_at = $request->published_at ?? now(); // Default to current timestamp if not provided
 
         $property->save();
+        
+        if($files = $request->file('images')) {
+            foreach($files as $key => $file) {
+                $extension = $file ->getClientOriginalExtension();
+                $filename = $key. '-' .time(). '.'. $extension;
+
+                $path = 'uploads/properties/';
+
+                $file->move($path,$filename);
+
+                PropertyImage::create([
+                    'property_id' => $property->id,
+                    'user_id' => auth()->id(),
+                    'images' => $path . $filename,
+                ]);
+            }
+        }
+
+        Document::create([
+            'property_id' => $property->id,
+            'user_id' => auth()->id(),
+            'type' => $request->typeDocument,
+            'status' => 'Not Uploaded'
+        ]);
+        
 
         return redirect()->route('home')->with('success', 'Property added successfully.');
     }
