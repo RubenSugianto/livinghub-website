@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function properties() {
         return $this->hasMany(Property::class);
     }
+    // ini sebenernya gatau perlu atau ngga tapi liat dulu nanti
+    public function profile() {
+        return $this->hasMany(User::class);
+    }
 }

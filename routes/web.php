@@ -26,7 +26,10 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('lihatprofile');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('lihatprofile');
+});
 
 
 // Add Property Routes
