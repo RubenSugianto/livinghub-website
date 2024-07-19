@@ -56,8 +56,19 @@ class User extends Authenticatable
     public function properties() {
         return $this->hasMany(Property::class);
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Property::class, 'favorites', 'user_id', 'property_id')->withTimestamps();
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Property::class, 'likes', 'user_id', 'property_id')->withTimestamps();
+
     // ini sebenernya gatau perlu atau ngga tapi liat dulu nanti
-    public function profile() {
-        return $this->hasMany(User::class);
+    // public function profile() {
+    // return $this->hasMany(User::class);
+
     }
 }

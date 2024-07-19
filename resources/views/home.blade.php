@@ -182,147 +182,173 @@
     }
 
     .card {
-      background-color: #FFF;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 15px;
-      overflow: hidden;
-      padding: 1.25rem;
-      position: relative;
-      transition: 0.15s ease-in;
-      margin: 10px;
-    }
+    background-color: #FFF;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 1.25rem;
+    position: relative;
+    transition: 0.15s ease-in;
+    margin: 10px;
+}
     .card:hover, .card:focus-within {
-      box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
-      transform: translateY(-5px);
+        box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
     }
 
     .card-image {
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
     .card-image img {
-      width: 100%;
-      display: block;
-      border-radius: 10px;
+        width: 100%;
+        display: block;
+        border-radius: 10px;
     }
 
     .card-image::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 50%; 
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      z-index: 1;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        z-index: 1;
     }
 
     .price-badge {
-      position: absolute;
-      bottom: 10px; 
-      left: 10px;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      font-size: 1.25rem;
-      font-weight: bold;
-      z-index: 2; 
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        z-index: 2;
     }
 
-    .card-body {
-      padding: 1.25rem;
-      position: relative;
+    .card-list {
+            width: 90%;
+            max-width: 400px;
     }
 
-    .card-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .card {
+        background-color: #FFF;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 20px 50px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        padding: 1.25rem;
+        position: relative;
+        transition: 0.15s ease-in;
+        margin: 10px;
     }
 
-    .icon-button {
-      border: 0;
-      background-color: #fff;
-      border-radius: 50%;
-      width: 2.5rem;
-      height: 2.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-      font-size: 1.25rem;
-      transition: 0.25s ease;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
-      z-index: 2; 
-      cursor: pointer;
-      color: #565656;
-      position: absolute;
-      top: -10px;
-      right: 0;
+    .card:hover, .card:focus-within {
+        box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
     }
 
-    .icon-button svg {
-      width: 1em;
-      height: 1em;
+    .card-image {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
-    .icon-button:hover, .icon-button:focus {
-      background-color: #EC4646;
-      color: #FFF;
+    .card-image img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
     }
 
-    .icon-button.liked {
-      background-color: #EC4646;
-      color: #FFF;
-    }
 
-    .icon-button.liked:hover {
-      background-color: #EC4646;
-      color: #FFF;
+    .price-badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        z-index: 2;
     }
 
     .card-footer {
-      margin-top: 1.25rem;
-      border-top: 1px solid #ddd;
-      padding-top: 1.25rem;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+        margin-top: 1.25rem;
+        border-top: 1px solid #ddd;
+        padding-top: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
-    .card-meta {
-      display: flex;
-      align-items: center;
-      color: #787878;
-      
-    }
-    .card-meta:first-child:after {
-      display: block;
-      content: "";
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background-color: currentcolor;
-      margin-left: 0.75rem;
-      margin-right: 0.75rem;
-    }
-    .card-meta svg {
-      flex-shrink: 0;
-      width: 1em;
-      height: 1em;
-      margin-right: 0.25em;
+    .like-count-icon {
+    margin-right: 10px; 
     }
 
+    .like-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        z-index: 2; 
+    }
 
-    :root {
-      --primary: #23adad;
-      --greyLight: #23adade1;
-      --greyLight-2: #cbe0dd;
-      --greyDark: #2d4848;
-      --btnColor: #5E5DF0;
+    .like-button .btn {
+        border-radius: 50%;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        border: none; 
+    }
+
+    .like-button .btn-outline-danger {
+        color: #dc3545;
+        background: #fff;
+    }
+
+    .like-button .btn-outline-danger:hover {
+        background: #dc3545;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    }
+
+    .like-button .btn-outline-danger i {
+        font-weight: bold; 
+        color: var(--greyDark)
+    }
+
+    .like-button .btn-danger {
+        color: #fff;
+        background: #dc3545;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
+        border: none; 
+    }
+
+    .like-button .btn-danger:hover {
+        background: #bd2130;
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    }
+
+    .card-meta .like-count-icon {
+        font-size: 1.2em; 
+        color: var(--greyDark);
+    }
+
+    .like-button .btn i {
+        font-size: 1.5em; 
+        line-height: 1; 
     }
 
     html {
@@ -567,8 +593,6 @@
         </div>
     </div>
 </div>
-
-
 <!-- Properties Section -->
 <div class="container mt-4">
     <div class="row">
@@ -586,6 +610,29 @@
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>
                     </div>
+                    <div class="like-button">
+                        @auth
+                            @if(auth()->user()->likes && auth()->user()->likes->contains($property->id))
+                                <form action="{{ route('properties.unlike', $property) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger liked">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('properties.like', $property) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-outline-danger">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            </a>
+                        @endauth
+                    </div>
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{ $property->name }}</h5>
@@ -596,10 +643,12 @@
                     </div>
                     <div class="card-footer">
                         <div class="card-meta d-flex justify-content-between">
+                            <span class="position-relative like-count-icon">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                {{ $property->like_count }}
+                            </span>
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm0-4H7v-2h5v2zm5 4h-3v-2h3v2zm0-4h-3v-2h3v2z"/>
-                                </svg>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
                                 @if ($property->published_at)
                                     {{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}
                                 @endif

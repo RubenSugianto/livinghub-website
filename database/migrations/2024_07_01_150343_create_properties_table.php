@@ -1,7 +1,5 @@
 <?php
 
-// database/migrations/xxxx_xx_xx_create_properties_table.php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,6 +22,7 @@ return new class extends Migration
             $table->integer('buildingArea');
             $table->string('status');
             $table->string('type');
+            $table->integer('like_count')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

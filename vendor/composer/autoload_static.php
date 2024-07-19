@@ -86,6 +86,7 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Clock\\' => 24,
+            'Spatie\\LaravelPackageTools\\' => 27,
         ),
         'R' => 
         array (
@@ -113,6 +114,8 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         array (
             'Monolog\\' => 8,
             'Mockery\\' => 8,
+            'Maize\\Markable\\Database\\Factories\\' => 34,
+            'Maize\\Markable\\' => 15,
         ),
         'L' => 
         array (
@@ -315,6 +318,10 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
         ),
+        'Spatie\\LaravelPackageTools\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-package-tools/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -337,8 +344,8 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -375,6 +382,14 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         'Mockery\\' => 
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
+        ),
+        'Maize\\Markable\\Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maize-tech/laravel-markable/database/factories',
+        ),
+        'Maize\\Markable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maize-tech/laravel-markable/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -509,8 +524,35 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
 
     public static $classMap = array (
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DijualController' => __DIR__ . '/../..' . '/app/Http/Controllers/DijualController.php',
+        'App\\Http\\Controllers\\DisewaController' => __DIR__ . '/../..' . '/app/Http/Controllers/DisewaController.php',
+        'App\\Http\\Controllers\\FavouriteController' => __DIR__ . '/../..' . '/app/Http/Controllers/FavouriteController.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
+        'App\\Http\\Controllers\\PropertyController' => __DIR__ . '/../..' . '/app/Http/Controllers/PropertyController.php',
+        'App\\Http\\Controllers\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegisterController.php',
+        'App\\Http\\Controllers\\SimulasikprController' => __DIR__ . '/../..' . '/app/Http/Controllers/SimulasikprController.php',
+        'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\IsAdmin' => __DIR__ . '/../..' . '/app/Http/Middleware/IsAdmin.php',
+        'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
+        'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
+        'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
+        'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
+        'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
+        'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\Document' => __DIR__ . '/../..' . '/app/Models/Document.php',
+        'App\\Models\\Favourite' => __DIR__ . '/../..' . '/app/Models/Favourite.php',
+        'App\\Models\\Property' => __DIR__ . '/../..' . '/app/Models/Property.php',
+        'App\\Models\\PropertyImage' => __DIR__ . '/../..' . '/app/Models/PropertyImage.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
+        'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
+        'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
+        'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -630,8 +672,10 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\PropertyFactory' => __DIR__ . '/../..' . '/database/factories/PropertyFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\PropertySeeder' => __DIR__ . '/../..' . '/database/seeders/PropertySeeder.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
         'DateException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateException.php',
         'DateInvalidOperationException' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateInvalidOperationException.php',
@@ -3233,6 +3277,20 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'Maize\\Markable\\Database\\Factories\\ArticleFactory' => __DIR__ . '/..' . '/maize-tech/laravel-markable/database/factories/ArticleFactory.php',
+        'Maize\\Markable\\Database\\Factories\\PostFactory' => __DIR__ . '/..' . '/maize-tech/laravel-markable/database/factories/PostFactory.php',
+        'Maize\\Markable\\Database\\Factories\\UserFactory' => __DIR__ . '/..' . '/maize-tech/laravel-markable/database/factories/UserFactory.php',
+        'Maize\\Markable\\Exceptions\\InvalidMarkInstanceException' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Exceptions/InvalidMarkInstanceException.php',
+        'Maize\\Markable\\Exceptions\\InvalidMarkValueException' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Exceptions/InvalidMarkValueException.php',
+        'Maize\\Markable\\Exceptions\\InvalidMarkableInstanceException' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Exceptions/InvalidMarkableInstanceException.php',
+        'Maize\\Markable\\Mark' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Mark.php',
+        'Maize\\Markable\\Markable' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Markable.php',
+        'Maize\\Markable\\MarkableServiceProvider' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/MarkableServiceProvider.php',
+        'Maize\\Markable\\Models\\Bookmark' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Models/Bookmark.php',
+        'Maize\\Markable\\Models\\Favorite' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Models/Favorite.php',
+        'Maize\\Markable\\Models\\Like' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Models/Like.php',
+        'Maize\\Markable\\Models\\Reaction' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Models/Reaction.php',
+        'Maize\\Markable\\Scopes\\MarkableScope' => __DIR__ . '/..' . '/maize-tech/laravel-markable/src/Scopes/MarkableScope.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',
@@ -5355,6 +5413,10 @@ class ComposerStaticInit9ea300bf63d716957d573127fa6a8383
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\LaravelPackageTools\\Commands\\InstallCommand' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Commands/InstallCommand.php',
+        'Spatie\\LaravelPackageTools\\Exceptions\\InvalidPackage' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Exceptions/InvalidPackage.php',
+        'Spatie\\LaravelPackageTools\\Package' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/Package.php',
+        'Spatie\\LaravelPackageTools\\PackageServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-package-tools/src/PackageServiceProvider.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Clock\\Clock' => __DIR__ . '/..' . '/symfony/clock/Clock.php',
         'Symfony\\Component\\Clock\\ClockAwareTrait' => __DIR__ . '/..' . '/symfony/clock/ClockAwareTrait.php',

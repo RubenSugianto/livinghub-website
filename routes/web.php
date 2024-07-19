@@ -9,6 +9,7 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SimulasikprController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FavouriteController;
 use Illuminate\Support\Facades\Route;
 
 // Home Routes
@@ -46,3 +47,13 @@ Route::get('/search', [PropertyController::class, 'search'])->name('search');
 
 // Dashboard
 Route::get('/myproperties', [DashboardController::class, 'showMyProperty'])->middleware('auth');
+
+//Favourite and likes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/properties/{property}/favorite', [PropertyController::class, 'favorite'])->name('properties.favorite');
+    Route::post('/properties/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
+    Route::post('/properties/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
+    Route::post('/properties/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
+    Route::get('/favorites', [PropertyController::class, 'favorites'])->name('properties.favorites');
+    Route::get('/likes', [PropertyController::class, 'likes'])->name('properties.likes');
+});
