@@ -601,7 +601,11 @@
             <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
-                        <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name }}">
+                        @if($property->images->isNotEmpty())
+                            <img src="{{ asset($property->images->first()->images) }}" class="card-img-top" alt="{{ $property->name }}">
+                        @else
+                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name }}">
+                        @endif
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>

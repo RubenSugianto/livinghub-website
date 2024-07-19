@@ -281,6 +281,8 @@
                 <div class="dropdown">
                     <i class='fa fa-user-circle' style='font-size:36px;'></i>
                     <div class="dropdown-content">
+                        <a href="/lihatprofile">My Profile</a>
+                        <a href="/myproperties">My Property</a>
                         <a href="#">Favorites</a>
                         <a href="#">Like</a>
                         @auth

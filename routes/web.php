@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SimulasikprController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavouriteController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])-
 
 // Search
 Route::get('/search', [PropertyController::class, 'search'])->name('search');
+
+// Dashboard
+Route::get('/myproperties', [DashboardController::class, 'showMyProperty'])->middleware('auth');
 
 //Favourite and likes
 Route::middleware(['auth'])->group(function () {
