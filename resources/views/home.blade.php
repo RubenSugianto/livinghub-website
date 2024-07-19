@@ -191,50 +191,50 @@
     transition: 0.15s ease-in;
     margin: 10px;
 }
-.card:hover, .card:focus-within {
-    box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-}
+    .card:hover, .card:focus-within {
+        box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+    }
 
-.card-image {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-}
+    .card-image {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-.card-image img {
-    width: 100%;
-    display: block;
-    border-radius: 10px;
-}
+    .card-image img {
+        width: 100%;
+        display: block;
+        border-radius: 10px;
+    }
 
-.card-image::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    z-index: 1;
-}
+    .card-image::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        z-index: 1;
+    }
 
-.price-badge {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-    z-index: 2;
-}
+    .price-badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        z-index: 2;
+    }
 
-.card-list {
-        width: 90%;
-        max-width: 400px;
+    .card-list {
+            width: 90%;
+            max-width: 400px;
     }
 
     .card {
@@ -293,7 +293,7 @@
 
     .like-button {
         position: absolute;
-        top: 45%;
+        top: 50%;
         right: 10px;
         transform: translateY(-50%);
         z-index: 2; 
