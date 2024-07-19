@@ -67,8 +67,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Property::class, 'likes', 'user_id', 'property_id')->withTimestamps();
 
     // ini sebenernya gatau perlu atau ngga tapi liat dulu nanti
-    public function profile() {
-        return $this->hasMany(User::class);
+    // public function profile() {
+    // return $this->hasMany(User::class);
 
     }
 }
