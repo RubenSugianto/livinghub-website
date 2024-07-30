@@ -4,6 +4,44 @@
 
 @section('styles')
 <style>
+    .alert {
+        font-size: 2rem; /* Increase font size */
+        padding: 25px; /* Increase padding */
+        margin-bottom: 20px; /* Add margin */
+        border-radius: 5px; /* Rounded corners */
+        transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+        position: relative; /* For positioning the close button */
+    }
+
+    .alert .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #000; /* Change to match your design */
+        transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for scale and color */
+    }
+
+    .alert .close-btn:hover {
+        color: #555; /* Change color on hover */
+    }
+
+    .alert .close-btn:active {
+        transform: scale(1.2); /* Scale up slightly when clicked */
+    }
+
+    .alert.fade {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .alert.fade.hide {
+        opacity: 0;
+        transform: translateY(-20px); /* Slide up effect */
+    }
 
     .carousel-item img {
         max-height: 400px; 
@@ -435,6 +473,12 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+<div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ session('success') }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -700,6 +744,26 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `/properties/${propertyId}`;
         });
     });
+
+    function hideAlert() {
+        const successAlert = document.getElementById('successAlert');
+        if (successAlert) {
+            successAlert.classList.add('hide');
+            setTimeout(() => {
+                successAlert.remove(); // Remove alert element after transition
+            }, 500); // Match with CSS transition duration
+        }
+    }
+
+    const successAlert = document.getElementById('successAlert');
+    if (successAlert) {
+        setTimeout(() => {
+            successAlert.classList.add('hide');
+            setTimeout(() => {
+                successAlert.remove(); // Remove alert element after transition
+            }, 500); // Match with CSS transition duration
+        }, 3000); // Hide alert after 3 seconds
+    }
 });
 
 function resetFilters() {
