@@ -127,13 +127,6 @@ class PropertyController extends Controller
         return redirect()->route('home')->with('success', 'Property updated successfully.');
     }
 
-    // Menghapus properti
-    public function destroy(Property $property)
-    {
-        $property->delete();
-
-        return redirect()->route('home')->with('success', 'Property deleted successfully.');
-    }
 
     // Mencari properti berdasarkan filter
     public function search(Request $request)
@@ -266,4 +259,13 @@ class PropertyController extends Controller
         $likes = auth()->user()->likes()->get();
         return view('likes', compact('likes'));
     }
+
+
+public function compare(Request $request)
+{
+    $propertyIds = $request->input('propertyIds');
+    $properties = Property::whereIn('id', $propertyIds)->get();
+
+    return response()->json($properties);
+}
 }
