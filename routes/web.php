@@ -30,7 +30,8 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('lihatprofile');
+    Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/lihatprofile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 
