@@ -145,6 +145,10 @@
         margin-bottom: 15px;
     }
 
+    input[type="file"] {
+        margin-bottom: 15px; /* Add this line to add space */
+    }
+
     .btn-primary {
         background-color: #4A4AC4;
         color: white;
@@ -152,6 +156,7 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        text-align: right;
     }
 
     .btn-primary:hover {
@@ -180,32 +185,104 @@
             <h1>Personal Info</h1>
         </div>
         <div class="profile-pic">
-            <img src="https://kukangku.id/wp-content/uploads/2021/08/kukang-kalimantan-scaled.jpg" alt="Profile Picture">
-            <button>Upload Picture</button>
-            <button class="delete-btn">Delete Picture</button>
+            <img id="profilePicturePreview" src="{{ $profile->profilepicture ? asset('storage/' . $profile->profilepicture) : asset('defaultprofilepicture.png') }}" alt="Profile Picture">
+            <button type="button" class="delete-btn" id="deletePictureBtn">Remove Image</button>
+            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <label for="profilepicture" class="formbold-form-label">Add / Edit Profile Picture</label>
+                <input type="file" class="form-control" id="profilepicture" name="profilepicture" accept="image/*" onchange="previewImage(event)">
+
+                <input type="hidden" name="remove_picture" id="removePicture" value="0">
+
+                <div class="form-floating">
+                    <input type="text" name="fullname" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Full Name" required value="{{ old('fullname', $profile->fullname) }}">
+                    <label for="fullname">Full Name</label>
+                    @error('fullname')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Username" required value="{{ old('username', $profile->username) }}">
+                    <label for="username">Username</label>
+                    @error('username')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" required value="{{ old('email', $profile->email) }}">
+                    <label for="email">Email address</label>
+                    @error('email')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone', $profile->phone) }}">
+                    <label for="phone">Phone</label>
+                    @error('phone')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
+                        <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                        <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                    </select>
+                    <label for="gender">Gender</label>
+                    @error('gender')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-floating">
+                    <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age', $profile->age) }}">
+                    <label for="age">Age</label>
+                    @error('age')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div style="text-align: right;">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
         </div>
-
-        <form>
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" value="{{ $profile->fullname }}" readonly>
-
-            <label for="username">Username:</label>
-            <input type="text" id="username" value="{{ $profile->username }}" readonly>
-
-            <label for="email">Email address:</label>
-            <input type="email" id="email" value="{{ $profile->email }}" readonly>
-
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" value="{{ $profile->phone }}" readonly>
-
-            <label for="gender">Gender:</label>
-            <input type="text" id="gender" value="{{ $profile->gender }}" readonly>
-
-            <label for="age">Age:</label>
-            <input type="number" id="age" value="{{ $profile->age }}" readonly>
-
-            <button type="submit" class="btn-primary">Save Changes</button>
-        </form>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const output = document.getElementById('profilePicturePreview');
+            output.src = reader.result;
+            document.getElementById('removePicture').value = '0'; // Reset the remove picture flag
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    document.getElementById('deletePictureBtn').addEventListener('click', function() {
+        const output = document.getElementById('profilePicturePreview');
+        output.src = '{{ asset('defaultprofilepicture.png') }}';
+        document.getElementById('removePicture').value = '1'; // Set the remove picture flag
+    });
+</script>
 @endsection
+
