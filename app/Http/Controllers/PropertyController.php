@@ -49,7 +49,7 @@ class PropertyController extends Controller
             'typeDocument' => 'required|string',
             'published_at' => 'nullable|date',
             'images' => 'required|array|max:10',
-            'images.*' => 'required|image|mimes:png,jpg,jpeg,webp'
+            'images.*' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         // Membuat properti baru
