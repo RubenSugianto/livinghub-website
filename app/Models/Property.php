@@ -50,4 +50,8 @@ class Property extends Model
     {
         return $this->belongsToMany(User::class, 'likes', 'property_id', 'user_id')->withTimestamps();
     }
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
+    }
 }

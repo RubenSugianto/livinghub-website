@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-     <!-- Bootstrap CSS -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -26,8 +26,6 @@
 
         body {
             background: whitesmoke;
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -35,39 +33,35 @@
 
         header {
             position: fixed;
-            top: 0px;
+            top: 0;
             width: 100%;
-            background: #000; 
+            background: #000;
             padding: 10px 20px;
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
-            z-index: 1000; 
+            z-index: 1000;
         }
 
         .logo img {
-            width: 130px; 
+            width: 130px;
             height: auto;
-        }
-
-        .logo:hover {
-            color: #4A4AC4;
         }
 
         nav {
             display: flex;
-            justify-content: flex-end; 
+            justify-content: flex-end;
             align-items: center;
             gap: 35px;
+            flex-grow: 1;
         }
 
         nav a {
-            color: #fff !important; 
+            color: #fff !important;
             font-size: 20px;
             font-weight: 500;
             text-decoration: none !important;
             padding: 5px 0;
-            margin: 0;
             position: relative;
         }
 
@@ -78,7 +72,7 @@
             left: 50%;
             height: 3px;
             width: 0;
-            background: #4A4AC4; 
+            background: #4A4AC4;
             border-radius: 12px;
             transition: all 0.4s ease;
             transform: translateX(-50%);
@@ -92,16 +86,12 @@
             background: #5E5DF0;
             border-radius: 999px;
             box-shadow: #5E5DF0 0 10px 20px -10px;
-            box-sizing: border-box;
-            color: #FFFFFF;
+            color: #fff;
             font-size: 16px;
             font-weight: 700;
-            line-height: 24px;
-            opacity: 1;
-            outline: 0 solid transparent;
             padding: 8px 18px;
-            width: fit-content;
-            border: 0;
+            border: none;
+            cursor: pointer;
         }
 
         .navbutton:hover {
@@ -111,7 +101,6 @@
 
         .dropdown {
             position: relative;
-            display: inline-block;
         }
 
         .dropdown-content {
@@ -143,20 +132,20 @@
         .fa-user-circle {
             margin-left: 30px;
             cursor: pointer;
-            color: #fff; 
+            color: #fff;
         }
 
         main {
-            margin-top: 80px; 
+            margin-top: 70px; /* Adjusted to ensure enough space for the navbar */
             flex: 1;
             padding: 20px;
         }
 
         footer {
             width: 100%;
-            background: #000; 
-            padding: 30px 0; 
-            color: #fff; 
+            background: #000;
+            padding: 30px 0;
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -169,7 +158,7 @@
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            padding: 0 40px; 
+            padding: 0 40px;
         }
 
         .footer-description {
@@ -193,7 +182,7 @@
             flex: 1;
             min-width: 150px;
             padding: 20px;
-            margin-top: 20px; 
+            margin-top: 20px;
         }
 
         .footer-section p {
@@ -208,7 +197,7 @@
         }
 
         .footer-section a {
-            color: #fff; 
+            color: #fff;
             text-decoration: none;
             position: relative;
             padding: 2px 0;
@@ -221,7 +210,7 @@
             left: 0;
             height: 2px;
             width: 0;
-            background: #4A4AC4; 
+            background: #4A4AC4;
             border-radius: 12px;
             transition: all 0.4s ease;
         }
@@ -238,12 +227,12 @@
 
         .social-icons i {
             font-size: 30px;
-            color: #fff; 
+            color: #fff;
             transition: color 0.4s ease;
         }
 
         .social-icons i:hover {
-            color: #4A4AC4; 
+            color: #4A4AC4;
         }
 
         .footer-bottom {
@@ -253,18 +242,16 @@
             text-align: center;
             margin-top: 30px;
         }
+
         .full-width-rectangle {
             width: 102.1%;
             height: 350px;
             background-color: black;
             margin: -20px;
-            padding: 0px; 
+            padding: 0;
         }
-
-        
-    
     </style>
-        @yield('styles')
+    @yield('styles')
 </head>
 <body>
     <header>
@@ -283,7 +270,7 @@
                     <div class="dropdown-content">
                         <a href="/lihatprofile">My Profile</a>
                         <a href="/myproperties">My Property</a>
-                        <a href="#">Favorites</a>
+                        <a href="/favorites">Favorites</a>
                         <a href="#">Like</a>
                         @auth
                             <form action="/logout" method="post" style="margin: 0;">
@@ -297,25 +284,6 @@
                         @endauth
                     </div>
                 </div>
-
-                <!-- <div class="dropdown">
-                    <i class='fa fa-user-circle' style='font-size:36px;'></i>
-                    <div class="dropdown-content">
-                        <a href="#">Favorites</a>
-                        <a href="#">Like</a>
-                        @auth
-                            <a>
-                                <form action="/logout" method="post">
-                                    @csrf
-                                    <button type="submit">Logout</button>
-                                </form>
-                            </a>
-                        
-                        @else
-                            <a href="/login">Login</a>
-                        @endauth
-                    </div>
-                </div> -->
                 @auth
                     <div class="text-white">Welcome back, {{ auth()->user()->username }}</div>
                 @endauth
@@ -324,77 +292,65 @@
     </header>
     <main>
         @yield('content')
-        
     </main>
     <footer>
-    <div class="footer-content">
-        <div class="footer-description">
-            <img src="Logoo.png" alt="Logo">
-            <p>Living HUB merupakan platform jual, beli dan sewa properti terkemuka di Indonesia yang memberikan layanan kepada pengguna sejak 2024. Living HUB berkomitmen menjadikan pengalaman jual beli properti Anda semudah mungkin dengan fitur-fitur yang kami sediakan.</p>
-        </div>
-
-        <div class="footer-section">
-            <p>Jakarta</p>
-            <div class="city-links">
-                <a href="{{ route('search', ['kota' => 'Jakarta Pusat']) }}">Jakarta Pusat</a>
-                <a href="{{ route('search', ['kota' => 'Jakarta Utara']) }}">Jakarta Utara</a>
-                <a href="{{ route('search', ['kota' => 'Jakarta Barat']) }}">Jakarta Barat</a>
-                <a href="{{ route('search', ['kota' => 'Jakarta Selatan']) }}">Jakarta Selatan</a>
-                <a href="{{ route('search', ['kota' => 'Jakarta Timur']) }}">Jakarta Timur</a>
+        <div class="footer-content">
+            <div class="footer-description">
+                <img src="Logoo.png" alt="Logo">
+                <p>Living HUB merupakan platform jual, beli dan sewa properti terkemuka di Indonesia yang memberikan layanan kepada pengguna sejak 2024. Living HUB berkomitmen menjadikan pengalaman jual beli properti Anda semudah mungkin dengan fitur-fitur yang kami sediakan.</p>
+            </div>
+            <div class="footer-section">
+                <p>Jakarta</p>
+                <div class="city-links">
+                    <a href="{{ route('search', ['kota' => 'Jakarta Pusat']) }}">Jakarta Pusat</a>
+                    <a href="{{ route('search', ['kota' => 'Jakarta Utara']) }}">Jakarta Utara</a>
+                    <a href="{{ route('search', ['kota' => 'Jakarta Barat']) }}">Jakarta Barat</a>
+                    <a href="{{ route('search', ['kota' => 'Jakarta Selatan']) }}">Jakarta Selatan</a>
+                    <a href="{{ route('search', ['kota' => 'Jakarta Timur']) }}">Jakarta Timur</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <p>Bogor</p>
+                <div class="city-links">
+                    <a href="{{ route('search', ['kota' => 'Kota Bogor']) }}">Kota Bogor</a>
+                    <a href="{{ route('search', ['kota' => 'Kabupaten Bogor']) }}">Kabupaten Bogor</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <p>Depok</p>
+                <div class="city-links">
+                    <a href="{{ route('search', ['kota' => 'Kota Depok']) }}">Kota Depok</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <p>Tangerang</p>
+                <div class="city-links">
+                    <a href="{{ route('search', ['kota' => 'Kota Tangerang']) }}">Kota Tangerang</a>
+                    <a href="{{ route('search', ['kota' => 'Kota Tangerang Selatan']) }}">Kota Tangerang Selatan</a>
+                    <a href="{{ route('search', ['kota' => 'Kabupaten Tangerang']) }}">Kabupaten Tangerang</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <p>Bekasi</p>
+                <div class="city-links">
+                    <a href="{{ route('search', ['kota' => 'Kota Bekasi']) }}">Kota Bekasi</a>
+                    <a href="{{ route('search', ['kota' => 'Kabupaten Bekasi']) }}">Kabupaten Bekasi</a>
+                </div>
             </div>
         </div>
-
-        <div class="footer-section">
-            <p>Bogor</p>
-            <div class="city-links">
-                <a href="{{ route('search', ['kota' => 'Kota Bogor']) }}">Kota Bogor</a>
-                <a href="{{ route('search', ['kota' => 'Kabupaten Bogor']) }}">Kabupaten Bogor</a>
-            </div>
+        <div class="social-icons">
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            <i class="fa fa-twitter" aria-hidden="true"></i>
         </div>
-
-        <div class="footer-section">
-            <p>Depok</p>
-            <div class="city-links">
-                <a href="{{ route('search', ['kota' => 'Kota Depok']) }}">Kota Depok</a>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Living HUB. All rights reserved.</p>
         </div>
+    </footer>
 
-        <div class="footer-section">
-            <p>Tangerang</p>
-            <div class="city-links">
-                <a href="{{ route('search', ['kota' => 'Kota Tangerang']) }}">Kota Tangerang</a>
-                <a href="{{ route('search', ['kota' => 'Kota Tangerang Selatan']) }}">Kota Tangerang Selatan</a>
-                <a href="{{ route('search', ['kota' => 'Kabupaten Tangerang']) }}">Kabupaten Tangerang</a>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <p>Bekasi</p>
-            <div class="city-links">
-                <a href="{{ route('search', ['kota' => 'Kota Bekasi']) }}">Kota Bekasi</a>
-                <a href="{{ route('search', ['kota' => 'Kabupaten Bekasi']) }}">Kabupaten Bekasi</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="social-icons">
-        <i class="fa fa-instagram" aria-hidden="true"></i>
-        <i class="fa fa-facebook-square" aria-hidden="true"></i>
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; 2024 Living HUB. All rights reserved.</p>
-    </div>
-</footer>
-
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-@yield('scripts')
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    @yield('scripts')
 </body>
 </html>

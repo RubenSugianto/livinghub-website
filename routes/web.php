@@ -9,7 +9,9 @@ use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SimulasikprController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\MyPropertyController;
+
 use Illuminate\Support\Facades\Route;
 
 // Home Routes
@@ -54,6 +56,22 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/properties/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
     Route::post('/properties/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
     Route::post('/properties/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
-    Route::get('/favorites', [PropertyController::class, 'favorites'])->name('properties.favorites');
+    Route::get('/favorites', [FavoritesController::class, 'index'])->name('properties.favorites');
     Route::get('/likes', [PropertyController::class, 'likes'])->name('properties.likes');
+});
+
+//Favorites Page
+Route::middleware(['auth'])->group(function () {
+    Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites.index');
+    Route::delete('/favorites/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
+});
+
+Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
+
+//My property page
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties.index');
+    Route::get('/myproperties/search', [MyPropertyController::class, 'search'])->name('myproperties.search');
+    Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
