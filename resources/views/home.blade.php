@@ -294,12 +294,14 @@
     .card-image {
         position: relative;
         border-radius: 10px;
+        height: 200px;
         overflow: hidden;
     }
 
     .card-image img {
         width: 100%;
-        display: block;
+        height: 100%;
+        object-fit: cover;
         border-radius: 10px;
     }
 
@@ -465,6 +467,19 @@
           color: var(--primary) !important;
         }
       }
+    }
+
+    .property-card {
+        width: 300px; /* Adjust width as needed */
+        height: 400px; /* Adjust height as needed */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
   
 
