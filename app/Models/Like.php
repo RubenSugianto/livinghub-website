@@ -6,15 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Favourite extends Model
+class Like extends Model
 {
     use HasFactory;
     use HasUuids;
 
-    protected $table = "favorites";
+    protected $table = "likes";
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['user_id', 'property_id'];
-    
+    protected $fillable = [
+        'user_id',
+        'property_id',
+    ];
 }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Models\Document;
+use App\Models\Like;
+use App\Models\Favourite;
 use Illuminate\Support\Str;
 
 class PropertyController extends Controller
@@ -127,6 +129,40 @@ class PropertyController extends Controller
         return redirect()->route('home')->with('success', 'Property updated successfully.');
     }
 
+    public function destroy($id)
+    {
+        $property = Property::findOrFail($id);
+
+        // Check and delete related likes
+        $likes = Like::where('property_id', $property->id)->get();
+        if ($likes->isNotEmpty()) {
+            Like::where('property_id', $property->id)->delete();
+        }
+
+        // Check and delete related favorites
+        $favorites = Favourite::where('property_id', $property->id)->get();
+        if ($favorites->isNotEmpty()) {
+            Favourite::where('property_id', $property->id)->delete();
+        }
+
+        // Check and delete related property images
+        $propertyImages = PropertyImage::where('property_id', $property->id)->get();
+        if ($propertyImages->isNotEmpty()) {
+            PropertyImage::where('property_id', $property->id)->delete();
+        }
+
+        // Check and delete related documents
+        $documents = Document::where('property_id', $property->id)->get();
+        if ($documents->isNotEmpty()) {
+            Document::where('property_id', $property->id)->delete();
+        }
+
+        // Delete the property
+        $property->delete();
+
+        return redirect()->route('myproperties.index')->with('success', 'Property deleted successfully');
+    }
+
 
     // Mencari properti berdasarkan filter
     public function search(Request $request)
@@ -219,15 +255,30 @@ class PropertyController extends Controller
     // Menambahkan properti ke favorit
     public function favorite(Property $property)
     {
-        auth()->user()->favorites()->attach($property->id);
+        $favourite = Favourite::create([
+            'id' => (string) Str::uuid(),
+            'user_id' => auth()->id(),
+            'property_id' => $property->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    
         return back()->with('success', 'Property added to favorites.');
     }
 
     // Menghapus properti dari favorit
     public function unfavorite(Property $property)
     {
-        auth()->user()->favorites()->detach($property->id);
-        return back()->with('success', 'Property removed from favorites.');
+        $favourite = Favourite::where('user_id', auth()->id())
+        ->where('property_id', $property->id)
+        ->first();
+
+        if ($favourite) {
+            $favourite->delete();
+            return back()->with('success', 'Property removed from favorites.');
+        }
+
+        return back()->with('error', 'Property not found in favorites.');
     }
 
     // Menampilkan properti favorit
@@ -240,17 +291,33 @@ class PropertyController extends Controller
     // Menambahkan properti ke daftar suka
     public function like(Property $property)
     {
-        auth()->user()->likes()->attach($property->id);
+        $like = Like::create([
+            'id' => (string) Str::uuid(),
+            'user_id' => auth()->id(),
+            'property_id' => $property->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         $property->increment('like_count');
+
         return back()->with('success', 'Property added to likes.');
     }
 
     // Menghapus properti dari daftar suka
     public function unlike(Property $property)
     {
-        auth()->user()->likes()->detach($property->id);
-        $property->decrement('like_count');
-        return back()->with('success', 'Property removed from likes.');
+        $like = Like::where('user_id', auth()->id())
+                ->where('property_id', $property->id)
+                ->first();
+
+        if ($like) {
+            $like->delete();
+            $property->decrement('like_count');
+            return back()->with('success', 'Property removed from likes.');
+        }
+
+        return back()->with('error', 'Property not found in likes.');
     }
 
     // Menampilkan properti yang disukai
