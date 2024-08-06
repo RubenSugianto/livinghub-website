@@ -34,6 +34,8 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/lihatprofile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/lihatprofile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 
