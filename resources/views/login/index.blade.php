@@ -4,142 +4,170 @@
 
 @section('styles')
 <style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f8f9fa;
-        margin: 0;
-        padding-top: 400px; 
-    }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding-top: 300px; /* Reduced padding-top */
+}
 
-    .container {
-        width: 1000px; 
-        height: 870px;
-        padding: 10px;    
-        background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+.container {
+    width: 800px; /* Reduced width */
+    max-width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 12px; /* Reduced font-size */
+    margin: 20px auto;
+    padding: 15px; /* Reduced padding */
+}
 
-    .logo-container {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+.logo-container {
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin-bottom */
+}
 
-    .logo-container img {
-        width: 400px; 
-    }
+.logo-container img {
+    width: 200px; /* Reduced logo size */
+}
 
-    .form-signin {
-        width: 150%;
-        max-width: 500px; 
-        margin: 0 auto; 
-    }
+h2 {
+    font-size: 20px; /* Reduced font-size */
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin-bottom */
+}
 
-    .form-floating {
-        margin-bottom: 20px; 
-    }
+.form-signin {
+    width: 100%;
+    max-width: 400px; /* Reduced width */
+    margin: 0 auto;
+}
 
-    .btn-primary {
-        background-color: #5E5DF0;
-        border-color: #007bff;
-    }
+.form-floating {
+    margin-bottom: 8px; /* Reduced margin-bottom */
+    width: 100%;
+    max-width: 400px; /* Reduced width */
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .btn-primary:hover {
-        background-color: #4A4AC4;
-        border-color: #0056b3;
-    }
+.form-control {
+    width: 100%;
+    padding: 8px; /* Reduced padding */
+    font-size: 12px; /* Reduced font-size */
+    height: 40px; /* Reduced height */
+    margin-bottom: 8px; /* Reduced margin-bottom */
+}
 
-    .invalid-feedback {
-        display: block;
-    }
+.btn-primary {
+    background-color: #5E5DF0;
+    border-color: #5E5DF0;
+    font-size: 12px; /* Reduced font-size */
+    padding: 8px 16px; /* Reduced padding */
+    width: 100%;
+    max-width: 400px; /* Match the width of input boxes */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto; /* Centering */
+    display: block; /* Centering */
+}
 
-    .small-link {
-        color: #007bff;
-        text-decoration: none; 
-    }
+.btn-primary:hover {
+    background-color: #4A4AC4;
+    border-color: #4A4AC4;
+}
 
-    .small-link:hover {
-        color: #0056b3;
-        text-decoration: none; 
-    }
+.invalid-feedback {
+    display: block;
+}
 
-    .btn-google {
-        font-size: 18px;
-        line-height: 1.2;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px; 
-        width: 100%; 
-        height: 70px;
-        border-radius: 10px;
-        box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
-        transition: all 0.4s;
-        position: relative;
-        z-index: 1;
-        margin-bottom: 20px;
-        text-decoration: none; 
-    }
+.small-link {
+    color: #007bff;
+    text-decoration: none;
+}
 
-    .btn-google::before {
-        content: "";
-        display: block;
-        position: absolute;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        top: 0;
-        left: 0;
-        background: #a64bf4;
-        background: linear-gradient(45deg, #00dbde, #fc00ff);
-        opacity: 0;
-        transition: all 0.4s;
-    }
+.small-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
 
-    .btn-google {
-        color: #555555;
-        background-color: #fff;
-        text-decoration: none;
-    }
+.btn-google {
+    font-size: 12px; /* Reduced font-size */
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px; /* Reduced padding */
+    width: 100%;
+    max-width: 400px; /* Match the width of input boxes */
+    height: 40px; /* Reduced height */
+    border-radius: 8px;
+    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto 8px auto; /* Centering and margin */
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #555555;
+}
 
-    .btn-google img {
-        width: 30px;
-        margin-right: 15px;
-        padding-bottom: 3px;
-    }
+.btn-google::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    top: 0;
+    left: 0;
+    background: linear-gradient(45deg, #00dbde, #fc00ff);
+    opacity: 0;
+    transition: all 0.4s;
+}
 
-    .btn-google:hover::before {
-        opacity: 1;
-    }
+.btn-google img {
+    width: 12px; /* Reduced width */
+    margin-right: 5px; /* Reduced margin-right */
+    padding-bottom: 1.5px;
+}
 
-    .btn-google:hover {
-        color: #fff;
-        text-decoration: none;
-    }
+.btn-google:hover::before {
+    opacity: 1;
+}
 
-    .wrap-input100 {
-        width: 100%;
-        position: relative;
-        background-color: #f7f7f7;
-        border: 1px solid #e6e6e6;
-        border-radius: 10px;
-    }
+.btn-google:hover {
+    color: #fff;
+    text-decoration: none;
+}
 
-    .password-toggle {
-        position: relative;
-    }
+.wrap-input100 {
+    width: 100%;
+    position: relative;
+    background-color: #f7f7f7;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 8px; /* Reduced padding */
+}
 
-    .password-toggle .toggle-icon {
-        position: absolute;
-        top: 50%;
-        right: 15px;
-        transform: translateY(-50%);
-        cursor: pointer;
-    }
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle .toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 8px; /* Reduced right position */
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+
 </style>
 @endsection
 

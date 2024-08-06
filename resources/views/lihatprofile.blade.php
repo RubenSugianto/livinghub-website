@@ -4,175 +4,211 @@
 
 @section('styles')
 <style>
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f8f9fa;
-        margin: 0;
-        padding: 0;
-    }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    padding-top: 330px;
+    font-size: 12px; 
+}
 
-    .container {
-        width: 100%;
-        max-width: 2000px; 
-        padding: 40px;
-        background-color: #ffffff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        display: flex;
-        margin-top: 500px; 
-        box-sizing: border-box; 
-    }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    margin-top: 50px;
+    box-sizing: border-box;
+    font-size: 12px; 
+}
 
-    .sidebar {
-        width: 25%;
-        padding-right: 20px;
-        border-right: 1px solid #e0e0e0;
-    }
+.sidebar {
+    width: 25%;
+    padding-right: 20px;
+    border-right: 1px solid #e0e0e0;
+    font-size: 12px; 
+}
 
-    .sidebar a {
-        display: block;
-        padding: 10px 0;
-        color: #333;
-        text-decoration: none;
-        position: relative;
-    }
+.sidebar a {
+    display: block;
+    padding: 10px 0;
+    color: #333;
+    text-decoration: none;
+    position: relative;
+    font-size: 12px; 
+}
 
-    .sidebar a::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        background: #4A4AC4;
-        bottom: 0;
-        left: 0;
-        transition: width 0.3s;
-    }
+.sidebar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #4A4AC4;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+}
 
-    .sidebar a:hover::after {
-        width: 100%;
-    }
+.sidebar a:hover::after {
+    width: 100%;
+}
 
-    .sidebar a.active {
-        font-weight: bold;
-        color: #4A4AC4;
-        border-bottom: 2px solid #4A4AC4;
-        padding-bottom: 8px;
-        margin-bottom: 10px;
-    }
+.sidebar a.active {
+    font-weight: bold;
+    color: #4A4AC4;
+    border-bottom: 2px solid #4A4AC4;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
 
-    .sidebar .delete-account {
-        color: red;
-        cursor: pointer;
-        display: block;
-        margin-top: 20px;
-        text-decoration: none;
-    }
+.sidebar .delete-account {
+    color: red;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+}
 
-    .sidebar .delete-account:hover::after {
-        width: 0;
-    }
+.sidebar .delete-account:hover::after {
+    width: 0;
+}
 
-    .content {
-        width: 75%;
-        padding-left: 20px;
-        box-sizing: border-box; 
-    }
+.content {
+    width: 75%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 12px; 
+}
 
-    .profile-header {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
+.profile-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 12px; 
+}
 
-    .profile-header h1 {
-        margin: 0;
-        font-size: 24px;
-    }
+.profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
 
-    .profile-pic {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
+.profile-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 12px; 
+}
 
-    .profile-pic img {
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-    }
+.profile-pic img {
+    border-radius: 10%;
+    width: 100px;
+    height: 100px;
+}
 
-    .profile-pic button {
-        background-color: #4A4AC4;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+.profile-pic button {
+    background-color: #4A4AC4;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    .profile-pic button:hover {
-        background-color: #3737c1;
-    }
+.profile-pic button:hover {
+    background-color: #3737c1;
+}
 
-    .profile-pic .delete-btn {
-        background-color: #ff4b4b;
-    }
+.profile-pic .delete-btn {
+    background-color: #ff4b4b;
+}
 
-    .profile-pic .delete-btn:hover {
-        background-color: #ff1f1f;
-    }
+.profile-pic .delete-btn:hover {
+    background-color: #ff1f1f;
+}
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 12px; 
+}
 
-    input[type="text"],
-    input[type="email"],
-    input[type="number"],
-    select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        box-sizing: border-box; 
-        margin-bottom: 15px;
-    }
+label {
+    min-width: 150px;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 12px; 
+}
 
-    input[type="file"] {
-        margin-bottom: 15px; /* Add this line to add space */
-    }
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    width: 500px; 
+    font-size: 12px; 
+}
 
-    .btn-primary {
-        background-color: #4A4AC4;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: right;
-    }
+input[type="file"] {
+    display: none;
+}
 
-    .btn-primary:hover {
-        background-color: #3737c1;
-    }
+.custom-file-upload {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px; 
+}
 
-    .delete-account {
-        color: red;
-        cursor: pointer;
-        display: block;
-        margin-top: 20px;
-        text-decoration: none;
-    }
+.custom-file-upload:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-primary {
+    background-color: #4A4AC4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    float: right;
+    font-size: 12px; 
+}
+
+.btn-primary:hover {
+    background-color: #3737c1;
+}
+
+.delete-account {
+    color: red;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    font-size: 12px; 
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 12px; 
+}
 </style>
 @endsection
-
 @section('content')
 <div class="container">
     <div class="sidebar">
@@ -187,102 +223,110 @@
         <div class="profile-pic">
             <img id="profilePicturePreview" src="{{ $profile->profilepicture ? asset('storage/' . $profile->profilepicture) : asset('defaultprofilepicture.png') }}" alt="Profile Picture">
             <button type="button" class="delete-btn" id="deletePictureBtn">Remove Image</button>
-            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <label for="profilepicture" class="formbold-form-label">Add / Edit Profile Picture</label>
-                <input type="file" class="form-control" id="profilepicture" name="profilepicture" accept="image/*" onchange="previewImage(event)">
-
-                <input type="hidden" name="remove_picture" id="removePicture" value="0">
-
-                <div class="form-floating">
-                    <input type="text" name="fullname" class="form-control @error('fullname') is-invalid @enderror" id="fullname" placeholder="Full Name" required value="{{ old('fullname', $profile->fullname) }}">
-                    <label for="fullname">Full Name</label>
-                    @error('fullname')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-floating">
-                    <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Username" required value="{{ old('username', $profile->username) }}">
-                    <label for="username">Username</label>
-                    @error('username')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-floating">
-                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" required value="{{ old('email', $profile->email) }}">
-                    <label for="email">Email address</label>
-                    @error('email')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-floating">
-                    <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone', $profile->phone) }}">
-                    <label for="phone">Phone</label>
-                    @error('phone')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-floating">
-                    <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
-                        <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
-                        <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
-                    </select>
-                    <label for="gender">Gender</label>
-                    @error('gender')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-floating">
-                    <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age', $profile->age) }}">
-                    <label for="age">Age</label>
-                    @error('age')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-
-                <div style="text-align: right;">
-                    <button type="submit" class="btn-primary">Save Changes</button>
-                </div>
-            </form>
         </div>
+        <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="profilepicture">Add / Edit Profile Picture</label>
+                <label for="profilepicture" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Upload File
+                </label>
+                <input type="file" id="profilepicture" name="profilepicture" accept="image/*">
+                <input type="hidden" name="remove_picture" id="removePicture" value="0">
+            </div>
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" class="@error('fullname') is-invalid @enderror" placeholder="Full Name" required value="{{ old('fullname', $profile->fullname) }}">
+                @error('fullname')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="{{ old('username', $profile->username) }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                    <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="{{ old('age', $profile->age) }}">
+            </div>
+            <button type="submit" class="btn-primary">Save Changes</button>
+        </form>
+
+        <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" style="display: none;">
+            @csrf
+            @method('DELETE')
+        </form>
     </div>
 </div>
-
 <script>
+    document.getElementById('profilepicture').addEventListener('change', function(event) {
+        previewImage(event);
+        document.getElementById('removePicture').value = '0'; 
+    });
+
     function previewImage(event) {
         const reader = new FileReader();
-        reader.onload = function(){
+        reader.onload = function() {
             const output = document.getElementById('profilePicturePreview');
             output.src = reader.result;
-            document.getElementById('removePicture').value = '0'; // Reset the remove picture flag
         };
         reader.readAsDataURL(event.target.files[0]);
     }
 
     document.getElementById('deletePictureBtn').addEventListener('click', function() {
-        const output = document.getElementById('profilePicturePreview');
-        output.src = '{{ asset('defaultprofilepicture.png') }}';
-        document.getElementById('removePicture').value = '1'; // Set the remove picture flag
+        document.getElementById('profilePicturePreview').src = '{{ asset('defaultprofilepicture.png') }}';
+        document.getElementById('removePicture').value = '1';
+    });
+
+    document.getElementById('profileForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const confirmSave = confirm('Are you sure you want to save the changes?');
+        if (confirmSave) {
+            fetch('{{ route('profile.update') }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the profile picture in the UI
+                    document.getElementById('profilePicturePreview').src = data.profile_picture;
+                    document.querySelector('.dropdown-content .auth-text img').src = data.profile_picture;
+
+                    // Redirect to home page after saving
+                    window.location.href = '{{ route('home') }}';
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     });
 </script>
-@endsection
 
+@endsection
