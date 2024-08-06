@@ -3,7 +3,34 @@
 @section('title', 'My Property')
 
 @section('content')
+    @if (session('success'))
+    <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="container mt-4 text-center">
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this property? This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h1 class="mb-4">{{ $title }}</h1> 
 
         <div class="search-bar mb-5">
@@ -71,10 +98,13 @@
                                 <td>{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</td>
                                 <td>
                                     <a href="#', $property->id) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                   <form action="#" method="POST" style="display:inline-block;">
+                                    <form action="{{ url('properties/'.$property->id)}}" method="POST"
+                                    class="delete-form" style="display:inline-block;" data-property-id="{{ $property->id }}">
                                         @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                        @method('delete')
+                                        <button type="button" class="btn btn-danger delete-button" data-property-id="{{ $property->id }}">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
                                     </form>
                                     <a href="#" class="btn btn-secondary"><i class="fa fa-file-text" aria-hidden="true"></i></a>
                                 </td>
@@ -131,6 +161,55 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    var deleteModal = $('#deleteModal');
+    var confirmDeleteButton = document.getElementById('confirmDelete');
+    var propertyIdToDelete;
+    var formToSubmit;
+
+    // Add event listeners to all delete buttons
+    document.querySelectorAll('.delete-button').forEach(function (button) {
+        button.addEventListener('click', function () {
+            propertyIdToDelete = this.getAttribute('data-property-id');
+            // Find the form associated with the delete button
+            formToSubmit = document.querySelector('.delete-form[data-property-id="' + propertyIdToDelete + '"]');
+            deleteModal.modal('show');
+        });
+    });
+
+    // Handle the confirm delete button
+    confirmDeleteButton.onclick = function () {
+        if (formToSubmit) {
+            formToSubmit.submit(); // Submit the form
+        }
+        deleteModal.modal('hide');
+    };
+
+    document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            deleteModal.modal('hide');
+        });
+    });
+
+    function hideAlert() {
+        const successAlert = document.getElementById('successAlert');
+        if (successAlert) {
+            successAlert.classList.add('hide');
+            setTimeout(() => {
+                successAlert.remove(); // Remove alert element after transition
+            }, 500); // Match with CSS transition duration
+        }
+    }
+
+    const successAlert = document.getElementById('successAlert');
+    if (successAlert) {
+        setTimeout(() => {
+            successAlert.classList.add('hide');
+            setTimeout(() => {
+                successAlert.remove(); // Remove alert element after transition
+            }, 500); // Match with CSS transition duration
+        }, 3000); // Hide alert after 3 seconds
+    }
 });
 
 function resetFilters() {
@@ -148,6 +227,48 @@ function resetFilters() {
     --greyLight: #23adade1;
     --greyLight-2: #cbe0dd;
 }
+
+.alert {
+    font-size: 1.25rem; /* Increase font size */
+    padding: 17px; /* Increase padding */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add margin */
+    border-radius: 5px; /* Rounded corners */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
+    position: relative; /* For positioning the close button */
+}
+
+.alert .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #000; /* Change to match your design */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for scale and color */
+}
+
+.alert .close-btn:hover {
+    color: #555; /* Change color on hover */
+}
+
+.alert .close-btn:active {
+    transform: scale(1.2); /* Scale up slightly when clicked */
+}
+
+.alert.fade {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert.fade.hide {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide up effect */
+}
+
 
 body {
     font-family: Arial, sans-serif;
