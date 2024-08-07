@@ -401,7 +401,7 @@
         <body>
     <header>
         <a href="{{ route('home') }}" class="logo">
-            <img src="Logoo.png" alt="Logo">
+        <img src="{{ asset('Logoo.png') }}" alt="Logo">
         </a>
         <nav>
             <a href="{{ route('home') }}">Home</a>
