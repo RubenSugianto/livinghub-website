@@ -300,43 +300,45 @@
     </script>
 </div>
 
-
 <style>
 .formbold-main-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px;
+    padding: 30px 30px 30px 30px;
     max-width: 2000px;
     width: 100%;
-    margin: 0 auto;
+    margin: 10 auto;
+    position: relative;
+    top: -20px;
 }
 
 .formbold-form-wrapper {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     background: white;
-    padding: 20px;
-    border-radius: 15px; 
+    padding: 15px;
+    border-radius: 10px;
 }
+
 .formbold-form-input {
     width: 100%;
-    padding: 13px 22px;
+    padding: 8px 15px;
     border-radius: 5px;
     border: 1px solid #DDE3EC;
     background: #FFFFFF;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     color: #536387;
     outline: none;
     resize: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .formbold-steps {
-    padding-bottom: 18px;
-    margin-bottom: 35px;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
     border-bottom: 1px solid #DDE3EC;
 }
 
@@ -345,16 +347,16 @@
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 40px;
+    gap: 30px;
 }
 
 .formbold-steps li {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10px;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 20px;
     color: #536387;
 }
 
@@ -364,11 +366,11 @@
     justify-content: center;
     background: #DDE3EC;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 20px;
     color: #536387;
 }
 
@@ -383,8 +385,8 @@
 
 .formbold-input-flex {
     display: flex;
-    gap: 20px;
-    margin-bottom: 22px;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .formbold-input-flex > div {
@@ -399,10 +401,10 @@
 .formbold-form-label {
     color: #07074D;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 12px;
+    line-height: 20px;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .formbold-form-step-1,
@@ -424,16 +426,16 @@
 .formbold-form-btn-wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .formbold-back-btn,
 .formbold-btn,
 .formbold-submit-btn {
-    padding: 13px 25px;
+    padding: 10px 20px;
     border-radius: 5px;
     border: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     color: white;
@@ -469,47 +471,46 @@
     background-color: #4A4AC4; 
 }
 
-
 .alert {
-  padding: 20px;
-  background-color: #f44336; 
-  color: white;
-  margin-bottom: 15px;
-  width: calc(100% - 40px); 
-  margin: 20px auto; 
-  border-radius: 15px; 
+    padding: 15px;
+    background-color: #f44336; 
+    color: white;
+    margin-bottom: 10px;
+    width: calc(100% - 40px); 
+    margin: 20px auto 10px auto;
+    border-radius: 10px;
+    position: relative;
+    top: -50px;
 }
 
-
 .closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+    margin-left: ;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .closebtn:hover {
-  color: black;
+    color: black;
 }
 
 .formbold-image-preview {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     margin-top: 10px;
 }
 
 .formbold-preview-image {
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 200px;
+    max-height: 200px;
     object-fit: cover;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 
 </style>
 

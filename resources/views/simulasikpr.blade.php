@@ -33,58 +33,63 @@
 
 @section('styles')
 <style>
-    
-    .simulasi-kpr-container {
-        width: 100%;
-        max-width: 600px;
-        background: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        margin: 0 auto;
-        border: 1px solid #ccc;
-    }
+.simulasi-kpr-container {
+    width: 100%;
+    max-width: 800px; /* Width of the container */
+    background: #fff;
+    padding: 30px; /* Reduced padding */
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1); /* Slightly larger shadow */
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    position: relative;
+    top: -30px; /* Moves the container up */
+}
 
-    .simulasi-kpr-container h1 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
+.simulasi-kpr-container h1 {
+    text-align: center;
+    margin-bottom: 20px; /* Reduced margin-bottom */
+    color: #333;
+    font-size: 20px; /* Reduced font size */
+}
 
-    .simulasi-kpr-container p {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #666;
-    }
+.simulasi-kpr-container p {
+    text-align: center;
+    margin-bottom: 20px; /* Reduced margin-bottom */
+    color: #666;
+    font-size: 14px; /* Reduced font size */
+}
 
-    .simulasi-kpr-container label {
-        font-weight: 600;
-        color: #444;
-    }
+.simulasi-kpr-container label {
+    font-weight: 600;
+    color: #444;
+    font-size: 14px; /* Reduced font size */
+}
 
-    .simulasi-kpr-container input[type="number"],
-    .simulasi-kpr-container button {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border-radius: 6px;
-        border: 1px solid #ddd;
-        box-sizing: border-box;
-    }
+.simulasi-kpr-container input[type="number"],
+.simulasi-kpr-container button {
+    width: 100%;
+    padding: 12px; /* Adjusted padding */
+    margin-bottom: 15px; /* Adjusted margin-bottom */
+    border-radius: 6px; /* Slightly smaller border-radius */
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 14px; /* Reduced font size */
+}
 
-    .simulasi-kpr-container button {
-        background-color: #5e5df0;
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-        border: none;
-        transition: background-color 0.3s ease;
-    }
+.simulasi-kpr-container button {
+    background-color: #5e5df0;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
 
-    .simulasi-kpr-container button:hover {
-        background-color: #4a4ac4;
-    }
+.simulasi-kpr-container button:hover {
+    background-color: #4a4ac4;
+}
 
-   
+
 </style>
 @endsection

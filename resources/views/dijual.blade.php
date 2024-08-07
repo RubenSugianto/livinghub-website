@@ -1,10 +1,11 @@
 @extends('master')
 
-@section('title', 'Properti Dijual')
+@section('title', 'Properti Disewa')
 
 @section('content')
 <div class="container mt-4">
  <!-- Search and filter buttons -->
+ <img src="LogooB.png" alt="Living HUB Logo" width="300" style="display: block; margin: auto;">
 <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
         <input type="text" name="search" placeholder="Cari properti disini..">
@@ -145,10 +146,10 @@
             @foreach($properties as $property)
                 <div class="col-md-10 mb-3">
                     <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
-                        <div class="card property-card" data-property-id="{{ $property->id }}">
-                            <div class="card-image position-relative">
-                                <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" class="card-img-top" alt="{{ $property->name }}">
-                            </div>
+                    <div class="card property-card" data-property-id="{{ $property->id }}">
+                    <div class="card-image position-relative">
+                        <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                         </div>
                             <div class="card-body">
                                 <div class="price mb-2">
                                     <span class="font-weight-bold" style="font-size: 1.4em;">Rp {{ number_format($property->price, 0, ',', '.') }}</span>
@@ -175,17 +176,19 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14H7v-2h5v2zm0-4H7v-2h5v2zm5 4h-3v-2h3v2zm0-4h-3v-2h3v2z"/>
-                                    </svg>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
                                     @if ($property->published_at)
                                         <span class="ml-2">{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</span>
                                     @endif
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg" class="rounded-circle" alt="User" width="30" height="30">
-                                    <span class="ml-2">{{ $property->user->username }}</span>
-                                </div>
+                                @if($property->user->profilepicture)
+                                    <img id="ProfilePicture" src="{{ asset('storage/' . $property->user->profilepicture) }}" alt="Profile Picture" onerror="this.src='{{ asset('path/to/default/profile.png') }}'">
+                                @else
+                                <i class="fa fa-user-o" style="font-size: 15px; color: grey;"></i>
+                                @endif
+                                <span class="ml-2">{{ $property->user->username }}</span>
+                            </div>
                             </div>
                         </div>
                     </a>
@@ -254,28 +257,25 @@ function resetFilters() {
   --greyDark: #2d4848;
   --btnColor: #5E5DF0;
 }
-
 html {
   box-sizing: border-box;
-  font-size: 70%; 
+  font-size: 50%;
   overflow-y: scroll;
-  font-family: "Poppins", sans-serif;
-  letter-spacing: 0.6px;
-  line-height: 1.4;
-  -webkit-user-select: none;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+body {
+    padding-top: 0px; 
 }
 
 .page {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 5rem;
-  margin: 3rem auto;
-  border-radius: 0.6rem;
+  height: 3rem;
+  margin: 1rem auto;
+  border-radius: 0.4rem;
   background: #ffffff;
-  box-shadow: 0 0.8rem 2rem rgba(90, 97, 129, 0.05);
+  box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
   width: fit-content;
 }
 
@@ -285,8 +285,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.8rem;
-  font-size: 1.6rem; 
+  margin: 0.4rem;
+  font-size: 1.2rem;
   cursor: pointer;
   border: none;
   background: none;
@@ -294,17 +294,17 @@ html {
 }
 
 .page__dots {
-  width: 3rem; 
-  height: 3rem; 
+  width: 2rem;
+  height: 2rem;
   color: var(--greyLight);
   cursor: initial;
 }
 
 .page__numbers {
-  width: 3rem; 
-  height: 3rem; 
-  border-radius: 0.4rem;
-  color: var(--greyDark); 
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  color: var(--greyDark);
 
   &:hover {
     color: #ffffff !important;
@@ -335,33 +335,33 @@ html {
 
 .property-card {
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   max-width: 100%;
   width: 100%;
-  margin: 15px auto;
+  margin: 8px auto;
 }
 
 .property-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.005);
 }
 
 .badge {
-    font-size: 1em; 
-    padding: 0.5em 1em; 
-    margin-right: 10px;
+  font-size: 0.8em;
+  padding: 0.3em 0.8em;
+  margin-right: 8px;
 }
 
 .card-image img {
   width: 100%;
-  height: 300px;
+  height: 350px;
   object-fit: cover;
 }
 
 .price {
-  font-size: 1.6em; 
+  font-size: 1.2em;
   font-weight: bold;
 }
 
@@ -370,53 +370,43 @@ html {
 }
 
 .card-title h5 {
-  font-size: 22px; 
+  font-size: 18px;
   font-weight: bold;
 }
 
 .card-title svg {
-  margin-left: 10px;
+  margin-left: 6px;
   cursor: pointer;
 }
 
 .card-text {
-  font-size: 16px; 
+  font-size: 12px;
   color: #555;
 }
 
 .card-footer {
-  padding: 15px;
+  padding: 8px;
   background: #f8f9fa;
 }
 
-.card-meta {
-  font-size: 16px; 
-  color: #777;
-}
-
-.card-meta svg {
-  margin-right: 5px;
-  vertical-align: middle;
-}
-
 .card-meta img {
-  width: 35px; 
-  height: 35px; 
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 
 .spacer {
-  margin-left: 5px;
+  margin-left: 3px;
 }
 
 .property-details p {
-  margin-right: 10px;
-  font-size: 16px; 
+  margin-right: 6px;
+  font-size: 12px;
 }
 
 .property-details svg {
-  margin-right: 5px;
+  margin-right: 3px;
 }
 
 .property-details strong {
@@ -424,10 +414,10 @@ html {
 }
 
 .property-description {
-  font-size: 16px; 
+  font-size: 12px;
   color: #555;
-  margin-top: 10px;
-  max-height: 100px;
+  margin-top: 6px;
+  max-height: 70px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -438,55 +428,59 @@ html {
   font-weight: 600 !important;
   border: 1px solid var(--primary) !important;
 }
-
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem; 
+}
 
 .search-bar .input-group {
-display: flex;
-justify-content: flex-start;
-align-items: center;
-width: 50%; 
-margin: 0;
-border: 2px solid #ccc;
-border-radius: 5px;
-overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 40%;
+  margin: 0;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .search-bar input[type="text"] {
-flex: 1;
-padding: 13px;
-border: none;
-outline: none;
-min-width: 0; 
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  min-width: 0;
 }
 
 .search-bar button {
-padding: 10px;
-background: none;
-color: black;
-border: none;
-cursor: pointer;
-min-width: 50px; 
-display: flex;
-align-items: center;
-justify-content: center;
+  padding: 6px;
+  background: none;
+  color: black;
+  border: none;
+  cursor: pointer;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-bar button:hover {
-color: #4A4AC4;
+  color: #4A4AC4;
 }
 
 .search-bar button.filter-button:hover {
-color: #4A4AC4;
+  color: #4A4AC4;
 }
-
 
 .btn-group-toggle .btn {
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
-  color: black; 
-  background-color: white; 
-  font-size: 16px; 
+  margin-right: 6px;
+  color: black;
+  background-color: white;
+  font-size: 12px;
 }
 
 .btn-group-toggle .btn.active {
@@ -502,11 +496,11 @@ color: #4A4AC4;
 .modal-body {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap: 30px;
 }
 
 .modal-body .form-group {
-  flex: 1 1 30%;
+  flex: 1 1 25%;
 }
 
 .modal-body .form-group-full {
@@ -516,7 +510,7 @@ color: #4A4AC4;
 .input-range {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .btn-group-toggle .btn input[type="radio"] {
@@ -526,8 +520,8 @@ color: #4A4AC4;
 label {
   font-weight: bold;
   display: block;
-  margin-bottom: 5px;
-  font-size: 16px;
+  margin-bottom: 3px;
+  font-size: 12px;
 }
 
 .modal-footer {
@@ -539,10 +533,10 @@ label {
 .modal-body .btn-group-toggle .btn {
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
-  color: black; 
-  background-color: white; 
-  font-size: 16px; 
+  margin-right: 6px;
+  color: black;
+  background-color: white;
+  font-size: 12px;
 }
 
 .modal-body .btn-group-toggle .btn.active {
@@ -556,7 +550,14 @@ label {
 }
 
 .modal-dialog.modal-lg {
-  max-width: 40%; 
+  max-width: 30%;
+}
+
+#ProfilePicture {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 </style>
