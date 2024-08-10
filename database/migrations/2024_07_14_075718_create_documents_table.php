@@ -15,8 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('property_id')->constrained();
             $table->foreignUuid('user_id')->constrained();
+            $table->string('name')->nullable();
             $table->string('type');
-            $table->string('images')->nullable();
+            $table->string('file')->nullable();
             $table->string('status');
             $table->timestamps();
         });
