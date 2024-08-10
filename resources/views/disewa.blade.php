@@ -148,7 +148,11 @@
                     <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
                     <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
-                        <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                        @if($property->images->isNotEmpty())
+                            <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                        @else
+                            <img src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/02/0/0/Screen-Shot-2022-02-08-at-1.01.01-PM-gigapixel-low_res-scale-2_00x.png?ve=1&tl=1" alt="No Image Available" width="100">
+                        @endif
                          </div>
                             <div class="card-body">
                                 <div class="price mb-2">
