@@ -100,34 +100,37 @@ class PropertyController extends Controller
         return redirect()->route('home')->with('success', 'Property added successfully.');
     }
 
-    // Menampilkan form edit properti
-    public function edit(Property $property)
+     // Show the form for editing a specific property
+     public function edit($id)
     {
-        return view('property.edit', compact('property'));
+        $property = Property::findOrFail($id);
+        $propertyImages = PropertyImage::where('property_id', $id)->get(); // Add this line
+
+        return view('properties.edit', compact('property', 'propertyImages')); // Update this line
     }
-
-    // Mengupdate properti
-    public function update(Request $request, Property $property)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'required|string',
-            'bedroom' => 'required|integer',
-            'bathroom' => 'required|integer',
-            'electricity' => 'required|integer',
-            'surfaceArea' => 'required|integer',
-            'buildingArea' => 'required|integer',
-            'status' => 'required|string',
-            'type' => 'required|string',
-            'published_at' => 'nullable|date',
-        ]);
-
+ 
+     // Update a specific property
+     public function update(Request $request, $id)
+     {
+         $request->validate([
+             'name' => 'required|string|max:255',
+             'price' => 'required|integer',
+             'location' => 'required|string|max:255',
+             'description' => 'required|string',
+             'bedroom' => 'required|integer',
+             'bathroom' => 'required|integer',
+             'electricity' => 'required|integer',
+             'surfaceArea' => 'required|integer',
+             'buildingArea' => 'required|integer',
+             'status' => 'required|string|max:50',
+             'type' => 'required|string|max:50',
+         ]);
+ 
+        $property = Property::findOrFail($id);
         $property->update($request->all());
-
-        return redirect()->route('home')->with('success', 'Property updated successfully.');
-    }
+ 
+        return redirect()->route('myproperties.index')->with('success', 'Property updated successfully');
+     }
 
     public function destroy($id)
     {
