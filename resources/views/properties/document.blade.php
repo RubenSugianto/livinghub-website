@@ -5,19 +5,32 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h1>Verifikasi Dokumen Properti</h1>
-            <h2>Verifikasi dokumen Anda!</h2>
+
+            <div class="form-group-row">
+                <div class="input-container">
+                    <h2>Verifikasi dokumen Anda!</h2>
+                </div>
+            </div>
+
             <form action="{{ route('document.update', $property->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                <!-- Property Details -->
+                <!-- Document Type -->
                 <div class="form-group-row">
-                    <label for="certificate">Jenis Sertifikat</label>
+                    <label for="documentType">Jenis Sertifikat</label>
                     <div class="input-container">
-                        <input type="text" class="form-control" id="certificate" name="certificate" value="{{ old('certificate', $document->type ?? '') }}">
+                        <select class="form-control" id="documentType" name="documentType" required>
+                            <option value="" disabled selected>Pilih jenis sertifikat</option>
+                            <option value="SHM" {{ old('documentType', $document->type ?? '') == 'SHM' ? 'selected' : '' }}>SHM</option>
+                            <option value="SHGB" {{ old('documentType', $document->type ?? '') == 'SHGB' ? 'selected' : '' }}>SHGB</option>
+                            <option value="SHGU" {{ old('documentType', $document->type ?? '') == 'SHGU' ? 'selected' : '' }}>SHGU</option>
+                            <option value="Hak Pakai" {{ old('documentType', $document->type ?? '') == 'Hak Pakai' ? 'selected' : '' }}>Hak Pakai</option>
+                        </select>
                     </div>
                 </div>
 
+                <!-- Document Name -->
                 <div class="form-group-row">
                     <label for="documentName">Nama Dokumen</label>
                     <div class="input-container">
@@ -25,6 +38,7 @@
                     </div>
                 </div>
 
+                <!-- Document Status -->
                 <div class="form-group-row">
                     <label for="documentStatus">Status Sertifikat</label>
                     <div class="input-container">
@@ -32,6 +46,7 @@
                     </div>
                 </div>
 
+                <!-- Upload Document -->
                 <div class="form-group-row">
                     <label for="document">Upload Dokumen PDF (Maksimal 1 Dokumen)</label>
                     <div class="input-container">
@@ -40,6 +55,7 @@
                     </div>
                 </div>
 
+                <!-- Submit Button -->
                 <div class="form-group-row">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
@@ -57,6 +73,10 @@
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
+    }
+
+    .form-group-row h2 {
+        margin-top: 0; /* Remove top margin */
     }
 
     .form-group-row label {
