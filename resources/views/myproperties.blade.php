@@ -97,16 +97,19 @@
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</td>
                                 <td>
-                                    <a href="#', $property->id) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <form action="{{ url('properties/'.$property->id)}}" method="POST"
-                                    class="delete-form" style="display:inline-block;" data-property-id="{{ $property->id }}">
+                                    <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <form action="{{ route('property.destroy', $property->id) }}" method="POST" class="delete-form" style="display:inline-block;" data-property-id="{{ $property->id }}">
                                         @csrf
                                         @method('delete')
                                         <button type="button" class="btn btn-danger delete-button" data-property-id="{{ $property->id }}">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    <a href="#" class="btn btn-secondary"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+                                    <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

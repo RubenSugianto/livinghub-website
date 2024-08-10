@@ -11,6 +11,7 @@ use App\Http\Controllers\SimulasikprController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\MyPropertyController;
+use App\Http\Controllers\DocumentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -76,5 +77,12 @@ Route::post('/compare-properties', [PropertyController::class, 'compare'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties.index');
     Route::get('/myproperties/search', [MyPropertyController::class, 'search'])->name('myproperties.search');
+    Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
+    Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
     Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
 });
+
+
+Route::get('/document/edit/{property_id}', [DocumentController::class, 'edit'])->name('document.edit');
+Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
+
