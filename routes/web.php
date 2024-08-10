@@ -80,9 +80,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
     Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
     Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
+    Route::get('/document/{property}/edit', [DocumentController::class, 'edit'])->name('document.edit');
+    Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
 });
 
 
-Route::get('/document/edit/{property_id}', [DocumentController::class, 'edit'])->name('document.edit');
-Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
+
 
