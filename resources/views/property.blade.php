@@ -27,7 +27,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-    
+
             <!-- Likes and Favorites -->
             <div class="tags-favorite">
                 <div class="tags">
@@ -114,9 +114,25 @@
                 <p><strong>Terakhir Update</strong> <span class="spacer">{{ $property->updated_at ? \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') : '-' }}</span></p>
                 <hr>
             </div>
+
+            <!-- Profile Section -->
+            <div class="profile-section d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    @if($property->user->profilepicture)
+                        <img id="ProfilePicture" src="{{ asset('storage/' . $property->user->profilepicture) }}" alt="Profile Picture" class="profile-picture">
+                    @else
+                        <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
+                    @endif
+                    <span class="ml-2 profile-username">{{ $property->user->username }}</span>
+                </div>
+                <a href="#" class="btn btn-outline-secondary chat-button">
+                    <i class="fa fa-comments-o" aria-hidden="true"></i> Chat
+                </a>
+            </div>
         </div>
     </div>
 </div>
+
 <style>
     .tags-favorite {
         display: flex;
@@ -132,20 +148,21 @@
 
     .image-container {
         position: relative;
-        max-height: 400px;
+        max-height: 250px;
         overflow: hidden;
         border-radius: 15px;
-        margin-top: 80px;
+        margin-top: 50px;
     }
 
     .back-button {
         position: absolute;
-        top: 10px; /
+        top: 10px;
         left: 10px;
         text-decoration: none;
         z-index: 10;
-        font-size: 28px;
+        font-size: 18px;
         color: black;
+        transition: color 0.3s;
     }
 
     .back-button:hover {
@@ -153,10 +170,12 @@
         text-decoration: none;
     }
 
-    .img-fluid {
-        width: 100%;
-        height: auto;
+    .image-container {
+        position: relative;
+        max-height: 500px; /* Increased max-height */
+        overflow: hidden;
         border-radius: 15px;
+        margin-top: 50px;
     }
 
     .tags {
@@ -167,37 +186,37 @@
     .tag {
         background-color: #777; 
         border-radius: 10px;
-        padding: 10px 15px;
-        font-size: 18px;
+        padding: 5px 8px;
+        font-size: 12px;
         font-weight: bold;
         color: #ddd;
     }
 
     h1 {
-        font-size: 40px; 
+        font-size: 24px; 
         font-weight: bold;
     }
 
     .price {
-        font-size: 28px; 
+        font-size: 20px; 
         color: #000;
     }
 
     .location {
-        font-size: 18px; 
+        font-size: 14px; 
         color: #777;
     }
 
     .section-title {
-        font-size: 22px;
+        font-size: 16px;
         font-weight: bold;
         margin-top: 20px;
     }
 
     .property-info p {
-        font-size: 16px; 
+        font-size: 12px; 
         color: #555;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         display: flex;
         justify-content: space-between;
     }
@@ -209,9 +228,41 @@
     .info-item {
         display: flex;
         flex-direction: column;
-        font-size: 16px; 
+        font-size: 12px; 
         color: #555;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
+    }
+
+    .profile-section {
+        margin-top: 20px;
+    }
+
+    .profile-picture {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .profile-icon {
+        font-size: 30px;
+        color: grey;
+    }
+
+    .profile-username {
+        font-size: 12px;
+        color: #333;
+    }
+
+    .chat-button {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        transition: color 0.3s, border-color 0.3s;
+    }
+
+    .chat-button:hover {
+        color: #4A4AC4 !important; 
+        border-color: #4A4AC4 !important; 
     }
 </style>
 @endsection
