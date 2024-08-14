@@ -3,6 +3,8 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\PropertyImage;
@@ -101,12 +103,13 @@ class PropertyController extends Controller
     }
 
      // Show the form for editing a specific property
-     public function edit($id)
+    public function edit($id)
     {
         $property = Property::findOrFail($id);
         $propertyImages = PropertyImage::where('property_id', $id)->get(); // Add this line
+        $imageIds = $propertyImages->pluck('id'); // Get only the IDs
 
-        return view('properties.edit', compact('property', 'propertyImages')); // Update this line
+        return view('properties.edit', compact('property', 'propertyImages', 'imageIds')); // Update this line
     }
  
      // Update a specific property
@@ -124,12 +127,42 @@ class PropertyController extends Controller
              'buildingArea' => 'required|integer',
              'status' => 'required|string|max:50',
              'type' => 'required|string|max:50',
+             'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+             'existing_images' => 'array', // Array of existing image IDs (hidden inputs in the form)
          ]);
- 
-        $property = Property::findOrFail($id);
-        $property->update($request->all());
- 
-        return redirect()->route('myproperties.index')->with('success', 'Property updated successfully');
+     
+         $property = Property::findOrFail($id);
+         $property->update($request->except('images', 'existing_images'));
+     
+         // Handle existing images
+         $existingImageIds = $request->input('existing_images', []);
+         $currentImageIds = $property->images->pluck('id')->toArray();
+     
+         // Delete images that are no longer in the existing_images list
+         foreach (array_diff($currentImageIds, $existingImageIds) as $imageId) {
+             $image = PropertyImage::find($imageId);
+             if ($image) {
+                 Storage::delete($image->images);
+                 $image->delete();
+             }
+         }
+     
+         // Handle newly uploaded images
+         if ($files = $request->file('images')) {
+             foreach ($files as $file) {
+                 $filename = time() . '-' . $file->getClientOriginalName();
+                 $path = 'uploads/properties/';
+                 $file->move($path, $filename);
+     
+                 PropertyImage::create([
+                     'property_id' => $property->id,
+                     'user_id' => auth()->id(),
+                     'images' => $path . $filename,
+                 ]);
+             }
+         }
+     
+         return redirect()->route('myproperties.index')->with('success', 'Property updated successfully.');
      }
 
     public function destroy($id)
