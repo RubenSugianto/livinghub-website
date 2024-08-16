@@ -252,7 +252,21 @@
             const customTypeInput = document.getElementById('customType');
 
             if (typeSelect.value === 'Lainnya') {
-                typeSelect.value = customTypeInput.value;
+                if (customTypeInput.value.trim() !== '') {
+                    // Create a new option with the custom value
+                    const newOption = document.createElement('option');
+                    newOption.value = customTypeInput.value.trim();
+                    newOption.textContent = customTypeInput.value.trim();
+                    typeSelect.appendChild(newOption);
+                    
+                    // Select the new option
+                    typeSelect.value = customTypeInput.value.trim();
+                } else {
+                    // If custom input is empty, prevent form submission
+                    event.preventDefault();
+                    alert('Please enter a custom document type.');
+                    return;
+                }
             }
             
             const allFieldsFilled = Array.from(document.querySelectorAll('input[required], select[required], textarea[required]')).every(field => field.value.trim() !== '');
@@ -268,12 +282,14 @@
         typeSelect.addEventListener('change', function () {
             if (typeSelect.value === 'Lainnya') {
                 customTypeInput.style.display = 'block';
-                customTypeInput.required = true;  // Make the custom input field required when shown
+                customTypeInput.required = true;
             } else {
                 customTypeInput.style.display = 'none';
-                customTypeInput.required = false; // Make sure it's not required when hidden
+                customTypeInput.required = false;
+                customTypeInput.value = ''; // Clear the custom input when not selected
             }
         });
+
     });
 
     function previewImages(event) {
