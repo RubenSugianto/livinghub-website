@@ -11,25 +11,45 @@
     @endif
     <div class="container mt-4 text-center">
         <!-- Confirmation Modal -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         Are you sure you want to delete this property? This action cannot be undone.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Pending Status Modal -->
+        <div class="modal fade" id="pendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pendingModalLabel">Pending Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        The status of this document is currently pending. Please review the document.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
         <h1 class="mb-4">{{ $title }}</h1> 
 
@@ -107,9 +127,19 @@
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    </a>
+                                    @if ($property->document->status === 'Pending')
+                                        <!-- Button for pending status with modal trigger, always using btn-warning -->
+                                        <a href="javascript:void(0);" class="btn btn-warning"
+                                        data-bs-toggle="modal" data-bs-target="#pendingModal">
+                                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        </a>
+                                    @else
+                                        <!-- Button for non-pending status that navigates to document edit page, always using btn-secondary -->
+                                        <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
+                                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        </a>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach
@@ -213,6 +243,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500); // Match with CSS transition duration
         }, 3000); // Hide alert after 3 seconds
     }
+
+    var pendingModal = new bootstrap.Modal(document.getElementById('pendingModal'));
+
+    // Show the modal on click of status button if status is 'Pending'
+    document.querySelectorAll('[data-status="pending"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            pendingModal.show();
+        });
+    });
+
 });
 
 function resetFilters() {
@@ -220,6 +260,8 @@ function resetFilters() {
         input.value = '';
     });
 }
+
+
 </script>
 @endsection
 
