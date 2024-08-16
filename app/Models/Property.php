@@ -42,6 +42,11 @@ class Property extends Model
     {
         return $this->hasMany(PropertyImage::class);
     }
+
+    public function document()
+    {
+        return $this->hasOne(Document::class); // Adjusted for one-to-one relationship
+    }
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
