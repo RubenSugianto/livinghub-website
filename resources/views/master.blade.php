@@ -16,275 +16,247 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-       * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-        body {
-            background: whitesmoke;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-top: 50px;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #000;
-            padding: 5px 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
+body {
+    background: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 70px;
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-        }
+header {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
 
-        .logo img {
-            width: 100px;
-            height: auto;
-        }
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 15px;
+    border-radius: 20px;
+    margin: 0 10px;
+}
 
-        nav {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex: 1;
-            justify-content: center;
-        }
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
-        nav a {
-        color: #fff;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        text-decoration: none !important;
-        padding: 5px 5px !important;
-        position: relative !important;
-        transition: color 0.3s ease !important;
-         }
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Add some space between the logo and the routes */
+}
 
-        nav a:before {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 50%;
-            height: 2px;
-            width: 0;
-            background: #4A4AC4;
-            border-radius: 12px;
-            transition: width 0.4s ease;
-            transform: translateX(-50%);
-        }
+.logo img {
+    width: 70px;
+    height: auto;
+}
 
-        nav a:hover {
-            color: #4A4AC4;
-        }
+.nav-routes {
+    display: flex;
+    align-items: center;
+    background-color: white; /* Single white background for routes */
+    padding: 5px 15px;
+    border-radius: 20px; /* Rounded corners for the white background */
+    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
+}
 
-        nav a:hover:before {
-            width: 100%;
-        }
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    justify-content: center;
+}
 
-        .navbutton {
-            background: #5E5DF0;
-            border-radius: 999px;
-            box-shadow: #5E5DF0 0 10px 20px -10px;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+nav a {
+    color: #000000 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    padding: 5px 10px !important;
+    position: relative !important;
+    transition: color 0.3s ease !important;
+    background-color: transparent !important;
+    border-radius: 12px;
+}
 
-        .navbutton:hover {
-            background: #4A4AC4;
-            box-shadow: #4A4AC4 0 10px 20px -10px;
-        }
+nav a:before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    height: 2px;
+    width: 0;
+    background: #4A4AC4;
+    border-radius: 12px;
+    transition: width 0.4s ease;
+    transform: translateX(-50%);
+}
 
-     
+nav a:hover:before {
+    width: 100%;
+}
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+.navbutton {
+    background: #5E5DF0;
+    color: #ffffff;
+    border-radius: 999px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px; /* Add some space between the routes and the button */
+    transition: background 0.3s ease;
+}
 
-        .dropdown i {
-            cursor: pointer;
-            color: white;
-        }
+.navbutton:hover {
+    background: #4A4AC4;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color:white ;
-            color: #333333;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            min-width: 280px;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+.dropdown {
+    position: relative;
+    margin-left: 15px;
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.dropdown i {
+    cursor: pointer;
+    color: #000000;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 999px;
+}
 
-        .auth-text {
-            color: #333;
-            padding: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-     
-            background-color:  #ffffff;
-        }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    color: #333333;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    min-width: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
 
-        .auth-text img {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px; 
-            object-fit: cover;
-            background-color: #ffffff; 
-            margin-right: 10px; 
-        }   
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.auth-text {
+    color: #333;
+    padding: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+}
 
-        .username {
-            font-size: 16px;
-        }
-               
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+.auth-text img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    background-color: #ffffff;
+    margin-right: 10px;
+}
 
-        .dropbtn {
-            color: #fff;
-            font-size: 14px;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #333;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 200px; 
-        }
+.username {
+    font-size: 16px;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #ffffff; 
-            color: #333;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-            min-width: 280px;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+    width: 100%;
+}
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+.dropdown-content a:hover {
+    background-color: #EFF3FF;
+    color: #4A4AC4;
+}
 
-        .dropdown-content a {
-            color: #333; 
-            padding: 12px 20px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-weight: 500;
-            font-size: 14px;
-            text-align: left;
-            width: 100%;
-        }
+.dropdown-content a i {
+    margin-right: 10px;
+    color: #ABB0B4;
+    transition: color 0.3s ease;
+}
 
-        .dropdown-content a:hover {
-            background-color: #EFF3FF; 
-            color: #4A4AC4; 
-        }
+.dropdown-content a:hover i {
+    color: #4A4AC4;
+}
 
-        .dropdown-content a i {
-            margin-right: 10px; 
-            color: #ABB0B4; 
-            transition: color 0.3s ease;
-        }
+.dropdown-content a i.right-icon {
+    margin-left: auto;
+}
 
-        .dropdown-content a:hover i {
-            color: #4A4AC4; 
-        }
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-        .dropdown-content a i.right-icon {
-            margin-left: auto;
-        }
+.logout-btn i {
+    margin-right: 10px;
+    color: #ABB0B4;
+    transition: color 0.3s ease;
+}
 
-        .logout-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            padding: 12px 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: left;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+.logout-btn:hover {
+    background-color: #EFF3FF;
+    border-radius: 8px;
+    color: #4A4AC4;
+}
 
-        .logout-btn i {
-            margin-right: 10px; 
-            color: #ABB0B4;
-            transition: color 0.3s ease;
-        }
+.logout-btn:hover i {
+    color: #4A4AC4;
+}
 
-        .logout-btn:hover {
-            background-color: #EFF3FF; 
-            border-radius: 8px;
-            color: #4A4AC4; 
-        }
+.logout-btn .right-icon {
+    margin-left: auto;
+}
 
-        .logout-btn:hover i {
-            color: #4A4AC4; 
-        }
-
-
-        .logout-btn .right-icon {
-            margin-left: auto; 
-        }
-
-        .logout-btn:hover {
-            background-color: #e0e0e0;
-            border-radius: 8px;
-        }
-      
-        .fa-bars {
-            cursor: pointer;
-            color: white;
-            margin-left: 15px;
-            font-size: 25px;
-        }
 
         main {
             margin-top: 50px;
@@ -394,14 +366,93 @@
             text-align: center;
             margin-top: 15px;
         }
+ 
+        .search-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); 
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
 
-    </style>
+        .search-popup-content {
+            text-align: center;
+            width: 100%;
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .search-popup h1 {
+            color: #fff;
+            font-size: 40px; 
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+
+        .search-input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-input {
+            width: 50%;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 40px; 
+            border: none;
+            background-color: #fff;
+            color: #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+        }
+
+        .search-icon-input {
+            position: relative;
+            left: 35px; 
+            font-size: 20px;
+            color: #333;
+        }
+
+        .search-popup input[type="text"] {
+            padding-left: 40px; 
+        }
+
+        .search-popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #fff;
+            background: none;
+            border: none; 
+        }
+
+
+        .search-popup.show {
+            display: flex;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+
+</style>
         @yield('styles')
         </head>
         <body>
-    <header>
+        <header>
+    <div class="navbar-container">
         <a href="{{ route('home') }}" class="logo">
-        <img src="{{ asset('Logoo.png') }}" alt="Logo">
+            <img src="{{ asset('LogooB.png') }}" alt="Logo">
         </a>
         <nav>
             <a href="{{ route('home') }}">Home</a>
@@ -410,38 +461,52 @@
             <a href="{{ route('simulasikpr') }}">Simulasi KPR</a>
             <button class="navbutton" role="button" onclick="location.href='{{ route('property.add') }}'">Tambah Properti</button>
         </nav>
+        <div class="search-container">
+        <i class="fa fa-search search-icon" aria-hidden="true" style="font-size: 20px; color: #000;" onclick="openSearchPopup()"></i>
+        </div>
         <div class="dropdown">
-    <i class="fa fa-bars" style='font-size:25px;'></i>
-    <div class="dropdown-content">
-    <div class="auth-text">
-    @auth
-        @if(auth()->user()->profilepicture)
-        <img id="dropdownProfilePicture" src="{{ asset('storage/' . auth()->user()->profilepicture) }}" alt="Profile Picture">
-        @else
-        <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
-        @endif
-        <div class="username">{{ auth()->user()->username }}</div>
-    @else
-        <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
-        <div class="username">Guest</div>
-    @endauth
-</div>
-        <a href="/lihatprofile"><i class="fa fa-cog" aria-hidden="true"></i> My Profile <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-        <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> My Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-        <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorites <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-        <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-        @auth
-        <form action="/logout" method="post" style="margin: 0;">
-            @csrf
-            <button type="submit" class="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></button>
-        </form>
-        @else
-        <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-        @endauth
+            <i class="fa fa-bars" style='font-size:25px;'></i>
+            <div class="dropdown-content">
+                <div class="auth-text">
+                    @auth
+                        @if(auth()->user()->profilepicture)
+                        <img id="dropdownProfilePicture" src="{{ asset('storage/' . auth()->user()->profilepicture) }}" alt="Profile Picture">
+                        @else
+                        <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
+                        @endif
+                        <div class="username">{{ auth()->user()->username }}</div>
+                    @else
+                        <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
+                        <div class="username">Guest</div>
+                    @endauth
+                </div>
+                <a href="/lihatprofile"><i class="fa fa-cog" aria-hidden="true"></i> My Profile <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> My Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorites <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                @auth
+                <form action="/logout" method="post" style="margin: 0;">
+                    @csrf
+                    <button type="submit" class="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></button>
+                </form>
+                @else
+                <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                @endauth
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="search-popup">
+    <div class="search-popup-content">
+        <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
+        <h1>What are you looking for?</h1>
+        <div class="search-input-container">
+            <i class="fa fa-search search-icon-input"></i>   
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
     </div>
 </div>
-    </header>
-    <main>
             @yield('content')
         </main>
         <footer>
@@ -498,11 +563,22 @@
                 <p>&copy; 2024 Living HUB. All rights reserved.</p>
             </div>
         </footer>
-        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        @yield('scripts')
-    </body>
-    </html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <script>
+function openSearchPopup() {
+    document.querySelector('.search-popup').classList.add('show');
+}
+
+function closeSearchPopup() {
+    document.querySelector('.search-popup').classList.remove('show');
+}
+
+
+</script>
+
+    @yield('scripts')
+</body>
+</html>

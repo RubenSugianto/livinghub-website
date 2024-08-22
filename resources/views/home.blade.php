@@ -4,14 +4,40 @@
 
 @section('styles')
 <style>
- /* Alert Styles */
+
+/* General Styles */
+body {
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #393232;
+    margin: 0;
+    padding-top: 0px; 
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 70%; 
+    overflow-y: scroll;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.6px;
+    line-height: 1.4;
+    -webkit-user-select: none;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Alert Styles */
 .alert {
-    font-size: 2rem; /* Increase font size */
-    padding: 25px; /* Increase padding */
-    margin-bottom: 20px; /* Add margin */
-    border-radius: 5px; /* Rounded corners */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-    position: relative; /* For positioning the close button */
+    font-size: 2rem; 
+    padding: 25px; 
+    margin-bottom: 20px; 
+    border-radius: 5px; 
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+    position: relative; 
 }
 
 .alert .close-btn {
@@ -22,16 +48,16 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #000; /* Change to match your design */
-    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for scale and color */
+    color: #000; 
+    transition: transform 0.3s ease, color 0.3s ease; 
 }
 
 .alert .close-btn:hover {
-    color: #555; /* Change color on hover */
+    color: #555;
 }
 
 .alert .close-btn:active {
-    transform: scale(1.2); /* Scale up slightly when clicked */
+    transform: scale(1.2); 
 }
 
 .alert.fade {
@@ -41,44 +67,51 @@
 
 .alert.fade.hide {
     opacity: 0;
-    transform: translateY(-20px); /* Slide up effect */
+    transform: translateY(-20px);
 }
 
+
 /* Carousel Styles */
+#carouselExampleIndicators {
+    margin-top: 1000px; /* Adjust this value to control the space between the header image and carousel */
+    position: relative;
+    z-index: 1;
+}
+
 .carousel-item img {
-    max-height: 400px; 
+    max-height: 400px;
     width: 100%;
-    margin: auto; 
-    object-fit: contain;  
+    margin: auto;
+    object-fit: contain;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-    width: 5%; 
-    top: 50%; 
+    width: 5%;
+    top: 50%;
     transform: translateY(-50%);
-    opacity: 0.8; 
+    opacity: 0.8;
     z-index: 1;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5); 
-    border-radius: 50%; 
-    padding: 12px; 
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 12px;
 }
 
 .carousel-control-prev-icon {
-    margin-right: 5px; 
+    margin-right: 5px;
 }
 
 .carousel-control-next-icon {
-    margin-left: 5px; 
+    margin-left: 5px;
 }
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-    opacity: 1; 
+    opacity: 1;
 }
 
 /* Search Bar Styles */
@@ -199,23 +232,67 @@ label {
     max-width: 40%; 
 }
 
-/* General Styles */
-body {
-    line-height: 1.5;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #393232;
-    margin: 0;
-    padding-top: 10px; 
-}
-
+/* Image Styles */
 img {
     max-width: 100%;
     display: block;
 }
 
+/* Header Image Styles */
+.header-pic-container {
+    width: 100%;
+    position: absolute ;
+    top: 0 ;
+    left: 0 ;
+    right: 0 ;
+    z-index: 0 ; /* Keep this at 0 or higher */
+
+}
+
+.header-pic-container img {
+    width: 100vw; /* Ensures the image spans the entire viewport width */
+    height: auto;
+    display: block;
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+}
+
+/* Button Styles */
+.header-button {
+    position: absolute ;
+    top: 75% ; /* Lowered the button */
+    left: 50% ;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px ; /* Smaller button size */
+    background-color:  #5E5DF0 !important; /* Button background color */
+    color: #fff !important; /* Text color */
+    text-decoration: none !important; /* Remove underline if any */
+    border-radius: 50px !important; /* Rounded corners */
+    font-size: 14px !important; /* Slightly smaller font size */
+    font-weight: bold !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow for depth */
+    display: flex ;
+    align-items: center ;
+    justify-content: center ;
+
+}
+
+
+.header-button::after {
+    content: '\2197'; /* Unicode for the arrow */
+    font-size: 16px; /* Slightly smaller arrow */
+    margin-left: 8px;
+    transition: margin-left 0.3s ease;
+}
+
+.header-button:hover::after {
+    margin-left: 12px; /* Adjusted animation on hover */
+}
+
+.header-button:hover {
+    background-color: #4A4AC4 !important; /* Darker shade on hover */
+}
+
+/* Card Styles */
 .card-list {
     width: 90%;
     max-width: 400px;
@@ -336,19 +413,6 @@ img {
     line-height: 1; 
 }
 
-html {
-    box-sizing: border-box;
-    font-size: 70%; 
-    overflow-y: scroll;
-    font-family: "Poppins", sans-serif;
-    letter-spacing: 0.6px;
-    line-height: 1.4;
-    -webkit-user-select: none;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
-
-/* Pagination Styles */
 .page {
     display: flex;
     justify-content: center;
@@ -447,7 +511,6 @@ html {
     color: #ccc;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 576px) {
     .card-image {
         height: 200px;
@@ -486,10 +549,8 @@ html {
     }
 }
 
-
 </style>
 @endsection
-
 @section('content')
 @if (session('success'))
 <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -497,6 +558,17 @@ html {
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
+
+
+<!-- Header Image -->
+<div class="header-pic-container">
+    <img src="HeaderPic.png" alt="Header Image">
+
+    <!-- Button -->
+    <a href="{{ route('search')}}" class="header-button">Explore Our Projects</a>
+</div>
+
+<!-- Carousel Section -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -523,6 +595,8 @@ html {
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+
 
 <!-- Search and filter buttons -->
 <div class="search-bar mb-5">
@@ -663,11 +737,7 @@ html {
             <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
-                        @if($property->images->isNotEmpty())
-                            <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
-                        @else
-                            <img src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/02/0/0/Screen-Shot-2022-02-08-at-1.01.01-PM-gigapixel-low_res-scale-2_00x.png?ve=1&tl=1" alt="No Image Available" width="100">
-                        @endif
+                          <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>
