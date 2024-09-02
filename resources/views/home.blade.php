@@ -5,7 +5,16 @@
 @section('styles')
 <style>
 
-/* General Styles */
+:root {
+    --primary-color: #5E5DF0;
+    --secondary-color: #4A4AC4;
+    --text-color: #393232;
+    --background-color: #f5f5f5;
+    --border-radius: 5px;
+    --transition-speed: 0.3s;
+    --font-family: "Poppins", sans-serif;
+}
+
 body {
     line-height: 1.5;
     min-height: 100vh;
@@ -13,16 +22,16 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #393232;
+    color: var(--text-color);
     margin: 0;
-    padding-top: 0px; 
+    padding-top: 0;
+    font-family: var(--font-family);
 }
 
 html {
     box-sizing: border-box;
-    font-size: 70%; 
+    font-size: 70%;
     overflow-y: scroll;
-    font-family: "Poppins", sans-serif;
     letter-spacing: 0.6px;
     line-height: 1.4;
     -webkit-user-select: none;
@@ -30,14 +39,19 @@ html {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
-/* Alert Styles */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
 .alert {
-    font-size: 2rem; 
-    padding: 25px; 
-    margin-bottom: 20px; 
-    border-radius: 5px; 
-    transition: opacity 0.5s ease, transform 0.5s ease; 
-    position: relative; 
+    font-size: 2rem;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    position: relative;
 }
 
 .alert .close-btn {
@@ -48,8 +62,8 @@ html {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #000; 
-    transition: transform 0.3s ease, color 0.3s ease; 
+    color: #000;
+    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 .alert .close-btn:hover {
@@ -57,7 +71,7 @@ html {
 }
 
 .alert .close-btn:active {
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 .alert.fade {
@@ -70,60 +84,37 @@ html {
     transform: translateY(-20px);
 }
 
-
-/* Carousel Styles */
 #carouselExampleIndicators {
-    margin-top: 1000px; /* Adjust this value to control the space between the header image and carousel */
+    margin-top: 120px; 
     position: relative;
-    z-index: 1;
+
 }
 
 .carousel-item img {
     max-height: 400px;
     width: 100%;
-    margin: auto;
     object-fit: contain;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.8;
-    z-index: 1;
+
+.search-bar h2 {
+    margin-top: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4rem;
+    margin-bottom: 20px;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 12px;
-}
-
-.carousel-control-prev-icon {
-    margin-right: 5px;
-}
-
-.carousel-control-next-icon {
-    margin-left: 5px;
-}
-
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    opacity: 1;
-}
-
-/* Search Bar Styles */
 .search-bar .input-group {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 30%; 
+    width: 100%;
     margin: 0 auto;
     border: 2px solid #ccc;
-    border-radius: 5px;
+    border-radius: 25px;
     overflow: hidden;
+    background-color: var(--background-color);
+    padding: 5px;
 }
 
 .search-bar input[type="text"] {
@@ -131,30 +122,25 @@ html {
     padding: 10px;
     border: none;
     outline: none;
-    min-width: 0; 
+    font-size: 1rem;
+    background-color: var(--background-color);
 }
 
-.search-bar button {
+.search-bar button,
+.search-bar .filter-button {
     padding: 10px;
     background: none;
     color: black;
     border: none;
     cursor: pointer;
-    min-width: 50px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: color var(--transition-speed) ease;
 }
 
-.search-bar button:hover {
-    color: #4A4AC4;
+.search-bar button:hover,
+.search-bar .filter-button:hover {
+    color: var(--secondary-color);
 }
 
-.search-bar button.filter-button:hover {
-    color: #4A4AC4;
-}
-
-/* Button Group Toggle Styles */
 .btn-group-toggle .btn {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -177,7 +163,6 @@ html {
     display: none;
 }
 
-/* Modal Styles */
 .modal-body {
     display: flex;
     flex-wrap: wrap;
@@ -232,67 +217,61 @@ label {
     max-width: 40%; 
 }
 
-/* Image Styles */
 img {
     max-width: 100%;
     display: block;
 }
-
-/* Header Image Styles */
 .header-pic-container {
     width: 100%;
-    position: absolute ;
+    position: relative ;
     top: 0 ;
     left: 0 ;
     right: 0 ;
-    z-index: 0 ; /* Keep this at 0 or higher */
+    z-index: 0 ; 
 
 }
 
 .header-pic-container img {
-    width: 100vw; /* Ensures the image spans the entire viewport width */
+    width: 100vw; 
     height: auto;
     display: block;
-    object-fit: cover; /* Ensures the image covers the area without stretching */
+    object-fit: cover; /
 }
 
-/* Button Styles */
 .header-button {
     position: absolute ;
-    top: 75% ; /* Lowered the button */
+    top: 75% ; 
     left: 50% ;
     transform: translate(-50%, -50%);
-    padding: 10px 20px ; /* Smaller button size */
-    background-color:  #5E5DF0 !important; /* Button background color */
-    color: #fff !important; /* Text color */
-    text-decoration: none !important; /* Remove underline if any */
-    border-radius: 50px !important; /* Rounded corners */
-    font-size: 14px !important; /* Slightly smaller font size */
+    padding: 10px 20px ; 
+    background-color:  #5E5DF0 !important; 
+    color: #fff !important; 
+    text-decoration: none !important; 
+    border-radius: 50px !important; 
+    font-size: 14px !important; 
     font-weight: bold !important;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; 
     display: flex ;
     align-items: center ;
     justify-content: center ;
 
 }
 
-
 .header-button::after {
-    content: '\2197'; /* Unicode for the arrow */
-    font-size: 16px; /* Slightly smaller arrow */
+    content: '\2197'; 
+    font-size: 16px; 
     margin-left: 8px;
     transition: margin-left 0.3s ease;
 }
 
 .header-button:hover::after {
-    margin-left: 12px; /* Adjusted animation on hover */
+    margin-left: 12px; 
 }
 
 .header-button:hover {
-    background-color: #4A4AC4 !important; /* Darker shade on hover */
+    background-color: #4A4AC4 !important; 
 }
 
-/* Card Styles */
 .card-list {
     width: 90%;
     max-width: 400px;
@@ -414,102 +393,71 @@ img {
 }
 
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 5rem;
-    margin: 3rem auto;
-    border-radius: 5rem;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1;
-    list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  margin: 1rem auto;
+  border-radius: 0.4rem;
+  background: #ffffff;
+  box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+  width: fit-content;
 }
 
-.page-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    z-index: 1;
+.page__numbers,
+.page__btn,
+.page__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.4rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
-.page-item:not(:last-child) {
-    margin-right: 0.3rem;
+.page__dots {
+  width: 2rem;
+  height: 2rem;
+  color: var(--greyLight);
+  cursor: initial;
 }
 
-.page-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: 0;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.3s;
-    padding: 1rem 2rem;
-    z-index: 1;
-    font-size: 1.6rem;
-    font-weight: 700;
-    position: relative;
+.page__numbers {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  color: var(--greyDark);
+
+  &:hover {
+    color: #ffffff !important;
+    background: #5E5DF0 !important;
+  }
+
+  &.active {
+    color: #ffffff !important;
+    background: #5E5DF0 !important;
+    font-weight: 600 !important;
+    border: 1px solid var(--primary) !important;
+  }
 }
 
-.page-link:hover {
-    color: #000;
+.page__btn {
+  color: var(--btnColor);
+  pointer-events: none;
+
+  &.active {
+    color: var(--btnColor);
+    pointer-events: initial;
+
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
 }
 
-.page-item.active .page-link {
-    color: #000;
-}
-
-.page-item.active {
-    box-shadow: none;
-}
-
-.page-item.active:not(:last-child) {
-    margin-right: 0.3rem;
-}
-
-.page-link::before,
-.page-link::after {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    border-radius: 50%;
-    content: "";
-    width: 4rem;
-    height: 4rem;
-    z-index: -1;
-    transition: all 0.3s;
-}
-
-.page-link::before {
-    background-color: var(--orange);
-    top: 0.3rem;
-    right: -2rem;
-    box-shadow: 2px -2px 0 var(--orange);
-}
-
-.page-link::after {
-    background-color: var(--pink);
-    bottom: 0.3rem;
-    left: -2rem;
-    box-shadow: -2px 2px 0 var(--pink);
-}
-
-.page-item.active .page-link::before,
-.page-item.active .page-link::after {
-    width: 100%;
-    height: 100%;
-    border-radius: 5rem;
-    box-shadow: none;
-}
-
-.page-link[aria-disabled="true"] {
-    pointer-events: none;
-    color: #ccc;
-}
 
 @media (max-width: 576px) {
     .card-image {
@@ -549,6 +497,38 @@ img {
     }
 }
 
+.icon i {
+    color: #333;
+}
+
+.card {
+    margin-top: 50px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.bg-dark .icon i {
+    color: #fff;
+}
+
+.bg-dark .details {
+    background: none; /
+    padding: 0; 
+    color: #fff; 
+}
+
+.latest-property-heading {
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #333; 
+    margin-top: 50px;
+}
+
 </style>
 @endsection
 @section('content')
@@ -559,13 +539,85 @@ img {
 </div>
 @endif
 
-
 <!-- Header Image -->
 <div class="header-pic-container">
     <img src="HeaderPic.png" alt="Header Image">
 
     <!-- Button -->
-    <a href="{{ route('search')}}" class="header-button">Explore Our Projects</a>
+    <a href="{{ route('search')}}" class="header-button">Explore Property</a>
+</div>
+
+<!-- Text Section -->
+<div class="container text-center mt-5" style="padding-top: 50px;">
+    <h2 style="font-size: 5rem; font-weight: 700;">What we provide</h2>
+    <p style="font-size: 1.25rem; font-weight: 400;">Temukan properti impian Anda dengan bantuan kami</p>
+</div>
+<!-- Cards Section -->
+<div class="container mt-4">
+    <div class="row text-center">
+        <!-- First Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="icon mb-3">
+                        <i class="fa fa-info fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Comprehensive Information Details</h5>
+                    <div class="details preview">
+                        <p class="card-text">Get a quick overview of key information for an informed decision-making process.</p>
+                    </div>
+                    <div class="collapse" id="infoDetails">
+                        <div class="details">
+                            <p class="card-text">Gain full access to comprehensive information to ensure you have all the details necessary for a comfortable experience.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#infoDetails" aria-expanded="false" aria-controls="infoDetails">READ MORE</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Second Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 bg-dark text-white">
+                <div class="card-body">
+                    <div class="icon mb-3">
+                        <i class="fa fa-star fa-2x text-white"></i>
+                    </div>
+                    <h5 class="card-title">Complete Features</h5>
+                    <div class="details preview">
+                        <p class="card-text">Explore a selection of features tailored to your needs, offering both ease and efficiency.</p>
+                    </div>
+                    <div class="collapse" id="featuresDetails">
+                        <div class="details">
+                            <p class="card-text">Delve into our full suite of features designed to provide unparalleled comfort and convenience in every aspect of our service.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-light mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#featuresDetails" aria-expanded="false" aria-controls="featuresDetails">READ MORE</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Third Card -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="icon mb-3">
+                        <i class="fa fa-cogs fa-2x"></i>
+                    </div>
+                    <h5 class="card-title">Smooth Workflow</h5>
+                    <div class="details preview">
+                        <p class="card-text">Experience a seamless process designed to simplify your tasks and save time.</p>
+                    </div>
+                    <div class="collapse" id="workflowDetails">
+                        <div class="details">
+                            <p class="card-text">We offer a streamlined workflow that ensures a user-friendly experience, making your property management easy and efficient.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#workflowDetails" aria-expanded="false" aria-controls="workflowDetails">READ MORE</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Carousel Section -->
@@ -574,16 +626,24 @@ img {
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="C3.png" alt="First slide">
+      <img class="d-block w-100" src="C1.png" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="C3.png" alt="Second slide">
+      <img class="d-block w-100" src="C2.png" alt="Second slide">
     </div>
     <div class="carousel-item">
       <img class="d-block w-100" src="C3.png" alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="C4.png" alt="Fourth slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="C5.png" alt="Fifth slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -595,18 +655,115 @@ img {
     <span class="sr-only">Next</span>
   </a>
 </div>
+<!-- Latest Property Heading -->
+<div class="container mt-4">
+    <h2 class="latest-property-heading mb-4">Latest Property</h2> <!-- Updated class -->
+    <div class="row">
+        @foreach($properties as $property)
+        <div class="col-md-3 mb-3">
+            <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
+                <div class="card property-card" data-property-id="{{ $property->id }}">
+                    <div class="card-image position-relative">
+                          <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                        <div class="price-badge">
+                            <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
+                        </div>
+                    </div>
+                    <div class="like-button">
+                        @auth
+                            @if(auth()->user()->likes && auth()->user()->likes->contains($property->id))
+                                <form action="{{ route('properties.unlike', $property) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger liked">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('properties.like', $property) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-outline-danger">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            </a>
+                        @endauth
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                            <h5>{{ $property->name }}</h5>
+                        </div>
+                        <p class="card-text">{{ $property->location }}</p>
+                        <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
+                        <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-meta d-flex justify-content-between">
+                            <span class="position-relative like-count-icon">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                {{ $property->like_count }}
+                            </span>
+                            <span>
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                @if ($property->published_at)
+                                    {{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
+</div>
 
+<!-- Pagination buttons -->
+<div class="d-flex justify-content-center mt-4 page">
+                <!-- Previous Page Button -->
+                <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
+
+                <!-- Pagination Elements -->
+                @if ($properties->lastPage() > 1)
+                    @if ($properties->currentPage() > 3)
+                        <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
+                        @if($properties->currentPage() > 4)
+                            <div class="page__dots">...</div>
+                        @endif
+                    @endif
+
+                    @for ($i = max($properties->currentPage() - 2, 1); $i <= min($properties->currentPage() + 2, $properties->lastPage()); $i++)
+                        <button class="page__numbers {{ $properties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $properties->url($i) }}'">{{ $i }}</button>
+                    @endfor
+
+                    @if ($properties->currentPage() < $properties->lastPage() - 2)
+                        @if($properties->currentPage() < $properties->lastPage() - 3)
+                            <div class="page__dots">...</div>
+                        @endif
+                        <button class="page__numbers" onclick="window.location='{{ $properties->url($properties->lastPage()) }}'">{{ $properties->lastPage() }}</button>
+                    @endif
+                @endif
+
+                <!-- Next Page Button -->
+                <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
+            </div>
 
 
 <!-- Search and filter buttons -->
 <div class="search-bar mb-5">
-    <img src="LogooB.png" alt="Living HUB Logo" width="400" style="display: block; margin: auto;">
+    <h2 style="text-align: center; font-weight: bold;">Looking for something else?</h2>
     <form action="{{ route('search') }}" method="GET" class="input-group">
-        <input type="text" name="search" placeholder="Cari properti disini..">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
+        <input type="text" name="search" placeholder="Search Keyword">
+        <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
     </form>
 </div>
+
 
 <!-- Filter Modal Dialog Box -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
@@ -729,96 +886,6 @@ img {
         </div>
     </div>
 </div>
-<!-- Properties Section -->
-<div class="container mt-4">
-    <div class="row">
-        @foreach($properties as $property)
-        <div class="col-md-3 mb-3">
-            <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
-                <div class="card property-card" data-property-id="{{ $property->id }}">
-                    <div class="card-image position-relative">
-                          <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
-                        <div class="price-badge">
-                            <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
-                        </div>
-                    </div>
-                    <div class="like-button">
-                        @auth
-                            @if(auth()->user()->likes && auth()->user()->likes->contains($property->id))
-                                <form action="{{ route('properties.unlike', $property) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger liked">
-                                        <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('properties.like', $property) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            @endif
-                        @else
-                            <a href="{{ route('login') }}" class="btn btn-outline-danger">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            </a>
-                        @endauth
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                            <h5>{{ $property->name }}</h5>
-                        </div>
-                        <p class="card-text">{{ $property->location }}</p>
-                        <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
-                        <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="card-meta d-flex justify-content-between">
-                            <span class="position-relative like-count-icon">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                {{ $property->like_count }}
-                            </span>
-                            <span>
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                @if ($property->published_at)
-                                    {{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}
-                                @endif
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach
-    </div>
-</div>
-
-<!-- Pagination Section -->
-@if ($properties->lastPage() > 1)
-    @if ($properties->currentPage() > 3)
-        <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
-        @if($properties->currentPage() > 4)
-            <div class="page__dots">...</div>
-        @endif
-    @endif
-
-    @for ($i = max($properties->currentPage() - 2, 1); $i <= min($properties->currentPage() + 2, $properties->lastPage()); $i++)
-        <button class="page__numbers {{ $properties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $properties->url($i) }}'">{{ $i }}</button>
-    @endfor
-
-    @if ($properties->currentPage() < $properties->lastPage() - 2)
-        @if($properties->currentPage() < $properties->lastPage() - 3)
-            <div class="page__dots">...</div>
-        @endif
-        <button class="page__numbers" onclick="window.location='{{ $properties->url($properties->lastPage()) }}'">{{ $properties->lastPage() }}</button>
-    @endif
-
-    <!-- Next Page Button -->
-    <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
-@endif
-@endsection
-
 
 
 @section('scripts')

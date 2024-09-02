@@ -27,7 +27,6 @@ class MyPropertyController extends Controller
             $query->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%{$search}%")
                     ->orWhere('location', 'LIKE', "%{$search}%")
-                    ->orWhere('description', 'LIKE', "%{$search}%")
                     ->orWhere('price', 'LIKE', "%{$search}%")
                     ->orWhere('status', 'LIKE', "%{$search}%")
                     ->orWhere('type', 'LIKE', "%{$search}%");
