@@ -1,11 +1,11 @@
 @extends('master')
 
-@section('title', 'Properti Disewa')
+@section('title', 'Properti Dijual')
 
 @section('content')
 <div class="container mt-4">
  <!-- Search and filter buttons -->
- <img src="LogooB.png" alt="Living HUB Logo" width="300" style="display: block; margin: auto;">
+
 <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
         <input type="text" name="search" placeholder="Cari properti disini..">
@@ -432,51 +432,55 @@ body {
   font-weight: 600 !important;
   border: 1px solid var(--primary) !important;
 }
+
 .search-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
 }
 
-.search-bar .input-group {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 40%;
-  margin: 0;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    padding: 5px;
 }
 
-.search-bar input[type="text"] {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  outline: none;
-  min-width: 0;
+.input-group input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
-.search-bar button {
-  padding: 6px;
-  background: none;
-  color: black;
-  border: none;
-  cursor: pointer;
-  min-width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.input-group button {
+    padding: 10px;
+    background: none;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.search-bar button:hover {
-  color: #4A4AC4;
+.input-group button i {
+    font-size: 1.8rem; /
 }
 
-.search-bar button.filter-button:hover {
-  color: #4A4AC4;
+
+.input-group button:hover {
+    color: #4A4AC4;
 }
+
 
 .btn-group-toggle .btn {
   border: 1px solid #ccc;

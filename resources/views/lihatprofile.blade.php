@@ -22,9 +22,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     display: flex;
-    margin-top: 50px;
     box-sizing: border-box;
     font-size: 12px; 
+    margin-top: 150px;
+    margin-bottom: 30px;
 }
 
 .sidebar {

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+        
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -18,244 +18,244 @@
     <style>
      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-body {
-    background: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding-top: 70px;
-}
+        body {
+            background: whitesmoke;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
 
-header {
-    position: fixed;
-    top: 10px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        header {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
 
-.navbar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    padding: 5px 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 15px;
-    border-radius: 20px;
-    margin: 0 10px;
-}
+        .navbar-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 5px 10px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 5px 15px;
+            border-radius: 20px;
+            margin: 0 10px;
+        }
 
-.navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    margin-right: 20px; /* Add some space between the logo and the routes */
-}
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Add some space between the logo and the routes */
+        }
 
-.logo img {
-    width: 70px;
-    height: auto;
-}
+        .logo img {
+            width: 90px;
+            height: auto;
+        }
 
-.nav-routes {
-    display: flex;
-    align-items: center;
-    background-color: white; /* Single white background for routes */
-    padding: 5px 15px;
-    border-radius: 20px; /* Rounded corners for the white background */
-    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
-}
+        .nav-routes {
+            display: flex;
+            align-items: center;
+            background-color: white; /* Single white background for routes */
+            padding: 5px 15px;
+            border-radius: 20px; /* Rounded corners for the white background */
+            box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
+        }
 
-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex: 1;
-    justify-content: center;
-}
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+            justify-content: center;
+        }
 
-nav a {
-    color: #000000 !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    text-decoration: none !important;
-    padding: 5px 10px !important;
-    position: relative !important;
-    transition: color 0.3s ease !important;
-    background-color: transparent !important;
-    border-radius: 12px;
-}
+        nav a {
+            color: #000000 !important;
+            font-size: 12px !important;
+            font-weight: 500 !important;
+            text-decoration: none !important;
+            padding: 5px 10px !important;
+            position: relative !important;
+            transition: color 0.3s ease !important;
+            background-color: transparent !important;
+            border-radius: 12px;
+        }
 
-nav a:before {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 50%;
-    height: 2px;
-    width: 0;
-    background: #4A4AC4;
-    border-radius: 12px;
-    transition: width 0.4s ease;
-    transform: translateX(-50%);
-}
+        nav a:before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            height: 2px;
+            width: 0;
+            background: #4A4AC4;
+            border-radius: 12px;
+            transition: width 0.4s ease;
+            transform: translateX(-50%);
+        }
 
-nav a:hover:before {
-    width: 100%;
-}
+        nav a:hover:before {
+            width: 100%;
+        }
 
-.navbutton {
-    background: #5E5DF0;
-    color: #ffffff;
-    border-radius: 999px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border: none;
-    cursor: pointer;
-    margin-left: 20px; /* Add some space between the routes and the button */
-    transition: background 0.3s ease;
-}
+        .navbutton {
+            background: #5E5DF0;
+            color: #ffffff;
+            border-radius: 999px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border: none;
+            cursor: pointer;
+            margin-left: 20px; /* Add some space between the routes and the button */
+            transition: background 0.3s ease;
+        }
 
-.navbutton:hover {
-    background: #4A4AC4;
-}
+        .navbutton:hover {
+            background: #4A4AC4;
+        }
 
-.dropdown {
-    position: relative;
-    margin-left: 15px;
-}
+        .dropdown {
+            position: relative;
+            margin-left: 15px;
+        }
 
-.dropdown i {
-    cursor: pointer;
-    color: #000000;
-    font-size: 18px;
-    padding: 5px;
-    border-radius: 999px;
-}
+        .dropdown i {
+            cursor: pointer;
+            color: #000000;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 999px;
+        }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: white;
-    color: #333333;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    min-width: 280px;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            color: #333333;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            min-width: 280px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-.auth-text {
-    color: #333;
-    padding: 15px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #ffffff;
-}
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .auth-text {
+            color: #333;
+            padding: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #ffffff;
+        }
 
-.auth-text img {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: cover;
-    background-color: #ffffff;
-    margin-right: 10px;
-}
+        .auth-text img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            background-color: #ffffff;
+            margin-right: 10px;
+        }
 
-.username {
-    font-size: 16px;
-}
+        .username {
+            font-size: 16px;
+        }
 
-.dropdown-content a {
-    color: #333;
-    padding: 12px 20px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: 500;
-    font-size: 14px;
-    text-align: left;
-    width: 100%;
-}
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+            text-align: left;
+            width: 100%;
+        }
 
-.dropdown-content a:hover {
-    background-color: #EFF3FF;
-    color: #4A4AC4;
-}
+        .dropdown-content a:hover {
+            background-color: #EFF3FF;
+            color: #4A4AC4;
+        }
 
-.dropdown-content a i {
-    margin-right: 10px;
-    color: #ABB0B4;
-    transition: color 0.3s ease;
-}
+        .dropdown-content a i {
+            margin-right: 10px;
+            color: #ABB0B4;
+            transition: color 0.3s ease;
+        }
 
-.dropdown-content a:hover i {
-    color: #4A4AC4;
-}
+        .dropdown-content a:hover i {
+            color: #4A4AC4;
+        }
 
-.dropdown-content a i.right-icon {
-    margin-left: auto;
-}
+        .dropdown-content a i.right-icon {
+            margin-left: auto;
+        }
 
-.logout-btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 12px 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: left;
-    color: #333;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.logout-btn i {
-    margin-right: 10px;
-    color: #ABB0B4;
-    transition: color 0.3s ease;
-}
+        .logout-btn i {
+            margin-right: 10px;
+            color: #ABB0B4;
+            transition: color 0.3s ease;
+        }
 
-.logout-btn:hover {
-    background-color: #EFF3FF;
-    border-radius: 8px;
-    color: #4A4AC4;
-}
+        .logout-btn:hover {
+            background-color: #EFF3FF;
+            border-radius: 8px;
+            color: #4A4AC4;
+        }
 
-.logout-btn:hover i {
-    color: #4A4AC4;
-}
+        .logout-btn:hover i {
+            color: #4A4AC4;
+        }
 
-.logout-btn .right-icon {
-    margin-left: auto;
-}
+        .logout-btn .right-icon {
+            margin-left: auto;
+        }
 
 
         main {
@@ -445,7 +445,7 @@ nav a:hover:before {
         }
         
 
-</style>
+    </style>
         @yield('styles')
         </head>
         <body>
@@ -507,9 +507,9 @@ nav a:hover:before {
         </div>
     </div>
 </div>
-            @yield('content')
-        </main>
-        <footer>
+    @yield('content')
+       </main>
+         <footer>
             <div class="footer-content">
                 <div class="footer-description">
                 <img src="{{ asset('Logoo.png') }}" alt="Logo">
@@ -564,21 +564,20 @@ nav a:hover:before {
             </div>
         </footer>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
-function openSearchPopup() {
-    document.querySelector('.search-popup').classList.add('show');
-}
+        function openSearchPopup() {
+            document.querySelector('.search-popup').classList.add('show');
+        }
 
-function closeSearchPopup() {
-    document.querySelector('.search-popup').classList.remove('show');
-}
-
-
-</script>
-
-    @yield('scripts')
-</body>
+        function closeSearchPopup() {
+            document.querySelector('.search-popup').classList.remove('show');
+        }
+    </script>
+        @yield('scripts')
+    </body>
 </html>

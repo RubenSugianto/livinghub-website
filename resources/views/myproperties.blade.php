@@ -47,10 +47,6 @@
             </div>
         </div>
 
-
-
-
-
         <h1 class="mb-4">{{ $title }}</h1> 
 
         <div class="search-bar mb-5">
@@ -60,29 +56,128 @@
                 <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
             </form>
         </div>
-
         <!-- Filter Modal Dialog Box -->
-        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="filterModalLabel">Filter</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('search') }}" method="GET" id="filterForm">
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
+                            </label>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{ route('myproperties.search') }}" method="GET" id="filterForm">
-                            <!-- Filter form fields -->
-                        </form>
+                    <div class="form-group">
+                        <label for="bedrooms">Kamar Tidur</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                            </label>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                        <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+                    <div class="form-group">
+                        <label for="bathrooms">Kamar Mandi</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                            </label>
+                        </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="land_size">Luas Tanah</label>
+                        <div class="input-range">
+                            <input type="number" name="land_size_min" placeholder="0" class="form-control">
+                            <span>m² -</span>
+                            <input type="number" name="land_size_max" placeholder="0" class="form-control">
+                            <span>m²</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="building_size">Luas Bangunan</label>
+                        <div class="input-range">
+                            <input type="number" name="building_size_min" placeholder="0" class="form-control">
+                            <span>m² -</span>
+                            <input type="number" name="building_size_max" placeholder="0" class="form-control">
+                            <span>m²</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="certificate">Sertifikat</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_type">Tipe Properti</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
+                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
             </div>
         </div>
+    </div>
+</div>
+
         <div class="row justify-content-center flex-column">
             @if($properties->isEmpty())
                 <p>Property tidak ditemukan.</p>
@@ -147,37 +242,37 @@
                 </table>
 
                 <!-- Pagination buttons -->
-                <div class="d-flex justify-content-center mt-4 page">
-                    <!-- Previous Page Button -->
-                    <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
+            <div class="d-flex justify-content-center mt-4 page">
+                <!-- Previous Page Button -->
+                <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
 
-                    <!-- Pagination Elements -->
-                    @if ($properties->lastPage() > 1)
-                        @if ($properties->currentPage() > 3)
-                            <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
-                            @if($properties->currentPage() > 4)
-                                <div class="page__dots">...</div>
-                            @endif
-                        @endif
-
-                        @for ($i = max($properties->currentPage() - 2, 1); $i <= min($properties->currentPage() + 2, $properties->lastPage()); $i++)
-                            <button class="page__numbers {{ $properties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $properties->url($i) }}'">{{ $i }}</button>
-                        @endfor
-
-                        @if ($properties->currentPage() < $properties->lastPage() - 2)
-                            @if($properties->currentPage() < $properties->lastPage() - 3)
-                                <div class="page__dots">...</div>
-                            @endif
-                            <button class="page__numbers" onclick="window.location='{{ $properties->url($properties->lastPage()) }}'">{{ $properties->lastPage() }}</button>
+                <!-- Pagination Elements -->
+                @if ($properties->lastPage() > 1)
+                    @if ($properties->currentPage() > 3)
+                        <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
+                        @if($properties->currentPage() > 4)
+                            <div class="page__dots">...</div>
                         @endif
                     @endif
 
-                    <!-- Next Page Button -->
-                    <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
-                </div>
-            @endif
-        </div>
+                    @for ($i = max($properties->currentPage() - 2, 1); $i <= min($properties->currentPage() + 2, $properties->lastPage()); $i++)
+                        <button class="page__numbers {{ $properties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $properties->url($i) }}'">{{ $i }}</button>
+                    @endfor
+
+                    @if ($properties->currentPage() < $properties->lastPage() - 2)
+                        @if($properties->currentPage() < $properties->lastPage() - 3)
+                            <div class="page__dots">...</div>
+                        @endif
+                        <button class="page__numbers" onclick="window.location='{{ $properties->url($properties->lastPage()) }}'">{{ $properties->lastPage() }}</button>
+                    @endif
+                @endif
+
+                <!-- Next Page Button -->
+                <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
+            </div>
+        @endif
     </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -271,16 +366,22 @@ function resetFilters() {
     --primary: #23adad;
     --greyLight: #23adade1;
     --greyLight-2: #cbe0dd;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --border-color: #ccc;
+    --border-radius: 25px;
+    --transition-speed: 0.3s;
+    --hover-color: #4A4AC4;
 }
 
 .alert {
-    font-size: 1.25rem; /* Increase font size */
-    padding: 17px; /* Increase padding */
+    font-size: 1.25rem;
+    padding: 17px;
     margin-top: 20px;
-    margin-bottom: 20px; /* Add margin */
-    border-radius: 5px; /* Rounded corners */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition */
-    position: relative; /* For positioning the close button */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    position: relative;
 }
 
 .alert .close-btn {
@@ -292,16 +393,16 @@ function resetFilters() {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #000; /* Change to match your design */
-    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for scale and color */
+    color: #000;
+    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 .alert .close-btn:hover {
-    color: #555; /* Change color on hover */
+    color: #555;
 }
 
 .alert .close-btn:active {
-    transform: scale(1.2); /* Scale up slightly when clicked */
+    transform: scale(1.2);
 }
 
 .alert.fade {
@@ -311,9 +412,8 @@ function resetFilters() {
 
 .alert.fade.hide {
     opacity: 0;
-    transform: translateY(-20px); /* Slide up effect */
+    transform: translateY(-20px);
 }
-
 
 body {
     font-family: Arial, sans-serif;
@@ -321,47 +421,132 @@ body {
 }
 
 .search-bar {
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
+}
+
+.search-bar .input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: var(--background-color);
+    padding: 5px;
 }
 
 .search-bar input[type="text"] {
-    width: 300px;
+    flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px 0 0 4px;
+    border: none;
+    outline: none;
+    font-size: 1rem; /* Make font size consistent with the design */
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
-.search-bar button {
+.search-bar button,
+.search-bar .filter-button {
     padding: 10px;
-    background-color: #5E5DF0;
-    color: white;
+    background: none;
+    color: black;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: color var(--transition-speed) ease;
 }
 
-.search-bar button[type="submit"] {
-    border-radius: 0 4px 4px 0;
+.search-bar button:hover,
+.search-bar .filter-button:hover {
+    color: var(--hover-color);
 }
 
-.search-bar button:hover {
-    background-color: #4A4AC4;
+.search-bar button i,
+.search-bar .filter-button i {
+    font-size: 1rem; /* Adjust icon size as needed */
 }
 
-.filter-button {
-    background-color: #5E5DF0;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 10px;
-    transition: background-color 0.3s;
+.btn-group-toggle .btn {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 6px;
+  color: black;
+  background-color: white;
+  font-size: 12px;
 }
 
-.filter-button:hover {
-    background-color: #4A4AC4;
+.btn-group-toggle .btn.active {
+  background-color: #4A4AC4;
+  color: white;
+}
+
+.btn-group-toggle .btn:hover {
+  background-color: #4A4AC4;
+  color: white;
+}
+
+.modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.modal-body .form-group {
+  flex: 1 1 25%;
+}
+
+.modal-body .form-group-full {
+  flex: 1 1 100%;
+}
+
+.input-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-group-toggle .btn input[type="radio"] {
+  display: none;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body .btn-group-toggle .btn {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 6px;
+  color: black;
+  background-color: white;
+  font-size: 12px;
+}
+
+.modal-body .btn-group-toggle .btn.active {
+  background-color: #5E5DF0;
+  color: white;
+}
+
+.modal-body .btn-group-toggle .btn:hover {
+  background-color: #4A4AC4;
+  color: white;
+}
+
+.modal-dialog.modal-lg {
+  max-width: 50%;
 }
 
 .table {
@@ -394,29 +579,72 @@ body {
     padding: 10px;
 }
 
-.page__btn, .page__numbers {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    margin: 0 2px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  margin: 1rem auto;
+  border-radius: 0.4rem;
+  background: #ffffff;
+  box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+  width: fit-content;
 }
 
-.page__btn.active, .page__numbers.active {
-    background-color: #5E5DF0;
-    color: white;
+.page__numbers,
+.page__btn,
+.page__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.4rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .page__dots {
-    padding: 5px 10px;
+  width: 2rem;
+  height: 2rem;
+  color: var(--greyLight);
+  cursor: initial;
 }
 
-.page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+.page__numbers {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.2rem;
+  color: var(--greyDark);
+
+  &:hover {
+    color: #ffffff !important;
+    background: #5E5DF0 !important;
+  }
+
+  &.active {
+    color: #ffffff !important;
+    background: #5E5DF0 !important;
+    font-weight: 600 !important;
+    border: 1px solid var(--primary) !important;
+  }
 }
+
+.page__btn {
+  color: var(--btnColor);
+  pointer-events: none;
+
+  &.active {
+    color: var(--btnColor);
+    pointer-events: initial;
+
+    &:hover {
+      color: var(--primary) !important;
+    }
+  }
+}
+
 </style>
 @endsection

@@ -13,8 +13,6 @@
         </ul>
     </div>
 @endif
-
-
 <div class="alert" id="form-alert" style="display:none;">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   Harap isi semua detail sebelum lanjut ke halaman selanjutnya.
@@ -317,6 +315,7 @@
 </div>
 
 <style>
+    
 .formbold-main-wrapper {
     display: flex;
     align-items: center;
