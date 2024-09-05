@@ -11,69 +11,69 @@ body {
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 530px; /* Reduced padding-top */
+    padding-top: 600px; 
 }
 
 .container {
-    width: 800px; /* Reduced width */
+    width: 800px; 
     max-width: 100%;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    font-size: 12px; /* Reduced font-size */
+    font-size: 12px; 
     margin: 20px auto;
-    padding: 15px; /* Reduced padding */
+    padding: 15px; 
 }
 
 .logo-container {
     text-align: center;
-    margin-bottom: 15px; /* Reduced margin-bottom */
+    margin-bottom: 15px; 
 }
 
 .logo-container img {
-    width: 200px; /* Reduced logo size */
+    width: 200px; 
 }
 
 h2 {
-    font-size: 20px; /* Reduced font-size */
+    font-size: 20px; 
     text-align: center;
-    margin-bottom: 15px; /* Reduced margin-bottom */
+    margin-bottom: 15px; 
 }
 
 .form-signin {
     width: 100%;
-    max-width: 400px; /* Reduced width */
+    max-width: 400px; 
     margin: 0 auto;
 }
 
 .form-floating {
-    margin-bottom: 8px; /* Reduced margin-bottom */
+    margin-bottom: 8px; 
     width: 100%;
-    max-width: 400px; /* Reduced width */
+    max-width: 400px; 
     margin-left: auto;
     margin-right: auto;
 }
 
 .form-control, .form-select {
     width: 100%;
-    padding: 8px; /* Reduced padding */
-    font-size: 12px; /* Reduced font-size */
-    height: 40px; /* Reduced height */
-    margin-bottom: 8px; /* Reduced margin-bottom */
+    padding: 8px;
+    font-size: 12px; 
+    height: 40px;
+    margin-bottom: 8px; 
 }
 
 .btn-primary {
     background-color: #5E5DF0;
     border-color: #5E5DF0;
-    font-size: 12px; /* Reduced font-size */
-    padding: 8px 16px; /* Reduced padding */
+    font-size: 12px; 
+    padding: 8px 16px;
     width: 100%;
-    max-width: 400px; /* Match the width of input boxes */
+    max-width: 400px; 
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 0 auto; /* Centering */
-    display: block; /* Centering */
+    margin: 0 auto; 
+    display: block; 
 }
 
 .btn-primary:hover {
@@ -96,21 +96,21 @@ h2 {
 }
 
 .btn-google {
-    font-size: 12px; /* Reduced font-size */
+    font-size: 12px;
     line-height: 1.2;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 8px; /* Reduced padding */
+    padding: 8px; 
     width: 100%;
-    max-width: 400px; /* Match the width of input boxes */
-    height: 40px; /* Reduced height */
+    max-width: 400px; 
+    height: 40px; 
     border-radius: 8px;
     box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
     transition: all 0.4s;
     position: relative;
     z-index: 1;
-    margin: 0 auto 8px auto; /* Centering and margin */
+    margin: 0 auto 8px auto; 
     text-decoration: none;
     background-color: #ffffff;
     color: #555555;
@@ -132,8 +132,8 @@ h2 {
 }
 
 .btn-google img {
-    width: 12px; /* Reduced width */
-    margin-right: 5px; /* Reduced margin-right */
+    width: 12px;
+    margin-right: 5px;
     padding-bottom: 1.5px;
 }
 
@@ -152,7 +152,7 @@ h2 {
     background-color: #f7f7f7;
     border: 1px solid #e6e6e6;
     border-radius: 8px;
-    padding: 8px; /* Reduced padding */
+    padding: 8px; 
 }
 
 .password-toggle {
@@ -162,7 +162,7 @@ h2 {
 .password-toggle .toggle-icon {
     position: absolute;
     top: 50%;
-    right: 8px; /* Reduced right position */
+    right: 10px; 
     transform: translateY(-50%);
     cursor: pointer;
 }
@@ -176,7 +176,7 @@ h2 {
 
 .divider-text span {
     padding: 0 10px;
-    font-size: 12px; /* Same font size as other text */
+    font-size: 12px; 
     color: #6c757d;
 }
 
@@ -186,6 +186,7 @@ h2 {
     border-bottom: 1px solid #9f9f9f;
     margin: 0 10px;
 }
+
 </style>
 @endsection
 
