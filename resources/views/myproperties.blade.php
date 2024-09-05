@@ -276,6 +276,7 @@
 @endsection
 
 @section('scripts')
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const propertyRows = document.querySelectorAll('tr[data-property-id]');
@@ -295,7 +296,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var propertyIdToDelete;
     var formToSubmit;
 
-    // Add event listeners to all delete buttons
     document.querySelectorAll('.delete-button').forEach(function (button) {
         button.addEventListener('click', function () {
             propertyIdToDelete = this.getAttribute('data-property-id');
@@ -305,10 +305,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Handle the confirm delete button
     confirmDeleteButton.onclick = function () {
         if (formToSubmit) {
-            formToSubmit.submit(); // Submit the form
+            formToSubmit.submit(); 
         }
         deleteModal.modal('hide');
     };
@@ -324,8 +323,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (successAlert) {
             successAlert.classList.add('hide');
             setTimeout(() => {
-                successAlert.remove(); // Remove alert element after transition
-            }, 500); // Match with CSS transition duration
+                successAlert.remove(); 
+            }, 500); 
         }
     }
 
@@ -334,14 +333,13 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             successAlert.classList.add('hide');
             setTimeout(() => {
-                successAlert.remove(); // Remove alert element after transition
-            }, 500); // Match with CSS transition duration
-        }, 3000); // Hide alert after 3 seconds
+                successAlert.remove();  //Time delay
+        }, 3000); 
     }
 
     var pendingModal = new bootstrap.Modal(document.getElementById('pendingModal'));
 
-    // Show the modal on click of status button if status is 'Pending'
+
     document.querySelectorAll('[data-status="pending"]').forEach(function (button) {
         button.addEventListener('click', function () {
             pendingModal.show();
@@ -445,7 +443,7 @@ body {
     padding: 10px;
     border: none;
     outline: none;
-    font-size: 1rem; /* Make font size consistent with the design */
+    font-size: 1rem; 
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -467,7 +465,7 @@ body {
 
 .search-bar button i,
 .search-bar .filter-button i {
-    font-size: 1rem; /* Adjust icon size as needed */
+    font-size: 1rem; 
 }
 
 .btn-group-toggle .btn {
