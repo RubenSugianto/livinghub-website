@@ -3,15 +3,22 @@
 @section('title', 'Properti Disewa')
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-4 disewa-page">
  <!-- Search and filter buttons -->
 
-<div class="search-bar mb-5">
+ <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
-        <input type="text" name="search" placeholder="Cari properti disini..">
-        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
+        <input type="text" name="search" id="search-input" placeholder="Cari properti disini.." class="form-control">
+        <button type="submit" class="btn btn-outline-secondary">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-outline-secondary filter-button" data-toggle="modal" data-target="#filterModal">
+            <i class="fa fa-filter" aria-hidden="true"></i>
+        </button>
     </form>
+    <div class="keyword-suggestions mt-15">
+        <!-- Keyword suggestions will be dynamically inserted here -->
+    </div>
 </div>
 
 <!-- Filter Modal Dialog Box -->
@@ -243,6 +250,44 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = `/properties/${propertyId}`;
         });
     });
+
+    const keywordSuggestions = document.querySelector('.keyword-suggestions');
+    const searchInput = document.getElementById('search-input');
+    const searchForm = document.querySelector('.search-bar form');
+
+    // List of potential keywords (you can extend this list)
+    const keywords = [
+        'Rumah mewah', 'Rumah asri', 'Apartemen murah', 'Ruko disewa',
+        'Tanah dijual', 'Rumah strategis', 'Apartemen dijual', 'Ruko minimalis',
+        'Rumah cluster', 'Villa disewa', 'Kost murah', 'Kavling strategis',
+        'Tanah murah', 'Rumah klasik', 'Ruko produktif', 'Apartemen premium',
+        'Rumah luas', 'Kost eksklusif', 'Ruko ramai', 'Tanah strategis'
+    ];
+
+    // Function to generate random keywords
+    function getRandomKeywords(count) {
+        const shuffled = keywords.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+
+    // Generate and display keyword suggestions
+    function displayKeywordSuggestions() {
+        const randomKeywords = getRandomKeywords(5);
+        keywordSuggestions.innerHTML = randomKeywords.map(keyword => 
+            `<button type="button" class="btn btn-outline-secondary btn-sm mr-2 mb-2 keyword-btn">${keyword}</button>`
+        ).join('');
+    }
+
+    // Initial display of keyword suggestions
+    displayKeywordSuggestions();
+
+    // Event delegation for keyword buttons
+    keywordSuggestions.addEventListener('click', function(event) {
+        if (event.target.classList.contains('keyword-btn')) {
+            searchInput.value = event.target.textContent;
+            searchForm.submit();
+        }
+    });
 });
 
 function resetFilters() {
@@ -261,6 +306,7 @@ function resetFilters() {
   --greyDark: #2d4848;
   --btnColor: #5E5DF0;
 }
+
 html {
   box-sizing: border-box;
   font-size: 50%;
@@ -268,178 +314,183 @@ html {
 }
 
 body {
-    padding-top: 0px; 
+  padding-top: 0px;
 }
 
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-  margin: 1rem auto;
-  border-radius: 0.4rem;
-  background: #ffffff;
-  box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
-  width: fit-content;
-}
+.disewa-page {
+  /* Add specific styles for the disewa-page here */
 
-.page__numbers,
-.page__btn,
-.page__dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.4rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-.page__dots {
-  width: 2rem;
-  height: 2rem;
-  color: var(--greyLight);
-  cursor: initial;
-}
-
-.page__numbers {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.2rem;
-  color: var(--greyDark);
-
-  &:hover {
-    color: #ffffff !important;
-    background: #5E5DF0 !important;
+  .page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    margin: 1rem auto;
+    border-radius: 0.4rem;
+    background: #ffffff;
+    box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+    width: fit-content;
   }
 
-  &.active {
+  .page__numbers,
+  .page__btn,
+  .page__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+  }
+
+  .page__dots {
+    width: 2rem;
+    height: 2rem;
+    color: var(--greyLight);
+    cursor: initial;
+  }
+
+  .page__numbers {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.2rem;
+    color: var(--greyDark);
+
+    &:hover {
+      color: #ffffff !important;
+      background: #5E5DF0 !important;
+    }
+
+    &.active {
+      color: #ffffff !important;
+      background: #5E5DF0 !important;
+      font-weight: 600 !important;
+      border: 1px solid var(--primary) !important;
+    }
+  }
+
+  .page__btn {
+    color: var(--btnColor);
+    pointer-events: none;
+
+    &.active {
+      color: var(--btnColor);
+      pointer-events: initial;
+
+      &:hover {
+        color: var(--primary) !important;
+      }
+    }
+  }
+
+  .property-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    max-width: 100%;
+    width: 100%;
+    margin: 8px auto;
+  }
+
+  .property-card:hover {
+    transform: scale(1.005);
+  }
+
+  .badge {
+    font-size: 0.8em;
+    padding: 0.3em 0.8em;
+    margin-right: 8px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+
+  .price {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card-title h5 {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .card-title svg {
+    margin-left: 6px;
+    cursor: pointer;
+  }
+
+  .card-text {
+    font-size: 12px;
+    color: #555;
+  }
+
+  .card-footer {
+    padding: 8px;
+    background: #f8f9fa;
+  }
+
+  .card-meta img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .spacer {
+    margin-left: 3px;
+  }
+
+  .property-details p {
+    margin-right: 6px;
+    font-size: 12px;
+  }
+
+  .property-details svg {
+    margin-right: 3px;
+  }
+
+  .property-details strong {
+    font-weight: bold;
+  }
+
+  .property-description {
+    font-size: 12px;
+    color: #555;
+    margin-top: 6px;
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .page__numbers.active a {
     color: #ffffff !important;
-    background: #5E5DF0 !important;
+    background: var(--primary) !important;
     font-weight: 600 !important;
     border: 1px solid var(--primary) !important;
   }
-}
 
-.page__btn {
-  color: var(--btnColor);
-  pointer-events: none;
-
-  &.active {
-    color: var(--btnColor);
-    pointer-events: initial;
-
-    &:hover {
-      color: var(--primary) !important;
-    }
-  }
-}
-
-.property-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  max-width: 100%;
-  width: 100%;
-  margin: 8px auto;
-}
-
-.property-card:hover {
-  transform: scale(1.005);
-}
-
-.badge {
-  font-size: 0.8em;
-  padding: 0.3em 0.8em;
-  margin-right: 8px;
-}
-
-.card-image img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
-}
-
-.price {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.card-title h5 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.card-title svg {
-  margin-left: 6px;
-  cursor: pointer;
-}
-
-.card-text {
-  font-size: 12px;
-  color: #555;
-}
-
-.card-footer {
-  padding: 8px;
-  background: #f8f9fa;
-}
-
-.card-meta img {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  margin-right: 6px;
-}
-
-.spacer {
-  margin-left: 3px;
-}
-
-.property-details p {
-  margin-right: 6px;
-  font-size: 12px;
-}
-
-.property-details svg {
-  margin-right: 3px;
-}
-
-.property-details strong {
-  font-weight: bold;
-}
-
-.property-description {
-  font-size: 12px;
-  color: #555;
-  margin-top: 6px;
-  max-height: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.page__numbers.active a {
-  color: #ffffff !important;
-  background: var(--primary) !important;
-  font-weight: 600 !important;
-  border: 1px solid var(--primary) !important;
-}
-.search-bar {
+  .search-bar {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 100px;
-}
+    flex-direction: column;
+  }
 
-.input-group {
+  .input-group {
     display: flex;
     align-items: center;
     width: 100%;
@@ -450,9 +501,9 @@ body {
     overflow: hidden;
     background-color: #f5f5f5;
     padding: 5px;
-}
+  }
 
-.input-group input[type="text"] {
+  .input-group input[type="text"] {
     flex: 1;
     padding: 10px;
     border: none;
@@ -460,112 +511,132 @@ body {
     font-size: 1.5rem;
     background-color: #f5f5f5;
     color: #333;
-}
+  }
 
-.input-group button {
+  .input-group button {
     padding: 10px;
     background: none;
     color: black;
     border: none;
     cursor: pointer;
     transition: color 0.3s ease;
-}
+  }
 
-.input-group button i {
-    font-size: 1.8rem; /
-}
+  .input-group button i {
+    font-size: 1.8rem;
+  }
 
-
-.input-group button:hover {
+  .input-group button:hover {
     color: #4A4AC4;
+  }
+
+  .btn-group-toggle .btn {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 6px;
+    color: black;
+    background-color: white;
+    font-size: 12px;
+  }
+
+  .btn-group-toggle .btn.active {
+    background-color: #4A4AC4;
+    color: white;
+  }
+
+  .btn-group-toggle .btn:hover {
+    background-color: #4A4AC4;
+    color: white;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .modal-body .form-group {
+    flex: 1 1 25%;
+  }
+
+  .modal-body .form-group-full {
+    flex: 1 1 100%;
+  }
+
+  .input-range {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-group-toggle .btn input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .modal-body .btn-group-toggle .btn {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 6px;
+    color: black;
+    background-color: white;
+    font-size: 12px;
+  }
+
+  .modal-body .btn-group-toggle .btn.active {
+    background-color: #5E5DF0;
+    color: white;
+  }
+
+  .modal-body .btn-group-toggle .btn:hover {
+    background-color: #4A4AC4;
+    color: white;
+  }
+
+  .modal-dialog.modal-lg {
+    max-width: 30%;
+  }
+
+  #ProfilePicture {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .keyword-suggestions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .keyword-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .keyword-btn:hover {
+    background-color: #e0e0e0;
+  }
 }
-
-
-.btn-group-toggle .btn {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 6px;
-  color: black;
-  background-color: white;
-  font-size: 12px;
-}
-
-.btn-group-toggle .btn.active {
-  background-color: #4A4AC4;
-  color: white;
-}
-
-.btn-group-toggle .btn:hover {
-  background-color: #4A4AC4;
-  color: white;
-}
-
-.modal-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.modal-body .form-group {
-  flex: 1 1 25%;
-}
-
-.modal-body .form-group-full {
-  flex: 1 1 100%;
-}
-
-.input-range {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-group-toggle .btn input[type="radio"] {
-  display: none;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 3px;
-  font-size: 12px;
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-body .btn-group-toggle .btn {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 6px;
-  color: black;
-  background-color: white;
-  font-size: 12px;
-}
-
-.modal-body .btn-group-toggle .btn.active {
-  background-color: #5E5DF0;
-  color: white;
-}
-
-.modal-body .btn-group-toggle .btn:hover {
-  background-color: #4A4AC4;
-  color: white;
-}
-
-.modal-dialog.modal-lg {
-  max-width: 30%;
-}
-
-#ProfilePicture {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 </style>
 @endsection

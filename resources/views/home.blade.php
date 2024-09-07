@@ -529,6 +529,34 @@ img {
     margin-top: 50px;
 }
 
+.ks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.keyword-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.keyword-suggestion {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.keyword-suggestion:hover {
+    background-color: #e0e0e0;
+}
+
 </style>
 @endsection
 @section('content')
@@ -664,7 +692,7 @@ img {
             <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark">
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
-                          <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                          <img src="{{ asset($property->images->first()) }}" alt="{{ $property->name }}" width="100">
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>
@@ -757,11 +785,14 @@ img {
     <h2 style="text-align: center; font-weight: bold;">Looking for something else?</h2>
     <form action="{{ route('search') }}" method="GET" class="input-group">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <input type="text" name="search" placeholder="Search Keyword">
+        <input type="text" name="search" id="searchInput" placeholder="Search Keyword">
         <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
             <i class="fa fa-filter" aria-hidden="true"></i>
         </button>
     </form>
+    <div class="keyword-suggestions">
+        <!-- Keyword suggestions will be dynamically inserted here -->
+    </div>
 </div>
 
 
@@ -919,6 +950,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500); 
         }, 3000); 
     }
+
+    const keywordSuggestions = document.querySelector('.keyword-suggestions');
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = document.querySelector('.search-bar form');
+
+    // List of possible keywords
+    const keywords = [
+        'Rumah mewah', 'Rumah asri', 'Apartemen murah', 'Ruko disewa',
+        'Tanah dijual', 'Rumah strategis', 'Apartemen dijual', 'Ruko minimalis',
+        'Rumah cluster', 'Villa disewa', 'Kost murah', 'Kavling strategis',
+        'Tanah murah', 'Rumah klasik', 'Ruko produktif', 'Apartemen premium',
+        'Rumah luas', 'Kost eksklusif', 'Ruko ramai', 'Tanah strategis'
+    ];
+
+    // Function to generate random keywords
+    function generateRandomKeywords(count) {
+        const shuffled = keywords.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+
+    // Function to create keyword suggestion elements
+    function createKeywordSuggestions() {
+        const randomKeywords = generateRandomKeywords(5);
+        keywordSuggestions.innerHTML = '';
+        randomKeywords.forEach(keyword => {
+            const suggestionElement = document.createElement('span');
+            suggestionElement.classList.add('keyword-suggestion');
+            suggestionElement.textContent = keyword;
+            suggestionElement.addEventListener('click', () => {
+                searchInput.value = keyword;
+                searchForm.submit();
+            });
+            keywordSuggestions.appendChild(suggestionElement);
+        });
+    }
+
+    // Generate keyword suggestions on page load
+    createKeywordSuggestions();
 });
 
 function resetFilters() {
