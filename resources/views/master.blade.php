@@ -387,39 +387,44 @@
             width: 100%;
             max-width: 80%;
             margin: auto;
+            text-align: center;
         }
 
         .search-popup h1 {
             color: #fff;
             font-size: 40px; 
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
         }
 
 
         .search-input-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
+            margin-top: 10px; /* To control spacing */
+            display: inline-block;
+            width: 100%;
+            max-width: 600px; /* Adjust the width according to your design */
+            position: relative;
         }
+
 
         .search-input {
-            width: 50%;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 40px; 
+            width: 100%;
+            padding: 15px 20px 15px 60px; /* Padding for icon inside */
+            border-radius: 50px !important; /* The key property to make it rounded */
             border: none;
-            background-color: #fff;
-            color: #333;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+            background-color: white; /* Ensure it's visible on all backgrounds */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Optional for a shadow */
+            font-size: 1.5rem;
         }
 
+
         .search-icon-input {
-            position: relative;
-            left: 35px; 
-            font-size: 20px;
-            color: #333;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #888;
         }
 
         .search-popup input[type="text"] {
@@ -443,7 +448,40 @@
             opacity: 1;
             transition: opacity 0.3s ease;
         }
+
+        .input-group {
+            position: relative;
+            display: inline-block;
+            width: 100%; /* Ensure full width for the form */
+        }
+
+        .search-input:focus {
+            outline: none;
+        }
         
+        .search-submit-button {
+            display: none; /* Keep submit button hidden */
+        }
+
+        .search-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-keyword {
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-keyword:hover {
+            background-color: #e0e0e0;
+        }
 
     </style>
         @yield('styles')
@@ -497,13 +535,44 @@
     </div>
 </header>
 
-<div class="search-popup">
+<!-- <div class="search-popup">
     <div class="search-popup-content">
         <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
         <h1>What are you looking for?</h1>
         <div class="search-input-container">
             <i class="fa fa-search search-icon-input"></i>   
             <input type="text" placeholder="Search..." class="search-input">
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="search-popup">
+    <div class="search-popup-content">
+        <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
+        <h1>What are you looking for?</h1>
+        <div class="search-input-container">
+            <form action="{{ route('search') }}" method="GET" class="input-group">
+                <i class="fa fa-search search-icon-input"></i>   
+                <input type="text" name="search" placeholder="Search..." class="search-input" />
+                <button type="submit" class="search-submit-button" style="display: none;"></button>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<div class="search-popup">
+    <div class="search-popup-content">
+        <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
+        <h1>What are you looking for?</h1>
+        <div class="search-input-container">
+            <form action="{{ route('search') }}" method="GET" class="input-group">
+                <i class="fa fa-search search-icon-input"></i>   
+                <input type="text" name="search" placeholder="Search..." class="search-input" />
+                <button type="submit" class="search-submit-button" style="display: none;"></button>
+            </form>
+        </div>
+        <div class="search-keywords">
+            <!-- Keywords will be dynamically inserted here -->
         </div>
     </div>
 </div>
@@ -570,13 +639,89 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        const keywordsList = [
+            'Rumah mewah', 'Rumah asri', 'Apartemen murah', 'Ruko disewa',
+            'Tanah dijual', 'Rumah strategis', 'Apartemen dijual', 'Ruko minimalis',
+            'Rumah cluster', 'Villa disewa', 'Kost murah', 'Kavling strategis',
+            'Tanah murah', 'Rumah klasik', 'Ruko produktif', 'Apartemen premium',
+            'Rumah luas', 'Kost eksklusif', 'Ruko ramai', 'Tanah strategis'
+        ];
+
+        function getRandomKeywords(count) {
+            const shuffled = [...keywordsList].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, count);
+        }
+
+        function generateKeywords() {
+            const keywordsContainer = document.querySelector('.search-keywords');
+            if (!keywordsContainer) {
+                console.error('Keywords container not found');
+                return;
+            }
+            const keywords = getRandomKeywords(5);
+            
+            keywordsContainer.innerHTML = '';
+            keywords.forEach(keyword => {
+                const keywordElement = document.createElement('div');
+                keywordElement.className = 'search-keyword';
+                keywordElement.textContent = keyword;
+                keywordElement.addEventListener('click', () => performSearch(keyword));
+                keywordsContainer.appendChild(keywordElement);
+            });
+        }
+
+        function performSearch(keyword) {
+            const searchInput = document.querySelector('.search-input');
+            if (searchInput) {
+                searchInput.value = keyword;
+                const form = document.querySelector('form');
+                if (form) {
+                    form.submit();
+                } else {
+                    console.error('Search form not found');
+                }
+            } else {
+                console.error('Search input not found');
+            }
+        }
+
         function openSearchPopup() {
-            document.querySelector('.search-popup').classList.add('show');
+            const searchPopup = document.querySelector('.search-popup');
+            if (searchPopup) {
+                searchPopup.classList.add('show');
+                generateKeywords();
+            } else {
+                console.error('Search popup not found');
+            }
         }
 
         function closeSearchPopup() {
-            document.querySelector('.search-popup').classList.remove('show');
+            const searchPopup = document.querySelector('.search-popup');
+            if (searchPopup) {
+                searchPopup.classList.remove('show');
+            } else {
+                console.error('Search popup not found');
+            }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchIcon = document.querySelector('.search-icon');
+            if (searchIcon) {
+                searchIcon.addEventListener('click', openSearchPopup);
+            } else {
+                console.error('Search icon not found');
+            }
+
+            const closeButton = document.querySelector('.search-popup-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', closeSearchPopup);
+            } else {
+                console.error('Close button not found');
+            }
+
+            // Generate keywords initially
+            generateKeywords();
+        });
     </script>
         @yield('scripts')
     </body>
