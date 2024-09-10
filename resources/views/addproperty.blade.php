@@ -158,7 +158,8 @@
         </div>
     </form>
     <div id="form-alert" style="display:none;">Please fill all required fields.</div>
-
+     </div> 
+         </div>
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         const nextBtn = document.getElementById('next');
@@ -243,7 +244,6 @@
 
         showStep(currentStep);
 
-        // Handle form submission
         const propertyForm = document.getElementById('propertyForm');
         propertyForm.addEventListener('submit', function (event) {
             const typeSelect = document.getElementById('typeDocument');
@@ -251,16 +251,16 @@
 
             if (typeSelect.value === 'Lainnya') {
                 if (customTypeInput.value.trim() !== '') {
-                    // Create a new option with the custom value
+        
                     const newOption = document.createElement('option');
                     newOption.value = customTypeInput.value.trim();
                     newOption.textContent = customTypeInput.value.trim();
                     typeSelect.appendChild(newOption);
                     
-                    // Select the new option
+                
                     typeSelect.value = customTypeInput.value.trim();
                 } else {
-                    // If custom input is empty, prevent form submission
+                   
                     event.preventDefault();
                     alert('Please enter a custom document type.');
                     return;
@@ -284,7 +284,7 @@
             } else {
                 customTypeInput.style.display = 'none';
                 customTypeInput.required = false;
-                customTypeInput.value = ''; // Clear the custom input when not selected
+                customTypeInput.value = ''; 
             }
         });
 
@@ -294,7 +294,7 @@
         const files = event.target.files;
 
         const imagePreview = document.getElementById('imagePreview');
-        imagePreview.innerHTML = ''; // Clear previous previews
+        imagePreview.innerHTML = ''; 
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -315,46 +315,24 @@
 </div>
 
 <style>
-    
-.formbold-main-wrapper {
+    .formbold-main-wrapper {
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 30px 30px 30px 30px;
-    max-width: 2000px;
+    align-items: center;
+    padding: 30px;
+    max-width: 1200px;
     width: 100%;
-    margin: 10 auto;
+    margin: 0 auto;
     position: relative;
-    top: -20px;
 }
 
 .formbold-form-wrapper {
-    margin: 0 auto;
-    max-width: 1000px;
-    width: 100%;
-    background: white;
-    padding: 15px;
+    background: #fff;
+    padding: 20px;
     border-radius: 10px;
-}
-
-.formbold-form-input {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: 1px solid #DDE3EC;
-    background: #FFFFFF;
-    font-weight: 500;
-    font-size: 14px;
-    color: #536387;
-    outline: none;
-    resize: none;
-    margin-bottom: 15px;
-}
-
-.formbold-steps {
-    padding-bottom: 10px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #DDE3EC;
+    max-width: 800px;
 }
 
 .formbold-steps ul {
@@ -362,90 +340,74 @@
     margin: 0;
     list-style: none;
     display: flex;
-    gap: 30px;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DDE3EC;
+    margin-bottom: 25px;
 }
 
 .formbold-steps li {
+    font-size: 14px;
+    color: #536387;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
-    color: #536387;
 }
 
 .formbold-steps li span {
-    display: flex;
-    align-items: center;
+    display: inline-flex;
     justify-content: center;
-    background: #DDE3EC;
-    border-radius: 50%;
+    align-items: center;
     width: 30px;
     height: 30px;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
+    border-radius: 50%;
+    background: #DDE3EC;
     color: #536387;
-}
-
-.formbold-steps li.active {
-    color: #07074D;
+    font-size: 14px;
 }
 
 .formbold-steps li.active span {
-    background: #6A64F1;
-    color: #FFFFFF;
+    background-color: #6A64F1;
+    color: #fff;
 }
 
-.formbold-input-flex {
-    display: flex;
-    gap: 15px;
+.formbold-form-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #DDE3EC;
+    background: #f9f9f9;
+    font-weight: 500;
+    font-size: 14px;
+    color: #536387;
     margin-bottom: 15px;
-}
-
-.formbold-input-flex > div {
-    width: 50%;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
 .formbold-form-input:focus {
     border-color: #6a64f1;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
 }
 
-.formbold-form-label {
-    color: #07074D;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 20px;
-    display: block;
-    margin-bottom: 8px;
+.formbold-input-flex {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
 }
 
-.formbold-form-step-1,
-.formbold-form-step-2,
-.formbold-form-step-3,
-.formbold-form-step-4,
-.formbold-form-step-5 {
-    display: none;
-}
-
-.formbold-form-step-1.active,
-.formbold-form-step-2.active,
-.formbold-form-step-3.active,
-.formbold-form-step-4.active,
-.formbold-form-step-5.active {
-    display: block;
+.formbold-input-flex > div {
+    flex: 1;
 }
 
 .formbold-form-btn-wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
-.formbold-back-btn,
-.formbold-btn,
+.formbold-btn, 
+.formbold-back-btn, 
 .formbold-submit-btn {
     padding: 10px 20px;
     border-radius: 5px;
@@ -453,58 +415,66 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    color: white;
-}
-
-.formbold-btn {
-    background-color: #5E5DF0; 
-}
-
-.formbold-btn:hover {
-    background-color: #4A4AC4; 
+    background-color: #5E5DF0;
+    color: #fff;
+    transition: background-color 0.3s ease;
 }
 
 .formbold-back-btn {
     background-color: #ccc;
-    display: none;
 }
 
-.formbold-back-btn.active {
-    display: block;
-}
-
-.formbold-submit-btn {
-    background-color: #5E5DF0; 
-    display: none;
-}
-
-.formbold-submit-btn.active {
-    display: block;
-}
-
+.formbold-btn:hover, 
 .formbold-submit-btn:hover {
-    background-color: #4A4AC4; 
+    background-color: #4A4AC4;
+}
+
+.formbold-form-step-1, 
+.formbold-form-step-2, 
+.formbold-form-step-3, 
+.formbold-form-step-4, 
+.formbold-form-step-5 {
+    display: none;
+}
+
+.formbold-form-step-1.active, 
+.formbold-form-step-2.active, 
+.formbold-form-step-3.active, 
+.formbold-form-step-4.active, 
+.formbold-form-step-5.active {
+    display: block;
+}
+
+.formbold-image-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.formbold-preview-image {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .alert {
     padding: 15px;
-    background-color: #f44336; 
+    background-color: #f44336;
     color: white;
-    margin-bottom: 10px;
-    width: calc(100% - 40px); 
-    margin: 20px auto 10px auto;
+    margin: 10px auto;
     border-radius: 10px;
+    width: calc(100% - 40px);
     position: relative;
     top: -50px;
 }
 
 .closebtn {
-    margin-left: ;
     color: white;
-    font-weight: bold;
     float: right;
     font-size: 20px;
-    line-height: 18px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -513,19 +483,24 @@
     color: black;
 }
 
-.formbold-image-preview {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
+@media (max-width: 768px) {
+    .formbold-input-flex {
+        flex-direction: column;
+    }
+
+    .formbold-back-btn,
+    .formbold-btn,
+    .formbold-submit-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .formbold-steps ul {
+        flex-direction: column;
+    }
 }
 
-.formbold-preview-image {
-    max-width: 200px;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+
 
 </style>
 
