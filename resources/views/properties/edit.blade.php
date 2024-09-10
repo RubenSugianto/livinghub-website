@@ -58,89 +58,96 @@
                 </div>
 
 
-                <!-- Property Details -->
-                <div class="form-group-row">
-                    <label for="name">Nama Properti</label>
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $property->name) }}" required>
-                    </div>
+         <!-- Property Details -->
+            <div class="form-group-row">
+                <label for="name">Nama Properti</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $property->name) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="description">Deskripsi Properti</label>
-                    <div class="input-container">
-                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description', $property->description) }}</textarea>
-                        <p class="helper-text">Penjelasan detail terkait properti agar calon pembeli mengetahui spesifikasi dan detail mengenai properti yang akan dibeli.</p>
-                    </div>
+            <div class="form-group-row">
+                <label for="description">Deskripsi Properti</label>
+                <div class="input-container">
+                    <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description', $property->description) }}</textarea>
+                    <p class="helper-text">Penjelasan detail terkait properti agar calon pembeli mengetahui spesifikasi dan detail mengenai properti yang akan dibeli.</p>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="price">Harga Properti</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $property->price) }}" required>
-                        <p class="helper-text">Contoh: Rp500.000.000</p>
-                    </div>
+            <div class="form-group-row">
+                <label for="price">Harga Properti</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $property->price) }}" required>
+                    <p class="helper-text">Contoh: Rp500.000.000</p>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="location">Lokasi Properti</label>
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="location" name="location" value="{{ old('location', $property->location) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="location">Lokasi Properti</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="location" name="location" value="{{ old('location', $property->location) }}" readonly>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="bathroom">Jumlah Kamar Mandi</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="bathroom" name="bathroom" value="{{ old('bathroom', $property->bathroom) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="bathroom">Jumlah Kamar Mandi</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="bathroom" name="bathroom" value="{{ old('bathroom', $property->bathroom) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="bedroom">Jumlah Kamar Tidur</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="bedroom" name="bedroom" value="{{ old('bedroom', $property->bedroom) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="bedroom">Jumlah Kamar Tidur</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="bedroom" name="bedroom" value="{{ old('bedroom', $property->bedroom) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="electricity">Listrik Properti</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="electricity" name="electricity" value="{{ old('electricity', $property->electricity) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="electricity">Listrik Properti</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="electricity" name="electricity" value="{{ old('electricity', $property->electricity) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="surfaceArea">Luas Permukaan</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="surfaceArea" name="surfaceArea" value="{{ old('surfaceArea', $property->surfaceArea) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="surfaceArea">Luas Permukaan</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="surfaceArea" name="surfaceArea" value="{{ old('surfaceArea', $property->surfaceArea) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="buildingArea">Luas Bangunan</label>
-                    <div class="input-container">
-                        <input type="number" class="form-control" id="buildingArea" name="buildingArea" value="{{ old('buildingArea', $property->buildingArea) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="buildingArea">Luas Bangunan</label>
+                <div class="input-container">
+                    <input type="number" class="form-control" id="buildingArea" name="buildingArea" value="{{ old('buildingArea', $property->buildingArea) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="status">Status Properti</label>
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="status" name="status" value="{{ old('status', $property->status) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="status">Status Properti</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="status" name="status" value="{{ old('status', $property->status) }}" required>
                 </div>
+            </div>
 
-                <div class="form-group-row">
-                    <label for="type">Jenis Properti</label>
-                    <div class="input-container">
-                        <input type="text" class="form-control" id="type" name="type" value="{{ old('type', $property->type) }}" required>
-                    </div>
+            <div class="form-group-row">
+                <label for="type">Jenis Properti</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="type" name="type" value="{{ old('type', $property->type) }}" readonly>
                 </div>
-                
-                <div class="form-group-row text-right"> 
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
+
+            <div class="form-group-row">
+                <label for="sertifikat">Sertifikat Properti</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="sertifikat" name="sertifikat" value="{{ old('sertifikat', $property->type) }}" readonly>
                 </div>
+            </div>
+
+            <div class="form-group-row text-right">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+            </div>
             </form>
         </div>
     </div>
@@ -223,6 +230,33 @@
 
 
 <style>
+
+.alert {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: inherit;
+    cursor: pointer;
+}
+
 .container {
     background-color: #ffffff;
     padding: 30px;
@@ -233,7 +267,6 @@
     position: relative;
 }
 
-/* Header Styling */
 h1 {
     font-size: 24px;
     font-weight: bold;
@@ -243,7 +276,6 @@ h1 {
     color: #333;
 }
 
-/* Form Group and Labels */
 .form-group-row {
     display: flex;
     flex-wrap: wrap;
@@ -259,10 +291,10 @@ h1 {
     color: #555;
 }
 
-/* Input Container */
+
 .input-container {
     flex-grow: 1;
-    width: calc(100% - 220px); /* Adjust based on label width */
+    width: calc(100% - 220px); 
 }
 
 /* Form Control */
@@ -279,16 +311,14 @@ h1 {
     box-shadow: 0 0 5px rgba(94, 93, 240, 0.25);
 }
 
-/* Helper Text */
 .helper-text {
     font-size: 0.875rem;
     color: #6c757d;
     margin-top: 5px;
 }
 
-/* Photo Label and Image Upload */
 .form-group-row label[for="images"] {
-    font-weight: bold; /* Make the label for Foto Properti bold */
+    font-weight: bold; 
     color: #555;
 }
 
@@ -324,7 +354,6 @@ h1 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Delete Icon */
 .image-slot .delete-icon {
     position: absolute;
     top: 8px;
@@ -354,7 +383,6 @@ h1 {
     color: #5E5DF0;
 }
 
-/* Buttons */
 .btn-primary {
     background-color: #5E5DF0;
     border-color: #5E5DF0;
@@ -363,7 +391,7 @@ h1 {
     padding: 12px 30px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
-    float: right; /* Align button to the right */
+    float: right; 
 }
 
 .btn-primary:hover {
@@ -383,7 +411,7 @@ h1 {
     align-items: center;
     transition: background-color 0.3s ease;
     position: absolute;
-    top: -20px; /* Adjusts the position of the back button vertically */
+    top: -20px; 
     left: 0;
 }
 
