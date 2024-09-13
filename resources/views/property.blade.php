@@ -129,11 +129,98 @@
                     <i class="fa fa-comments-o" aria-hidden="true"></i> Chat
                 </a>
             </div>
+
+            <div>
+                <h3 class="section-title">Komentar</h3>
+                @foreach ($property->comments as $comment)
+                <div class="comment">
+                    <div class="comment-header">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt="User Icon"/>
+                        <strong>{{ $comment->user_name }}</strong>
+                    </div>
+                    <p>{{ $comment->comment }}</p>
+                    <small>{{ $comment->created_at->format('d F Y') }}</small>
+                </div>
+                @endforeach
+
+                <hr>
+
+                @auth <!-- Hanya tampilkan form jika pengguna sudah login -->
+                <h4>Tambahkan Komentar</h4>
+                <form action="{{ route('comments.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="property_id" value="{{ $property->id }}">
+
+                    <div class="comment-input">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt="User Icon"/>
+                        <!-- Nama pengguna bisa ditampilkan di sini jika diinginkan -->
+                        <strong>{{ Auth::user()->username }}</strong>
+                    </div>
+
+                    <textarea name="comment" placeholder="Tambahkan komentar..." required></textarea>
+                    <button type="submit">Komen</button>
+                </form>
+                @else
+                <p>Silahkan <a href="{{ route('login') }}">Login</a> untuk menambahkan komentar.</p>
+                @endauth
+            </div>
+
+
         </div>
     </div>
 </div>
 
 <style>
+
+    .comment-input {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .comment-input img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-input strong {
+        font-size: 14px;
+        color: #333;
+        margin-right: 10px;
+    }
+
+    textarea[name="comment"] {
+        width: calc(100%); /* Sesuaikan lebar sesuai kebutuhan */
+        height: 40px; 
+        border: 1px solid #ccc;
+        border-radius: 15px;
+        padding: 8px 15px;
+        font-size: 14px;
+        resize: none;
+        outline: none;
+    }
+
+    textarea[name="comment"]::placeholder {
+        color: #aaa;
+    }
+
+    button[type="submit"] {
+        background-color: #777;
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 8px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #555;
+    }
+
     .tags-favorite {
         display: flex;
         justify-content: space-between; 

@@ -364,11 +364,18 @@ class PropertyController extends Controller
     }
 
 
-public function compare(Request $request)
-{
-    $propertyIds = $request->input('propertyIds');
-    $properties = Property::whereIn('id', $propertyIds)->get();
+    public function compare(Request $request)
+    {
+        $propertyIds = $request->input('propertyIds');
+        $properties = Property::whereIn('id', $propertyIds)->get();
 
-    return response()->json($properties);
-}
+        return response()->json($properties);
+    }
+
+    public function showComment($id)
+    {
+        $property = Property::with('comments')->findOrFail($id);
+        return view('properties.showComment', compact('property'));
+    }
+
 }

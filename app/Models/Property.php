@@ -60,4 +60,14 @@ class Property extends Model
     {
         return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
     }
+
+    // protected $keyType = 'uuid';
+    // public $incrementing = false;
+
+    // Relasi one-to-many dengan Comment
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'property_id');
+    }
+
 }

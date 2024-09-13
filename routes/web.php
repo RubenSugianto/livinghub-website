@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\MyPropertyController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\CommentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +84,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/document/{property}/edit', [DocumentController::class, 'edit'])->name('document.edit');
     Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
 });
+
+// Comment
+Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
 
 
