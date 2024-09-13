@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('property_id')->constrained('properties')->onDelete('cascade'); // Relasi ke properties dengan tipe UUID
-            $table->string('user_name')->nullable()->change();
+            $table->string('user_name')->nullable();
             $table->text('comment');
             $table->timestamps();
         });
