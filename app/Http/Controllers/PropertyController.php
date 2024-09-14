@@ -70,6 +70,7 @@ class PropertyController extends Controller
         $property->surfaceArea = $request->surfaceArea;
         $property->buildingArea = $request->buildingArea;
         $property->status = $request->status;
+        $property->check = 'Pending';
         $property->type = $request->typeProperty;
         $property->published_at = $request->published_at ?? now(); // Default to current timestamp if not provided
 
