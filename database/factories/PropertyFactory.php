@@ -32,6 +32,7 @@ class PropertyFactory extends Factory
             'buildingArea' => $this->faker->numberBetween(100, 5000),
             'status' => $this->faker->randomElement(['dijual', 'disewa']),
             'type' => $this->faker->randomElement(['rumah', 'apartemen']),
+            'check' => 'Pending',
             'published_at' => $this->faker->optional()->dateTime,
             'created_at' => now(),
             'updated_at' => now(),

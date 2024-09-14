@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('buildingArea');
             $table->string('status');
             $table->string('type');
+            $table->string('check');
             $table->integer('like_count')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
