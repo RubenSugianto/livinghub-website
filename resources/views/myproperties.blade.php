@@ -191,6 +191,7 @@
                             <th>Lokasi</th>
                             <th>Detail</th>
                             <th>Terakhir Update</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -211,6 +212,7 @@
                                     <p><strong>LB:</strong> {{ $property->buildingArea }} m²</p>
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</td>
+                                <td>{{ $property->check }}</td>
                                 <td>
                                     <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
