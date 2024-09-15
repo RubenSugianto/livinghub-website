@@ -1,12 +1,12 @@
 @extends('master')
 
-@section('title', 'Properti Disewa')
+@section('title', 'Properti Dijual')
 
 @section('content')
-<div class="container mt-4 disewa-page">
+<div class="container mt-4 dijual-page">
  <!-- Search and filter buttons -->
 
- <div class="search-bar mb-5">
+<div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
         <input type="text" name="search" id="search-input" placeholder="Cari properti disini.." class="form-control">
         <button type="submit" class="btn btn-outline-secondary">
@@ -299,6 +299,8 @@ function resetFilters() {
 
 @section('styles')
 <style>
+
+    
 :root {
   --primary: #23adad;
   --greyLight: #23adade1;
@@ -317,9 +319,7 @@ body {
   padding-top: 0px;
 }
 
-.disewa-page {
-  /* Add specific styles for the disewa-page here */
-
+.dijual-page {
   .page {
     display: flex;
     justify-content: center;
@@ -615,28 +615,32 @@ body {
     border-radius: 50%;
     object-fit: cover;
   }
-
   .keyword-suggestions {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;  
     margin-top: 20px;
-  }
+}
 
-  .keyword-btn {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  .keyword-btn { 
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 30px;  
+      padding: 10px 25px;   
+      font-size: 1.5rem;  
+      font-weight: bold;    
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;  
+      color: grey;
   }
 
   .keyword-btn:hover {
-    background-color: #e0e0e0;
-  }
-}
+      background-color: #4A4AC4;
+      transform: scale(1.05);  
+      color: #ffffff;
+  } 
+
+
 </style>
 @endsection

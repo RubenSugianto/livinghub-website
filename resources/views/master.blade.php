@@ -63,7 +63,7 @@
         .logo {
             display: flex;
             align-items: center;
-            margin-right: 20px; /* Add some space between the logo and the routes */
+            margin-right: 20px; 
         }
 
         .logo img {
@@ -74,9 +74,9 @@
         .nav-routes {
             display: flex;
             align-items: center;
-            background-color: white; /* Single white background for routes */
+            background-color: white; 
             padding: 5px 15px;
-            border-radius: 20px; /* Rounded corners for the white background */
+            border-radius: 20px; 
             box-shadow: rgba(0, 0, 0, 0.1) 0 5px 10px;
         }
 
@@ -127,7 +127,7 @@
             padding: 4px 10px;
             border: none;
             cursor: pointer;
-            margin-left: 20px; /* Add some space between the routes and the button */
+            margin-left: 20px; 
             transition: background 0.3s ease;
         }
 
@@ -399,21 +399,21 @@
 
 
         .search-input-container {
-            margin-top: 10px; /* To control spacing */
+            margin-top: 10px; 
             display: inline-block;
             width: 100%;
-            max-width: 600px; /* Adjust the width according to your design */
+            max-width: 600px;
             position: relative;
         }
 
 
         .search-input {
             width: 100%;
-            padding: 15px 20px 15px 60px; /* Padding for icon inside */
-            border-radius: 50px !important; /* The key property to make it rounded */
+            padding: 15px 20px 15px 60px; 
+            border-radius: 50px !important; 
             border: none;
-            background-color: white; /* Ensure it's visible on all backgrounds */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Optional for a shadow */
+            background-color: white; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
             font-size: 1.5rem;
         }
 
@@ -452,7 +452,7 @@
         .input-group {
             position: relative;
             display: inline-block;
-            width: 100%; /* Ensure full width for the form */
+            width: 100%; 
         }
 
         .search-input:focus {
@@ -460,7 +460,7 @@
         }
         
         .search-submit-button {
-            display: none; /* Keep submit button hidden */
+            display: none; 
         }
 
         .search-keywords {
@@ -483,9 +483,26 @@
             background-color: #e0e0e0;
         }
 
+        .search-keyword {
+            background-color: #f0f0f0;
+            border-radius: 30px; 
+            padding: 10px 25px;  
+            margin: 10px;        
+            cursor: pointer;
+            font-size: 1.5rem; 
+            font-weight: bold;   
+            transition: background-color 0.3s, transform 0.2s; 
+        }
+
+         .search-keyword:hover {
+            transform: scale(1.05); 
+            background-color: #4A4AC4;
+            color: #ffffff;
+        }
+   
     </style>
         @yield('styles')
-        </head>
+ </head>
         <body>
         <header>
     <div class="navbar-container">

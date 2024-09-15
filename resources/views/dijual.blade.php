@@ -615,29 +615,31 @@ body {
     border-radius: 50%;
     object-fit: cover;
   }
-
   .keyword-suggestions {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;  
     margin-top: 20px;
-  }
+}
 
-  .keyword-btn {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  .keyword-btn { 
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 30px;  
+      padding: 10px 25px;   
+      font-size: 1.5rem;  
+      font-weight: bold;    
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;  
+      color: grey;
   }
 
   .keyword-btn:hover {
-    background-color: #e0e0e0;
-  }
-}
+      background-color: #4A4AC4;
+      transform: scale(1.05);  
+      color: #ffffff;
+  } 
 
 
 </style>
