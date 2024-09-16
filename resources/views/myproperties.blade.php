@@ -29,12 +29,30 @@
             </div>
         </div>
 
-        <!-- Pending Status Modal -->
-        <div class="modal fade" id="pendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
+        <!-- Property Pending Status Modal -->
+        <div class="modal fade" id="propertyPendingModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="pendingModalLabel">Pending Status</h5>
+                        <h5 class="modal-title" id="propertyModalLabel">Property Pending Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        The status of this property is currently pending. Please review the property.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Pending Status Modal -->
+        <div class="modal fade" id="documentPendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pendingModalLabel">Document Pending Status</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -42,6 +60,21 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Image Preview -->
+        <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imagePreviewModalLabel">Image Preview</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img id="previewImage" src="" alt="Preview" style="max-width: 100%; max-height: 1000px;">
                     </div>
                 </div>
             </div>
@@ -199,7 +232,7 @@
                         @foreach($properties as $property)
                             <tr data-property-id="{{ $property->id }}">
                                 <td>
-                                    <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100">
+                                    <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" width="100" class="clickable-image">
                                 </td>
                                 <td>{{ $property->name }}</td>
                                 <td>Rp {{ number_format($property->price, 0, ',', '.') }}</td>
@@ -224,10 +257,17 @@
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </form>
-                                    @if ($property->document->status === 'Pending')
-                                        <!-- Button for pending status with modal trigger, always using btn-warning -->
+                                    
+                                    @if ($property->document->status === 'Pending' && $property->check != 'Pending')
+                                        <!-- Pending Status of Document -->
                                         <a href="javascript:void(0);" class="btn btn-warning"
-                                        data-bs-toggle="modal" data-bs-target="#pendingModal">
+                                        data-bs-toggle="modal" data-bs-target="#documentPendingModal">
+                                            <i class="fa fa-file-text" aria-hidden="true"></i>
+                                        </a>
+                                    @elseif ($property->check === 'Pending')
+                                        <!-- Pending Status of Property -->
+                                        <a href="javascript:void(0);" class="btn btn-warning"
+                                        data-bs-toggle="modal" data-bs-target="#propertyPendingModal">
                                             <i class="fa fa-file-text" aria-hidden="true"></i>
                                         </a>
                                     @else
@@ -273,7 +313,7 @@
                 <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
             </div>
         @endif
-    </div>
+        </div>
 </div>
 @endsection
 
@@ -330,22 +370,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    const successAlert = document.getElementById('successAlert');
-    if (successAlert) {
-        setTimeout(() => {
-            successAlert.classList.add('hide');
-            setTimeout(() => {
-                successAlert.remove();  //Time delay
-        }, 3000); 
-    }
-
-    var pendingModal = new bootstrap.Modal(document.getElementById('pendingModal'));
-
+    var documentPendingModal = new bootstrap.Modal(document.getElementById('documentPendingModal'));
+    var propertyPendingModal = new bootstrap.Modal(document.getElementById('propertyPendingModal'));
 
     document.querySelectorAll('[data-status="pending"]').forEach(function (button) {
         button.addEventListener('click', function () {
-            pendingModal.show();
+            documentPendingModal.show();
+            propertyPendingModal.show();
         });
+    });
+
+    const imagePreviewModal = new bootstrap.Modal(document.getElementById('imagePreviewModal'));
+    const previewImage = document.getElementById('previewImage');
+    
+    document.querySelectorAll('.clickable-image').forEach(function (image) {
+        image.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent row click event
+            const imageSrc = this.getAttribute('src'); // Changed from 'data-image-src' to 'src'
+            previewImage.src = imageSrc;
+            imagePreviewModal.show();
+        });
+    });
+
+    document.querySelector('.btn-close').addEventListener('click', function () {
+        imagePreviewModal.hide();
     });
 
 });
