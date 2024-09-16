@@ -7,7 +7,7 @@
     <div class="row justify-content-center mb-5">
         <div class="col-md-8">
             <a href="javascript:history.back()" class="back-button">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
+            <i class="fa fa-angle-left" aria-hidden="true"></i> Kembali
             </a>
 
             <div id="propertyCarousel" class="carousel slide image-container" data-ride="carousel">
@@ -135,7 +135,7 @@
                 @foreach ($property->comments as $comment)
                 <div class="comment">
                     <div class="comment-header">
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt="User Icon"/>
+                        <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="User Icon"/>
                         <strong>{{ $comment->user_name }}</strong>
                     </div>
                     <p>{{ $comment->comment }}</p>
@@ -145,211 +145,312 @@
 
                 <hr>
 
-                @auth <!-- Hanya tampilkan form jika pengguna sudah login -->
+                @auth 
                 <h4>Tambahkan Komentar</h4>
                 <form action="{{ route('comments.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="property_id" value="{{ $property->id }}">
 
-                    <div class="comment-input">
-                        <img src="https://img.icons8.com/ios-glyphs/30/000000/user--v1.png" alt="User Icon"/>
-                        <!-- Nama pengguna bisa ditampilkan di sini jika diinginkan -->
-                        <strong>{{ Auth::user()->username }}</strong>
+                    <div class="comment-input d-flex align-items-center">
+                        @if(Auth::user()->profilepicture)
+                            <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="Profile Picture" class="profile-picture" />
+                        @else
+                            <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
+                        @endif
+                        <strong class="ml-2">{{ Auth::user()->username }}</strong>
                     </div>
 
-                    <textarea name="comment" placeholder="Tambahkan komentar..." required></textarea>
-                    <button type="submit">Komen</button>
+                <div class="comment-input">
+                    <textarea id="commentTextarea" name="comment" placeholder="Tulis komentar..."></textarea>
+                    <small id="wordCount" class="word-counter">0/200 characters</small>
+                </div>
+                <button type="submit" id="submitButton">Komen</button>
+
+
                 </form>
                 @else
                 <p>Silahkan <a href="{{ route('login') }}">Login</a> untuk menambahkan komentar.</p>
                 @endauth
             </div>
+            
+           <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const textarea = document.getElementById("commentTextarea");
+                const wordCount = document.getElementById("wordCount");  // Pastikan elemen yang tepat
+                const submitButton = document.getElementById("submitButton");
 
+            textarea.addEventListener("input", function() {
+            let text = this.value;
+
+            if (text.length > 200) {
+                text = text.substring(0, 200);
+                textarea.value = text;
+            }
+
+            wordCount.innerText = `${text.length}/200 characters`;
+
+            submitButton.disabled = text.length > 200;
+        });
+    });
+        </script>
 
         </div>
     </div>
 </div>
-
 <style>
 
-    .comment-input {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
 
-    .comment-input img {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
+.profile-section {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-    .comment-input strong {
-        font-size: 14px;
-        color: #333;
-        margin-right: 10px;
-    }
+.profile-picture, .comment-profile-picture {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
 
-    textarea[name="comment"] {
-        width: calc(100%); /* Sesuaikan lebar sesuai kebutuhan */
-        height: 40px; 
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        padding: 8px 15px;
-        font-size: 14px;
-        resize: none;
-        outline: none;
-    }
+.profile-icon {
+    font-size: 30px;
+    color: #777;
+}
 
-    textarea[name="comment"]::placeholder {
-        color: #aaa;
-    }
+.profile-username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10px;
+}
 
-    button[type="submit"] {
-        background-color: #777;
-        color: white;
-        border: none;
-        border-radius: 15px;
-        padding: 8px 20px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+.chat-button {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: color 0.3s, border-color 0.3s;
+}
 
-    button[type="submit"]:hover {
-        background-color: #555;
-    }
+.chat-button:hover {
+    color: #4A4AC4;
+    border-color: #4A4AC4;
+}
 
-    .tags-favorite {
-        display: flex;
-        justify-content: space-between; 
-        align-items: center;
-        margin-top: 10px;
-    }
+.comment {
+    margin-top: 30px;
+    max-width: 100%;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
 
-    .like-favorite-buttons {
-        display: flex;
-        gap: 10px; 
-    }
+.comment-header {
+    display: flex;
+    align-items: center;
+}
 
-    .image-container {
-        position: relative;
-        max-height: 250px;
-        overflow: hidden;
-        border-radius: 15px;
-        margin-top: 50px;
-    }
+.comment-header img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
 
-    .back-button {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        text-decoration: none;
-        z-index: 10;
-        font-size: 18px;
-        color: black;
-        transition: color 0.3s;
-    }
+.comment-header strong {
+    font-size: 15px;
+    color: #333;
+    font-weight: bold;
+}
 
-    .back-button:hover {
-        color: #4A4AC4 !important; 
-        text-decoration: none;
-    }
+.comment p {
+    font-size: 13px;
+    color: #555;
+    margin: 0.375rem 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 
-    .image-container {
-        position: relative;
-        max-height: 500px; /* Increased max-height */
-        overflow: hidden;
-        border-radius: 15px;
-        margin-top: 50px;
-    }
+.comment small {
+    font-size: 0.75rem;
+    color: #aaa;
+}
 
-    .tags {
-        display: flex;
-        gap: 10px; 
-    }
+.comment-input {
+    position: relative; 
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.625rem;
+}
 
-    .tag {
-        background-color: #777; 
-        border-radius: 10px;
-        padding: 5px 8px;
-        font-size: 12px;
-        font-weight: bold;
-        color: #ddd;
-    }
+textarea[name="comment"] {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 0.625rem;
+    font-size: 0.9375rem;
+    resize: none;
+    outline: none;
+    padding-right: 70px; 
+    padding-bottom: 40px; 
+}
 
-    h1 {
-        font-size: 24px; 
-        font-weight: bold;
-    }
+textarea[name="comment"]::placeholder {
+    color: #bbb;
+}
 
-    .price {
-        font-size: 20px; 
-        color: #000;
-    }
+.word-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 0.75rem;
+    color: #bbb;
+    background-color: white;
+    padding: 0 5px;
+    pointer-events: none; 
+}
 
-    .location {
-        font-size: 14px; 
-        color: #777;
-    }
+button[type="submit"] {
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    margin-top: 0.625rem;
+}
 
-    .section-title {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 20px;
-    }
+button[type="submit"]:hover {
+    background-color: #555;
+    transform: translateY(-2px);
+}
 
-    .property-info p {
-        font-size: 12px; 
-        color: #555;
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: space-between;
-    }
+.tags-favorite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    
+}
+.like-favorite-buttons button {
+    background-color: white;
+    color: #dc3545;
+    border: 2px solid #dc3545;
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    font-size: 16px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease-in-out;
+}
 
-    .property-info hr {
-        border: 1px solid #ddd; 
-    }
+.like-favorite-buttons {
+    display: flex;
+    gap: 15px; 
+}
 
-    .info-item {
-        display: flex;
-        flex-direction: column;
-        font-size: 12px; 
-        color: #555;
-        margin-bottom: 8px;
-    }
+.like-favorite-buttons button:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-2px); 
+}
 
-    .profile-section {
-        margin-top: 20px;
-    }
+.like-favorite-buttons button:focus, 
+.like-favorite-buttons button:active {
+    outline: none;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.6); 
+}
 
-    .profile-picture {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-    }
+.tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
 
-    .profile-icon {
-        font-size: 30px;
-        color: grey;
-    }
+.tag {
+    background-color: #777;
+    border-radius: 10px;
+    padding: 10px 15px; 
+    font-size: 18px; 
+    font-weight: bold;
+    color: white;
+}
 
-    .profile-username {
-        font-size: 12px;
-        color: #333;
-    }
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-    .chat-button {
-        display: flex;
-        align-items: center;
-        font-size: 12px;
-        transition: color 0.3s, border-color 0.3s;
-    }
+.price {
+    font-size: 20px;
+    color: #000;
+}
 
-    .chat-button:hover {
-        color: #4A4AC4 !important; 
-        border-color: #4A4AC4 !important; 
-    }
+.location {
+    font-size: 14px;
+    color: #777;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.property-info p {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.property-info hr {
+    border: 1px solid #ddd;
+}
+
+.image-container {
+    position: relative;
+    max-height: 500px; 
+    overflow: hidden;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #6D757D;
+    border-color: #6D757D;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    margin-top: 30px;
+}
+
+.back-button i {
+    margin-right: 10px;
+    font-size: 18px;
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #4A4AC4;
+    border-color: #4A4AC4;
+    color: white;
+    text-decoration: none;
+}
+
 </style>
 @endsection
