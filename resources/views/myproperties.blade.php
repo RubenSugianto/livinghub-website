@@ -386,13 +386,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.clickable-image').forEach(function (image) {
         image.addEventListener('click', function (event) {
             event.stopPropagation(); // Prevent row click event
-            const imageSrc = this.getAttribute('src'); // Changed from 'data-image-src' to 'src'
+            const imageSrc = this.getAttribute('src');
             previewImage.src = imageSrc;
             imagePreviewModal.show();
         });
     });
 
-    document.querySelector('.btn-close').addEventListener('click', function () {
+    // Add this new code for handling the close button
+    document.querySelector('#imagePreviewModal .btn-close').addEventListener('click', function () {
         imagePreviewModal.hide();
     });
 
