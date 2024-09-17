@@ -1,14 +1,15 @@
 @extends('master')
 
 @section('title', 'My Property')
-
 @section('content')
-    @if (session('success'))
+@if (session('success'))
     <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ session('success') }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+        <strong class="alert-content">{{ session('success') }}</strong>
+        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">&times;</button>
     </div>
-    @endif
+@endif
+
     <div class="container mt-4 text-center">
         <!-- Confirmation Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -422,52 +423,63 @@ function resetFilters() {
     --transition-speed: 0.3s;
     --hover-color: #4A4AC4;
 }
-
-.alert {
-    font-size: 1.25rem;
-    padding: 17px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.alert-success {
+    padding: 15px;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    margin: 10px auto;
+    border-radius: 10px;
+    width: calc(100% - 40px);
     position: relative;
+    top: -50px;
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
 }
 
-.alert .close-btn {
+.alert-success .btn-close {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    outline: none;
+    top: 50%;
+    right: 15px;
+    background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    color: #000;
-    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
+    color: #155724;
+    transform: translateY(-50%); 
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.alert .close-btn:hover {
-    color: #555;
+.alert-success .btn-close:hover {
+    color: #0d3c1e;
 }
 
-.alert .close-btn:active {
-    transform: scale(1.2);
+.alert-success .btn-close:active {
+    transform: translateY(-50%) scale(1.1); 
 }
 
-.alert.fade {
+.alert-success .alert-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.alert-success .alert-content {
+    display: flex;
+    align-items: center;
+}
+
+.alert-success.fade {
     opacity: 1;
     transform: translateY(0);
 }
 
-.alert.fade.hide {
+.alert-success.fade.hide {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-15px);
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-}
 
 .search-bar {
     width: 100%;
