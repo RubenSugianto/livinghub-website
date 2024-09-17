@@ -133,50 +133,46 @@
             <div>
                 <h3 class="section-title">Komentar</h3>
                 @foreach ($property->comments as $comment)
-                <div class="comment">
-                    <div class="comment-header">
-                        <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="User Icon"/>
-                        <strong>{{ $comment->user_name }}</strong>
+                    <div class="comment">
+                        <div class="comment-header">
+                            <strong>{{ $comment->user_name }}</strong>
+                        </div>
+                        <p>{{ $comment->comment }}</p>
+                        <small>{{ $comment->created_at->format('d F Y') }}</small>
                     </div>
-                    <p>{{ $comment->comment }}</p>
-                    <small>{{ $comment->created_at->format('d F Y') }}</small>
-                </div>
                 @endforeach
 
                 <hr>
 
-                @auth 
-                <h4>Tambahkan Komentar</h4>
-                <form action="{{ route('comments.store') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="property_id" value="{{ $property->id }}">
+                @auth
+                    <h4>Tambahkan Komentar</h4>
+                    <form action="{{ route('comments.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="property_id" value="{{ $property->id }}">
+                        <div class="comment-input d-flex align-items-center">
+                            @if(Auth::user()->profilepicture)
+                                <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="Profile Picture" class="profile-picture" />
+                            @else
+                                <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
+                            @endif
+                            <strong class="ml-2">{{ Auth::user()->username }}</strong>
+                        </div>
 
-                    <div class="comment-input d-flex align-items-center">
-                        @if(Auth::user()->profilepicture)
-                            <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="Profile Picture" class="profile-picture" />
-                        @else
-                            <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
-                        @endif
-                        <strong class="ml-2">{{ Auth::user()->username }}</strong>
-                    </div>
-
-                <div class="comment-input">
-                    <textarea id="commentTextarea" name="comment" placeholder="Tulis komentar..."></textarea>
-                    <small id="wordCount" class="word-counter">0/200 characters</small>
-                </div>
-                <button type="submit" id="submitButton">Komen</button>
-
-
-                </form>
+                        <div class="comment-input">
+                            <textarea id="commentTextarea" name="comment" placeholder="Tulis komentar..."></textarea>
+                            <small id="wordCount" class="word-counter">0/200 characters</small>
+                        </div>
+                        <button type="submit" id="submitButton">Komen</button>
+                    </form>
                 @else
-                <p>Silahkan <a href="{{ route('login') }}">Login</a> untuk menambahkan komentar.</p>
+                    <p>Silahkan <a href="{{ route('login') }}">Login</a> untuk menambahkan komentar.</p>
                 @endauth
             </div>
-            
+
            <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const textarea = document.getElementById("commentTextarea");
-                const wordCount = document.getElementById("wordCount");  // Pastikan elemen yang tepat
+                const wordCount = document.getElementById("wordCount");  
                 const submitButton = document.getElementById("submitButton");
 
             textarea.addEventListener("input", function() {
