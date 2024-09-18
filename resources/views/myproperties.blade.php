@@ -3,10 +3,12 @@
 @section('title', 'My Property')
 @section('content')
 @if (session('success'))
-    <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <div id="successAlert" class="alert alert-success fade show" role="alert">
         <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
-        <strong class="alert-content">{{ session('success') }}</strong>
-        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">&times;</button>
+        <span class="alert-content">
+            <strong>{{ session('success') }}</strong>
+        </span>
+        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
     </div>
 @endif
 
@@ -423,63 +425,64 @@ function resetFilters() {
     --transition-speed: 0.3s;
     --hover-color: #4A4AC4;
 }
-.alert-success {
+.alert {
     padding: 15px;
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-    color: #155724;
     margin: 10px auto;
     border-radius: 10px;
     width: calc(100% - 40px);
     position: relative;
-    top: -50px;
-    margin-top: 60px;
+    top: -10px; 
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 
-.alert-success .btn-close {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    background: none;
+.alert-success {
+    background-color: #d4edda; 
+    border: 1px solid #c3e6cb; 
+    color: #155724; 
+}
+
+.alert .btn-close {
+    background: transparent;
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem; 
+    color: #155724; 
     cursor: pointer;
-    color: #155724;
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px; 
+    top: 50%;
     transform: translateY(-50%); 
-    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.alert-success .btn-close:hover {
-    color: #0d3c1e;
+.alert .btn-close:hover {
+    color: #0d3c1e; 
 }
 
-.alert-success .btn-close:active {
+.alert .btn-close:active {
     transform: translateY(-50%) scale(1.1); 
 }
 
-.alert-success .alert-icon {
+.alert .alert-icon {
     font-size: 2rem;
     margin-right: 15px;
     vertical-align: middle;
 }
 
-.alert-success .alert-content {
-    display: flex;
-    align-items: center;
-}
-
-.alert-success.fade {
+.alert.fade {
     opacity: 1;
     transform: translateY(0);
 }
 
-.alert-success.fade.hide {
+.alert.fade.hide {
     opacity: 0;
     transform: translateY(-15px);
 }
-
 
 .search-bar {
     width: 100%;

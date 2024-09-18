@@ -44,34 +44,53 @@ img {
     display: block;
 }
 
-
 .alert {
-    font-size: 2rem;
-    padding: 25px;
-    margin-bottom: 20px;
-    border-radius: var(--border-radius);
-    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 10px;
+    width: calc(100% - 40px);
     position: relative;
+    top: -10px; 
+    display: flex;
+    align-items: center;
+    margin-top: 80px;
 }
 
-.alert .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.alert-success {
+    background-color: #d4edda; 
+    border: 1px solid #c3e6cb; 
+    color: #155724; 
+}
+
+.alert .btn-close {
     background: transparent;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.5rem; 
+    color: #155724; 
     cursor: pointer;
-    color: #000;
-    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
-.alert .close-btn:hover {
-    color: #555;
+.alert .btn-close:hover {
+    color: #0d3c1e; 
 }
 
-.alert .close-btn:active {
-    transform: scale(1.2);
+.alert .btn-close:active {
+    transform: translateY(-50%) scale(1.1); 
+}
+
+.alert .alert-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    vertical-align: middle;
 }
 
 .alert.fade {
@@ -81,8 +100,9 @@ img {
 
 .alert.fade.hide {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-15px);
 }
+
 
 #carouselExampleIndicators {
     margin-top: 120px; 
@@ -566,10 +586,13 @@ img {
 @endsection
 @section('content')
 @if (session('success'))
-<div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>{{ session('success') }}</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div id="successAlert" class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+        <span class="alert-content">
+            <strong>{{ session('success') }}</strong>
+        </span>
+        <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
 @endif
 
 <!-- Header Image -->
