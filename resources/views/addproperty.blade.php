@@ -13,11 +13,14 @@
         </ul>
     </div>
 @endif
-<div class="alert" id="form-alert" style="display:none;">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Harap isi semua detail sebelum lanjut ke halaman selanjutnya.
-</div>
 
+<div class="alert alert-danger fade" id="form-alert" style="display:none;">
+    <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+    <span class="alert-content">
+        <strong>Harap isi semua detail sebelum lanjut ke halaman selanjutnya.</strong>
+    </span>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+</div>
 
 <div class="formbold-main-wrapper">
   <div class="formbold-form-wrapper">
@@ -459,29 +462,74 @@
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 .alert {
     padding: 15px;
-    background-color: #f44336;
-    color: white;
     margin: 10px auto;
     border-radius: 10px;
     width: calc(100% - 40px);
     position: relative;
-    top: -50px;
+    top: -10px; 
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem; 
 }
 
-.closebtn {
-    color: white;
-    float: right;
-    font-size: 20px;
+.alert-success {
+    background-color: #d4edda; 
+    color: #155724; 
+    border: 1px solid #c3e6cb; 
+}
+
+.alert-warning {
+    background-color: #f8d7da; 
+    color: #721c24; 
+    border: 1px solid #f5c6cb; 
+}
+
+.alert .btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem; 
+    color: #721c24; 
     cursor: pointer;
-    transition: 0.3s;
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
 }
 
-.closebtn:hover {
-    color: black;
+.alert .btn-close:hover {
+    color: #5a3b02; 
 }
+
+.alert .btn-close:active {
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+.alert .alert-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.alert.fade {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert.fade.hide {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+
 
 @media (max-width: 768px) {
     .formbold-input-flex {
@@ -499,8 +547,6 @@
         flex-direction: column;
     }
 }
-
-
 
 </style>
 

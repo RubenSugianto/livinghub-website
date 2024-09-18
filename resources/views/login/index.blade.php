@@ -7,7 +7,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Ganti dari center ke flex-start agar container berada di atas */
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
@@ -166,29 +166,97 @@ h2 {
     transform: translateY(-50%);
     cursor: pointer;
 }
+.alert {
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 10px;
+    width: calc(100% - 40px);
+    position: relative;
+    top: -10px;
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+}
 
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-warning {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert .btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #721c24; 
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.alert-success .btn-close {
+    color: #155724;
+}
+
+.alert .btn-close:hover {
+    color: #5a3b02;
+}
+
+.alert .btn-close:active {
+    transform: translateY(-50%) scale(1.1);
+}
+
+.alert .alert-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.alert.fade {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert.fade.hide {
+    opacity: 0;
+    transform: translateY(-15px);
+}
 
 </style>
 @endsection
-
 @section('content')
+@if(session()->has('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+    <strong>{{ session('success') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+</div>
+@endif
+
+@if(session()->has('loginError'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+    <strong>{{ session('loginError') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+</div>
+@endif
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-            @if(session()->has('loginError'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('loginError') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
             <main class="form-signin mb-10">
                 <div class="logo-container">
                     <img src="LogooB.png" alt="Logo">
