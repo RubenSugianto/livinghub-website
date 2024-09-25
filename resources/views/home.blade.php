@@ -337,27 +337,43 @@ img {
     font-weight: bold;
     z-index: 2;
 }
-
 .card-footer {
-    margin-top: 1.25rem;
-    border-top: 1px solid #ddd;
-    padding-top: 1.25rem;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    align-items: center; 
+    gap: 15px; 
+}
+
+.like-count-icon,
+.card-footer span {
+    display: inline-flex;
+    align-items: center; 
+    gap: 5px; 
+}
+
+.like-count-icon i,
+.card-footer i {
+    font-size: 1rem; 
+    vertical-align: middle;
+}
+
+.card-footer span {
+    line-height: 1; 
+}
+
+.card-footer i {
+    vertical-align: middle; 
 }
 
 .like-count-icon {
-    margin-right: 10px; 
+    margin-right: 15px; 
 }
 
 .like-button {
     position: absolute;
-    top: 50%;
-    right: 10px;
+    top: 55%;
+    right: 8px;
     transform: translateY(-50%);
-    z-index: 2; 
+    z-index: 4; 
 }
 
 .like-button .btn {
@@ -711,9 +727,10 @@ img {
     <span class="sr-only">Next</span>
   </a>
 </div>
-<!-- Latest Property Heading -->
+
+ <!-- Property Card-->
 <div class="container mt-4">
-    <h2 class="latest-property-heading mb-4">Latest Property</h2> <!-- Updated class -->
+    <h2 class="latest-property-heading mb-4">Latest Property</h2>
     <div class="row">
         @foreach($properties as $property)
         <div class="col-md-3 mb-3">
@@ -721,38 +738,29 @@ img {
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
                         @if($property->images->isNotEmpty())
-                            <img src="{{ asset($property->images->first()) }}" alt="{{ $property->name }}" width="100">
+                            <img src="{{ asset($property->images->first()) }}" alt="{{ $property->name }}" class="img-fluid">
                         @else
-                            <img src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/02/0/0/Screen-Shot-2022-02-08-at-1.01.01-PM-gigapixel-low_res-scale-2_00x.png?ve=1&tl=1" alt="No Image Available" width="100">
+                            <img src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/02/0/0/Screen-Shot-2022-02-08-at-1.01.01-PM-gigapixel-low_res-scale-2_00x.png?ve=1&tl=1" alt="No Image Available" class="img-fluid">
                         @endif
-                          
+                        
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>
                     </div>
+
+                    <!-- Like Button -->
                     <div class="like-button">
                         @auth
-                            @if(auth()->user()->likes && auth()->user()->likes->contains($property->id))
-                                <form action="{{ route('properties.unlike', $property) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger liked">
-                                        <i class="fa fa-heart" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            @else
-                                <form action="{{ route('properties.like', $property) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger">
-                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    </button>
-                                </form>
-                            @endif
+                            <button data-property-id="{{ $property->id }}" class="like-btn btn @if(auth()->user()->likes && auth()->user()->likes->contains($property->id)) btn-danger @else btn-outline-danger @endif" aria-label="Like Property">
+                                <i class="fa @if(auth()->user()->likes->contains($property->id)) fa-heart @else fa-heart-o @endif" aria-hidden="true"></i>
+                            </button>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-outline-danger">
+                            <a href="{{ route('login') }}" class="btn btn-outline-danger" aria-label="Login to Like Property">
                                 <i class="fa fa-heart-o" aria-hidden="true"></i>
                             </a>
                         @endauth
                     </div>
+
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{ $property->name }}</h5>
@@ -761,15 +769,18 @@ img {
                         <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
                         <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
                     </div>
+
                     <div class="card-footer">
                         <div class="card-meta d-flex justify-content-between">
                             <span class="position-relative like-count-icon">
-                                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                                {{ $property->like_count }}
+                                <i class="fa fa-heart-o" aria-hidden="true"></i> 
+                                <span class="like-count">{{ $property->likeCount() }}</span>
                             </span>
                             <span>
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 @if ($property->published_at)
+                                    {{ \Carbon\Carbon::parse($property->published_at)->format('d/m/Y') }}
+                                @else
                                     {{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}
                                 @endif
                             </span>
@@ -781,6 +792,7 @@ img {
         @endforeach
     </div>
 </div>
+
 
 <!-- Pagination buttons -->
 <div class="d-flex justify-content-center mt-4 page">
@@ -954,15 +966,21 @@ img {
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const propertyCards = document.querySelectorAll('.property-card');
-
-    propertyCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const propertyId = card.getAttribute('data-property-id');
-            window.location.href = `/properties/${propertyId}`;
-        });
+    window.addEventListener("pageshow", function(event) {
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        // Reload the page if it's from cache
+        location.reload();
+        }
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        const propertyCards = document.querySelectorAll('.property-card');
+
+        propertyCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const propertyId = card.getAttribute('data-property-id');
+                window.location.href = `/properties/${propertyId}`;
+            });
+        });
 
     function hideAlert() {
         const successAlert = document.getElementById('successAlert');
@@ -1020,12 +1038,87 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Generate keyword suggestions on page load
-    createKeywordSuggestions();
-});
+        createKeywordSuggestions();
+    });
 
-function resetFilters() {
-    document.getElementById('filterForm').reset();
-    document.querySelectorAll('.btn-group-toggle .btn').forEach(btn => btn.classList.remove('active'));
-}
-</script>
-@endsection
+    function resetFilters() {
+        document.getElementById('filterForm').reset();
+        document.querySelectorAll('.btn-group-toggle .btn').forEach(btn => btn.classList.remove('active'));
+    }
+    $(document).ready(function() {
+        // Event untuk klik tombol like
+        $('.like-btn').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Stop the click event from bubbling up
+
+            var propertyId = $(this).data('property-id');
+            var url = '';
+
+            if (!propertyId) {
+                console.error('Property ID not found!');
+                return;
+            }
+
+            // Tentukan URL berdasarkan status like/unlike
+            if ($(this).hasClass('btn-danger')) {
+                url = '{{ route("properties.unlike", "__property_id__") }}'.replace('__property_id__', propertyId);
+            } else {
+                url = '{{ route("properties.like", "__property_id__") }}'.replace('__property_id__', propertyId);
+            }
+
+            // Nonaktifkan tombol untuk mencegah multiple clicks
+            $(this).prop('disabled', true);
+
+            // Store reference to the button
+            var $button = $(this); 
+
+            // Kirim permintaan AJAX
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    property_id: propertyId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Ambil elemen like count yang hanya berisi angka
+                        let likeCountElement = $button.closest('.property-card').find('.like-count');
+                        let currentLikes = parseInt(likeCountElement.text());
+
+                        // Pastikan nilai currentLikes tidak NaN
+                        if (isNaN(currentLikes)) {
+                            currentLikes = 0;
+                        }
+
+                        if ($button.hasClass('btn-danger')) {
+                            $button.removeClass('btn-danger').addClass('btn-outline-danger');
+                            $button.find('i').removeClass('fa-heart').addClass('fa-heart-o');
+                            // Decrease like count
+                            likeCountElement.text(currentLikes - 1);
+                        } else {
+                            $button.removeClass('btn-outline-danger').addClass('btn-danger');
+                            $button.find('i').removeClass('fa-heart-o').addClass('fa-heart');
+                            // Increase like count
+                            likeCountElement.text(currentLikes + 1);
+                        }
+                    } else if (response.status === 401) {
+                        // If the user is not logged in, redirect to login page
+                        window.location.href = '{{ route("login") }}';
+                    }
+                },
+
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                },
+                complete: function() {
+                    // Aktifkan kembali tombol setelah permintaan selesai
+                    $button.prop('disabled', false);
+                }
+            });
+        });
+    });
+
+    </script>
+    @endsection

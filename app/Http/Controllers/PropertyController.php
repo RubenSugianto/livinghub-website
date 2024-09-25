@@ -290,93 +290,125 @@ class PropertyController extends Controller
     }
 
     // Menambahkan properti ke favorit
-    public function favorite(Property $property)
-    {
-        $favourite = Favourite::create([
-            'id' => (string) Str::uuid(),
-            'user_id' => auth()->id(),
-            'property_id' => $property->id,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    
-        return back()->with('success', 'Property added to favorites.');
-    }
+  // Add to Favorites
 
-    // Menghapus properti dari favorit
-    public function unfavorite(Property $property)
-    {
-        $favourite = Favourite::where('user_id', auth()->id())
+ 
+      // Add to Favorites
+      public function favorite(Property $property)
+      {
+          Favourite::firstOrCreate([
+              'user_id' => auth()->id(),
+              'property_id' => $property->id,
+          ], [
+              'id' => (string) Str::uuid(),
+              'created_at' => now(),
+              'updated_at' => now(),
+          ]);
+  
+          return response()->json([
+              'success' => true,
+              'message' => 'Property added to favorites.'
+          ]);
+      }
+  
+      // Remove from Favorites
+      public function unfavorite(Property $property)
+      {
+          $favourite = Favourite::where('user_id', auth()->id())
+              ->where('property_id', $property->id)
+              ->first();
+  
+          if ($favourite) {
+              $favourite->delete();
+              return response()->json([
+                  'success' => true,
+                  'message' => 'Property removed from favorites.'
+              ]);
+          }
+  
+          return response()->json([
+              'success' => false,
+              'message' => 'Property not found in favorites.'
+          ]);
+      }
+  
+      // View Favorite Properties
+      public function favorites()
+      {
+          $favorites = auth()->user()->favorites()->get();
+          return view('favourites', compact('favorites'));
+      }
+  // Like a Property
+public function like(Property $property)
+{
+    Like::firstOrCreate([
+        'user_id' => auth()->id(),
+        'property_id' => $property->id,
+    ], [
+        'id' => (string) Str::uuid(),
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Property liked successfully.'
+    ]);
+}
+
+// Unlike a Property
+public function unlike(Property $property)
+{
+    $like = Like::where('user_id', auth()->id())
         ->where('property_id', $property->id)
         ->first();
 
-        if ($favourite) {
-            $favourite->delete();
-            return back()->with('success', 'Property removed from favorites.');
-        }
-
-        return back()->with('error', 'Property not found in favorites.');
-    }
-
-    // Menampilkan properti favorit
-    public function favorites()
-    {
-        $favorites = auth()->user()->favorites()->get();
-        return view('favourites', compact('favorites'));
-    }
-
-    // Menambahkan properti ke daftar suka
-    public function like(Property $property)
-    {
-        $like = Like::create([
-            'id' => (string) Str::uuid(),
-            'user_id' => auth()->id(),
-            'property_id' => $property->id,
-            'created_at' => now(),
-            'updated_at' => now(),
+    if ($like) {
+        $like->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Property unliked successfully.'
         ]);
-
-        $property->increment('like_count');
-
-        return back()->with('success', 'Property added to likes.');
     }
 
-    // Menghapus properti dari daftar suka
-    public function unlike(Property $property)
-    {
-        $like = Like::where('user_id', auth()->id())
-                ->where('property_id', $property->id)
-                ->first();
-
-        if ($like) {
-            $like->delete();
-            $property->decrement('like_count');
-            return back()->with('success', 'Property removed from likes.');
-        }
-
-        return back()->with('error', 'Property not found in likes.');
-    }
-
-    // Menampilkan properti yang disukai
-    public function likes()
-    {
-        $likes = auth()->user()->likes()->get();
-        return view('likes', compact('likes'));
-    }
-
-
-    public function compare(Request $request)
-    {
-        $propertyIds = $request->input('propertyIds');
-        $properties = Property::whereIn('id', $propertyIds)->get();
-
-        return response()->json($properties);
-    }
-
-    public function showComment($id)
-    {
-        $property = Property::with('comments')->findOrFail($id);
-        return view('properties.showComment', compact('property'));
-    }
-
+    return response()->json([
+        'success' => false,
+        'message' => 'Property not found in likes.'
+    ]);
 }
+
+// View Liked Properties
+public function likes()
+{
+    $likes = auth()->user()->likes()->get();
+    return view('likes', compact('likes'));
+}
+
+// Get Like Count for a Property
+public function likeCount(Property $property)
+{
+    $count = $property->likes()->count(); // Hitung jumlah like untuk properti ini
+
+    return response()->json([
+        'success' => true,
+        'count' => $count,
+    ]);
+}
+
+      // Compare properties
+      public function compare(Request $request)
+      {
+          $propertyIds = $request->input('propertyIds');
+          $properties = Property::whereIn('id', $propertyIds)->get();
+  
+          return response()->json($properties);
+      }
+  
+      // Show comments of a property
+      public function showComment($id)
+      {
+          $property = Property::with('comments')->findOrFail($id);
+          return view('properties.showComment', compact('property'));
+      }
+  }
+  
