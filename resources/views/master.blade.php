@@ -539,6 +539,7 @@
                 <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> My Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorites <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/chatify"><i class="bi bi-chat-dots" aria-hidden="true"></i> Chat <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 @auth
                 <form action="/logout" method="post" style="margin: 0;">
                     @csrf

@@ -1,0 +1,4 @@
+# Laravel specific
+/vendor
+/public/storage
+

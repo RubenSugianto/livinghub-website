@@ -125,7 +125,7 @@
                     @endif
                     <span class="ml-2 profile-username">{{ $property->user->username }}</span>
                 </div>
-                <a href="#" class="btn btn-outline-secondary chat-button">
+                <a href="{{ url('chatify/' . $property->user->id) }}" class="btn btn-outline-secondary chat-button">
                     <i class="fa fa-comments-o" aria-hidden="true"></i> Chat
                 </a>
             </div>

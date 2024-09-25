@@ -25,7 +25,7 @@ class UserFactory extends Factory
     {
         return [
             'id' => (string) Str::uuid(),
-            'fullname' => $this->faker->unique()->name(),
+            'name' => $this->faker->unique()->name(),
             'username' => $this->faker->unique()->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'gender' => $this->faker->randomElement(['male', 'female', 'other']),
