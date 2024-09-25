@@ -54,22 +54,25 @@ Route::get('/search', [PropertyController::class, 'search'])->name('search');
 
 // Dashboard
 Route::get('/myproperties', [DashboardController::class, 'showMyProperty'])->middleware('auth');
-
-//Favourite and likes
+// Favourite and Like Routes
 Route::middleware(['auth'])->group(function () {
-    Route::post('/properties/{property}/favorite', [PropertyController::class, 'favorite'])->name('properties.favorite');
-    Route::post('/properties/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
-    Route::post('/properties/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
-    Route::post('/properties/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
-    Route::get('/favorites', [FavoritesController::class, 'index'])->name('properties.favorites');
-    Route::get('/likes', [PropertyController::class, 'likes'])->name('properties.likes');
+    Route::prefix('properties')->group(function () {
+        Route::post('/{property}/favorite', [PropertyController::class, 'favorite'])->name('properties.favorite');
+        Route::post('/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
+        Route::post('/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
+        Route::post('/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
+    });
 });
 
-//Favorites Page
+// Favorites Page Routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites.index');
-    Route::delete('/favorites/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
+    Route::prefix('favorites')->group(function () {
+        Route::get('/', [FavoritesController::class, 'index'])->name('favorites.index');
+        Route::delete('/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
+    });
 });
+
+
 
 Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
 

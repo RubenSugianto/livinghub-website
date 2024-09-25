@@ -1,5 +1,4 @@
 <?php
-// app/Models/Property.php
 
 namespace App\Models;
 
@@ -47,27 +46,26 @@ class Property extends Model
     {
         return $this->hasOne(Document::class); // Adjusted for one-to-one relationship
     }
+
     public function favoritedBy()
     {
         return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
     }
 
-    public function likedBy()
+    // Relasi likes
+    public function likes()
     {
         return $this->belongsToMany(User::class, 'likes', 'property_id', 'user_id')->withTimestamps();
     }
-    public function favoritedByUsers()
+
+    // Menghitung jumlah like terkait dengan properti ini
+    public function likeCount()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
+        return $this->likes()->count(); 
     }
 
-    // protected $keyType = 'uuid';
-    // public $incrementing = false;
-
-    // Relasi one-to-many dengan Comment
     public function comments()
     {
         return $this->hasMany(Comment::class, 'property_id');
     }
-
 }
