@@ -200,6 +200,7 @@
             font-size: 14px;
             text-align: left;
             width: 100%;
+            border-radius: 8px; 
         }
 
         .dropdown-content a:hover {
@@ -213,12 +214,13 @@
             transition: color 0.3s ease;
         }
 
-        .dropdown-content a:hover i {
-            color: #4A4AC4;
-        }
-
         .dropdown-content a i.right-icon {
             margin-left: auto;
+            font-size: 14px;
+        }
+
+        .dropdown-content a:hover i {
+            color: #4A4AC4;
         }
 
         .logout-btn {
@@ -235,6 +237,7 @@
             text-align: left;
             color: #333;
             transition: background-color 0.3s ease, color 0.3s ease;
+            border-radius: 8px; 
         }
 
         .logout-btn i {
@@ -245,7 +248,6 @@
 
         .logout-btn:hover {
             background-color: #EFF3FF;
-            border-radius: 8px;
             color: #4A4AC4;
         }
 
@@ -538,8 +540,8 @@
                 <a href="/lihatprofile"><i class="fa fa-cog" aria-hidden="true"></i> My Profile <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> My Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorites <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="/chatify"><i class="bi bi-chat-dots" aria-hidden="true"></i> Chat <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/likes"><i class="fa fa-heart" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/chatify"><i class="fa fa-commenting" aria-hidden="true"></i> Chat <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 @auth
                 <form action="/logout" method="post" style="margin: 0;">
                     @csrf
