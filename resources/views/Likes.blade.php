@@ -4,9 +4,9 @@
 
 @section('content')
 
-    <div class="container mt-4">
-        <h1 class="mb-4">My Favorites</h1>
-        <div class="search-bar mb-5">
+<div class="container mt-4">
+    <h1 class="mb-4">My Likes</h1> <!-- Changed title from "My Favorites" to "My Likes" -->
+    <div class="search-bar mb-5">
         <form action="{{ route('myproperties.search') }}" method="GET" class="input-group justify-content-center">
             <input type="text" name="search" placeholder="Cari properti disini..">
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -14,110 +14,79 @@
         </form>
     </div>
 
-    @if($favorites->isEmpty())
-        <p>Anda belum memiliki properti favorit.</p>
-    @endif
-
-    <div id="comparisonContainer">
-        <button id="compareButton" class="btn btn-primary mb-3 d-flex align-items-center" disabled>
-            Bandingkan Properti
-            <i class="fa fa-star ml-2" aria-hidden="true"></i>
-        </button>
-    </div>
-
-    @foreach($favorites as $property)
-        <div class="col-md-10 mb-3 position-relative"> 
-            <div class="property-select d-flex align-items-center">
-                <div class="card property-card d-flex align-items-center">
-                    <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark d-flex align-items-center">
-                        <div class="card-image">
-                            @if($property->images->isNotEmpty())
-                                <img src="{{ asset($property->images->first()->images) }}" class="card-img-top" alt="{{ $property->name }}">
-                            @else
-                                <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Default Image">
-                            @endif
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">{{ $property->type }}</p>
-                            <h5 class="card-title">{{ $property->name }}</h5>
-                            <p class="property-location">
-                                <i class="fa fa-map-marker"></i> {{ $property->location }}
-                            </p>
-                            <p class="card-text">{{ $property->certificate }}</p>
-                            <p class="price mb-0">Rp {{ number_format($property->price, 0, ',', '.') }}</p>
-                        </div>
-                    </a>
-                
-                        <!-- Star Checkbox -->
-                        <input type="checkbox" id="star-checkbox-{{ $property->id }}" class="compare-checkbox star-checkbox" data-property-id="{{ $property->id }}">
-                        <label for="star-checkbox-{{ $property->id }}"></label>
+    @if($likes->isEmpty())
+        <p>Anda belum memiliki properti like.</p>
+    @else
+        @foreach($likes as $property) <!-- Changed from $favorites to $likes -->
+            <div class="col-md-10 mb-3 position-relative"> 
+                <div class="property-select d-flex align-items-center">
+                    <div class="card property-card d-flex align-items-center">
+                        <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark d-flex align-items-center">
+                            <div class="card-image">
+                                @if($property->images->isNotEmpty())
+                                    <img src="{{ asset($property->images->first()->images) }}" class="card-img-top" alt="{{ $property->name }}">
+                                @else
+                                    <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Default Image">
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ $property->type }}</p>
+                                <h5 class="card-title">{{ $property->name }}</h5>
+                                <p class="property-location">
+                                    <i class="fa fa-map-marker"></i> {{ $property->location }}
+                                </p>
+                                <p class="card-text">{{ $property->certificate }}</p>
+                                <p class="price mb-0">Rp {{ number_format($property->price, 0, ',', '.') }}</p>
+                            </div>
+                        </a>
                     </form>
                 </div>
-                <!-- Delete Button -->
-                    <button type="button" class="btn btn-link delete-button" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $property->id }}').submit();">
-                        <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </button>
-
-                            <form id="delete-form-{{ $property->id }}" action="{{ route('favorites.destroy', $property->id) }}" method="POST" class="delete-form d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
-
+           
+                  <!-- Delete Button -->
+                <button type="button" class="btn btn-link delete-button" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $property->id }}').submit();">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+                <form id="delete-form-{{ $property->id }}" action="{{ route('likes.destroy', $property->id) }}" method="POST" class="delete-form d-none">
+                    @csrf
+                    @method('DELETE')
+                </form>
                         </div>
                     </div>
                 @endforeach
-
-
+                    
             <!-- Pagination buttons -->
             <div class="d-flex justify-content-center mt-4 page">
                 <!-- Previous Page Button -->
-                <button class="page__btn {{ $favorites->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $favorites->previousPageUrl() }}'">&lt;</button>
+                <button class="page__btn {{ $likes->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $likes->previousPageUrl() }}'">&lt;</button>
 
                 <!-- Pagination Elements -->
-                @if ($favorites->lastPage() > 1)
-                    @if ($favorites->currentPage() > 3)
-                        <button class="page__numbers" onclick="window.location='{{ $favorites->url(1) }}'">1</button>
-                        @if($favorites->currentPage() > 4)
+                @if ($likes->lastPage() > 1)
+                    @if ($likes->currentPage() > 3)
+                        <button class="page__numbers" onclick="window.location='{{ $likes->url(1) }}'">1</button>
+                        @if($likes->currentPage() > 4)
                             <div class="page__dots">...</div>
                         @endif
                     @endif
 
-                    @for ($i = max($favorites->currentPage() - 2, 1); $i <= min($favorites->currentPage() + 2, $favorites->lastPage()); $i++)
-                        <button class="page__numbers {{ $favorites->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $favorites->url($i) }}'">{{ $i }}</button>
+                    @for ($i = max($likes->currentPage() - 2, 1); $i <= min($likes->currentPage() + 2, $likes->lastPage()); $i++)
+                        <button class="page__numbers {{ $likes->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $likes->url($i) }}'">{{ $i }}</button>
                     @endfor
 
-                    @if ($favorites->currentPage() < $favorites->lastPage() - 2)
-                        @if($favorites->currentPage() < $favorites->lastPage() - 3)
+                    @if ($likes->currentPage() < $likes->lastPage() - 2)
+                        @if($likes->currentPage() < $likes->lastPage() - 3)
                             <div class="page__dots">...</div>
                         @endif
-                        <button class="page__numbers" onclick="window.location='{{ $favorites->url($favorites->lastPage()) }}'">{{ $favorites->lastPage() }}</button>
+                        <button class="page__numbers" onclick="window.location='{{ $likes->url($likes->lastPage()) }}'">{{ $likes->lastPage() }}</button>
                     @endif
                 @endif
 
                 <!-- Next Page Button -->
-                <button class="page__btn {{ $favorites->currentPage() == $favorites->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $favorites->nextPageUrl() }}'">&gt;</button>
-            </div>
-         </div>
-
-        <!-- Comparison Table -->
-        <div id="comparisonTableContainer" class="mt-4" style="display: none;">
-            <div class="table-container"> <!-- Added container for background -->
-            <h2>Comparison Table</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Property 1</th>
-                            <th>Property 2</th>
-                        </tr>
-                    </thead>
-                    <tbody id="comparisonTableBody">
-                        <!-- Comparison data will be inserted here -->
-                    </tbody>
-                </table>
-            </div>
+                    <button class="page__btn {{ $likes->currentPage() == $likes->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $likes->nextPageUrl() }}'">&gt;</button>
+                </div>
+            @endif
         </div>
-            
+
+
         <!-- Filter Modal Dialog Box -->
         <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -240,102 +209,6 @@
             </div>
         </div>
 
-        @endsection
-
-        @section('scripts')
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.compare-checkbox');
-            const compareButton = document.getElementById('compareButton');
-            const comparisonTableContainer = document.getElementById('comparisonTableContainer');
-            const comparisonTableBody = document.getElementById('comparisonTableBody');
-            let selectedProperties = [];
-
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const propertyId = this.getAttribute('data-property-id');
-                    if (this.checked) {
-                        if (selectedProperties.length < 2) {
-                            selectedProperties.push(propertyId);
-                        } else {
-                            this.checked = false;
-                            alert('You can only compare 2 properties at a time.');
-                        }
-                    } else {
-                        selectedProperties = selectedProperties.filter(id => id !== propertyId);
-                    }
-                    compareButton.disabled = selectedProperties.length !== 2;
-                });
-            });
-
-            compareButton.addEventListener('click', function() {
-                fetch('/compare-properties', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ propertyIds: selectedProperties })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    comparisonTableBody.innerHTML = `
-                        <tr>
-                    <td>Name</td>
-                    <td>${data[0].name}</td>
-                    <td>${data[1].name}</td>
-                </tr>
-                <tr>
-                    <td>Price</td>
-                    <td>Rp ${data[0].price.toLocaleString()}</td>
-                    <td>Rp ${data[1].price.toLocaleString()}</td>
-                </tr>
-                <tr>
-                    <td>Location</td>
-                    <td>${data[0].location}</td>
-                    <td>${data[1].location}</td>
-                </tr>
-                <tr>
-                    <td>Surface Area</td>
-                    <td>${data[0].surfaceArea} m²</td>
-                    <td>${data[1].surfaceArea} m²</td>
-                </tr>
-                <tr>
-                    <td>Building Area</td>
-                    <td>${data[0].buildingArea} m²</td>
-                    <td>${data[1].buildingArea} m²</td>
-                </tr>
-                <tr>
-                    <td>Bedrooms</td>
-                    <td>${data[0].bedroom}</td>
-                    <td>${data[1].bedroom}</td>
-                </tr>
-                <tr>
-                    <td>Bathrooms</td>
-                    <td>${data[0].bathroom}</td>
-                    <td>${data[1].bathroom}</td>
-                </tr>
-                <tr>
-                    <td>Electricity</td>
-                    <td>${data[0].electricity} Watts</td>
-                    <td>${data[1].electricity} Watts</td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>${data[0].status}</td>
-                    <td>${data[1].status}</td>
-                </tr>
-                <tr>
-                    <td>Type</td>
-                    <td>${data[0].type}</td>
-                    <td>${data[1].type}</td>
-                </tr>
-                    `;
-                    comparisonTableContainer.style.display = 'block';
-                });
-            });
-        });
-        </script>
         @endsection
 
         @section('styles')
@@ -463,70 +336,6 @@
             margin-bottom: 10px;
         }
 
-        #compareButton {
-            background-color: #5E5DF0;
-            color: #fff;
-            border-radius: 25px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            font-size: 0.9rem;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #compareButton i.fa-star {
-            margin-left: 8px;
-            font-size: 1.2rem;
-            color: #FFD700;
-        }
-
-        #compareButton:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-        }
-
-        #compareButton:hover:not(:disabled) {
-            background-color: #4A4AC4;
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .table {
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            border-collapse: collapse;
-            font-size: 16px;
-        }
-        .property-select {
-            position: relative;
-        }
-
-        .star-checkbox {
-            display: none;
-        }
-
-        .star-checkbox + label {
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #ccc;
-            margin-left: 10px;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 10;
-        }
-
-        .star-checkbox + label:before {
-            font-family: FontAwesome;
-            content: "\f006";
-        }
-
-        .star-checkbox:checked + label:before {
-            content: "\f005";
-            color: #FFD700;
-        }
-
         .delete-button {
             background: transparent;
             border: none;
@@ -547,42 +356,9 @@
             outline: none;
             border: none;
             box-shadow: none;
+        
         }
 
-        .table-container {
-            background-color: white; 
-            padding: 20px; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-        }
-
-        .table thead th {
-            background-color: #5E5DF0;
-            color: white;
-            text-align: center;
-            padding: 15px 20px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .table th, .table td {
-            border: none;
-            padding: 15px 20px;
-            text-align: center;
-        }
-
-        .table tbody tr:nth-of-type(odd) {
-            background-color: #f2f2f9;
-        }
-
-        .table tbody tr:nth-of-type(even) {     
-            background-color: #ffffff;
-        }
-
-        .table tbody tr:hover {
-            background-color: #4A4AC4;
-            transition: background-color 0.3s ease;
-        }
 
         @media (max-width: 768px) {
             .property-card {
@@ -594,11 +370,7 @@
                 gap: 30px;
             }
 
-            #compareButton {
-                width: 100%;
-            }
         }
-
 
         .page {
         display: flex;
@@ -794,7 +566,6 @@
         .modal-dialog.modal-lg {
         max-width: 50%;
         }
-        
 
         </style>
         @endsection

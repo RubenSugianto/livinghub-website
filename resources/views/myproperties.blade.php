@@ -286,6 +286,128 @@
                     </tbody>
                 </table>
 
+                    <!-- Filter Modal Dialog Box -->
+                    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('search') }}" method="GET" id="filterForm">
+                                        <div class="form-group">
+                                            <label for="status">Status</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bedrooms">Kamar Tidur</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bathrooms">Kamar Mandi</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="land_size">Luas Tanah</label>
+                                            <div class="input-range">
+                                                <input type="number" name="land_size_min" placeholder="0" class="form-control">
+                                                <span>m² -</span>
+                                                <input type="number" name="land_size_max" placeholder="0" class="form-control">
+                                                <span>m²</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="building_size">Luas Bangunan</label>
+                                            <div class="input-range">
+                                                <input type="number" name="building_size_min" placeholder="0" class="form-control">
+                                                <span>m² -</span>
+                                                <input type="number" name="building_size_max" placeholder="0" class="form-control">
+                                                <span>m²</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="certificate">Sertifikat</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="property_type">Tipe Properti</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
+                                                </label>
+                                                <label class="btn btn-outline-primary">
+                                                    <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
+                                    <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <!-- Pagination buttons -->
             <div class="d-flex justify-content-center mt-4 page">
                 <!-- Previous Page Button -->
@@ -414,6 +536,7 @@ function resetFilters() {
 
 @section('styles')
 <style>
+
 :root {
     --primary: #23adad;
     --greyLight: #23adade1;
@@ -425,6 +548,15 @@ function resetFilters() {
     --transition-speed: 0.3s;
     --hover-color: #4A4AC4;
 }
+
+H1{
+font-size: 2.2rem; 
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .alert {
     padding: 15px;
     margin: 10px auto;

@@ -13,6 +13,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\MyPropertyController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikesController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,7 @@ Route::get('/search', [PropertyController::class, 'search'])->name('search');
 
 // Dashboard
 Route::get('/myproperties', [DashboardController::class, 'showMyProperty'])->middleware('auth');
+
 // Favourite and Like Routes
 Route::middleware(['auth'])->group(function () {
     Route::prefix('properties')->group(function () {
@@ -67,14 +69,20 @@ Route::middleware(['auth'])->group(function () {
 // Favorites Page Routes
 Route::middleware(['auth'])->group(function () {
     Route::prefix('favorites')->group(function () {
-        Route::get('/', [FavoritesController::class, 'index'])->name('favorites.index');
+        Route::get('/', [FavoritesController::class, 'index'])->name('favorites');
         Route::delete('/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
     });
 });
 
-
-
 Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
+
+// Likes Page Routes
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('likes')->group(function () { // Changed 'favorites' to 'likes' for consistency
+        Route::get('/', [LikesController::class, 'index'])->name('likes'); // Updated the route name for clarity
+        Route::delete('/{id}', [LikesController::class, 'destroy'])->name('likes.destroy');
+    });
+});
 
 //My property page
 
