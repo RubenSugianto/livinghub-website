@@ -104,7 +104,7 @@
                     @else
                         <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
                     @endif
-                    <span class="ml-2 profile-username">{{ $property->user->username }}</span>
+                    <span class="ml-2 profile-username">{{ $property->user->name }}</span>
                 </div>
                 <a href="{{ url('chatify/' . $property->user->id) }}" class="btn btn-outline-secondary chat-button">
                     <i class="fa fa-comments-o" aria-hidden="true"></i> Chat
