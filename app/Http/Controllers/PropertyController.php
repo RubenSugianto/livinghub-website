@@ -56,6 +56,15 @@ class PropertyController extends Controller
             'images.*' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Check if the user is a buyer and update to seller if true
+        if ($user->role === 'buyer') {
+            $user->role = 'seller';
+            $user->save();
+        }
+
         // Membuat properti baru
         $property = new Property();
         $property->id = (string) Str::uuid(); // Generate UUID untuk id field
