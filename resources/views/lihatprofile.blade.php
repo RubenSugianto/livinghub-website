@@ -222,10 +222,10 @@ input[type="file"] {
             <h1>Personal Info</h1>
         </div>
         <div class="profile-pic">
-            <img id="profilePicturePreview" src="{{ $profile->profilepicture ? asset('storage/' . $profile->profilepicture) : asset('defaultprofilepicture.png') }}" alt="Profile Picture">
+        <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
             <button type="button" class="delete-btn" id="deletePictureBtn">Remove Image</button>
         </div>
-        <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        <form id="profileForm" action="{{ route('profile.update') }}" method="PUT" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -237,9 +237,9 @@ input[type="file"] {
                 <input type="hidden" name="remove_picture" id="removePicture" value="0">
             </div>
             <div class="form-group">
-                <label for="fullname">Full Name</label>
-                <input type="text" id="fullname" name="fullname" class="@error('fullname') is-invalid @enderror" placeholder="Full Name" required value="{{ old('fullname', $profile->fullname) }}">
-                @error('fullname')
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
+                @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
