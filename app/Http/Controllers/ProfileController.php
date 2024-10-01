@@ -18,44 +18,44 @@ class ProfileController extends Controller
         $user = Auth::user();
     
         $request->validate([
-            'fullname' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:20',
             'gender' => 'required|string|max:10',
             'age' => 'required|integer|min:0',
-            'profilepicture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Change to 'avatar'
         ]);
     
-        $user->fullname = $request->input('fullname');
+        $user->name = $request->input('name');
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
         $user->gender = $request->input('gender');
         $user->age = $request->input('age');
-    
-        // Handle profile picture removal
+
+        // Handle avatar removal
         if ($request->input('remove_picture') == '1') {
-            if ($user->profilepicture && Storage::exists('public/' . $user->profilepicture)) {
-                Storage::delete('public/' . $user->profilepicture);
+            if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
+                Storage::delete('public/users_avatar/' . $user->avatar);
             }
-            $user->profilepicture = null;
+            $user->avatar = null;
         } else if ($request->hasFile('profilepicture')) {
-            // Delete old image if exists
-            if ($user->profilepicture && Storage::exists('public/' . $user->profilepicture)) {
-                Storage::delete('public/' . $user->profilepicture);
+            // Delete old avatar if exists
+            if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
+                Storage::delete('public/users-avatar/' . $user->avatar);
             }
     
-            // Store the new image
-            $imagePath = $request->file('profilepicture')->store('profile_pictures', 'public');
-            $user->profilepicture = $imagePath;
+            // Store the new avatar
+            $avatarPath = $request->file('profilepicture')->store('users-avatar', 'public');
+            $user->avatar = basename($avatarPath); // Store only the file name
         }
     
         $user->save();
     
         return response()->json([
             'success' => 'Profile updated successfully.',
-            'profile_picture' => $user->profilepicture ? asset('storage/' . $user->profilepicture) : asset('defaultprofilepicture.png')
+            'profilepicture' => $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('defaultprofilepicture.png')
         ]);
     }
     
