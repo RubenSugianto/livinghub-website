@@ -20,8 +20,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('phone')->unique();
             $table->string('password');
-            $table->string('role')->default('user');
-            $table->string('profilepicture')->nullable();
+            $table->string('role')->default('buyer');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
