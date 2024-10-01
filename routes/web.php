@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
 // Comment
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
-
+// Profile Seller
+Route::get('/profileseller/{id}', [ProfileController::class, 'showSellerProfile'])->name('profileseller');
 
 
