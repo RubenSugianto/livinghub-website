@@ -32,7 +32,6 @@ class UserFactory extends Factory
             'age' => $this->faker->numberBetween(18, 90),
             'phone' => $this->faker->unique()->regexify('[0-9]{12}'),
             'password' => Hash::make('password'),
-            'role' => 'user',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'created_at' => now(),

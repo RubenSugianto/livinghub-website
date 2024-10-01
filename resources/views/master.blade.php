@@ -505,7 +505,7 @@
     </style>
         @yield('styles')
  </head>
-        <body>
+    <body>
         <header>
     <div class="navbar-container">
         <a href="{{ route('home') }}" class="logo">
@@ -526,11 +526,14 @@
             <div class="dropdown-content">
                 <div class="auth-text">
                     @auth
-                        @if(auth()->user()->profilepicture)
-                        <img id="dropdownProfilePicture" src="{{ asset('storage/' . auth()->user()->profilepicture) }}" alt="Profile Picture">
-                        @else
+                    @php
+                        $userWithAvatar = Chatify::getUserWithAvatar(Auth::user());
+                    @endphp
+                    @if($userWithAvatar->avatar)
+                        <img id="dropdownProfilePicture" src="{{ $userWithAvatar->avatar }}" alt="Profile Picture">
+                    @else
                         <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
-                        @endif
+                    @endif
                         <div class="username">{{ auth()->user()->username }}</div>
                     @else
                         <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
@@ -554,31 +557,6 @@
         </div>
     </div>
 </header>
-
-<!-- <div class="search-popup">
-    <div class="search-popup-content">
-        <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
-        <h1>What are you looking for?</h1>
-        <div class="search-input-container">
-            <i class="fa fa-search search-icon-input"></i>   
-            <input type="text" placeholder="Search..." class="search-input">
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="search-popup">
-    <div class="search-popup-content">
-        <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
-        <h1>What are you looking for?</h1>
-        <div class="search-input-container">
-            <form action="{{ route('search') }}" method="GET" class="input-group">
-                <i class="fa fa-search search-icon-input"></i>   
-                <input type="text" name="search" placeholder="Search..." class="search-input" />
-                <button type="submit" class="search-submit-button" style="display: none;"></button>
-            </form>
-        </div>
-    </div>
-</div> -->
 
 <div class="search-popup">
     <div class="search-popup-content">
