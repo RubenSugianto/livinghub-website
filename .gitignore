@@ -1,4 +1,4 @@
 # Laravel specific
 /vendor
 /public/storage
-
+/public/uploads/properties/
