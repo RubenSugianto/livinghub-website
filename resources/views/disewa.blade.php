@@ -481,7 +481,6 @@ body {
     font-weight: 600 !important;
     border: 1px solid var(--primary) !important;
   }
-
   .search-bar {
     width: 100%;
     display: flex;
@@ -491,62 +490,70 @@ body {
   }
 
   .input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    overflow: hidden;
-    background-color: #f5f5f5;
-    padding: 5px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      border: 2px solid #ccc;
+      border-radius: 25px;
+      overflow: hidden;
+      background-color: var(--background-color);
+      padding: 5px;
   }
 
   .input-group input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 1.5rem;
-    background-color: #f5f5f5;
-    color: #333;
+      flex: 1;
+      padding: 10px;
+      border: none !important; 
+      outline: none !important; 
+      font-size: 1.5rem;
+      background-color: #f5f5f5;
+      color: #333;
+  }
+
+  .input-group input[type="text"]:focus {
+      outline: none !important; 
+      box-shadow: none; 
   }
 
   .input-group button {
-    padding: 10px;
-    background: none;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: color 0.3s ease;
+      padding: 10px;
+      background-color: transparent !important; 
+      border: none !important; 
+      box-shadow: none !important; 
+      cursor: pointer;
+      color: black; 
+      transition: color 0.3s ease, background-color 0.3s ease; 
   }
 
   .input-group button i {
-    font-size: 1.8rem;
+      font-size: 1.8rem;
   }
 
   .input-group button:hover {
-    color: #4A4AC4;
+      color: #4A4AC4; 
+      background-color: transparent !important; 
   }
 
   .btn-group-toggle .btn {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 6px;
-    color: black;
-    background-color: white;
+    color: black; 
     font-size: 12px;
-  }
-
-  .btn-group-toggle .btn.active {
-    background-color: #4A4AC4;
-    color: white;
+    background-color: transparent; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
   }
 
   .btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
+      color: #4A4AC4 !important; 
+  }
+
+  .btn-group-toggle .btn:active,
+  .btn-group-toggle .btn:focus {
+      color: #4A4AC4 !important;
+      
   }
 
   .modal-body {
@@ -596,13 +603,11 @@ body {
   }
 
   .modal-body .btn-group-toggle .btn.active {
-    background-color: #5E5DF0;
-    color: white;
+    background-color: #4A4AC4 !important;
   }
 
   .modal-body .btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
+    background-color: #4A4AC4 !important;
   }
 
   .modal-dialog.modal-lg {
@@ -615,13 +620,14 @@ body {
     border-radius: 50%;
     object-fit: cover;
   }
+  
   .keyword-suggestions {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;  
-    margin-top: 20px;
-}
+    margin-top: 20px; 
+  }
 
   .keyword-btn { 
       background-color: #f0f0f0;
@@ -636,10 +642,17 @@ body {
   }
 
   .keyword-btn:hover {
-      background-color: #4A4AC4;
+      background-color: #4A4AC4 !important; 
       transform: scale(1.05);  
       color: #ffffff;
-  } 
+  }
+
+  .keyword-btn:active,
+  .keyword-btn:focus {
+      background-color: #4A4AC4 !important; 
+      color: #ffffff;
+      box-shadow: none !important; 
+  }
 
 
 </style>

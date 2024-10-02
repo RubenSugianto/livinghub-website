@@ -129,6 +129,7 @@ img {
     display: flex;
     align-items: center;
     width: 100%;
+    max-width: 800px;
     margin: 0 auto;
     border: 2px solid #ccc;
     border-radius: 25px;
@@ -142,7 +143,7 @@ img {
     padding: 10px;
     border: none;
     outline: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background-color: var(--background-color);
 }
 
@@ -154,6 +155,7 @@ img {
     border: none;
     cursor: pointer;
     transition: color var(--transition-speed) ease;
+    font-size: 1.2rem;
 }
 
 .search-bar button:hover,
@@ -532,11 +534,6 @@ img {
         max-width: 70%;
     }
 }
-
-.icon i {
-    color: #333;
-}
-
 .card {
     margin-top: 50px;
     border: none;
@@ -547,23 +544,41 @@ img {
     transform: translateY(-10px);
 }
 
-.bg-dark .icon i {
-    color: #fff;
+.card img {
+    max-width: 200px; 
+    height: auto;
+    display: block;
+    margin: 0 auto 40px; /
 }
 
-.bg-dark .details {
-    background: none; /
-    padding: 0; 
+.btn {
+    border: 2px solid #333; 
+    background-color: transparent; 
+    color: #333; 
+    padding: 10px 20px; 
+    margin-top: 20px; 
+    font-weight: bold; 
+    transition: all 0.3s ease; 
+    outline: none; 
+}
+
+.btn:hover {
+    background-color: #333; 
     color: #fff; 
+}
+
+.btn:focus {
+    outline: none; 
 }
 
 .latest-property-heading {
     text-align: center;
     font-size: 4rem;
     font-weight: 700;
-    color: #333; 
+    color: #333;
     margin-top: 50px;
 }
+
 
 .ks {
     display: flex;
@@ -622,7 +637,7 @@ img {
 <!-- Text Section -->
 <div class="container text-center mt-5" style="padding-top: 50px;">
     <h2 style="font-size: 5rem; font-weight: 700;">What we provide</h2>
-    <p style="font-size: 1.25rem; font-weight: 400;">Temukan properti impian Anda dengan bantuan kami</p>
+    <p style="font-size: 1.25rem; font-weight: 400;">Discover your perfect dream property effortlessly with our expert assistance, guiding you every step of the way.</p>
 </div>
 <!-- Cards Section -->
 <div class="container mt-4">
@@ -632,65 +647,51 @@ img {
             <div class="card h-100">
                 <div class="card-body">
                     <div class="icon mb-3">
-                        <i class="fa fa-info fa-2x"></i>
+                        <img src="icon1.png" alt="Buy a property">
                     </div>
-                    <h5 class="card-title">Comprehensive Information Details</h5>
+                    <h5 class="card-title">Buy a home</h5>
                     <div class="details preview">
-                        <p class="card-text">Get a quick overview of key information for an informed decision-making process.</p>
+                        <p class="card-text">Find your dream home with a rich photo experience and access to the largest number of listings.</p>
                     </div>
-                    <div class="collapse" id="infoDetails">
-                        <div class="details">
-                            <p class="card-text">Gain full access to comprehensive information to ensure you have all the details necessary for a comfortable experience.</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#infoDetails" aria-expanded="false" aria-controls="infoDetails">READ MORE</button>
+                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('dijual') }}'">BUY NOW</button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Second Card -->
         <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 bg-dark text-white">
+            <div class="card h-100 ">
                 <div class="card-body">
                     <div class="icon mb-3">
-                        <i class="fa fa-star fa-2x text-white"></i>
+                        <img src="icon2.png" alt="Sell a property">
                     </div>
-                    <h5 class="card-title">Complete Features</h5>
+                    <h5 class="card-title">Sell a home</h5>
                     <div class="details preview">
-                        <p class="card-text">Explore a selection of features tailored to your needs, offering both ease and efficiency.</p>
+                        <p class="card-text">List your home with ease and connect with potential buyers through our extensive network.</p>
                     </div>
-                    <div class="collapse" id="featuresDetails">
-                        <div class="details">
-                            <p class="card-text">Delve into our full suite of features designed to provide unparalleled comfort and convenience in every aspect of our service.</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline-light mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#featuresDetails" aria-expanded="false" aria-controls="featuresDetails">READ MORE</button>
+                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('property.add') }}'">SELL NOW</button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Third Card -->
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <div class="icon mb-3">
-                        <i class="fa fa-cogs fa-2x"></i>
+                        <img src="icon3.png" alt="Rent a home">
                     </div>
-                    <h5 class="card-title">Smooth Workflow</h5>
+                    <h5 class="card-title">Rent a home</h5>
                     <div class="details preview">
-                        <p class="card-text">Experience a seamless process designed to simplify your tasks and save time.</p>
+                        <p class="card-text">Explore rental properties and find a place to call home with our comprehensive listings.</p>
                     </div>
-                    <div class="collapse" id="workflowDetails">
-                        <div class="details">
-                            <p class="card-text">We offer a streamlined workflow that ensures a user-friendly experience, making your property management easy and efficient.</p>
-                        </div>
+                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('disewa') }}'">RENT NOW</button>
                     </div>
-                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#workflowDetails" aria-expanded="false" aria-controls="workflowDetails">READ MORE</button>
-                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Carousel Section -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
