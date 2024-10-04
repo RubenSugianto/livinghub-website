@@ -526,15 +526,12 @@
             <div class="dropdown-content">
                 <div class="auth-text">
                     @auth
-                    @php
-                        $userWithAvatar = Chatify::getUserWithAvatar(Auth::user());
-                    @endphp
-                    @if($userWithAvatar->avatar)
-                        <img id="dropdownProfilePicture" src="{{ $userWithAvatar->avatar }}" alt="Profile Picture">
+                    @if(Auth::user()->avatar)
+                        <img id="dropdownProfilePicture" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
                     @else
                         <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
                     @endif
-                        <div class="username">{{ auth()->user()->username }}</div>
+                        <div class="username">{{ auth::user()->username }}</div>
                     @else
                         <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
                         <div class="username">Guest</div>
