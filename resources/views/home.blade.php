@@ -739,11 +739,10 @@ img {
                 <div class="card property-card" data-property-id="{{ $property->id }}">
                     <div class="card-image position-relative">
                         @if($property->images->isNotEmpty())
-                            <img src="{{ asset($property->images->first()) }}" alt="{{ $property->name }}" class="img-fluid">
+                            <img src="{{ asset($property->images->first()->images) }}" alt="{{ $property->name }}" class="img-fluid">
                         @else
                             <img src="https://a57.foxnews.com/static.foxbusiness.com/foxbusiness.com/content/uploads/2022/02/0/0/Screen-Shot-2022-02-08-at-1.01.01-PM-gigapixel-low_res-scale-2_00x.png?ve=1&tl=1" alt="No Image Available" class="img-fluid">
                         @endif
-                        
                         <div class="price-badge">
                             <span>Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                         </div>

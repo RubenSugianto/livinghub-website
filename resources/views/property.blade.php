@@ -99,13 +99,13 @@
             <!-- Profile Section -->
             <div class="profile-section d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                <a href="{{ route('profileseller', $property->user->id) }}" class="d-flex align-items-center">
+                <a href="{{ route('profileseller', $property->user->id) }}" class="d-flex align-items-center no-underline" style="text-decoration: none;">
                 @if($property->user->avatar) 
-                    <img id="ProfilePicture" src="{{ asset($property->user->avatar) }}" alt="Profile Picture" class="profile-picture">
+                    <img id="ProfilePicture" src="{{ Chatify::getUserWithAvatar($property->user)->avatar }}" alt="Profile Picture" class="profile-picture">
                 @else 
                     <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
                 @endif
-                    <span class="ml-2 profile-username">{{ $property->user->name }}</span>
+                <span class="ml-2 profile-username">{{ $property->user->name }}</span>
                 </a>
                 </div>
                 <a href="{{ url('chatify/' . $property->user->id) }}" class="btn btn-outline-secondary chat-button">
@@ -134,8 +134,8 @@
                     <input type="hidden" name="property_id" value="{{ $property->id }}">
 
                     <div class="comment-input d-flex align-items-center mb-3">
-                        @if(Auth::user()->profilepicture)
-                            <img src="{{ asset('storage/' . Auth::user()->profilepicture) }}" alt="Profile Picture" class="profile-picture" />
+                        @if(Auth::user()->avatar)
+                            <img src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture" class="profile-picture" />
                         @else
                             <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
                         @endif
