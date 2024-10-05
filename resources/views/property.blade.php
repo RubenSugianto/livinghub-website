@@ -322,17 +322,30 @@
         .chat-button {
             display: flex;
             align-items: center;
+            gap: 8px;
             font-size: 14px;
             color: #333;
             border: 1px solid #ccc;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: color 0.3s, border-color 0.3s;
+            padding: 8px 15px;
+            border-radius: 25px;
+            background-color: #f9f9f9;
+            transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
         }
 
         .chat-button:hover {
-            color: #4A4AC4;
-            border-color: #4A4AC4;
+            color: #fff !important;
+            background-color: #4A4AC4 !important;
+            border-color: #4A4AC4 !important;
+            box-shadow: 0px 4px 10px rgba(74, 74, 196, 0.4) !important;
+        }
+
+        .chat-button:focus {
+            outline: none;
+            color: #fff !important; 
+            background-color: #4A4AC4 !important;
+            border-color: #4A4AC4 !important;
         }
 
         .comment {

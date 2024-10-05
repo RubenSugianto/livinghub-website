@@ -10,7 +10,7 @@ class DijualController extends Controller
     public function index()
     {
        
-        $properties = Property::where('status', 'Dijual')->paginate(2); 
+        $properties = Property::where('status', 'Dijual')->paginate(10); 
         
         
         return view('dijual', compact('properties'));
