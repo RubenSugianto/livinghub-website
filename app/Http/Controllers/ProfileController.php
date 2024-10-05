@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
+use App\Models\Property;
 
 class ProfileController extends Controller
 {
@@ -56,6 +58,20 @@ class ProfileController extends Controller
         return response()->json([
             'success' => 'Profile updated successfully.',
             'profilepicture' => $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('defaultprofilepicture.png')
+        ]);
+    }
+
+    public function showSellerProfile($id)
+    {
+        // Fetch the seller by user id
+        $seller = User::findOrFail($id);
+
+        // Fetch properties that belong to the seller
+        $properties = Property::where('user_id', $id)->with('images')->get();
+
+        return view('profile.sellerprofile', [
+            'seller' => $seller,
+            'properties' => $properties
         ]);
     }
     

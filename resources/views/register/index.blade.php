@@ -199,9 +199,9 @@ h2 {
     <form action="/register" method="post" class="form-registration">
         @csrf
         <div class="form-floating">
-            <input type="text" name="fullname" class="form-control rounded-top @error('fullname') is-invalid @enderror" id="fullname" placeholder="Name" required value="{{ old('fullname') }}">
-            <label for="fullname">Full Name</label>
-            @error('fullname')
+            <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
+            <label for="name">Full Name</label>
+            @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
