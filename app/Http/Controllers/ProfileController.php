@@ -61,18 +61,4 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function showSellerProfile($id)
-    {
-        // Fetch the seller by user id
-        $seller = User::findOrFail($id);
-
-        // Fetch properties that belong to the seller
-        $properties = Property::where('user_id', $id)->with('images')->get();
-
-        return view('profile.sellerprofile', [
-            'seller' => $seller,
-            'properties' => $properties
-        ]);
-    }
-    
 }

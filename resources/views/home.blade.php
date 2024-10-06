@@ -293,10 +293,10 @@ img {
 .header-button:hover {
     background-color: #4A4AC4 !important; 
 }
-
 .card-list {
-    width: 90%;
-    max-width: 400px;
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto; 
 }
 
 .card {
@@ -308,26 +308,26 @@ img {
     position: relative;
     transition: 0.15s ease-in;
     margin: 10px;
-}
-
-.card:hover, .card:focus-within {
-    box-shadow: 0 0 0 2px #5E5DF0, 0 10px 60px 0 rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
+    width: 100%; 
 }
 
 .card-image {
     position: relative;
     border-radius: 10px;
-    height: 200px;
+    height: 200px; 
+    max-height: 200px;
     overflow: hidden;
 }
 
 .card-image img {
     width: 100%;
-    height: 100%;
+    height: 100%; 
     object-fit: cover;
     border-radius: 10px;
+    max-height: none; 
 }
+
+
 
 .price-badge {
     position: absolute;
@@ -534,6 +534,16 @@ img {
         max-width: 70%;
     }
 }
+
+.card .icon img {
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover; 
+    margin: 0 auto; 
+    display: block; 
+}
+
+
 .card {
     margin-top: 50px;
     border: none;
@@ -542,13 +552,6 @@ img {
 
 .card:hover {
     transform: translateY(-10px);
-}
-
-.card img {
-    max-width: 200px; 
-    height: auto;
-    display: block;
-    margin: 0 auto 40px; /
 }
 
 .btn {
