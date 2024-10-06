@@ -39,22 +39,25 @@ class PropertyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'location' => 'required|string|max:255',
-            'description' => 'required|string',
-            'bedroom' => 'required|integer',
-            'bathroom' => 'required|integer',
-            'electricity' => 'required|integer',
-            'surfaceArea' => 'required|integer',
-            'buildingArea' => 'required|integer',
-            'status' => 'required|string',
-            'typeProperty' => 'required|string',
-            'typeDocument' => 'required|string',
-            'published_at' => 'nullable|date',
-            'images' => 'required|array|max:10',
-            'images.*' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'numeric', 'min:0'], 
+            'province' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'full_location' => ['required', 'string', 'max:255'], 
+            'description' => ['required', 'string', 'max:1000'], 
+            'bedroom' => ['required', 'integer', 'min:1'], 
+            'bathroom' => ['required', 'integer', 'min:1'], 
+            'electricity' => ['required', 'integer', 'min:1'], 
+            'surfaceArea' => ['required', 'integer', 'min:1'], 
+            'buildingArea' => ['required', 'integer', 'min:1'], 
+            'status' => ['required', 'string'],
+            'typeProperty' => ['required', 'string'],
+            'typeDocument' => ['required', 'string'],
+            'published_at' => ['date'],
+            'images' => ['required', 'array', 'max:10'],
+            'images.*' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:2048']
         ]);
+    
 
         // Get the authenticated user
         $user = auth()->user();
@@ -65,25 +68,26 @@ class PropertyController extends Controller
             $user->save();
         }
 
-        // Membuat properti baru
-        $property = new Property();
-        $property->id = (string) Str::uuid(); // Generate UUID untuk id field
-        $property->user_id = auth()->id();
-        $property->name = $request->name;
-        $property->price = $request->price;
-        $property->location = $request->location;
-        $property->description = $request->description;
-        $property->bedroom = $request->bedroom;
-        $property->bathroom = $request->bathroom;
-        $property->electricity = $request->electricity;
-        $property->surfaceArea = $request->surfaceArea;
-        $property->buildingArea = $request->buildingArea;
-        $property->status = $request->status;
-        $property->check = 'Pending';
-        $property->type = $request->typeProperty;
-        $property->published_at = $request->published_at ?? now(); // Default to current timestamp if not provided
+        // Create a new property
+        $property = Property::create([
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'price' => $request->price,
+            'city' => $request->province, 
+            'location' => $request->location, 
+            'full_location' => $request->full_location, 
+            'description' => $request->description,
+            'bedroom' => $request->bedroom,
+            'bathroom' => $request->bathroom,
+            'electricity' => $request->electricity,
+            'surfaceArea' => $request->surfaceArea,
+            'buildingArea' => $request->buildingArea,
+            'status' => $request->status,
+            'check' => 'Pending',
+            'type' => $request->typeProperty,
+            'published_at' => now(),
+        ]);
 
-        $property->save();
 
         // Menyimpan gambar properti
         if($files = $request->file('images')) {

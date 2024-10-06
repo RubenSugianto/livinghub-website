@@ -17,7 +17,7 @@
 <div class="alert alert-danger fade" id="form-alert" style="display:none;">
     <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
     <span class="alert-content">
-        <strong>Harap isi semua detail sebelum lanjut ke halaman selanjutnya.</strong>
+        <strong>Harap isi semua informasi sebelum lanjut ke halaman selanjutnya.</strong>
     </span>
     <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
 </div>
@@ -81,12 +81,22 @@
                 <select class="formbold-form-input" id="detailed-location" name="location" required>
                 </select>
             </div>
+            <div class="formgroup">
+                <label for="full_location" class="formbold-form-label">Alamat Lengkap</label>
+                <textarea class="formbold-form-input" id="full_location" name="full_location" required></textarea>
+                <small class="text-muted">
+                    Alamat Lengkap can only be filled by a maximum of <strong>255 characters</strong>.
+                </small>
+            </div>
         </div>
 
         <div class="formbold-form-step-3">
             <div class="formgroup">
                 <label for="description" class="formbold-form-label">Deskripsi Properti</label>
-                <textarea class="formbold-form-input" id="description" name="description" required></textarea>
+                <textarea class="formbold-form-input" id="description" name="description" required style="width: 100%; height: 150px;"></textarea>
+                <small class="text-muted">
+                    Description can only be filled by a maximum of <strong>1,000 characters</strong>.
+                </small>
             </div>
         </div>
 
@@ -149,6 +159,9 @@
             <div class="formgroup">
                 <label for="images" class="formbold-form-label">Upload Gambar (Maksimal 10 Gambar)</label>
                 <input type="file" class="form-control" id="images" name="images[]" multiple required onchange="previewImages(event)">
+                <small class="text-muted mt-7">
+                    Please upload images in the following formats: <strong>PNG, JPG, JPEG, WEBP</strong>. Maximum file size: <strong>2 MB</strong>.
+                </small>
             </div>
         </div>
 
