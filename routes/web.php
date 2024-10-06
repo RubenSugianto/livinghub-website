@@ -14,6 +14,7 @@ use App\Http\Controllers\MyPropertyController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikesController;
+use App\Http\Controllers\showSellerProfileController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -100,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
 
 // Profile Seller
-Route::get('/profileseller/{id}', [ProfileController::class, 'showSellerProfile'])->name('profileseller');
+Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
+
 
 
