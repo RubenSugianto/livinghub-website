@@ -13,7 +13,9 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained();
             $table->string('name');
             $table->integer('price');
+            $table->string('city');
             $table->string('location');
+            $table->string('full_location');
             $table->text('description');
             $table->integer('bedroom');
             $table->integer('bathroom');
