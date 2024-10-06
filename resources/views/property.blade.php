@@ -71,10 +71,10 @@
 
             <h1 class="mt-2">{{ $property->name }}</h1>
             <h1 class="mt-3">Rp {{ number_format($property->price, 0, ',', '.') }}</h1>
-            <p class="location">{{ $property->location }}</p>
+            <p class="location mt-3">{{ $property->full_location }}</p>
 
             <h3 class="section-title">Deskripsi Properti</h3>
-            <article class="my-3 fs-5">
+            <article class="my-3 fs-5 description-wrap">
                 {!! $property->description !!}
             </article>
 
@@ -503,8 +503,8 @@
         }
 
         .location {
-            font-size: 14px;
-            color: #777;
+            font-size: 16px;
+            color: #000;
         }
 
         .section-title {
@@ -562,6 +562,14 @@
             color: white;
             text-decoration: none;
         }
-
+        .description-wrap {
+            word-wrap: break-word; /* Allows breaking of long words */
+            overflow-wrap: break-word; /* Breaks long words onto the next line */
+            white-space: normal; /* Normalizes whitespace handling */
+            max-width: 100%; /* Ensure it does not exceed the container */
+            text-align: justify; /* Justifies the text */
+            text-align: justify; /* Justifies the text */
+            text-justify: inter-word;
+        }
         </style>
         @endsection
