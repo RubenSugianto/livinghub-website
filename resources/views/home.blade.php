@@ -765,7 +765,7 @@ img {
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{ $property->name }}</h5>
                         </div>
-                        <p class="card-text">{{ $property->location }}</p>
+                        <p class="card-text">{{ $property->city }}, {{ $property->location }}</p>
                         <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
                         <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
                     </div>

@@ -168,7 +168,7 @@
                                 <div class="card-title d-flex justify-content-between align-items-center">
                                     <h5 style="font-size: 20px;">{{ $property->name }}</h5>
                                 </div>
-                                <p class="card-text">{{ $property->location }}</p>
+                                <p class="card-text">{{ $property->city }}, {{ $property->location }}</p>
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
