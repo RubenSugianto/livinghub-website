@@ -132,7 +132,9 @@ class PropertyController extends Controller
          $request->validate([
              'name' => 'required|string|max:255',
              'price' => 'required|integer',
-             'location' => 'required|string|max:255',
+             'city' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'full_location' => ['required', 'string', 'max:255'], 
              'description' => 'required|string',
              'bedroom' => 'required|integer',
              'bathroom' => 'required|integer',

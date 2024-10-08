@@ -84,9 +84,7 @@
             <div class="formgroup">
                 <label for="full_location" class="formbold-form-label">Alamat Lengkap</label>
                 <textarea class="formbold-form-input" id="full_location" name="full_location" required></textarea>
-                <small class="text-muted">
-                    Alamat Lengkap can only be filled by a maximum of <strong>255 characters</strong>.
-                </small>
+                <p class="helper-text">Alamat lengkap hanya bisa diisi dengan maksimum 255 karakter.</p>
             </div>
         </div>
 
@@ -94,9 +92,7 @@
             <div class="formgroup">
                 <label for="description" class="formbold-form-label">Deskripsi Properti</label>
                 <textarea class="formbold-form-input" id="description" name="description" required style="width: 100%; height: 150px;"></textarea>
-                <small class="text-muted">
-                    Description can only be filled by a maximum of <strong>1,000 characters</strong>.
-                </small>
+                <p class="helper-text">Deskripsi hanya bisa diisi dengan maksimum 1000 karakter.</p>
             </div>
         </div>
 
@@ -159,9 +155,7 @@
             <div class="formgroup">
                 <label for="images" class="formbold-form-label">Upload Gambar (Maksimal 10 Gambar)</label>
                 <input type="file" class="form-control" id="images" name="images[]" multiple required onchange="previewImages(event)">
-                <small class="text-muted mt-7">
-                    Please upload images in the following formats: <strong>PNG, JPG, JPEG, WEBP</strong>. Maximum file size: <strong>2 MB</strong>.
-                </small>
+                <p class="helper-text">Format foto harus .jpg, .jpeg, .png, .webp dan ukuran maksimal 2 MB. Maksimal 10 foto yang berbeda satu sama lain untuk menarik perhatian calon pembeli.</p>
             </div>
         </div>
 
@@ -541,6 +535,16 @@
 .alert.fade.hide {
     opacity: 0;
     transform: translateY(-15px);
+}
+
+.formgroup .formbold-form-input ~ .helper-text {
+    margin-top: -20px; /* Reduce space between the input and helper text */
+}
+
+.helper-text {
+    font-size: 0.875rem; /* Small, but readable size */
+    color: #6c757d; /* Muted gray color */
+    margin-top: 5px; /* Space between the input and helper text */
 }
 
 
