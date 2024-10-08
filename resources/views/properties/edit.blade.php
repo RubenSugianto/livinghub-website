@@ -53,8 +53,7 @@
 
                 <!-- Error message if no image is uploaded -->
                 <p id="imageError" class="text-danger" style="display: none;">Anda harus mengunggah setidaknya satu foto sebelum menyimpan.</p>
-
-                <p class="helper-text">Format foto harus .jpg, .jpeg, .png dan ukuran minimal 300 x 300 px. Maksimal 10 foto yang berbeda satu sama lain untuk menarik perhatian calon pembeli.</p>
+                <p class="helper-text">Format foto harus .jpg, .jpeg, .png, .webp dan ukuran maksimal 2 MB. Maksimal 10 foto yang berbeda satu sama lain untuk menarik perhatian calon pembeli.</p>
                 </div>
 
 
@@ -69,7 +68,7 @@
             <div class="form-group-row">
                 <label for="description">Deskripsi Properti</label>
                 <div class="input-container">
-                    <textarea class="form-control" id="description" name="description" rows="3" required>{{ old('description', $property->description) }}</textarea>
+                    <textarea class="form-control" style="width: 100%; height: 250px;" id="description" name="description" rows="3" required>{{ old('description', $property->description) }}</textarea>
                     <p class="helper-text">Penjelasan detail terkait properti agar calon pembeli mengetahui spesifikasi dan detail mengenai properti yang akan dibeli.</p>
                 </div>
             </div>
@@ -83,9 +82,35 @@
             </div>
 
             <div class="form-group-row">
-                <label for="location">Lokasi Properti</label>
+                <label for="city" class="formbold-form-label">Provinsi</label>
                 <div class="input-container">
-                    <input type="text" class="form-control" id="location" name="location" value="{{ old('location', $property->location) }}" readonly>
+                    <select class="form-control" id="city" name="city" required>
+                        <option value="" disabled>Pilih Lokasi</option>
+                        <option value="Jakarta" {{ old('city', $property->city) == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
+                        <option value="Bogor" {{ old('city', $property->city) == 'Bogor' ? 'selected' : '' }}>Bogor</option>
+                        <option value="Depok" {{ old('city', $property->city) == 'Depok' ? 'selected' : '' }}>Depok</option>
+                        <option value="Tangerang" {{ old('city', $property->city) == 'Tangerang' ? 'selected' : '' }}>Tangerang</option>
+                        <option value="Bekasi" {{ old('city', $property->city) == 'Bekasi' ? 'selected' : '' }}>Bekasi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group-row" id="detailed-location-group"> <!-- Ensure it's displayed by default -->
+                <label for="location" class="formbold-form-label">Kota</label>
+                <div class="input-container">
+                    <select class="form-control" id="location" name="location" required>
+                        <option value="" disabled>Pilih Kota</option>
+                        <!-- Dynamic city options will be populated here -->
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group-row">
+                <label for="full_location" class="formbold-form-label">Lokasi Properti</label>
+                <div class="input-container">
+                    <textarea class="form-control" id="full_location" name="full_location" required>{{ old('full_location', $property->full_location) }}</textarea>
+                    <p class="helper-text">Lokasi properti hanya bisa diisi dengan maksimum 255 karakter.</p>
                 </div>
             </div>
 
@@ -125,11 +150,16 @@
             </div>
 
             <div class="form-group-row">
-                <label for="status">Status Properti</label>
+                <label for="status" class="formbold-form-label">Status Properti</label>
                 <div class="input-container">
-                    <input type="text" class="form-control" id="status" name="status" value="{{ old('status', $property->status) }}" required>
+                    <select class="form-control" id="status" name="status" required>
+                        <option value="" disabled>Pilih Status</option>
+                        <option value="dijual" {{ old('status', $property->status) == 'dijual' ? 'selected' : '' }}>Dijual</option>
+                        <option value="disewa" {{ old('status', $property->status) == 'disewa' ? 'selected' : '' }}>Disewa</option>
+                    </select>
                 </div>
             </div>
+
 
             <div class="form-group-row">
                 <label for="type">Jenis Properti</label>
@@ -226,6 +256,50 @@
             window.history.back(); 
         }
     }
+
+    const detailedLocations = {
+        "Jakarta": ["Jakarta Pusat", "Jakarta Utara", "Jakarta Barat", "Jakarta Selatan", "Jakarta Timur"],
+        "Bogor": ["Kota Bogor"],
+        "Depok": ["Kota Depok"],
+        "Tangerang": ["Kota Tangerang", "Kota Tangerang Selatan"],
+        "Bekasi": ["Kota Bekasi"]
+    };
+
+    const citySelect = document.getElementById('city'); // 'Provinsi' dropdown
+    const detailedLocationGroup = document.getElementById('detailed-location-group'); // 'Kota' dropdown group
+    const locationSelect = document.getElementById('location'); // 'Kota' dropdown
+
+    function populateDetailedLocations(locations, defaultLocation = '') {
+        locationSelect.innerHTML = '<option value="" disabled>Pilih Kota</option>'; // Reset city options
+        locations.forEach(location => {
+            const option = document.createElement('option');
+            option.value = location;
+            option.textContent = location;
+            if (location === defaultLocation) {
+                option.selected = true; // Set default selected option if matches
+            }
+            locationSelect.appendChild(option); // Add city options dynamically
+        });
+    }
+
+    // Event listener for when the province is changed
+    citySelect.addEventListener('change', function () {
+        const selectedCity = citySelect.value;
+        // Always populate 'Kota' dropdown regardless of selection
+        populateDetailedLocations(detailedLocations[selectedCity] || [], locationSelect.value);
+    });
+
+    // Initial population of 'Kota' based on the default province
+    if (citySelect.value) {
+        citySelect.dispatchEvent(new Event('change')); // Populate 'Kota' if a province is selected
+    }
+
+    // Set the default value for location if available (from the database)
+    const defaultLocation = '{{ old('location', $property->location) }}'; // Get default from PHP
+    if (defaultLocation) {
+        populateDetailedLocations(detailedLocations[citySelect.value] || [], defaultLocation); // Populate 'Kota' dropdown
+    }
+
 </script>
 
 
@@ -291,7 +365,6 @@ h1 {
     color: #555;
 }
 
-
 .input-container {
     flex-grow: 1;
     width: calc(100% - 220px); 
@@ -300,15 +373,16 @@ h1 {
 /* Form Control */
 .form-control {
     width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ced4da;
+    padding: 10px 15px; /* Changed to match .formbold-form-input */
+    border-radius: 5px; /* Changed to match .formbold-form-input */
+    border: 1px solid #DDE3EC; /* Changed to match .formbold-form-input */
+    background: #f9f9f9; /* Changed to match .formbold-form-input */
     transition: border-color 0.3s ease;
 }
 
 .form-control:focus {
-    border-color: #5E5DF0;
-    box-shadow: 0 0 5px rgba(94, 93, 240, 0.25);
+    border-color: #6a64f1; /* Changed to match .formbold-form-input */
+    box-shadow: 0 0 5px rgba(106, 100, 241, 0.25); /* Adjusted for consistency */
 }
 
 .helper-text {
