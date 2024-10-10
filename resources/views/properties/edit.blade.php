@@ -80,31 +80,30 @@
                     <p class="helper-text">Contoh: Rp500.000.000</p>
                 </div>
             </div>
-
             <div class="form-group-row">
+
                 <label for="city" class="formbold-form-label">Provinsi</label>
-                <div class="input-container">
-                    <select class="form-control" id="city" name="city" required>
-                        <option value="" disabled>Pilih Lokasi</option>
-                        <option value="Jakarta" {{ old('city', $property->city) == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
-                        <option value="Bogor" {{ old('city', $property->city) == 'Bogor' ? 'selected' : '' }}>Bogor</option>
-                        <option value="Depok" {{ old('city', $property->city) == 'Depok' ? 'selected' : '' }}>Depok</option>
-                        <option value="Tangerang" {{ old('city', $property->city) == 'Tangerang' ? 'selected' : '' }}>Tangerang</option>
-                        <option value="Bekasi" {{ old('city', $property->city) == 'Bekasi' ? 'selected' : '' }}>Bekasi</option>
-                    </select>
+                    <div class="input-container">
+                        <select class="form-control" id="city" name="city" disabled>
+                            <option value="" disabled>Pilih Lokasi</option>
+                            <option value="Jakarta" {{ old('city', $property->city) == 'Jakarta' ? 'selected' : '' }}>Jakarta</option>
+                            <option value="Bogor" {{ old('city', $property->city) == 'Bogor' ? 'selected' : '' }}>Bogor</option>
+                            <option value="Depok" {{ old('city', $property->city) == 'Depok' ? 'selected' : '' }}>Depok</option>
+                            <option value="Tangerang" {{ old('city', $property->city) == 'Tangerang' ? 'selected' : '' }}>Tangerang</option>
+                            <option value="Bekasi" {{ old('city', $property->city) == 'Bekasi' ? 'selected' : '' }}>Bekasi</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group-row" id="detailed-location-group"> <!-- Ensure it's displayed by default -->
-                <label for="location" class="formbold-form-label">Kota</label>
-                <div class="input-container">
-                    <select class="form-control" id="location" name="location" required>
-                        <option value="" disabled>Pilih Kota</option>
-                        <!-- Dynamic city options will be populated here -->
-                    </select>
+                <div class="form-group-row" id="detailed-location-group">
+                    <label for="location" class="formbold-form-label">Kota</label>
+                    <div class="input-container">
+                        <select class="form-control" id="location" name="location" disabled>
+                            <option value="" disabled>Pilih Kota</option>
+                            <!-- Dynamic city options will be populated here -->
+                        </select>
+                    </div>
                 </div>
-            </div>
-
 
             <div class="form-group-row">
                 <label for="full_location" class="formbold-form-label">Lokasi Properti</label>
@@ -349,7 +348,6 @@ h1 {
     text-align: center;
     color: #333;
 }
-
 .form-group-row {
     display: flex;
     flex-wrap: wrap;
@@ -370,19 +368,19 @@ h1 {
     width: calc(100% - 220px); 
 }
 
-/* Form Control */
 .form-control {
     width: 100%;
-    padding: 10px 15px; /* Changed to match .formbold-form-input */
-    border-radius: 5px; /* Changed to match .formbold-form-input */
-    border: 1px solid #DDE3EC; /* Changed to match .formbold-form-input */
-    background: #f9f9f9; /* Changed to match .formbold-form-input */
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    border: 1px solid #DDE3EC; 
+    background: #f9f9f9; 
     transition: border-color 0.3s ease;
+    min-height: 40px; 
 }
 
 .form-control:focus {
-    border-color: #6a64f1; /* Changed to match .formbold-form-input */
-    box-shadow: 0 0 5px rgba(106, 100, 241, 0.25); /* Adjusted for consistency */
+    border-color: #6a64f1; 
+    box-shadow: 0 0 5px rgba(106, 100, 241, 0.25); 
 }
 
 .helper-text {
@@ -390,6 +388,7 @@ h1 {
     color: #6c757d;
     margin-top: 5px;
 }
+
 
 .form-group-row label[for="images"] {
     font-weight: bold; 
