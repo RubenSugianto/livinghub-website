@@ -3,241 +3,119 @@
 @section('title', 'Home')
 
 @section('styles')
-<style>
+<style> 
 
-:root {
-    --primary-color: #5E5DF0;
-    --secondary-color: #4A4AC4;
-    --text-color: #393232;
-    --background-color: #f5f5f5;
-    --border-radius: 5px;
-    --transition-speed: 0.3s;
-    --font-family: "Poppins", sans-serif;
-}
+    :root {
+        --primary-color: #5E5DF0;
+        --secondary-color: #4A4AC4;
+        --text-color: #393232;
+        --background-color: #f5f5f5;
+        --border-radius: 5px;
+        --transition-speed: 0.3s;
+        --font-family: "Poppins", sans-serif;
+    }
 
-body {
-    line-height: 1.5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    margin: 0;
-    padding-top: 0;
-    font-family: var(--font-family);
-}
+    body {
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        margin: 0;
+        padding-top: 0;
+        font-family: var(--font-family);
+    }
 
-html {
-    box-sizing: border-box;
-    font-size: 70%;
-    overflow-y: scroll;
-    letter-spacing: 0.6px;
-    line-height: 1.4;
-    -webkit-user-select: none;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: subpixel-antialiased;
-}
+    html {
+        box-sizing: border-box;
+        font-size: 70%;
+        overflow-y: scroll;
+        letter-spacing: 0.6px;
+        line-height: 1.4;
+        -webkit-user-select: none;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
 
-img {
-    max-width: 100%;
-    display: block;
-}
+    img {
+        max-width: 100%;
+        display: block;
+    }
 
-.alert {
-    padding: 15px;
-    margin: 10px auto;
-    border-radius: 10px;
-    width: calc(100% - 40px);
-    position: relative;
-    top: -10px; 
-    display: flex;
-    align-items: center;
-    margin-top: 80px;
-}
+    .alert {
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 10px;
+        width: calc(100% - 40px);
+        position: relative;
+        top: -10px; 
+        display: flex;
+        align-items: center;
+        margin-top: 80px;
+    }
 
-.alert-success {
-    background-color: #d4edda; 
-    border: 1px solid #c3e6cb; 
-    color: #155724; 
-}
+    .alert-success {
+        background-color: #d4edda; 
+        border: 1px solid #c3e6cb; 
+        color: #155724; 
+    }
 
-.alert .btn-close {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem; 
-    color: #155724; 
-    cursor: pointer;
-    margin-left: auto;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 15px; 
-    top: 50%;
-    transform: translateY(-50%); 
-}
+    .alert .btn-close {
+        background: transparent;
+        border: none;
+        font-size: 1.5rem; 
+        color: #155724; 
+        cursor: pointer;
+        margin-left: auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 15px; 
+        top: 50%;
+        transform: translateY(-50%); 
+    }
 
-.alert .btn-close:hover {
-    color: #0d3c1e; 
-}
+    .alert .btn-close:hover {
+        color: #0d3c1e; 
+    }
 
-.alert .btn-close:active {
-    transform: translateY(-50%) scale(1.1); 
-}
+    .alert .btn-close:active {
+        transform: translateY(-50%) scale(1.1); 
+    }
 
-.alert .alert-icon {
-    font-size: 2rem;
-    margin-right: 15px;
-    vertical-align: middle;
-}
+    .alert .alert-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+        vertical-align: middle;
+    }
 
-.alert.fade {
-    opacity: 1;
-    transform: translateY(0);
-}
+    .alert.fade {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-.alert.fade.hide {
-    opacity: 0;
-    transform: translateY(-15px);
-}
-
-
-#carouselExampleIndicators {
-    margin-top: 120px; 
-    position: relative;
-
-}
-
-.carousel-item img {
-    max-height: 400px;
-    width: 100%;
-    object-fit: contain;
-}
+    .alert.fade.hide {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
 
 
-.search-bar h2 {
-    margin-top: 50px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
+    #carouselExampleIndicators {
+        margin-top: 120px; 
+        position: relative;
 
-.search-bar .input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border: 2px solid #ccc;
-    border-radius: 25px;
-    overflow: hidden;
-    background-color: var(--background-color);
-    padding: 5px;
-}
+    }
 
-.search-bar input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 1.2rem;
-    background-color: var(--background-color);
-}
+    .carousel-item img {
+        max-height: 400px;
+        width: 100%;
+        object-fit: contain;
+    }
 
-.search-bar button,
-.search-bar .filter-button {
-    padding: 10px;
-    background: none;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: color var(--transition-speed) ease;
-    font-size: 1.2rem;
-}
-
-.search-bar button:hover,
-.search-bar .filter-button:hover {
-    color: var(--secondary-color);
-}
-
-.btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    color: black; 
-    background-color: white; 
-}
-
-.btn-group-toggle .btn.active {
-    background-color: #4A4AC4;
-    color: white;
-}
-
-.btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
-}
-
-.btn-group-toggle .btn input[type="radio"] {
-    display: none;
-}
-
-.modal-body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-.modal-body .form-group {
-    flex: 1 1 30%;
-}
-
-.modal-body .form-group-full {
-    flex: 1 1 100%;
-}
-
-.input-range {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-body .btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    color: black; 
-    background-color: white; 
-}
-
-.modal-body .btn-group-toggle .btn.active {
-    background-color: #5E5DF0;
-    color: white;
-}
-
-.modal-body .btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
-}
-
-.modal-dialog.modal-lg {
-    max-width: 40%; 
-}
 
 img {
     max-width: 100%;
@@ -554,7 +432,7 @@ img {
     transform: translateY(-10px);
 }
 
-.btn {
+.btn-custom {
     border: 2px solid #333; 
     background-color: transparent; 
     color: #333; 
@@ -565,12 +443,12 @@ img {
     outline: none; 
 }
 
-.btn:hover {
+.btn-custom:hover {
     background-color: #333; 
     color: #fff; 
 }
 
-.btn:focus {
+.btn-custom:focus {
     outline: none; 
 }
 
@@ -583,37 +461,209 @@ img {
 }
 
 
-.ks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
+    .search-bar h2 {
+        margin-top: 50px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+    .search-bar .input-group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: var(--background-color);
+        padding: 5px;
+    }
 
-.keyword-suggestions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;  
-    margin-top: 20px;
-}
-.keyword-suggestion {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    padding: 10px 25px;
-    font-size: 1.25rem; 
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    color: grey;
-}
+    .search-bar input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        background-color: var(--background-color);
+    }
 
-.keyword-suggestion:hover {
-    background-color: #4A4AC4;
-    transform: scale(1.05);
-    color: #ffffff;
-}
+    .search-bar button,
+    .search-bar .filter-button {
+        padding: 10px;
+        background: none;
+        color: black;
+        border: none;
+        cursor: pointer;
+        transition: color var(--transition-speed) ease;
+        font-size: 1.2rem;
+    }
+
+    .search-bar button:hover,
+    .search-bar .filter-button:hover {
+        color: var(--secondary-color);
+    }
+
+
+    .close {
+        font-size: 24px;
+        color: #333;
+        opacity: 0.7;
+        transition: color 0.3s, opacity 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #4A4AC4;
+        opacity: 1;
+    }
+
+    .modal-body input[type="text"],
+    .modal-body input[type="number"],
+    .modal-body input[type="range"],
+    .modal-body select,
+    .modal-body textarea {
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+
+    .modal-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .modal-header, .modal-body, .modal-dialog, label, .btn-group-toggle .btn {
+        font-size: 14px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .modal-footer .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 0px;
+    }
+
+    .modal-body .form-group {
+        flex: 1 1 30%;
+    }
+
+    .input-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-group-toggle .btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: white;
+        color: black;
+    }
+
+    .btn-group-toggle .btn:hover,
+    .btn-group-toggle .btn:active,
+    .btn-group-toggle .btn:focus {
+        color: white;
+        background-color:#4A4AC4;
+        text-decoration: none;
+    }
+
+    .btn-group-toggle .btn input[type="radio"] {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-body .btn-group-toggle .btn.active {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-dialog.modal-lg {
+        max-width: 40%;
+    }
+
+    .btn-reset {
+        background-color: #FF5C5C;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-reset:hover {
+        background-color: #E04040;
+    }
+
+    .btn-search {
+        background-color: #5E5DF0;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-search:hover {
+        background-color: #4A4AC4;
+    }
+
+    .keyword-suggestions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;  
+        margin-top: 20px;
+    }
+    .keyword-suggestion {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 30px;
+        padding: 10px 25px;
+        font-size: 1.25rem; 
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        color: grey;
+    }
+
+    .keyword-suggestion:hover {
+        background-color: #4A4AC4;
+        transform: scale(1.05);
+        color: #ffffff;
+    }
 
 
 </style>
@@ -642,6 +692,7 @@ img {
     <h2 style="font-size: 5rem; font-weight: 700;">What we provide</h2>
     <p style="font-size: 1.25rem; font-weight: 400;">Discover your perfect dream property effortlessly with our expert assistance, guiding you every step of the way.</p>
 </div>
+
 <!-- Cards Section -->
 <div class="container mt-4">
     <div class="row text-center">
@@ -656,14 +707,14 @@ img {
                     <div class="details preview">
                         <p class="card-text">Find your dream home with a rich photo experience and access to the largest number of listings.</p>
                     </div>
-                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('dijual') }}'">BUY NOW</button>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('dijual') }}'">BUY NOW</button>
                 </div>
             </div>
         </div>
 
         <!-- Second Card -->
         <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 ">
+            <div class="card h-100">
                 <div class="card-body">
                     <div class="icon mb-3">
                         <img src="icon2.png" alt="Sell a property">
@@ -672,7 +723,7 @@ img {
                     <div class="details preview">
                         <p class="card-text">List your home with ease and connect with potential buyers through our extensive network.</p>
                     </div>
-                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('property.add') }}'">SELL NOW</button>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('property.add') }}'">SELL NOW</button>
                 </div>
             </div>
         </div>
@@ -682,19 +733,18 @@ img {
             <div class="card h-100">
                 <div class="card-body">
                     <div class="icon mb-3">
-                        <img src="icon3.png" alt="Rent a home">
+                        <img src="icon3.png" alt="Rent a property">
                     </div>
                     <h5 class="card-title">Rent a home</h5>
                     <div class="details preview">
                         <p class="card-text">Explore rental properties and find a place to call home with our comprehensive listings.</p>
                     </div>
-                    <button class="btn btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('disewa') }}'">RENT NOW</button>
-                    </div>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('disewa') }}'">RENT NOW</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Carousel Section -->
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -768,7 +818,7 @@ img {
                         <div class="card-title d-flex justify-content-between">
                             <h5>{{ $property->name }}</h5>
                         </div>
-                        <p class="card-text">{{ $property->city }}, {{ $property->location }}</p>
+                        <p class="card-text">{{ $property->location }}</p>
                         <p class="card-text">LB: {{ $property->buildingArea }} m²</p>
                         <p class="card-text">LS: {{ $property->surfaceArea }} m²</p>
                     </div>
@@ -832,8 +882,8 @@ img {
 <div class="search-bar mb-5">
     <h2 style="text-align: center; font-weight: bold;">Looking for something else?</h2>
     <form action="{{ route('search') }}" method="GET" class="input-group">
+        <input type="text" name="search" id="searchInput" placeholder="Search Property...">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <input type="text" name="search" id="searchInput" placeholder="Search Keyword">
         <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
             <i class="fa fa-filter" aria-hidden="true"></i>
         </button>

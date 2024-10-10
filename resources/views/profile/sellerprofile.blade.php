@@ -33,8 +33,8 @@
 <div class="search-bar mb-5">
     <h2 style="text-align: center; font-weight: bold;">Search for properties at this agency</h2>
     <form action="{{ route('profileseller', $seller->id) }}" method="GET" class="input-group">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search Property...">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search Keyword">
         <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
             <i class="fa fa-filter" aria-hidden="true"></i>
         </button>
@@ -53,94 +53,103 @@
             </div>
             <div class="modal-body">
                 <form action="{{ route('profileseller', $seller->id) }}" method="GET" id="filterForm">
-                    <!-- Status Filter -->
                     <div class="form-group">
                         <label for="status">Status</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="status" autocomplete="off" value="Dijual" {{ request('status') == 'Dijual' ? 'checked' : '' }}> Dijual
+                                <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="status" autocomplete="off" value="Disewa" {{ request('status') == 'Disewa' ? 'checked' : '' }}> Disewa
+                                <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
                             </label>
                         </div>
                     </div>
-
-                    <!-- Bedrooms Filter -->
                     <div class="form-group">
                         <label for="bedrooms">Kamar Tidur</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar" {{ request('bedrooms') == '1 Kamar' ? 'checked' : '' }}> 1 Kamar
+                                <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar" {{ request('bedrooms') == '2 Kamar' ? 'checked' : '' }}> 2 Kamar
+                                <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar" {{ request('bedrooms') == '3 Kamar' ? 'checked' : '' }}> 3 Kamar
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar" {{ request('bedrooms') == '3+ Kamar' ? 'checked' : '' }}> 3+ Kamar
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
                             </label>
                         </div>
                     </div>
-
-                    <!-- Bathrooms Filter -->
                     <div class="form-group">
                         <label for="bathrooms">Kamar Mandi</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar" {{ request('bathrooms') == '1 Kamar' ? 'checked' : '' }}> 1 Kamar
+                                <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar" {{ request('bathrooms') == '2 Kamar' ? 'checked' : '' }}> 2 Kamar
+                                <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar" {{ request('bathrooms') == '3 Kamar' ? 'checked' : '' }}> 3 Kamar
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar" {{ request('bathrooms') == '3+ Kamar' ? 'checked' : '' }}> 3+ Kamar
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
                             </label>
                         </div>
                     </div>
-
-                    <!-- Land Size Filter -->
                     <div class="form-group">
                         <label for="land_size">Luas Tanah</label>
                         <div class="input-range">
-                            <input type="number" name="land_size_min" placeholder="0" class="form-control" value="{{ request('land_size_min') }}">
+                            <input type="number" name="land_size_min" placeholder="0" class="form-control">
                             <span>m² -</span>
-                            <input type="number" name="land_size_max" placeholder="0" class="form-control" value="{{ request('land_size_max') }}">
+                            <input type="number" name="land_size_max" placeholder="0" class="form-control">
                             <span>m²</span>
                         </div>
                     </div>
-
-                    <!-- Building Size Filter -->
                     <div class="form-group">
                         <label for="building_size">Luas Bangunan</label>
                         <div class="input-range">
-                            <input type="number" name="building_size_min" placeholder="0" class="form-control" value="{{ request('building_size_min') }}">
+                            <input type="number" name="building_size_min" placeholder="0" class="form-control">
                             <span>m² -</span>
-                            <input type="number" name="building_size_max" placeholder="0" class="form-control" value="{{ request('building_size_max') }}">
+                            <input type="number" name="building_size_max" placeholder="0" class="form-control">
                             <span>m²</span>
                         </div>
                     </div>
-
-                    <!-- Property Type Filter -->
+                    <div class="form-group">
+                        <label for="certificate">Sertifikat</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
+                            </label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="property_type">Tipe Properti</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Rumah" {{ request('property_type') == 'Rumah' ? 'checked' : '' }}> Rumah
+                                <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Apartemen" {{ request('property_type') == 'Apartemen' ? 'checked' : '' }}> Apartemen
+                                <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Ruko" {{ request('property_type') == 'Ruko' ? 'checked' : '' }}> Ruko
+                                <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
                             </label>
                             <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Tanah" {{ request('property_type') == 'Tanah' ? 'checked' : '' }}> Tanah
+                                <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
                             </label>
                         </div>
                     </div>
@@ -351,7 +360,6 @@
     --background-color: #f5f5f5;
     --border-radius: 5px;
     --transition-speed: 0.3s;
-    --font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -364,7 +372,7 @@ body {
     color: var(--text-color);
     margin: 0;
     padding-top: 80px;
-    font-family: var(--font-family);
+    font-family: 'Poppins', sans-serif;
 }
 
 html {
@@ -738,82 +746,139 @@ html {
     color: var(--secondary-color);
 }
 
-.btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    color: black; 
-    background-color: white; 
-}
 
-.btn-group-toggle .btn.active {
-    background-color: #4A4AC4;
-    color: white;
-}
+.close {
+        font-size: 24px;
+        color: #333;
+        opacity: 0.7;
+        transition: color 0.3s, opacity 0.3s;
+    }
 
-.btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
-}
+    .close:hover,
+    .close:focus {
+        color: #4A4AC4;
+        opacity: 1;
+    }
 
-.btn-group-toggle .btn input[type="radio"] {
-    display: none;
-}
+    .modal-body input[type="text"],
+    .modal-body input[type="number"],
+    .modal-body input[type="range"],
+    .modal-body select,
+    .modal-body textarea {
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
 
-.modal-body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-}
+    .modal-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
 
-.modal-body .form-group {
-    flex: 1 1 30%;
-}
+    .modal-header, .modal-body, .modal-dialog, label, .btn-group-toggle .btn {
+        font-size: 14px;
+    }
 
-.modal-body .form-group-full {
-    flex: 1 1 100%;
-}
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+    }
 
-.input-range {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
+    .modal-footer .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-.modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 0px;
+    }
 
-.modal-body .btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    color: black; 
-    background-color: white; 
-}
+    .modal-body .form-group {
+        flex: 1 1 30%;
+    }
 
-.modal-body .btn-group-toggle .btn.active {
-    background-color: #5E5DF0;
-    color: white;
-}
+    .input-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-.modal-body .btn-group-toggle .btn:hover {
-    background-color: #4A4AC4;
-    color: white;
-}
+    .btn-group-toggle .btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: white;
+        color: black;
+    }
 
-.modal-dialog.modal-lg {
-    max-width: 40%; 
-}
+    .btn-group-toggle .btn:hover,
+    .btn-group-toggle .btn:active,
+    .btn-group-toggle .btn:focus {
+        color: white;
+        background-color:#4A4AC4;
+        text-decoration: none;
+    }
 
+    .btn-group-toggle .btn input[type="radio"] {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-body .btn-group-toggle .btn.active {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-dialog.modal-lg {
+        max-width: 40%;
+    }
+
+    .btn-reset {
+        background-color: #FF5C5C;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-reset:hover {
+        background-color: #E04040;
+    }
+
+    .btn-search {
+        background-color: #5E5DF0;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-search:hover {
+        background-color: #4A4AC4;
+    }
 
 </style>
 @endsection
