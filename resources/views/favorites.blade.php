@@ -6,13 +6,146 @@
 
     <div class="container mt-4">
         <h1 class="mb-4">My Favorites</h1>
-        <div class="search-bar mb-5">
-        <form action="{{ route('myproperties.search') }}" method="GET" class="input-group justify-content-center">
-            <input type="text" name="search" placeholder="Cari properti disini..">
-            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
-        </form>
+       
+<!-- Search and Filter Buttons -->
+<div class="search-bar mb-5">
+    <form action="{{ route('favorites') }}" method="GET" class="input-group">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search Property..." class="form-control">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-secondary">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary filter-button" data-toggle="modal" data-target="#filterModal">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Filter Modal Dialog Box -->
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+           <div class="modal-body">
+                <form action="{{ route('favorites') }}" method="GET" id="filterForm">
+                    <!-- Status Filter -->
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bedrooms">Kamar Tidur</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bathrooms">Kamar Mandi</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="land_size">Luas Tanah</label>
+                        <div class="input-range">
+                            <input type="number" name="land_size_min" placeholder="0" class="form-control">
+                            <span>m² -</span>
+                            <input type="number" name="land_size_max" placeholder="0" class="form-control">
+                            <span>m²</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="building_size">Luas Bangunan</label>
+                        <div class="input-range">
+                            <input type="number" name="building_size_min" placeholder="0" class="form-control">
+                            <span>m² -</span>
+                            <input type="number" name="building_size_max" placeholder="0" class="form-control">
+                            <span>m²</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="certificate">Sertifikat</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property_type">Tipe Properti</label>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
+                            </label>
+                            <label class="btn btn-outline-primary">
+                                <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
+                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+            </div>
+        </div>
     </div>
+</div>
+
+
 
     @if($favorites->isEmpty())
         <p>Anda belum memiliki properti favorit.</p>
@@ -117,128 +250,7 @@
                 </table>
             </div>
         </div>
-            
-        <!-- Filter Modal Dialog Box -->
-        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="filterModalLabel">Filter</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('search') }}" method="GET" id="filterForm">
-                            <div class="form-group">
-                                <label for="status">Status</label>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="bedrooms">Kamar Tidur</label>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="bathrooms">Kamar Mandi</label>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="land_size">Luas Tanah</label>
-                                <div class="input-range">
-                                    <input type="number" name="land_size_min" placeholder="0" class="form-control">
-                                    <span>m² -</span>
-                                    <input type="number" name="land_size_max" placeholder="0" class="form-control">
-                                    <span>m²</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="building_size">Luas Bangunan</label>
-                                <div class="input-range">
-                                    <input type="number" name="building_size_min" placeholder="0" class="form-control">
-                                    <span>m² -</span>
-                                    <input type="number" name="building_size_max" placeholder="0" class="form-control">
-                                    <span>m²</span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="certificate">Sertifikat</label>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="property_type">Tipe Properti</label>
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
-                                    </label>
-                                    <label class="btn btn-outline-primary">
-                                        <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                        <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         @endsection
 
@@ -351,6 +363,32 @@
             --border-radius: 25px;
             --transition-speed: 0.3s;
             --hover-color: #4A4AC4;
+        }
+
+    
+
+        body {
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            margin: 0;
+            padding-top: 0;
+            font-family: var(--font-family);
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: 70%;
+            overflow-y: scroll;
+            letter-spacing: 0.6px;
+            line-height: 1.4;
+            -webkit-user-select: none;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased;
         }
 
         .container {
@@ -666,6 +704,7 @@
         }
         }
 
+        
         .search-bar {
             width: 100%;
             display: flex;
@@ -673,128 +712,199 @@
             margin-top: 50px;
         }
 
-        .search-bar .input-group {
+        .input-group {
             display: flex;
             align-items: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
-            border: 2px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border: 2px solid var(--border-color) !important;
+            border-radius: var(--border-radius) !important;
             overflow: hidden;
-            background-color: var(--background-color);
-            padding: 5px;
+            background-color: var(--background-color) !important;
+            padding: 5px !important;
+            height: 50px; 
         }
 
-        .search-bar input[type="text"] {
+        .input-group input[type="text"] {
             flex: 1;
-            padding: 10px;
-            border: none;
-            outline: none;
-            font-size: 1rem; 
-            background-color: var(--background-color);
-            color: var(--text-color);
+            padding: 0 10px !important; 
+            border: none !important;
+            outline: none !important;
+            font-size: 1rem;
+            background-color: var(--background-color) !important;
+            color: var(--text-color) !important;
+            box-shadow: none !important;
+            height: 100%; 
         }
 
-        .search-bar button,
-        .search-bar .filter-button {
-            padding: 10px;
-            background: none;
-            color: black;
-            border: none;
+        .input-group input[type="text"]:focus {
+            background-color: var(--background-color) !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .input-group button {
+            padding: 0 10px !important;
+            background: none !important;
+            color: black !important;
+            border: none !important;
             cursor: pointer;
-            transition: color var(--transition-speed) ease;
+            transition: color var(--transition-speed) ease !important;
+            box-shadow: none !important;
+            height: 100%; 
         }
 
-        .search-bar button:hover,
-        .search-bar .filter-button:hover {
-            color: var(--hover-color);
+        .input-group button i {
+            font-size: 1rem;
         }
 
-        .search-bar button i,
-        .search-bar .filter-button i {
-            font-size: 1rem; 
+        .input-group button:focus,
+        .input-group button:active {
+            background-color: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
 
-        .btn-group-toggle .btn {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: 6px;
-        color: black;
-        background-color: white;
-        font-size: 12px;
+        .input-group button:hover {
+            color: #4A4AC4 !important;
+            background-color: transparent !important;
+        }
+ 
+        .close {
+            font-size: 24px;
+            color: #333;
+            opacity: 0.7;
+            transition: color 0.3s, opacity 0.3s;
         }
 
-        .btn-group-toggle .btn.active {
-        background-color: #4A4AC4;
-        color: white;
+        .close:hover,
+        .close:focus {
+            color: #4A4AC4;
+            opacity: 1;
         }
 
-        .btn-group-toggle .btn:hover {
-        background-color: #4A4AC4;
-        color: white;
+        .modal-body input[type="text"],
+        .modal-body input[type="number"],
+        .modal-body input[type="range"],
+        .modal-body select,
+        .modal-body textarea {
+            font-size: 14px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
         }
 
-        .modal-body {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
+        .modal-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
         }
 
-        .modal-body .form-group {
-        flex: 1 1 25%;
-        }
-
-        .modal-body .form-group-full {
-        flex: 1 1 100%;
-        }
-
-        .input-range {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        }
-
-        .btn-group-toggle .btn input[type="radio"] {
-        display: none;
+        .modal-header, .modal-body, .modal-dialog, label, .btn-group-toggle .btn {
+            font-size: 14px;
         }
 
         label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 3px;
-        font-size: 12px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 3px;
         }
 
         .modal-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
         }
 
-        .modal-body .btn-group-toggle .btn {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-right: 6px;
-        color: black;
-        background-color: white;
-        font-size: 12px;
+        .modal-footer .btn {
+            font-size: 14px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 0px;
+        }
+
+        .modal-body .form-group {
+            flex: 1 1 30%;
+        }
+
+        .input-range {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-group-toggle .btn {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: white;
+            color: black;
+        }
+
+        .btn-group-toggle .btn:hover,
+        .btn-group-toggle .btn:active,
+        .btn-group-toggle .btn:focus {
+            color: white;
+            background-color:#4A4AC4;
+            text-decoration: none;
+        }
+
+        .btn-group-toggle .btn input[type="radio"] {
+            background-color: #5E5DF0;
+            color: white;
+            font-weight: normal;
         }
 
         .modal-body .btn-group-toggle .btn.active {
-        background-color: #5E5DF0;
-        color: white;
-        }
-
-        .modal-body .btn-group-toggle .btn:hover {
-        background-color: #4A4AC4;
-        color: white;
+            background-color: #5E5DF0;
+            color: white;
+            font-weight: normal;
         }
 
         .modal-dialog.modal-lg {
-        max-width: 50%;
+            max-width: 40%;
         }
-        
+
+        .btn-reset {
+            background-color: #FF5C5C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-reset:hover {
+            background-color: #E04040;
+        }
+
+        .btn-search {
+            background-color: #5E5DF0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: #4A4AC4;
+        }
 
         </style>
         @endsection

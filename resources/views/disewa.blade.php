@@ -168,7 +168,7 @@
                                 <div class="card-title d-flex justify-content-between align-items-center">
                                     <h5 style="font-size: 20px;">{{ $property->name }}</h5>
                                 </div>
-                                <p class="card-text">{{ $property->city }}, {{ $property->location }}</p>
+                                <p class="card-text">{{ $property->location }}</p>
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
@@ -298,361 +298,410 @@ function resetFilters() {
 @endsection
 
 @section('styles')
-<style>
+    <style>
 
     
-:root {
-  --primary: #23adad;
-  --greyLight: #23adade1;
-  --greyLight-2: #cbe0dd;
-  --greyDark: #2d4848;
-  --btnColor: #5E5DF0;
-}
-
-html {
-  box-sizing: border-box;
-  font-size: 50%;
-  overflow-y: scroll;
-}
-
-body {
-  padding-top: 0px;
-}
-
-.dijual-page {
-  .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3rem;
-    margin: 1rem auto;
-    border-radius: 0.4rem;
-    background: #ffffff;
-    box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
-    width: fit-content;
-  }
-
-  .page__numbers,
-  .page__btn,
-  .page__dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0.4rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-  }
-
-  .page__dots {
-    width: 2rem;
-    height: 2rem;
-    color: var(--greyLight);
-    cursor: initial;
-  }
-
-  .page__numbers {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.2rem;
-    color: var(--greyDark);
-
-    &:hover {
-      color: #ffffff !important;
-      background: #5E5DF0 !important;
+    :root {
+        --primary-color: #5E5DF0;
+        --secondary-color: #4A4AC4;
+        --text-color: #393232;
+        --background-color: #f5f5f5;
+        --border-radius: 5px;
+        --transition-speed: 0.3s;
+        --font-family: "Poppins", sans-serif;
     }
 
-    &.active {
-      color: #ffffff !important;
-      background: #5E5DF0 !important;
-      font-weight: 600 !important;
-      border: 1px solid var(--primary) !important;
+    body {
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        margin: 0;
+        padding-top: 0;
+        font-family: var(--font-family);
     }
-  }
 
-  .page__btn {
-    color: var(--btnColor);
-    pointer-events: none;
-
-    &.active {
-      color: var(--btnColor);
-      pointer-events: initial;
-
-      &:hover {
-        color: var(--primary) !important;
-      }
+    html {
+        box-sizing: border-box;
+        font-size: 70%;
+        overflow-y: scroll;
+        letter-spacing: 0.6px;
+        line-height: 1.4;
+        -webkit-user-select: none;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: subpixel-antialiased;
     }
-  }
 
-  .property-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    max-width: 100%;
-    width: 100%;
-    margin: 8px auto;
-  }
+    .page__numbers,
+    .page__btn,
+    .page__dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.4rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+    }
 
-  .property-card:hover {
-    transform: scale(1.005);
-  }
+    .page__dots {
+        width: 2rem;
+        height: 2rem;
+        color: var(--greyLight);
+        cursor: initial;
+    }
 
-  .badge {
-    font-size: 0.8em;
-    padding: 0.3em 0.8em;
-    margin-right: 8px;
-  }
+    .page__numbers {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.2rem;
+        color: var(--greyDark);
 
-  .card-image img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-  }
+        &:hover {
+        color: #ffffff !important;
+        background: #5E5DF0 !important;
+        }
 
-  .price {
-    font-size: 1.2em;
-    font-weight: bold;
-  }
+        &.active {
+        color: #ffffff !important;
+        background: #5E5DF0 !important;
+        font-weight: 600 !important;
+        border: 1px solid var(--primary) !important;
+        }
+    }
 
-  .card-body {
-    padding: 15px;
-  }
+    .page__btn {
+        color: var(--btnColor);
+        pointer-events: none;
 
-  .card-title h5 {
-    font-size: 18px;
-    font-weight: bold;
-  }
+        &.active {
+        color: var(--btnColor);
+        pointer-events: initial;
 
-  .card-title svg {
-    margin-left: 6px;
-    cursor: pointer;
-  }
+        &:hover {
+            color: var(--primary) !important;
+        }
+        }
+    }
 
-  .card-text {
-    font-size: 12px;
-    color: #555;
-  }
+    .property-card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        max-width: 100%;
+        width: 100%;
+        margin: 8px auto;
+    }
 
-  .card-footer {
-    padding: 8px;
-    background: #f8f9fa;
-  }
+    .property-card:hover {
+        transform: scale(1.005);
+    }
 
-  .card-meta img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    margin-right: 6px;
-  }
+    .badge {
+        font-size: 0.8em;
+        padding: 0.3em 0.8em;
+        margin-right: 8px;
+    }
 
-  .spacer {
-    margin-left: 3px;
-  }
+    .card-image img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
 
-  .property-details p {
-    margin-right: 6px;
-    font-size: 12px;
-  }
+    .price {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
 
-  .property-details svg {
-    margin-right: 3px;
-  }
+    .card-body {
+        padding: 15px;
+    }
 
-  .property-details strong {
-    font-weight: bold;
-  }
+    .card-title h5 {
+        font-size: 18px;
+        font-weight: bold;
+    }
 
-  .property-description {
-    font-size: 12px;
-    color: #555;
-    margin-top: 6px;
-    max-height: 70px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    .card-title svg {
+        margin-left: 6px;
+        cursor: pointer;
+    }
 
-  .page__numbers.active a {
-    color: #ffffff !important;
-    background: var(--primary) !important;
-    font-weight: 600 !important;
-    border: 1px solid var(--primary) !important;
-  }
-  .search-bar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-    flex-direction: column;
-  }
+    .card-text {
+        font-size: 12px;
+        color: #555;
+    }
 
-  .input-group {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      border: 2px solid #ccc;
-      border-radius: 25px;
-      overflow: hidden;
-      background-color: var(--background-color);
-      padding: 5px;
-  }
+    .card-footer {
+        padding: 8px;
+        background: #f8f9fa;
+    }
 
-  .input-group input[type="text"] {
-      flex: 1;
-      padding: 10px;
-      border: none !important; 
-      outline: none !important; 
-      font-size: 1.5rem;
-      background-color: #f5f5f5;
-      color: #333;
-  }
+    .card-meta img {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        margin-right: 6px;
+    }
 
-  .input-group input[type="text"]:focus {
-      outline: none !important; 
-      box-shadow: none; 
-  }
+    .spacer {
+        margin-left: 3px;
+    }
 
-  .input-group button {
-      padding: 10px;
-      background-color: transparent !important; 
-      border: none !important; 
-      box-shadow: none !important; 
-      cursor: pointer;
-      color: black; 
-      transition: color 0.3s ease, background-color 0.3s ease; 
-  }
+    .property-details p {
+        margin-right: 6px;
+        font-size: 12px;
+    }
 
-  .input-group button i {
-      font-size: 1.8rem;
-  }
+    .property-details svg {
+        margin-right: 3px;
+    }
 
-  .input-group button:hover {
-      color: #4A4AC4; 
-      background-color: transparent !important; 
-  }
+    .property-details strong {
+        font-weight: bold;
+    }
 
-  .btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 6px;
-    color: black; 
-    font-size: 12px;
-    background-color: transparent; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
-  }
+    .property-description {
+        font-size: 12px;
+        color: #555;
+        margin-top: 6px;
+        max-height: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-  .btn-group-toggle .btn:hover {
-      color: #4A4AC4 !important; 
-  }
+    .page__numbers.active a {
+        color: #ffffff !important;
+        background: var(--primary) !important;
+        font-weight: 600 !important;
+        border: 1px solid var(--primary) !important;
+    }
+    .search-bar .input-group {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border: 2px solid #ccc;
+        border-radius: 25px;
+        overflow: hidden;
+        background-color: var(--background-color);
+        padding: 5px;
+        margin-top: 90px;
+    }
 
-  .btn-group-toggle .btn:active,
-  .btn-group-toggle .btn:focus {
-      color: #4A4AC4 !important;
-      
-  }
+    .search-bar input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: 1.2rem;
+        background-color: var(--background-color);
+    }
 
-  .modal-body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-  }
+    .input-group input[type="text"]:focus {
+        outline: none !important; 
+        box-shadow: none; 
+    }
 
-  .modal-body .form-group {
-    flex: 1 1 25%;
-  }
+    .input-group button {
+        padding: 10px;
+        background-color: transparent !important; 
+        border: none !important; 
+        box-shadow: none !important; 
+        cursor: pointer;
+        color: black; 
+        transition: color 0.3s ease, background-color 0.3s ease; 
+    }
 
-  .modal-body .form-group-full {
-    flex: 1 1 100%;
-  }
+    .input-group button i {
+        font-size: 1.2rem;
+    }
 
-  .input-range {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+    .input-group button:hover {
+        color: #4A4AC4; 
+        background-color: transparent !important; 
+    }
+    
+    .input-group button:focus {
+        color: #4A4AC4 !important; 
+        background-color: transparent !important; 
+    }
 
-  .btn-group-toggle .btn input[type="radio"] {
-    display: none;
-  }
+    .close {
+        font-size: 24px;
+        color: #333;
+        opacity: 0.7;
+        transition: color 0.3s, opacity 0.3s;
+    }
 
-  label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 3px;
-    font-size: 12px;
-  }
+    .close:hover,
+    .close:focus {
+        color: #4A4AC4;
+        opacity: 1;
+    }
 
-  .modal-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+    .modal-body input[type="text"],
+    .modal-body input[type="number"],
+    .modal-body input[type="range"],
+    .modal-body select,
+    .modal-body textarea {
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
 
-  .modal-body .btn-group-toggle .btn {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 6px;
-    color: black;
-    background-color: white;
-    font-size: 12px;
-  }
+    .modal-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
 
-  .modal-body .btn-group-toggle .btn.active {
-    background-color: #4A4AC4 !important;
-  }
+    .modal-header, .modal-body, .modal-dialog, label, .btn-group-toggle .btn {
+        font-size: 14px;
+    }
 
-  .modal-body .btn-group-toggle .btn:hover {
-    background-color: #4A4AC4 !important;
-  }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+    }
 
-  .modal-dialog.modal-lg {
-    max-width: 30%;
-  }
+    .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+    }
 
-  #ProfilePicture {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .keyword-suggestions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;  
-    margin-top: 20px; 
-  }
+    .modal-footer .btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
 
-  .keyword-btn { 
-      background-color: #f0f0f0;
-      border: 1px solid #ddd;
-      border-radius: 30px;  
-      padding: 10px 25px;   
-      font-size: 1.5rem;  
-      font-weight: bold;    
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;  
-      color: grey;
-  }
+    .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 0px;
+    }
 
-  .keyword-btn:hover {
-      background-color: #4A4AC4 !important; 
-      transform: scale(1.05);  
-      color: #ffffff;
-  }
+    .modal-body .form-group {
+        flex: 1 1 30%;
+    }
 
-  .keyword-btn:active,
-  .keyword-btn:focus {
-      background-color: #4A4AC4 !important; 
-      color: #ffffff;
-      box-shadow: none !important; 
-  }
+    .input-range {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .btn-group-toggle .btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+        background-color: white;
+        color: black;
+    }
+
+    .btn-group-toggle .btn:hover,
+    .btn-group-toggle .btn:active,
+    .btn-group-toggle .btn:focus {
+        color: white;
+        background-color:#4A4AC4;
+        text-decoration: none;
+    }
+
+    .btn-group-toggle .btn input[type="radio"] {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-body .btn-group-toggle .btn.active {
+        background-color: #5E5DF0;
+        color: white;
+        font-weight: normal;
+    }
+
+    .modal-dialog.modal-lg {
+        max-width: 40%;
+    }
+
+    .btn-reset {
+        background-color: #FF5C5C;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-reset:hover {
+        background-color: #E04040;
+    }
+
+    .btn-search {
+        background-color: #5E5DF0;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .btn-search:hover {
+        background-color: #4A4AC4;
+    }
+
+    .keyword-suggestions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;  
+        margin-top: 15px;
+    }
+
+    .keyword-btn {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 25px;  
+        padding: 7px 15px;    
+        font-size: 14px;  
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        color: grey;
+    }
+
+    .keyword-btn:hover {
+        background-color: #4A4AC4 !important;
+        transform: scale(1.05);  
+        color: #ffffff;
+    }
+
+
+    .keyword-btn:active,
+    .keyword-btn:focus {
+        background-color: #4A4AC4 !important; 
+        color: #ffffff;
+        box-shadow: none !important; 
+    }
 
 
 </style>
