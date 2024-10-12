@@ -23,7 +23,7 @@
                 <div class="form-group-row">
                     <label for="documentType">Jenis Sertifikat</label>
                     <div class="input-container">
-                        <select class="form-control" id="documentType" name="documentType" required>
+                        <select class="form-control @error('documentType') is-invalid @enderror" id="documentType" name="documentType" required>
                             <option value="" disabled selected>Pilih jenis sertifikat</option>
                             <option value="SHM" {{ old('documentType', $document->type ?? '') == 'SHM' ? 'selected' : '' }}>SHM</option>
                             <option value="SHGB" {{ old('documentType', $document->type ?? '') == 'SHGB' ? 'selected' : '' }}>SHGB</option>
@@ -31,31 +31,38 @@
                             <option value="Hak Pakai" {{ old('documentType', $document->type ?? '') == 'Hak Pakai' ? 'selected' : '' }}>Hak Pakai</option>
                         </select>
                     </div>
+                    @error('documentType')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Document Name -->
                 <div class="form-group-row">
                     <label for="documentName">Nama Dokumen</label>
                     <div class="input-container">
-                        <input type="text" class="form-control" id="documentName" name="documentName" value="{{ old('documentName', $document->name ?? '') }}">
+                        <input type="text" class="form-control @error('documentName') is-invalid @enderror" id="documentName" name="documentName" value="{{ old('documentName', $document->name ?? '') }}" required>
                     </div>
-                </div>
-
-                <!-- Document Status -->
-                <div class="form-group-row">
-                    <label for="documentStatus">Status Sertifikat</label>
-                    <div class="input-container">
-                        <p class="form-control-plaintext" id="documentStatus">{{ $document->status ?? 'N/A' }}</p>
-                    </div>
+                    @error('documentName')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Upload Document -->
                 <div class="form-group-row">
                     <label for="document">Upload Dokumen PDF (Maksimal 1 Dokumen)</label>
                     <div class="input-container">
-                        <input type="file" class="form-control" id="document" name="document" accept=".pdf">
-                        <p class="helper-text">Format dokumen harus .pdf. Maksimal 1 dokumen yang dapat diunggah.</p>
+                        <input type="file" class="form-control @error('document') is-invalid @enderror" id="document" id="document" name="document" accept=".pdf" required>
+                        <p class="helper-text">Hanya 1 dokumen dengan format pdf dan ukuran maksimal 5 MB yang dapat diunggah.</p>
                     </div>
+                    @error('document')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <!-- Submit Button -->
