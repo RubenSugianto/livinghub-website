@@ -22,9 +22,9 @@ class DocumentController extends Controller
         $document = Document::where('property_id', $property_id)->firstOrFail();
 
         $request->validate([
-            'documentType' => 'required|string',
-            'documentName' => 'required|string',
-            'document' => 'nullable|mimes:pdf|max:10240',
+            'documentType' => 'required|string|max:50',
+            'documentName' => 'required|string|max:100',
+            'document' => 'required|mimes:pdf|max:5120',
         ]);
     
         $document->type = $request->input('documentType');

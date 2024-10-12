@@ -33,7 +33,13 @@
             <div class="tags">
                 <span class="tag">{{ $property->status }}</span>
                 <span class="tag">{{ $property->type }}</span>
+                <span class="tag">{{ $document->type }}</span>
+                @if($document->status == 'Approved') 
+                    <span class="tagapprove">Document Verified <i class="bi bi-check2-all"></i></span>
+                @endif
             </div>
+            
+            
 
             <div class="like-favorite-buttons">
             <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -485,6 +491,15 @@
 
         .tag {
             background-color: #777;
+            border-radius: 10px;
+            padding: 10px 15px; 
+            font-size: 18px; 
+            font-weight: bold;
+            color: white;
+        }
+
+        .tagapprove {
+            background-color: #1aad6e;
             border-radius: 10px;
             padding: 10px 15px; 
             font-size: 18px; 

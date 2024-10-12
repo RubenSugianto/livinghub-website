@@ -342,6 +342,16 @@
                     <td>${data[0].type}</td>
                     <td>${data[1].type}</td>
                 </tr>
+                <tr>
+                    <td>Document Type</td>
+                    <td>${data[0].document ? data[0].document.type : '-'}</td>
+                    <td>${data[1].document ? data[1].document.type : '-'}</td>
+                </tr>
+                <tr>
+                    <td>Document Status</td>
+                    <td>${data[0].document ? data[0].document.status : '-'}</td>
+                    <td>${data[1].document ? data[1].document.status : '-'}</td>
+                </tr>
                     `;
                     comparisonTableContainer.style.display = 'block';
                 });
