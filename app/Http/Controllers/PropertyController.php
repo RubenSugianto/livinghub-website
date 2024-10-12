@@ -26,7 +26,8 @@ class PropertyController extends Controller
     public function show(Property $property)
     {
         $propertyImages = PropertyImage::where('property_id', $property->id)->get();
-        return view('property', compact('property', 'propertyImages'));
+        $document = $property->document;
+        return view('property', compact('property', 'propertyImages', 'document'));
     }
 
     // Menampilkan form untuk menambahkan properti
@@ -122,8 +123,9 @@ class PropertyController extends Controller
         $property = Property::findOrFail($id);
         $propertyImages = PropertyImage::where('property_id', $id)->get(); // Add this line
         $imageIds = $propertyImages->pluck('id'); // Get only the IDs
+        $document = $property->document;
 
-        return view('properties.edit', compact('property', 'propertyImages', 'imageIds')); // Update this line
+        return view('properties.edit', compact('property', 'propertyImages', 'imageIds', 'document')); // Update this line
     }
  
      // Update a specific property
@@ -413,10 +415,28 @@ public function likeCount(Property $property)
       // Compare properties
       public function compare(Request $request)
       {
-          $propertyIds = $request->input('propertyIds');
-          $properties = Property::whereIn('id', $propertyIds)->get();
+        $propertyIds = $request->input('propertyIds');
+        $properties = Property::whereIn('id', $propertyIds)->get();
+        $documents = Document::whereIn('property_id', $propertyIds)->get()->keyBy('property_id');
   
-          return response()->json($properties);
+        $response = [];
+        foreach ($properties as $property) {
+            $response[] = [
+                'id' => $property->id,
+                'name' => $property->name,
+                'price' => $property->price,
+                'location' => $property->location,
+                'surfaceArea' => $property->surfaceArea,
+                'buildingArea' => $property->buildingArea,
+                'bedroom' => $property->bedroom,
+                'bathroom' => $property->bathroom,
+                'electricity' => $property->electricity,
+                'status' => $property->status,
+                'type' => $property->type,
+                'document' => $documents[$property->id] ?? null, // Get documents related to this property
+            ];
+        }
+        return response()->json($response);
       }
   
       // Show comments of a property
