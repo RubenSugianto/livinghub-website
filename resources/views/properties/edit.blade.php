@@ -168,9 +168,16 @@
             </div>
 
             <div class="form-group-row">
-                <label for="sertifikat">Sertifikat Properti</label>
+                <label for="jenissertifikat">Jenis Sertifikat</label>
                 <div class="input-container">
-                    <input type="text" class="form-control" id="sertifikat" name="sertifikat" value="{{ old('sertifikat', $property->type) }}" readonly>
+                    <input type="text" class="form-control" id="jenissertifikat" name="jenissertifikat" value="{{ old('jenissertifikat', $document->type) }}" readonly>
+                </div>
+            </div>
+
+            <div class="form-group-row">
+                <label for="statussertifikat">Status Sertifikat</label>
+                <div class="input-container">
+                    <input type="text" class="form-control" id="statussertifikat" name="statussertifikat" value="{{ old('statussertifikat', $document->status) }}" readonly>
                 </div>
             </div>
 
