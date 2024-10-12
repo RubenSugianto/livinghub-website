@@ -26,7 +26,7 @@ class ProfileController extends Controller
             'phone' => 'required|string|max:20',
             'gender' => 'required|string|max:10',
             'age' => 'required|integer|min:0',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Change to 'avatar'
+            'profilepicture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
     
         $user->name = $request->input('name');
@@ -39,7 +39,7 @@ class ProfileController extends Controller
         // Handle avatar removal
         if ($request->input('remove_picture') == '1') {
             if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
-                Storage::delete('public/users_avatar/' . $user->avatar);
+                Storage::delete('public/users-avatar/' . $user->avatar);
             }
             $user->avatar = null;
         } else if ($request->hasFile('profilepicture')) {
