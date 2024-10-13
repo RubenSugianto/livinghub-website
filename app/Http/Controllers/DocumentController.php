@@ -23,11 +23,17 @@ class DocumentController extends Controller
 
         $request->validate([
             'documentType' => 'required|string|max:50',
+            'customType' => 'nullable|string|max:50',
             'documentName' => 'required|string|max:100',
             'document' => 'required|mimes:pdf|max:5120',
         ]);
-    
-        $document->type = $request->input('documentType');
+
+        $documentType = $request->input('documentType');
+        if ($documentType === 'Lainnya') {
+            $documentType = $request->input('customType');  // Use the custom document type
+        }
+
+        $document->type = $documentType;
     
         $document->name = $request->input('documentName');
     

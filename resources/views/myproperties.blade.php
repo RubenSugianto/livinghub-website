@@ -227,7 +227,8 @@
                             <th>Lokasi</th>
                             <th>Detail</th>
                             <th>Terakhir Update</th>
-                            <th>Status</th>
+                            <th>Status Properti</th>
+                            <th>Status Dokumen</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -249,6 +250,7 @@
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</td>
                                 <td>{{ $property->check }}</td>
+                                <td>{{ $property->document->status }}</td>
                                 <td>
                                     <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
