@@ -29,9 +29,16 @@
                             <option value="SHGB" {{ old('documentType', $document->type ?? '') == 'SHGB' ? 'selected' : '' }}>SHGB</option>
                             <option value="SHGU" {{ old('documentType', $document->type ?? '') == 'SHGU' ? 'selected' : '' }}>SHGU</option>
                             <option value="Hak Pakai" {{ old('documentType', $document->type ?? '') == 'Hak Pakai' ? 'selected' : '' }}>Hak Pakai</option>
+                            <option value="Lainnya" {{ !in_array(old('documentType', $document->type ?? ''), ['SHM', 'SHGB', 'SHGU', 'Hak Pakai']) ? 'selected' : '' }}>
+                                Lainnya
+                            </option>
                         </select>
+                        <input type="text" class="form-control @error('customType') is-invalid @enderror" id="customType" name="customType"
+                        placeholder="Isi tipe dokumen lainnya"
+                        value="{{ old('customType', !in_array($document->type ?? '', ['SHM', 'SHGB', 'SHGU', 'Hak Pakai']) ? $document->type : '') }}"
+                        style="{{ !in_array(old('documentType', $document->type ?? ''), ['SHM', 'SHGB', 'SHGU', 'Hak Pakai']) ? '' : 'display: none;' }}; margin-top: 10px;">
                     </div>
-                    @error('documentType')
+                        @error('documentType')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -73,6 +80,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const documentTypeSelect = document.getElementById('documentType');
+        const customTypeInput = document.getElementById('customType');
+
+        // Initially check if the "Lainnya" option is selected, and show the input field if it is
+        if (documentTypeSelect.value === 'Lainnya') {
+            customTypeInput.style.display = 'block';
+        }
+
+        // Event listener to toggle visibility of the custom input based on selection
+        documentTypeSelect.addEventListener('change', function () {
+            if (this.value === 'Lainnya') {
+                customTypeInput.style.display = 'block';
+            } else {
+                customTypeInput.style.display = 'none';
+                customTypeInput.value = '';  // Reset custom input if it's hidden
+            }
+        });
+    });
+</script>
+
+
+
 
 <style>
 .container {
