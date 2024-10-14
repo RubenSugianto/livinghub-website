@@ -383,6 +383,7 @@ h1 {
     background: #f9f9f9; 
     transition: border-color 0.3s ease;
     min-height: 40px; 
+    line-height: 1.2;
 }
 
 .form-control:focus {

@@ -33,6 +33,11 @@
                                 Lainnya
                             </option>
                         </select>
+
+                        <span class="dropdown-icon position-absolute" style="right: 20px; top: 32%">
+                         <i class="bi bi-caret-down-fill"></i>
+                        </span>
+
                         <input type="text" class="form-control @error('customType') is-invalid @enderror" id="customType" name="customType"
                         placeholder="Isi tipe dokumen lainnya"
                         value="{{ old('customType', !in_array($document->type ?? '', ['SHM', 'SHGB', 'SHGU', 'Hak Pakai']) ? $document->type : '') }}"
@@ -155,12 +160,14 @@ h2 {
 
 .form-control {
     width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ced4da;
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    border: 1px solid #DDE3EC; 
+    background: #f9f9f9; 
     transition: border-color 0.3s ease;
+    min-height: 40px; 
+    line-height: 1.2;
 }
-
 .form-control:focus {
     border-color: #5E5DF0;
     box-shadow: 0 0 5px rgba(94, 93, 240, 0.25);
