@@ -22,4 +22,10 @@ class Document extends Model
         'images',
         'status',
     ];
+
+    // Document.php
+    public function property() {
+        return $this->belongsTo(Property::class);
+    }
+
 }
