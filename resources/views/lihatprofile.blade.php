@@ -211,11 +211,31 @@ input[type="file"] {
 </style>
 @endsection
 @section('content')
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your account? This action is permanent and cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="sidebar">
         <a href="#" class="active">Personal Info</a>
         <a href="#">Change Password</a>
-        <a class="delete-account" href="#">Delete Account</a>
+        <a class="delete-account" href="javascript:void(0);" data-toggle="modal" data-target="#deleteAccountModal">Delete Account</a>
     </div>
     <div class="content">
         <div class="profile-header">
@@ -278,55 +298,91 @@ input[type="file"] {
     </div>
 </div>
 <script>
-    document.getElementById('profilepicture').addEventListener('change', function(event) {
-        previewImage(event);
-        document.getElementById('removePicture').value = '0'; 
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('profilepicture').addEventListener('change', function(event) {
+            previewImage(event);
+            document.getElementById('removePicture').value = '0'; 
+        });
 
-    function previewImage(event) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            const output = document.getElementById('profilePicturePreview');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    document.getElementById('deletePictureBtn').addEventListener('click', function() {
-        document.getElementById('profilePicturePreview').src = '{{ asset('defaultprofilepicture.png') }}';
-        document.getElementById('removePicture').value = '1';
-    });
-
-    document.getElementById('profileForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        const confirmSave = confirm('Are you sure you want to save the changes?');
-        if (confirmSave) {
-            fetch('{{ route('profile.update') }}', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the profile picture in the UI
-                    document.getElementById('profilePicturePreview').src = data.profile_picture;
-                    document.querySelector('.dropdown-content .auth-text img').src = data.profile_picture;
-
-                    // Redirect to home page after saving
-                    window.location.href = '{{ route('home') }}';
-                } else {
-                    alert('Something went wrong. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profilePicturePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
         }
+
+        document.getElementById('deletePictureBtn').addEventListener('click', function() {
+            document.getElementById('profilePicturePreview').src = '{{ asset('defaultprofilepicture.png') }}';
+            document.getElementById('removePicture').value = '1';
+        });
+
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const confirmSave = confirm('Are you sure you want to save the changes?');
+            if (confirmSave) {
+                fetch('{{ route('profile.update') }}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update the profile picture in the UI
+                        document.getElementById('profilePicturePreview').src = data.profile_picture;
+                        document.querySelector('.dropdown-content .auth-text img').src = data.profile_picture;
+
+                        // Redirect to home page after saving
+                        window.location.href = '{{ route('home') }}';
+                    } else {
+                        alert('Something went wrong. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+        
+        // Show delete account modal
+        document.querySelector('.delete-account').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('deleteAccountModal').style.display = 'block';
+        });
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('deleteAccountModal').style.display = 'none';
+        }
+
+        function removeBackdrop() {
+            let backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('deleteAccountModal') || 
+                event.target.matches('#deleteAccountModal .btn-secondary') || 
+                event.target.matches('#deleteAccountModal .btn-close')
+            ) {
+                closeModal();
+                removeBackdrop();
+            }
+        });
+
+        document.getElementById('confirmDeleteAccount').addEventListener('click', function() {
+            console.log('Delete button clicked');
+            document.getElementById('delete-account-form').submit();
+        });
     });
 </script>
 
