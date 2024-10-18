@@ -68,4 +68,9 @@ class Property extends Model
     {
         return $this->hasMany(Comment::class, 'property_id');
     }
+
+    public function propertyImages()
+    {
+        return $this->hasMany(PropertyImage::class, 'property_id', 'id');
+    }
 }
