@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
         Route::post('/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
     });
-});
+}); 
 
 // Favorites Page Routes
 Route::middleware(['auth'])->group(function () {
@@ -81,8 +81,8 @@ Route::post('/compare-properties', [PropertyController::class, 'compare'])->name
 
 // Likes Page Routes
 Route::middleware(['auth'])->group(function () {
-    Route::prefix('likes')->group(function () { // Changed 'favorites' to 'likes' for consistency
-        Route::get('/', [LikesController::class, 'index'])->name('likes'); // Updated the route name for clarity
+    Route::prefix('likes')->group(function () { 
+        Route::get('/', [LikesController::class, 'index'])->name('likes');
         Route::delete('/{id}', [LikesController::class, 'destroy'])->name('likes.destroy');
     });
 });
@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
 //My property page
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties.index');
+    Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties');
     Route::get('/myproperties/search', [MyPropertyController::class, 'search'])->name('myproperties.search');
     Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
     Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');

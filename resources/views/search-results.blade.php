@@ -8,7 +8,7 @@
 
 <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
-        <input type="text" name="search" id="search-input" placeholder="Cari properti disini.." class="form-control">
+        <input type="text" name="search" id="search-input" placeholder="Cari Properti..." class="form-control">
         <button type="submit" class="btn btn-outline-secondary">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
@@ -111,9 +111,6 @@
                             <label class="btn btn-outline-primary">
                                 <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
                             </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
-                            </label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -172,6 +169,7 @@
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
+                                <span class="badge bg-secondary">{{ $property->documents->first()->type }}</span>
 
                                 </div>
                                 <div class="property-details mt-2 d-flex flex-wrap align-items-center">
@@ -405,7 +403,7 @@ function resetFilters() {
     }
 
     .badge {
-        font-size: 0.8em;
+        font-size: 1em;
         padding: 0.3em 0.8em;
         margin-right: 8px;
     }

@@ -44,9 +44,13 @@ class FavoritesController extends Controller
                       ->orWhere('price', 'LIKE', '%' . $searchKeyword . '%')
                       ->orWhere('status', 'LIKE', '%' . $searchKeyword . '%')
                       ->orWhere('type', 'LIKE', '%' . $searchKeyword . '%');
-            });
-        }
-
+                      
+                      $query->orWhereHas('documents', function ($query) use ($searchKeyword) {
+                        $query->where('type', 'LIKE', "%{$searchKeyword}%");
+                    });
+                });
+            }
+            
         // Filter by status
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
@@ -115,6 +119,13 @@ class FavoritesController extends Controller
             $query->where('location', 'LIKE', '%' . $kota . '%');
         }
 
+
+        if ($request->has('certificate') && $request->input('certificate') != '') {
+            $certificateType = $request->input('certificate');
+            $query->whereHas('documents', function ($query) use ($certificateType) {
+                $query->where('type', $certificateType);
+            });
+        }
         // Paginate the results (default to 10 per page)
         $favorites = $query->paginate(10);
         $title = "Favorite Properties";

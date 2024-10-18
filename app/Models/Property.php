@@ -51,6 +51,10 @@ class Property extends Model
     {
         return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
     }
+    public function favorites()
+{
+    return $this->belongsToMany(Property::class, 'favorites', 'user_id', 'property_id');
+}
 
     // Relasi likes
     public function likes()
@@ -69,7 +73,13 @@ class Property extends Model
         return $this->hasMany(Comment::class, 'property_id');
     }
 
-    public function propertyImages()
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'property_id');
+    }
+    
+        public function propertyImages()
     {
         return $this->hasMany(PropertyImage::class, 'property_id', 'id');
     }

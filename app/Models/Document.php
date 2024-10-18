@@ -11,21 +11,21 @@ class Document extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $table = "documents";
+    protected $table = 'documents';
 
-    protected $guarded = ['id'];
-
+    // It's better to use either guarded or fillable, not both.
     protected $fillable = [
         'property_id',
         'user_id',
         'type',
-        'images',
+        'file',    // Changed 'images' to 'file' to match the migration
         'status',
     ];
 
-    // Document.php
-    public function property() {
-        return $this->belongsTo(Property::class);
-    }
 
+    // Define the inverse relationship with the Property model
+    public function property()
+    {
+        return $this->belongsTo(Property::class, 'property_id');
+    }
 }

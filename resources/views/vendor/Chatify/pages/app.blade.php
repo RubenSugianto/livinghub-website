@@ -78,15 +78,15 @@
         {{-- Custom Security Message --}}
         <div style="border: 1px solid #ccc; background-color: #f9f9f9; border-radius: 8px; padding: 10px 20px; max-width: 500px; margin: 20px auto; text-align: center;">
             <p style="font-size: 14px; color: #555; line-height: 1.4;">
-                <strong>All messages are monitored for security purposes to prevent scams and violations.
-                Please do not share personal details.</strong>
+                <strong> Semua pesan dipantau untuk tujuan keamanan guna mencegah penipuan dan pelanggaran.
+                Mohon untuk tidak membagikan informasi pribadi.</strong>
             </p>
         </div>
 
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el"><span>Pilih obrolan untuk memulai pengiriman pesan</span></p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">

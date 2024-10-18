@@ -31,9 +31,9 @@
 
 <!-- Search and filter buttons -->
 <div class="search-bar mb-5">
-    <h2 style="text-align: center; font-weight: bold;">Search for properties at this agency</h2>
+    <h2 style="text-align: center; font-weight: bold;">Cari properti di agen ini</h2>
     <form action="{{ route('profileseller', $seller->id) }}" method="GET" class="input-group">
-        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search Property...">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Cari Properti...">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
             <i class="fa fa-filter" aria-hidden="true"></i>
@@ -131,9 +131,6 @@
                             <label class="btn btn-outline-primary">
                                 <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
                             </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
-                            </label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -167,7 +164,7 @@
 <div class="row">
     @if($properties->isEmpty())
         <div class="col-12 text-center">
-            <p class="text-muted">Property not found.</p>
+            <p class="text-muted">Property tidak ditemukan.</p>
         </div>
     @else
         @foreach($properties as $property)

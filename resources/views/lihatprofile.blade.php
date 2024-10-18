@@ -217,15 +217,15 @@ input[type="file"] {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                <h5 class="modal-title" id="deleteAccountModalLabel">Konfirmasi Penghapusan Akun</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete your account? This action is permanent and cannot be undone.
+            Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini bersifat permanen dan tidak dapat dibatalkan.
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Yes, Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteAccount">Iya</button>
             </div>
         </div>
     </div>
@@ -233,23 +233,24 @@ input[type="file"] {
 
 <div class="container">
     <div class="sidebar">
-        <a href="#" class="active">Personal Info</a>
-        <a href="#">Change Password</a>
-        <a class="delete-account" href="javascript:void(0);" data-toggle="modal" data-target="#deleteAccountModal">Delete Account</a>
+
+        <a href="#" class="active">Informasi Pribadi</a>
+        <a href="#">Ubah Kata Sandi</a>
+        <a class="delete-account" href="javascript:void(0);" data-toggle="modal" data-target="#deleteAccountModal">Hapus Akun</a>
     </div>
     <div class="content">
         <div class="profile-header">
-            <h1>Personal Info</h1>
+            <h1>Informasi Pribadi</h1>
         </div>
         <div class="profile-pic">
         <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
-            <button type="button" class="delete-btn" id="deletePictureBtn">Remove Image</button>
+            <button type="button" class="delete-btn" id="deletePictureBtn">Hapus Gambar</button>
         </div>
         <form id="profileForm" action="{{ route('profile.update') }}" method="PUT" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="profilepicture">Add / Edit Profile Picture</label>
+                <label for="profilepicture">Tambah / Edit Foto Profil</label>
                 <label for="profilepicture" class="custom-file-upload">
                     <i class="fa fa-cloud-upload"></i> Upload File
                 </label>
@@ -257,7 +258,7 @@ input[type="file"] {
                 <input type="hidden" name="remove_picture" id="removePicture" value="0">
             </div>
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="name">Nama Lengkap</label>
                 <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
                 @error('name')
                 <div class="invalid-feedback">
@@ -270,25 +271,25 @@ input[type="file"] {
                 <input type="text" id="username" name="username" value="{{ old('username', $profile->username) }}">
             </div>
             <div class="form-group">
-                <label for="email">Email address</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}">
             </div>
             <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone">Nomor Telepon</label>
                 <input type="text" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}">
             </div>
             <div class="form-group">
-                <label for="gender">Gender</label>
+                <label for="gender">Jenis Kelamin</label>
                 <select id="gender" name="gender">
                     <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
                     <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="age">Age</label>
+                <label for="age">Umur</label>
                 <input type="number" id="age" name="age" value="{{ old('age', $profile->age) }}">
             </div>
-            <button type="submit" class="btn-primary">Save Changes</button>
+            <button type="submit" class="btn-primary">Simpan</button>
         </form>
 
         <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" style="display: none;">
