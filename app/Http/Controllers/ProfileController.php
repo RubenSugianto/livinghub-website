@@ -61,4 +61,29 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function destroy()
+    {
+        $user = Auth::user();
+
+        $properties = $user->properties()->with('propertyImages', 'document')->get();
+
+        if (!$properties->isEmpty()) {
+            foreach ($properties as $property) {
+                $property->propertyImages()->delete();
+                $property->document()->delete();
+            }
+            $user->properties()->delete();
+        }
+
+        if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
+            Storage::delete('public/users-avatar/' . $user->avatar);
+        }
+
+        Auth::logout();
+
+        $user->delete();
+
+        return redirect()->route('home')->with('success', 'Profile deleted successfully.');
+    }
+
 }

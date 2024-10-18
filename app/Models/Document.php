@@ -22,6 +22,7 @@ class Document extends Model
         'status',
     ];
 
+
     // Define the inverse relationship with the Property model
     public function property()
     {

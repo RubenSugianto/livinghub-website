@@ -15,6 +15,8 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\showSellerProfileController;
+use App\Http\Controllers\AdminController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -104,4 +106,15 @@ Route::post('/comments', [CommentController::class, 'store'])->middleware('auth'
 Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
 
 
+// Admin Property
+Route::get('/adminproperty', [AdminController::class, 'showPendingProperties'])->middleware('auth')->name('admin.property'); 
+Route::patch('/property/approve/{id}', [AdminController::class, 'approveProperty'])->middleware('auth')->name('property.approve');
+Route::patch('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->middleware('auth')->name('property.reject');
 
+// Admin Document
+Route::get('/admindocument', [AdminController::class, 'showDocuments'])->middleware('auth')->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
+Route::patch('/document/{id}/approve', [AdminController::class, 'approveDocument'])->middleware('auth')->name('document.approve');
+Route::patch('/document/{id}/decline', [AdminController::class, 'declineDocument'])->middleware('auth')->name('document.decline');
+
+// Admin Dashboard
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('admin.dashboard');
