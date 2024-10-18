@@ -12,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained();
             $table->string('name');
-            $table->integer('price');
+            $table->decimal('price', 20, 2);
             $table->string('city');
             $table->string('location');
             $table->string('full_location');

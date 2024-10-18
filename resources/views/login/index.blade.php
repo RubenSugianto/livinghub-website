@@ -268,7 +268,7 @@ h2 {
 
                     <div class="form-floating">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
-                        <label for="email">Email address</label>
+                        <label for="email">Email</label>
                         @error('email')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -278,7 +278,7 @@ h2 {
 
                     <div class="form-floating password-toggle">
                         <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                        <label for="password">Password</label>
+                        <label for="password">Kata Sandi</label>
                         <span class="toggle-icon" onclick="togglePasswordVisibility()"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
@@ -291,7 +291,7 @@ h2 {
                     </a>
 
                     <small class="d-block text-center mt-4">Belum memiliki akun? <a class="small-link" href="/register">Register</a></small>
-                    <small class="d-block text-center mt-4"><a class="small-link" href="/forgot-password">Forgot your password?</a></small>
+                    <small class="d-block text-center mt-4"><a class="small-link" href="/forgot-password">Lupa password?</a></small>
                     <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Login</button>
                 </form>
             </main>

@@ -109,7 +109,7 @@
             </div>
             <div class="formbold-input-flex">
                 <div>
-                    <label for="electricity" class="formbold-form-label">Listrik</label>
+                    <label for="electricity" class="formbold-form-label">Listrik(Watt)</label>
                     <input type="number" class="formbold-form-input" id="electricity" name="electricity" required>
                 </div>
                 <div>
@@ -568,3 +568,4 @@
 </style>
 
 @endsection
+    

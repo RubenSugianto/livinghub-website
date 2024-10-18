@@ -25,8 +25,12 @@ class showSellerProfileController extends Controller
                       ->orWhere('price', 'LIKE', '%' . $searchKeyword . '%')
                       ->orWhere('status', 'LIKE', '%' . $searchKeyword . '%')
                       ->orWhere('type', 'LIKE', '%' . $searchKeyword . '%');
-            });
-        }
+          
+                      $query->orWhereHas('documents', function ($query) use ($searchKeyword) {
+                        $query->where('type', 'LIKE', "%{$searchKeyword}%");
+                    });
+                });
+            }
 
         if ($request->has('status') && $request->input('status') != '') {
             $status = $request->input('status');
@@ -89,6 +93,13 @@ class showSellerProfileController extends Controller
         if ($request->has('kota') && $request->input('kota') != '') {
             $kota = $request->input('kota');
             $query->where('location', 'LIKE', '%' . $kota . '%');
+        }
+
+        if ($request->has('certificate') && $request->input('certificate') != '') {
+            $certificateType = $request->input('certificate');
+            $query->whereHas('documents', function ($query) use ($certificateType) {
+                $query->where('type', $certificateType);
+            });
         }
 
         $properties = $query->with('images')->paginate(20);

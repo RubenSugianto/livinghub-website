@@ -133,10 +133,10 @@ class PropertyController extends Controller
      {
          $request->validate([
              'name' => 'required|string|max:255',
-             'price' => 'required|integer',
-             'city' => ['required', 'string'],
-            'location' => ['required', 'string'],
-            'full_location' => ['required', 'string', 'max:255'], 
+             'price' => 'required|numeric|min:0', // Changed to numeric and removed max limit
+             'city' => 'required|string',
+             'location' => 'required|string',
+             'full_location' => 'required|string|max:255', 
              'description' => 'required|string',
              'bedroom' => 'required|integer',
              'bathroom' => 'required|integer',
@@ -148,7 +148,8 @@ class PropertyController extends Controller
              'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
              'existing_images' => 'array', // Array of existing image IDs (hidden inputs in the form)
          ]);
-     
+         
+
          $property = Property::findOrFail($id);
          $property->update($request->except('images', 'existing_images'));
      
@@ -223,23 +224,23 @@ class PropertyController extends Controller
     {
         $query = Property::query();
 
-        // Filter berdasarkan berbagai field
+       // Filter based on various fields, including document type
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($query) use ($search) {
+                // Filter properties based on property fields
                 $query->where('name', 'LIKE', "%{$search}%")
-                      ->orWhere('location', 'LIKE', "%{$search}%")
-                      ->orWhere('description', 'LIKE', "%{$search}%")
-                      ->orWhere('price', 'LIKE', "%{$search}%")
-                      ->orWhere('status', 'LIKE', "%{$search}%")
-                      ->orWhere('type', 'LIKE', "%{$search}%");
-            });
-        }
+                    ->orWhere('location', 'LIKE', "%{$search}%")
+                    ->orWhere('description', 'LIKE', "%{$search}%")
+                    ->orWhere('price', 'LIKE', "%{$search}%")
+                    ->orWhere('status', 'LIKE', "%{$search}%")
+                    ->orWhere('type', 'LIKE', "%{$search}%");
 
-        // Filter tambahan berdasarkan field individual
-        if ($request->has('status') && $request->input('status') != '') {
-            $status = $request->input('status');
-            $query->where('status', $status);
+                // Join with the documents table to filter based on document type
+                $query->orWhereHas('documents', function ($query) use ($search) {
+                    $query->where('type', 'LIKE', "%{$search}%");
+                });
+            });
         }
 
         if ($request->has('bedrooms') && $request->input('bedrooms') != '') {
@@ -298,6 +299,13 @@ class PropertyController extends Controller
         if ($request->has('kota')) {
             $kota = $request->input('kota');
             $query->where('location', 'LIKE', "%{$kota}%");
+        }
+
+        if ($request->has('certificate') && $request->input('certificate') != '') {
+            $certificateType = $request->input('certificate');
+            $query->whereHas('documents', function ($query) use ($certificateType) {
+                $query->where('type', $certificateType);
+            });
         }
 
         // Paginasi hasil pencarian

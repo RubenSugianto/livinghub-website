@@ -10,7 +10,7 @@
         <form action="{{ route('simulasikpr.calculate') }}" method="POST" class="kpr-form">
             @csrf
             <div class="form-group">
-                <label for="harga_rumah">Harga Rumah</label>
+                <label for="harga_rumah">Harga Property</label>
                 <input type="number" class="form-control" id="harga_rumah" name="harga_rumah" required>
             </div>
             <div class="form-group">

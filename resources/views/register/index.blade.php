@@ -200,7 +200,7 @@ h2 {
         @csrf
         <div class="form-floating">
             <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" required value="{{ old('name') }}">
-            <label for="name">Full Name</label>
+            <label for="name">Nama Lengkap</label>
             @error('name')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -220,7 +220,7 @@ h2 {
 
         <div class="form-floating">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
-            <label for="email">Email address</label>
+            <label for="email">Email</label>
             @error('email')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -230,7 +230,7 @@ h2 {
 
         <div class="form-floating password-toggle">
             <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
-            <label for="password">Password</label>
+            <label for="password">Kata Sandi</label>
             <span class="toggle-icon" onclick="togglePasswordVisibility()">
                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
             </span>
@@ -243,7 +243,7 @@ h2 {
 
         <div class="form-floating">
             <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone') }}">
-            <label for="phone">Phone</label>
+            <label for="phone">Nomor Telepon</label>
             @error('phone')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -253,11 +253,12 @@ h2 {
 
         <div class="form-floating">
             <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
-                <option value="">Select Gender</option>
-                <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                <option value="__" disabled selected></option>
+                <option value="Laki-laki" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="Perempuan" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
             </select>
-            <label for="gender">Gender</label>
+            <label for="gender" style="font-size: 12px;">Jenis Kelamin</label>
+
             @error('gender')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -267,7 +268,7 @@ h2 {
 
         <div class="form-floating">
             <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age') }}">
-            <label for="age">Age</label>
+            <label for="age">Umur</label>
             @error('age')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -287,7 +288,7 @@ h2 {
 
         <button class="btn btn-lg btn-primary" type="submit">Register</button>
 
-        <small class="d-block text-center mt-3">Already registered? <a href="/login" class="small-link">Login</a></small>
+        <small class="d-block text-center mt-3">Sudah ada akun? <a href="/login" class="small-link">Login</a></small>
     </form>
 </div>
 

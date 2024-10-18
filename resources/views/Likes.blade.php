@@ -5,13 +5,13 @@
 @section('content')
 
 <div class="container mt-4">
-    <h1 class="mb-4">My Likes</h1> 
+    <h1 class="mb-4">Properti Like</h1> 
     
     
 <!-- Search and Filter Buttons -->
 <div class="search-bar mb-5">
     <form action="{{ route('likes') }}" method="GET" class="input-group">
-        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Search Property..." class="form-control">
+        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Cari Properti..." class="form-control">
         <div class="input-group-append">
             <button type="submit" class="btn btn-outline-secondary">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -123,9 +123,6 @@
                             <label class="btn btn-outline-primary">
                                 <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
                             </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="Lainnya"> Lainnya
-                            </label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -157,7 +154,7 @@
 
     @if($likes->isEmpty())
     <div class="col-12 text-center">
-            <p class="text-muted">Liked Property not found.</p>
+            <p class="text-muted">Anda belum memiliki properti like</p>
     </div>
     @else
         @foreach($likes as $property) 
@@ -228,7 +225,16 @@
                 </div>
             @endif
         </div>
+        @endsection
 
+        
+        @section('scripts')
+        <script>
+        function resetFilters() {
+            document.getElementById('filterForm').reset();
+            document.querySelectorAll('.btn-group-toggle .btn').forEach(btn => btn.classList.remove('active'));
+        }
+        </script>
 
         @endsection
 
@@ -288,10 +294,7 @@
             color: #333;
             text-align: center;
             margin-bottom: 30px;
-        }
-
-        h2 {
-            text-align: center;
+            margin-top: 80px;
         }
 
         .text-normal {

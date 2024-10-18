@@ -404,28 +404,26 @@
             margin-top: 10px; 
             display: inline-block;
             width: 100%;
-            max-width: 600px;
+            max-width: 800px;
             position: relative;
         }
 
-
         .search-input {
             width: 100%;
-            padding: 15px 20px 15px 60px; 
-            border-radius: 50px !important; 
+            padding: 10px 20px 10px 50px; 
+            border-radius: 30px !important; 
             border: none;
             background-color: white; 
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
-            font-size: 1.5rem;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15); 
+            font-size: 1.2rem; 
         }
-
 
         .search-icon-input {
             position: absolute;
-            left: 20px;
+            left: 20px; 
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5rem;
+            font-size: 1.2rem; 
             color: #888;
         }
 
@@ -435,15 +433,14 @@
 
         .search-popup-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 30px;
+            top: 15px; 
+            right: 15px; 
+            font-size: 24px; 
             cursor: pointer;
             color: #fff;
             background: none;
             border: none; 
         }
-
 
         .search-popup.show {
             display: flex;
@@ -460,7 +457,7 @@
         .search-input:focus {
             outline: none;
         }
-        
+
         .search-submit-button {
             display: none; 
         }
@@ -469,38 +466,26 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 15px; 
         }
 
         .search-keyword {
             background-color: #f0f0f0;
-            border-radius: 20px;
-            padding: 5px 15px;
-            margin: 5px;
+            border-radius: 20px; 
+            padding: 8px 20px; 
+            margin: 5px; 
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .search-keyword:hover {
-            background-color: #e0e0e0;
-        }
-
-        .search-keyword {
-            background-color: #f0f0f0;
-            border-radius: 30px; 
-            padding: 10px 25px;  
-            margin: 10px;        
-            cursor: pointer;
-            font-size: 1.5rem; 
+            font-size: 1.2rem; 
             font-weight: bold;   
             transition: background-color 0.3s, transform 0.2s; 
         }
 
-         .search-keyword:hover {
+        .search-keyword:hover {
             transform: scale(1.05); 
             background-color: #4A4AC4;
             color: #ffffff;
         }
+
    
     </style>
         @yield('styles')
@@ -537,9 +522,9 @@
                         <div class="username">Guest</div>
                     @endauth
                 </div>
-                <a href="/lihatprofile"><i class="fa fa-cog" aria-hidden="true"></i> My Profile <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> My Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorites <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/lihatprofile"><i class="fa fa-cog" aria-hidden="true"></i> Profil  <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/myproperties"><i class="fa fa-home" aria-hidden="true"></i> Properti <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="/favorites"><i class="fa fa-bookmark" aria-hidden="true"></i> Favorit <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="/likes"><i class="fa fa-heart" aria-hidden="true"></i> Like <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 <a href="/chatify"><i class="fa fa-commenting" aria-hidden="true"></i> Chat <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 @auth
@@ -558,11 +543,11 @@
 <div class="search-popup">
     <div class="search-popup-content">
         <button class="search-popup-close" onclick="closeSearchPopup()">&times;</button>
-        <h1>What are you looking for?</h1>
+        <h1>Apa yang Anda cari?</h1>
         <div class="search-input-container">
             <form action="{{ route('search') }}" method="GET" class="input-group">
                 <i class="fa fa-search search-icon-input"></i>   
-                <input type="text" name="search" placeholder="Search..." class="search-input" />
+                <input type="text" name="search" placeholder="Cari Properti..." class="search-input" />
                 <button type="submit" class="search-submit-button" style="display: none;"></button>
             </form>
         </div>

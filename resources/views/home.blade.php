@@ -684,13 +684,13 @@ img {
     <img src="HeaderPic.png" alt="Header Image">
 
     <!-- Button -->
-    <a href="{{ route('search')}}" class="header-button">Explore Property</a>
+    <a href="{{ route('search')}}" class="header-button">Menjelajahi Properti</a>
 </div>
 
 <!-- Text Section -->
 <div class="container text-center mt-5" style="padding-top: 50px;">
-    <h2 style="font-size: 5rem; font-weight: 700;">What we provide</h2>
-    <p style="font-size: 1.25rem; font-weight: 400;">Discover your perfect dream property effortlessly with our expert assistance, guiding you every step of the way.</p>
+    <h2 style="font-size: 5rem; font-weight: 700;">Yang kami sediakan</h2>
+    <p style="font-size: 1.25rem; font-weight: 400;">Temukan properti impian Anda dengan mudah bersama kami, yang siap mendampingi Anda.</p>
 </div>
 
 <!-- Cards Section -->
@@ -703,11 +703,11 @@ img {
                     <div class="icon mb-3">
                         <img src="icon1.png" alt="Buy a property">
                     </div>
-                    <h5 class="card-title">Buy a home</h5>
+                    <h5 class="card-title">Beli Properti</h5>
                     <div class="details preview">
-                        <p class="card-text">Find your dream home with a rich photo experience and access to the largest number of listings.</p>
+                        <p class="card-text">Temukan rumah impian Anda dengan tampilan foto lengkap dan akses ke pilihan properti terluas.</p>
                     </div>
-                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('dijual') }}'">BUY NOW</button>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('dijual') }}'">BELI SEKARANG</button>
                 </div>
             </div>
         </div>
@@ -719,11 +719,11 @@ img {
                     <div class="icon mb-3">
                         <img src="icon2.png" alt="Sell a property">
                     </div>
-                    <h5 class="card-title">Sell a home</h5>
+                    <h5 class="card-title">Jual Properti</h5>
                     <div class="details preview">
-                        <p class="card-text">List your home with ease and connect with potential buyers through our extensive network.</p>
+                        <p class="card-text">Daftarkan properti Anda dengan mudah dan hubungkan dengan calon pembeli melalui jaringan luas kami.</p>
                     </div>
-                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('property.add') }}'">SELL NOW</button>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('property.add') }}'">JUAL SEKARANG</button>
                 </div>
             </div>
         </div>
@@ -735,11 +735,11 @@ img {
                     <div class="icon mb-3">
                         <img src="icon3.png" alt="Rent a property">
                     </div>
-                    <h5 class="card-title">Rent a home</h5>
+                    <h5 class="card-title">Sewa Properti</h5>
                     <div class="details preview">
-                        <p class="card-text">Explore rental properties and find a place to call home with our comprehensive listings.</p>
+                        <p class="card-text">Jelajahi properti sewa dan temukan tempat ideal untuk Anda."</p>
                     </div>
-                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('disewa') }}'">RENT NOW</button>
+                    <button class="btn-custom btn-outline-dark mt-3 toggle-details" type="button" onclick="window.location.href='{{ route('disewa') }}'">SEWA SEKARANG</button>
                 </div>
             </div>
         </div>
@@ -784,7 +784,7 @@ img {
 
  <!-- Property Card-->
 <div class="container mt-4">
-    <h2 class="latest-property-heading mb-4">Latest Property</h2>
+    <h2 class="latest-property-heading mb-4">Properti Terbaru</h2>
     <div class="row">
         @foreach($properties as $property)
         <div class="col-md-3 mb-3">
@@ -880,9 +880,9 @@ img {
 
 <!-- Search and filter buttons -->
 <div class="search-bar mb-5">
-    <h2 style="text-align: center; font-weight: bold;">Looking for something else?</h2>
+    <h2 style="text-align: center; font-weight: bold;">Mencari sesuatu yang lain?</h2>
     <form action="{{ route('search') }}" method="GET" class="input-group">
-        <input type="text" name="search" id="searchInput" placeholder="Search Property...">
+        <input type="text" name="search" id="searchInput" placeholder="Cari Properti...">
         <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         <button type="button" class="filter-button" data-toggle="modal" data-target="#filterModal">
             <i class="fa fa-filter" aria-hidden="true"></i>
