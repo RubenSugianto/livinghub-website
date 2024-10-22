@@ -133,11 +133,22 @@ body {
 .profile-pic .delete-btn:hover {
     background-color: #ff1f1f;
 }
-
 .form-group {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    font-size: 12px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    border: 1px solid #DDE3EC; 
+    background: #f9f9f9; 
+    transition: border-color 0.3s ease;
+    min-height: 40px; 
+    line-height: 1.2;
     font-size: 12px; 
 }
 
@@ -145,7 +156,7 @@ label {
     min-width: 150px;
     margin-right: 10px;
     font-weight: bold;
-    font-size: 12px; 
+    font-size: 12px;
 }
 
 input[type="text"],
@@ -160,6 +171,7 @@ select {
     width: 500px; 
     font-size: 12px; 
 }
+
 
 input[type="file"] {
     display: none;
@@ -180,7 +192,7 @@ input[type="file"] {
 }
 
 .btn-primary {
-    background-color: #4A4AC4;
+    background-color: #5E5DF0;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -192,7 +204,7 @@ input[type="file"] {
 }
 
 .btn-primary:hover {
-    background-color: #3737c1;
+    background-color: #4A4AC4;
 }
 
 .delete-account {
@@ -250,47 +262,54 @@ input[type="file"] {
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="profilepicture">Tambah / Edit Foto Profil</label>
-                <label for="profilepicture" class="custom-file-upload">
-                    <i class="fa fa-cloud-upload"></i> Upload File
-                </label>
-                <input type="file" id="profilepicture" name="profilepicture" accept="image/*">
-                <input type="hidden" name="remove_picture" id="removePicture" value="0">
-            </div>
-            <div class="form-group">
-                <label for="name">Nama Lengkap</label>
-                <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
-                @error('name')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="{{ old('username', $profile->username) }}">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}">
-            </div>
-            <div class="form-group">
-                <label for="phone">Nomor Telepon</label>
-                <input type="text" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}">
-            </div>
-            <div class="form-group">
-                <label for="gender">Jenis Kelamin</label>
-                <select id="gender" name="gender">
-                    <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
-                    <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="age">Umur</label>
-                <input type="number" id="age" name="age" value="{{ old('age', $profile->age) }}">
-            </div>
-            <button type="submit" class="btn-primary">Simpan</button>
-        </form>
+    <label for="profilepicture">Tambah / Edit Foto Profil</label>
+    <label for="profilepicture" class="custom-file-upload">
+        <i class="fa fa-cloud-upload"></i> Upload File
+    </label>
+    <input type="file" id="profilepicture" name="profilepicture" class="form-control" accept="image/*">
+        <input type="hidden" name="remove_picture" id="removePicture" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Nama Lengkap</label>
+        <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
+        @error('name')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+        @enderror
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-control" value="{{ old('username', $profile->username) }}" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $profile->email) }}">
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Nomor Telepon</label>
+        <input type="text" id="phone" name="phone" class="form-control" value="{{ old('phone', $profile->phone) }}">
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Jenis Kelamin</label>
+        <select id="gender" name="gender" class="form-control">
+            <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
+            <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="age">Umur</label>
+        <input type="number" id="age" name="age" class="form-control" value="{{ old('age', $profile->age) }}">
+    </div>
+
+    <button type="submit" class="btn-primary">Simpan</button>
+
 
         <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" style="display: none;">
             @csrf

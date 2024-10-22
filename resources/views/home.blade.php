@@ -684,7 +684,7 @@ img {
     <img src="HeaderPic.png" alt="Header Image">
 
     <!-- Button -->
-    <a href="{{ route('search')}}" class="header-button">Menjelajahi Properti</a>
+    <a href="{{ route('search')}}" class="header-button">Jelajahi Properti</a>
 </div>
 
 <!-- Text Section -->
