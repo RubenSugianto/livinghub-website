@@ -187,6 +187,77 @@ h2 {
     margin: 0 10px;
 }
 
+/* Password requirements styling - updated */
+.password-requirements {
+    margin: 15px auto 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #4A4AC4;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+    max-width: 400px; /* Match your form width */
+}
+
+.password-requirements h6 {
+    color: #333;
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.password-requirements ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.password-requirements li {
+    margin: 4px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.password-requirements li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #4A4AC4;
+}
+
+/* Divider styling */
+.d-flex {
+    display: flex;
+    align-items: center;
+    max-width: 400px; /* Match your form width */
+    margin: 20px auto;
+}
+
+.w-100 {
+    flex: 1;
+}
+
+.my-3 {
+    margin: 1rem 0;
+}
+
+.px-3 {
+    padding: 0 1rem;
+    color: #6c757d;
+    font-size: 12px;
+}
+
+hr {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid #9f9f9f;
+}
+
+/* Add margin before the submit button */
+.password-requirements + .btn-primary {
+    margin-top: 20px;
+}
+
 </style>
 @endsection
 
@@ -219,6 +290,40 @@ h2 {
         </div>
 
         <div class="form-floating">
+            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone') }}">
+            <label for="phone">Nomor Telepon</label>
+            @error('phone')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="form-floating">
+            <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
+                <option value="__" disabled selected></option>
+                <option value="Laki-laki" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="Perempuan" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+            </select>
+            <label for="gender" style="font-size: 12px;">Jenis Kelamin</label>
+            @error('gender')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="form-floating">
+            <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age') }}">
+            <label for="age">Umur</label>
+            @error('age')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="form-floating">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
             <label for="email">Email</label>
             @error('email')
@@ -241,39 +346,15 @@ h2 {
             @enderror
         </div>
 
-        <div class="form-floating">
-            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="Phone" required value="{{ old('phone') }}">
-            <label for="phone">Nomor Telepon</label>
-            @error('phone')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-
-        <div class="form-floating">
-            <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
-                <option value="__" disabled selected></option>
-                <option value="Laki-laki" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                <option value="Perempuan" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-            </select>
-            <label for="gender" style="font-size: 12px;">Jenis Kelamin</label>
-
-            @error('gender')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
-        </div>
-
-        <div class="form-floating">
-            <input type="number" name="age" class="form-control @error('age') is-invalid @enderror" id="age" placeholder="Age" required value="{{ old('age') }}">
-            <label for="age">Umur</label>
-            @error('age')
-            <div class="invalid-feedback">
-                {{ $message }}
-            </div>
-            @enderror
+        <div class="password-requirements">
+            <h6>Persyaratan Kata Sandi:</h6>
+            <ul>
+                <li>Minimal 8 karakter</li>
+                <li>Minimal 1 Huruf Besar</li>
+                <li>Minimal 1 Huruf Kecil</li>
+                <li>Minimal 1 Angka</li>
+                <li>Minimal 1 Karakter Spesial</li>
+            </ul>
         </div>
 
         <div class="d-flex justify-content-between mb-3">
