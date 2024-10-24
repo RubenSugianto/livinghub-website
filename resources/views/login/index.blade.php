@@ -246,6 +246,14 @@ h2 {
 </div>
 @endif
 
+@if(session()->has('password_reset_success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+    <strong>{{ session('password_reset_success') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+</div>
+@endif
+
 @if(session()->has('loginError'))
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
