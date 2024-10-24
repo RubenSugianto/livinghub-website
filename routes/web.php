@@ -16,6 +16,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\showSellerProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PasswordController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -37,11 +38,22 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
 Route::post('/logout', [LoginController::class, 'logout']);
 
+
+// Auth::routes(['verify' => true]);
+
+// Reset Password
+Route::get('/forgot-password', [PasswordController::class, 'forgotpassword'])->middleware('guest')->name('password.request');
+Route::post('/forgot-password', [PasswordController::class, 'verifyemail'])->middleware('guest')->name('password.email');
+Route::get('/reset-password/{token}', [PasswordController::class, 'resetpassword'])->middleware('guest')->name('password.reset');
+Route::post('/reset-password', [PasswordController::class, 'verifypassword'])->middleware('guest')->name('password.update');
+
+
+// profile page
 Route::middleware(['auth'])->group(function () {
     Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::put('/lihatprofile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/lihatprofile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::put('/lihatprofile/updateprofile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/lihatprofile/updatepassword', [PasswordController::class, 'changepassword'])->name('password.change');
 });
 
 
