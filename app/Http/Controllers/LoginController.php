@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,16 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email tidak ditemukan']);
+        }
+
+        if ($user->google_id != null && $user->password == null) {
+            return back()->withErrors(['email' => 'Kamu mendaftar dengan Google. Silahkan log in menggunakan Google Account anda.']);
+        }
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();

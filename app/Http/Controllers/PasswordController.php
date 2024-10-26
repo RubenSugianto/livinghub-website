@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PasswordController extends Controller
 {
@@ -18,7 +19,18 @@ class PasswordController extends Controller
 
     public function verifyemail(Request $request) {
         $request->validate(['email' => 'required|email']);
- 
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email tidak ditemukan.']);
+        }
+    
+        // If the user has a Google login without a password
+        if ($user->google_id != null && $user->password == null) {
+            return back()->withErrors(['email' => 'Kamu mendaftar dengan Google. Silahkan log in menggunakan Google Account anda.']);
+        }
+
         $status = Password::sendResetLink(
             $request->only('email')
         );
@@ -33,7 +45,6 @@ class PasswordController extends Controller
     }
 
     public function verifypassword(Request $request) {
-        // dd($request->all());
         $request->validate([
             'token' => ['required'],
             'email' => ['required', 'email:dns'], 
@@ -66,9 +77,7 @@ class PasswordController extends Controller
 
     public function changepassword(Request $request)
     {
-        // Validate the input
         $request->validate([
-            'email' => ['required', 'email:dns'],
             'old_password' => ['required'], 
             'password' => [
                 'required',
@@ -79,24 +88,34 @@ class PasswordController extends Controller
             ],
         ]);
 
-        // Find the user by email
-        $user = User::where('email', $request->email)->first();
+        $user = Auth::user();
 
-        // Check if the user exists
-        if (!$user) {
-            return back()->withErrors(['email' => 'Email tidak ditemukan.']);
-        }
-
-        // Verify the old password
         if (!Hash::check($request->old_password, $user->password)) {
             return back()->withErrors(['old_password' => 'Password yang diinput salah.']);
         }
 
-        // Update the user's password
         $user->password = Hash::make($request->password);
         $user->save();
 
-        // Redirect with a success message
         return redirect()->route('home')->with('success', 'Password changed successfully.');
+    }
+
+    public function setpassword(Request $request)
+    {
+        $request->validate([
+            'password' => [
+                'required',
+                'min:8',
+                'max:255',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/'
+            ],
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('home')->with('success', 'Password set successfully.');
     }
 }
