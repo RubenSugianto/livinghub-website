@@ -3,9 +3,9 @@
 @section('title', 'Properti Dijual')
 
 @section('content')
+
 <div class="container mt-4 dijual-page">
  <!-- Search and filter buttons -->
-
 <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
         <input type="text" name="search" id="search-input" placeholder="Cari Properti..." class="form-control">
@@ -139,8 +139,6 @@
         </div>
     </div>
 </div>
-
-
     <h1>Hasil Pencarian</h1>
     <div class="row justify-content-center flex-column">
         @if($properties->isEmpty())
@@ -169,7 +167,7 @@
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
-                                <span class="badge bg-secondary">{{ $property->documents->first()->type }}</span>
+                                <span class="badge bg-secondary">{{ $property->document->type }}</span>                               
 
                                 </div>
                                 <div class="property-details mt-2 d-flex flex-wrap align-items-center">
