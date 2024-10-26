@@ -363,7 +363,7 @@ hr {
                         <hr class="w-100 my-3" style="border-top: 1px solid #9f9f9f;">
                     </div>
 
-        <a href="#" class="btn btn-google">
+        <a href="{{ route('google.login') }}" class="btn btn-google">
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google"> Google
         </a>
 

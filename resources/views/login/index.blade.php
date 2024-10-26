@@ -289,12 +289,13 @@ h2 {
                         <label for="password">Kata Sandi</label>
                         <span class="toggle-icon" onclick="togglePasswordVisibility()"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
                     </div>
+                    
                     <div class="d-flex justify-content-between mb-3">
                         <hr class="w-100 my-3" style="border-top: 1px solid #9f9f9f;">
                         <span class="px-3">atau</span>
                         <hr class="w-100 my-3" style="border-top: 1px solid #9f9f9f;">
                     </div>
-                    <a href="#" class="btn-google">
+                    <a href="{{ route('google.login') }}" class="btn-google">
                         <img src="icon-google.png" alt="Google"> Google
                     </a>
 

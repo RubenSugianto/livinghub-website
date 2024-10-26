@@ -370,7 +370,11 @@ input[type="file"] {
 <div class="container">
     <div class="sidebar">
         <a href="#" class="active" id="informasiPribadiLink">Informasi Pribadi</a>
-        <a href="#" id="ubahKataSandiLink">Ubah Kata Sandi</a>
+        @if($profile->google_id != null && $profile->password == null)
+            <a href="#" id="ubahKataSandiLink">Set Kata Sandi</a>
+        @else
+            <a href="#" id="ubahKataSandiLink">Ubah Kata Sandi</a>
+        @endif
         <a class="delete-account" href="javascript:void(0);" data-toggle="modal" data-target="#deleteAccountModal">Hapus Akun</a>
     </div>
     <div class="content">
@@ -502,9 +506,16 @@ input[type="file"] {
 
         <div id="ubahKataSandiSection" style="display: none;">
             <div class="profile-header">
-                <h1>Ubah Kata Sandi</h1>
+                @if($profile->google_id != null && $profile->password == null)
+                    <h1>Set Kata Sandi</h1>
+                @else
+                    <h1>Ubah Kata Sandi</h1>
+                @endif
+                
             </div>
-            <form id="changePasswordForm" action="{{ route('password.change') }}" method="POST">
+            <form id="changePasswordForm" 
+                action="{{ $profile->google_id != null && $profile->password == null ? route('password.set') : route('password.change') }}" 
+                method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
@@ -521,24 +532,26 @@ input[type="file"] {
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <label for="old_password">Kata Sandi Lama</label>
-                        <div class="input-container">
-                            <div class="password-toggle-container">
-                                <input type="password" id="old_password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" placeholder="Old Password" required>
-                                <span class="toggle-icon" onclick="togglePasswordVisibility('old_password', this)">
-                                    <i class="fa fa-eye-slash"></i>
-                                </span>
+                @if($profile->password != null)
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="old_password">Kata Sandi Lama</label>
+                            <div class="input-container">
+                                <div class="password-toggle-container">
+                                    <input type="password" id="old_password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" placeholder="Old Password" required>
+                                    <span class="toggle-icon" onclick="togglePasswordVisibility('old_password', this)">
+                                        <i class="fa fa-eye-slash"></i>
+                                    </span>
+                                </div>
+                                @error('old_password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @error('old_password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
                         </div>
                     </div>
-                </div>
+                @endif
 
                 <div class="form-group">
                     <div class="input-wrapper">
