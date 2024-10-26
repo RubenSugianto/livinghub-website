@@ -134,31 +134,84 @@ body {
     background-color: #ff1f1f;
 }
 
+/* Update the form-group style */
 .form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 12px; 
+    margin-bottom: 20px;
+    font-size: 12px;
 }
 
-label {
+/* Add a new wrapper div for label and input */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Adjust label style */
+.input-wrapper label {
     min-width: 150px;
     margin-right: 10px;
     font-weight: bold;
     font-size: 12px; 
 }
 
-input[type="text"],
-input[type="email"],
-input[type="number"],
-select {
+/* Adjust input container style */
+.input-container {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for input fields */
+.input-container input,
+.input-container select {
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    font-size: 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Style for error message */
+.invalid-feedback {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Style for invalid input */
+input.is-invalid {
+    border-color: red;
+}
+
+/* Common input field styles */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+select {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc; /* Default border color */
+    border-radius: 3px;
     box-sizing: border-box;
-    width: 500px; 
+    width: 100%; 
     font-size: 12px; 
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border color and shadow */
+}
+
+/* Style for input fields on focus */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: 2px solid; /* Custom outline color and thickness */
+    box-shadow: 0 0 5px rgba(74, 74, 196, 0.5); /* Optional shadow for better visibility */
+}
+
+input[readonly] {
+    background-color: #f1f1f1; /* Light gray background */
 }
 
 input[type="file"] {
@@ -204,9 +257,92 @@ input[type="file"] {
     font-size: 12px; 
 }
 
-.invalid-feedback {
+.form-group .invalid-feedback {
     color: red;
     font-size: 12px; 
+    display: block;
+    margin-top: 0.25rem;
+}
+
+.password-toggle-container input {
+    width: 100%; /* Ensure it takes full width */
+    padding-right: 40px; /* Make space for the eye icon */
+    border-radius: 3px; /* Ensure consistent border-radius */
+    box-sizing: border-box; /* Ensure padding doesn’t affect width */
+}
+
+.password-toggle-container {
+    position: relative;
+    flex: 1; /* Ensure the container stretches to the same width */
+}
+
+.password-toggle-container .toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%); /* Center vertically */
+    cursor: pointer;
+    font-size: 18px;
+    color: #aaa;
+}
+
+.password-toggle-container .toggle-icon:hover {
+    color: #333;
+}
+
+/* Password requirements styling */
+.password-requirements {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #4A4AC4;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.password-requirements h6 {
+    color: #333;
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.password-requirements ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.password-requirements li {
+    margin: 4px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.password-requirements li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #4A4AC4;
+}
+
+/* Add margin before the submit button */
+.password-requirements + .btn-primary {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    background-color: #4A4AC4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    float: right;
 }
 </style>
 @endsection
@@ -233,69 +369,230 @@ input[type="file"] {
 
 <div class="container">
     <div class="sidebar">
-
-        <a href="#" class="active">Informasi Pribadi</a>
-        <a href="#">Ubah Kata Sandi</a>
+        <a href="#" class="active" id="informasiPribadiLink">Informasi Pribadi</a>
+        <a href="#" id="ubahKataSandiLink">Ubah Kata Sandi</a>
         <a class="delete-account" href="javascript:void(0);" data-toggle="modal" data-target="#deleteAccountModal">Hapus Akun</a>
     </div>
     <div class="content">
-        <div class="profile-header">
-            <h1>Informasi Pribadi</h1>
-        </div>
-        <div class="profile-pic">
-        <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
-            <button type="button" class="delete-btn" id="deletePictureBtn">Hapus Gambar</button>
-        </div>
-        <form id="profileForm" action="{{ route('profile.update') }}" method="PUT" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="profilepicture">Tambah / Edit Foto Profil</label>
-                <label for="profilepicture" class="custom-file-upload">
-                    <i class="fa fa-cloud-upload"></i> Upload File
-                </label>
-                <input type="file" id="profilepicture" name="profilepicture" accept="image/*">
-                <input type="hidden" name="remove_picture" id="removePicture" value="0">
+        <div id="informasiPribadiSection">
+            <div class="profile-header">
+                <h1>Informasi Pribadi</h1>
             </div>
-            <div class="form-group">
-                <label for="name">Nama Lengkap</label>
-                <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
-                @error('name')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
+            <div class="profile-pic">
+            <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
+                <button type="button" class="delete-btn" id="deletePictureBtn">Hapus Gambar</button>
             </div>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="{{ old('username', $profile->username) }}">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}">
-            </div>
-            <div class="form-group">
-                <label for="phone">Nomor Telepon</label>
-                <input type="text" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}">
-            </div>
-            <div class="form-group">
-                <label for="gender">Jenis Kelamin</label>
-                <select id="gender" name="gender">
-                    <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
-                    <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="age">Umur</label>
-                <input type="number" id="age" name="age" value="{{ old('age', $profile->age) }}">
-            </div>
-            <button type="submit" class="btn-primary">Simpan</button>
-        </form>
+            <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
-        <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" style="display: none;">
-            @csrf
-            @method('DELETE')
-        </form>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="profilepicture">Tambah / Edit Foto Profil</label>
+                        <div class="input-container">
+                            <label for="profilepicture" class="custom-file-upload">
+                                <i class="fa fa-cloud-upload"></i> Upload File
+                            </label>
+                            <input type="file" id="profilepicture" name="profilepicture" accept="image/*" class="@error('profilepicture') is-invalid @enderror">
+                            @error('profilepicture')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <input type="hidden" name="remove_picture" id="removePicture" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="name">Nama Lengkap</label>
+                        <div class="input-container">
+                            <input type="text" id="name" name="name" class="@error('name') is-invalid @enderror" placeholder="Full Name" required value="{{ old('name', $profile->name) }}">
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="username">Username</label>
+                        <div class="input-container">
+                            <input type="text" id="username" name="username" value="{{ old('username', $profile->username) }}" class="@error('username') is-invalid @enderror">
+                            @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="email">Email</label>
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}" class="@error('email') is-invalid @enderror">
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="phone">Nomor Telepon</label>
+                        <div class="input-container">
+                            <input type="text" id="phone" name="phone" value="{{ old('phone', $profile->phone) }}" class="@error('phone') is-invalid @enderror">
+                            @error('phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="gender">Jenis Kelamin</label>
+                        <div class="input-container">
+                            <select id="gender" name="gender" class="@error('gender') is-invalid @enderror">
+                                <option value="male" {{ old('gender', $profile->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                                <option value="female" {{ old('gender', $profile->gender) == 'female' ? 'selected' : '' }}>Female</option>
+                            </select>
+                            @error('gender')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="age">Umur</label>
+                        <div class="input-container">
+                            <input type="number" id="age" name="age" value="{{ old('age', $profile->age) }}" class="@error('age') is-invalid @enderror">
+                            @error('age')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+
+            <form id="delete-account-form" action="{{ route('profile.destroy') }}" method="POST" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+        </div>
+
+        <div id="ubahKataSandiSection" style="display: none;">
+            <div class="profile-header">
+                <h1>Ubah Kata Sandi</h1>
+            </div>
+            <form id="changePasswordForm" action="{{ route('password.change') }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="email">Email</label>
+                        <div class="input-container">
+                            <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror" required value="{{ old('email', Auth::user()->email) }}" readonly>
+                            @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="old_password">Kata Sandi Lama</label>
+                        <div class="input-container">
+                            <div class="password-toggle-container">
+                                <input type="password" id="old_password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" placeholder="Old Password" required>
+                                <span class="toggle-icon" onclick="togglePasswordVisibility('old_password', this)">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                            @error('old_password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="password">Kata Sandi Baru</label>
+                        <div class="input-container">
+                            <div class="password-toggle-container">
+                                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="New Password" required>
+                                <span class="toggle-icon" onclick="togglePasswordVisibility('password', this)">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                            @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <label for="password_confirmation">Konfirmasi Kata Sandi</label>
+                        <div class="input-container">
+                            <div class="password-toggle-container">
+                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Confirm Password" required>
+                                <span class="toggle-icon" onclick="togglePasswordVisibility('password_confirmation', this)">
+                                    <i class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                            @error('password_confirmation')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="password-requirements">
+                    <h6>Persyaratan Kata Sandi:</h6>
+                    <ul>
+                        <li>Minimal 8 karakter</li>
+                        <li>Minimal 1 Huruf Besar</li>
+                        <li>Minimal 1 Huruf Kecil</li>
+                        <li>Minimal 1 Angka</li>
+                        <li>Minimal 1 Karakter Spesial</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="btn-primary">Simpan</button>
+            </form>
+        </div>
+
     </div>
 </div>
 <script>
@@ -317,38 +614,6 @@ input[type="file"] {
         document.getElementById('deletePictureBtn').addEventListener('click', function() {
             document.getElementById('profilePicturePreview').src = '{{ asset('defaultprofilepicture.png') }}';
             document.getElementById('removePicture').value = '1';
-        });
-
-        document.getElementById('profileForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const confirmSave = confirm('Are you sure you want to save the changes?');
-            if (confirmSave) {
-                fetch('{{ route('profile.update') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Update the profile picture in the UI
-                        document.getElementById('profilePicturePreview').src = data.profile_picture;
-                        document.querySelector('.dropdown-content .auth-text img').src = data.profile_picture;
-
-                        // Redirect to home page after saving
-                        window.location.href = '{{ route('home') }}';
-                    } else {
-                        alert('Something went wrong. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
         });
         
         // Show delete account modal
@@ -384,6 +649,45 @@ input[type="file"] {
             console.log('Delete button clicked');
             document.getElementById('delete-account-form').submit();
         });
+
+        document.getElementById('informasiPribadiLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Show Informasi Pribadi section
+            document.getElementById('informasiPribadiSection').style.display = 'block';
+            document.getElementById('ubahKataSandiSection').style.display = 'none';
+            this.classList.add('active');
+            document.getElementById('ubahKataSandiLink').classList.remove('active');
+        });
+
+        document.getElementById('ubahKataSandiLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Show Ubah Kata Sandi section
+            document.getElementById('informasiPribadiSection').style.display = 'none';
+            document.getElementById('ubahKataSandiSection').style.display = 'block';
+            this.classList.add('active');
+            document.getElementById('informasiPribadiLink').classList.remove('active');
+        });
+
+        window.togglePasswordVisibility = function(inputId, iconElement) {
+            const passwordInput = document.getElementById(inputId);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                iconElement.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>'; 
+            } else {
+                passwordInput.type = 'password';
+                iconElement.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>'; 
+            }
+        };
+
+        @if ($errors->has('old_password') || $errors->has('password') || $errors->has('password_confirmation'))
+            // If there are errors in the password change form, show the ubahKataSandiSection
+            informasiPribadiSection.style.display = 'none';
+            ubahKataSandiSection.style.display = 'block';
+        @else
+            // Otherwise, show the informasiPribadiSection
+            informasiPribadiSection.style.display = 'block';
+            ubahKataSandiSection.style.display = 'none';
+        @endif
     });
 </script>
 

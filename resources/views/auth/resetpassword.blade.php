@@ -235,6 +235,49 @@ h2 {
     transform: translateY(-15px);
 }
 
+/* Password requirements styling */
+.password-requirements {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-left: 4px solid #4A4AC4;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.password-requirements h6 {
+    color: #333;
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.password-requirements ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.password-requirements li {
+    margin: 4px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.password-requirements li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #4A4AC4;
+}
+
+/* Add margin before the submit button */
+.password-requirements + .btn-primary {
+    margin-top: 20px;
+}
+
 </style>
 @endsection
 @section('content')
@@ -242,14 +285,6 @@ h2 {
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
     <strong>{{ session('success') }}</strong>
-    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
-</div>
-@endif
-
-@if(session()->has('password_reset_success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
-    <strong>{{ session('password_reset_success') }}</strong>
     <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
 </div>
 @endif
@@ -269,13 +304,17 @@ h2 {
                 <div class="logo-container">
                     <img src="LogooB.png" alt="Logo">
                 </div>
-                <h1 class="h3 mb-5 fw-bold text-center">Log In</h1>
-              
-                <form action="login" method="post">
+                <h1 class="h3 mb-5 fw-bold text-center">Reset Password</h1>
+
+                <form action="{{ route('password.update') }}" method="post">
                     @csrf
 
+                    <!-- Hidden token field -->
+                    <input type="hidden" name="token" value="{{ $token }}">
+
+                    <!-- Email field -->
                     <div class="form-floating">
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
                         <label for="email">Email</label>
                         @error('email')
                         <div class="invalid-feedback">
@@ -284,23 +323,44 @@ h2 {
                         @enderror
                     </div>
 
+                    <!-- Password field -->
                     <div class="form-floating password-toggle">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                        <label for="password">Kata Sandi</label>
-                        <span class="toggle-icon" onclick="togglePasswordVisibility()"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="New Password" required>
+                        <label for="password">New Password</label>
+                        <span class="toggle-icon" onclick="togglePasswordVisibility('password', this)"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
+                        @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <hr class="w-100 my-3" style="border-top: 1px solid #9f9f9f;">
-                        <span class="px-3">atau</span>
-                        <hr class="w-100 my-3" style="border-top: 1px solid #9f9f9f;">
-                    </div>
-                    <a href="#" class="btn-google">
-                        <img src="icon-google.png" alt="Google"> Google
-                    </a>
 
-                    <small class="d-block text-center mt-4">Belum memiliki akun? <a class="small-link" href="/register">Register</a></small>
-                    <small class="d-block text-center mt-4"><a class="small-link" href="/forgot-password">Lupa password?</a></small>
-                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Login</button>
+                    <!-- Password confirmation field -->
+                    <div class="form-floating password-toggle">
+                        <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm Password" required>
+                        <label for="password_confirmation">Confirm Password</label>
+                        <span class="toggle-icon" onclick="togglePasswordVisibility('password_confirmation', this)"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
+                        @error('password_confirmation')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+
+                    <div class="password-requirements">
+                        <h6>Persyaratan Kata Sandi:</h6>
+                        <ul>
+                            <li>Minimal 8 karakter</li>
+                            <li>Minimal 1 Huruf Besar</li>
+                            <li>Minimal 1 Huruf Kecil</li>
+                            <li>Minimal 1 Angka</li>
+                            <li>Minimal 1 Karakter Spesial</li>
+                        </ul>
+                    </div>
+
+
+                    <!-- Submit button -->
+                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Reset Password</button>
                 </form>
             </main>
         </div>
@@ -308,15 +368,14 @@ h2 {
 </div>
 
 <script>
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('password');
-    const toggleIcon = document.querySelector('.toggle-icon');
+function togglePasswordVisibility(inputId, iconElement) {
+    const passwordInput = document.getElementById(inputId);
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleIcon.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>'; 
+        iconElement.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>'; 
     } else {
         passwordInput.type = 'password';
-        toggleIcon.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>'; 
+        iconElement.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>'; 
     }
 }
 </script>
