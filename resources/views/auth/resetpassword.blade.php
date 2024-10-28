@@ -11,7 +11,7 @@ body {
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 350px; 
+    padding-top: 500px; 
 }
 
 .container {
@@ -302,9 +302,9 @@ h2 {
         <div class="col-md-12">
             <main class="form-signin mb-10">
                 <div class="logo-container">
-                    <img src="LogooB.png" alt="Logo">
+                <img src="{{ asset('LogooB.png') }}" alt="Logo">
                 </div>
-                <h1 class="h3 mb-5 fw-bold text-center">Reset Password</h1>
+                <h1 class="h3 mb-5 fw-bold text-center">Reset Kata Sandi</h1>
 
                 <form action="{{ route('password.update') }}" method="post">
                     @csrf
@@ -326,7 +326,7 @@ h2 {
                     <!-- Password field -->
                     <div class="form-floating password-toggle">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="New Password" required>
-                        <label for="password">New Password</label>
+                        <label for="password">Kata Sandi Baru</label>
                         <span class="toggle-icon" onclick="togglePasswordVisibility('password', this)"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
                         @error('password')
                         <div class="invalid-feedback">
@@ -338,7 +338,7 @@ h2 {
                     <!-- Password confirmation field -->
                     <div class="form-floating password-toggle">
                         <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm Password" required>
-                        <label for="password_confirmation">Confirm Password</label>
+                        <label for="password_confirmation">Konfirmasi Kata Sandi</label>
                         <span class="toggle-icon" onclick="togglePasswordVisibility('password_confirmation', this)"> <i class="fa fa-eye-slash" aria-hidden="true"></i> </span>
                         @error('password_confirmation')
                         <div class="invalid-feedback">
@@ -360,7 +360,7 @@ h2 {
 
 
                     <!-- Submit button -->
-                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Reset Password</button>
+                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Reset Kata Sandi</button>
                 </form>
             </main>
         </div>

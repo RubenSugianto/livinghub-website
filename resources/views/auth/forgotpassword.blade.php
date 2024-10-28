@@ -7,11 +7,11 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Position container at the top */
+    align-items: flex-start; 
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 350px;
+    padding-top: 200px;
 }
 
 .container {
@@ -21,7 +21,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-size: 12px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 15px;
 }
 
@@ -70,7 +70,6 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 0 auto;
     display: block;
 }
 
@@ -172,7 +171,7 @@ h2 {
     display: flex;
     align-items: center;
     position: relative;
-    margin-top: 150px;
+    margin-top: 100px;
 }
 
 .alert-success {
