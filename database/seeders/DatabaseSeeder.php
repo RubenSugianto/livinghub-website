@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Property;
+use App\Models\Document;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -50,6 +51,18 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
         ]);
 
-        Property::factory(20)->create();
+        // Property::factory(20)->create();
+
+        // Document::factory(20)->create();
+
+        Property::factory(20)
+        ->create()
+        ->each(function ($property) {
+            // Link a document to each property and assign a user
+            Document::factory()->create([
+                'property_id' => $property->id, // Link the document to the property
+                'user_id' => User::inRandomOrder()->first()->id, // Assign a random user to the document
+            ]);
+        });
     }
 }

@@ -169,7 +169,7 @@
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
-                                <span class="badge bg-secondary">{{ $property->documents->first()->type }}</span>
+                                <span class="badge bg-secondary">{{ $property->document->type }}</span>
 
                                 </div>
                                 <div class="property-details mt-2 d-flex flex-wrap align-items-center">

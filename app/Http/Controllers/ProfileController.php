@@ -20,13 +20,13 @@ class ProfileController extends Controller
         $user = Auth::user();
     
         $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'phone' => 'required|string|max:20',
-            'gender' => 'required|string|max:10',
-            'age' => 'required|integer|min:0',
-            'profilepicture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'name' => ['required', 'min:8', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
+            'username' => ['required', 'min:3', 'max:255', 'regex:/^[a-zA-Z0-9_\-]+$/', 'unique:users,username,' . $user->id],
+            'email' => ['required', 'email:dns', 'unique:users,email,' . $user->id],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^\d{12}$/', 'unique:users,phone,' . $user->id],
+            'gender' => ['required', 'string', 'max:10'],
+            'age' => ['required', 'integer', 'min:18', 'max:100'],
+            'profilepicture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
     
         $user->name = $request->input('name');
@@ -50,15 +50,12 @@ class ProfileController extends Controller
     
             // Store the new avatar
             $avatarPath = $request->file('profilepicture')->store('users-avatar', 'public');
-            $user->avatar = basename($avatarPath); // Store only the file name
+            $user->avatar = basename($avatarPath); 
         }
     
         $user->save();
     
-        return response()->json([
-            'success' => 'Profile updated successfully.',
-            'profilepicture' => $user->avatar ? asset('storage/users-avatar/' . $user->avatar) : asset('defaultprofilepicture.png')
-        ]);
+        return redirect()->route('home')->with('success', 'Profile updated successfully.',);
     }
 
     public function destroy()
