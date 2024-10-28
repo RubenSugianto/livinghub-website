@@ -4,359 +4,397 @@
 
 @section('styles')
 <style>
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f8f9fa;
-    padding-top: 330px;
-    font-size: 12px; 
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    padding: 40px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    display: flex;
-    box-sizing: border-box;
-    font-size: 12px; 
-    margin-top: 150px;
-    margin-bottom: 30px;
-}
-
-.sidebar {
-    width: 25%;
-    padding-right: 20px;
-    border-right: 1px solid #e0e0e0;
-    font-size: 12px; 
-}
-
-.sidebar a {
-    display: block;
-    padding: 10px 0;
-    color: #333;
-    text-decoration: none;
-    position: relative;
-    font-size: 12px; 
-}
-
-.sidebar a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #4A4AC4;
-    bottom: 0;
-    left: 0;
-    transition: width 0.3s;
-}
-
-.sidebar a:hover::after {
-    width: 100%;
-}
-
-.sidebar a.active {
-    font-weight: bold;
-    color: #4A4AC4;
-    border-bottom: 2px solid #4A4AC4;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-}
-
-.sidebar .delete-account {
-    color: red;
-    cursor: pointer;
-    display: block;
-    margin-top: 20px;
-    text-decoration: none;
-}
-
-.sidebar .delete-account:hover::after {
-    width: 0;
-}
-
-.content {
-    width: 75%;
-    padding-left: 20px;
-    box-sizing: border-box;
-    font-size: 12px; 
-}
-
-.profile-header {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    font-size: 12px; 
-}
-
-.profile-header h1 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.profile-pic {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    font-size: 12px; 
-}
-
-.profile-pic img {
-    border-radius: 10%;
-    width: 100px;
-    height: 100px;
-}
-
-.profile-pic button {
-    background-color: #4A4AC4;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.profile-pic button:hover {
-    background-color: #3737c1;
-}
-
-.profile-pic .delete-btn {
-    background-color: #ff4b4b;
-}
-
-.profile-pic .delete-btn:hover {
-    background-color: #ff1f1f;
-}
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 12px;
-}
-
-.form-control {
-    width: 100%;
-    padding: 10px 15px; 
-    border-radius: 5px; 
-    border: 1px solid #DDE3EC; 
-    background: #f9f9f9; 
-    transition: border-color 0.3s ease;
-    min-height: 40px; 
-    line-height: 1.2;
-    font-size: 12px; 
-}
-
-/* Add a new wrapper div for label and input */
-.input-wrapper {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-
-/* Adjust label style */
-.input-wrapper label {
-    min-width: 150px;
-    margin-right: 10px;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-/* Adjust input container style */
-.input-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Style for input fields */
-.input-container input,
-.input-container select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 12px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-/* Style for error message */
-.invalid-feedback {
-    color: red;
-    font-size: 12px;
-    margin-top: 4px;
-    display: block;
-}
-
-/* Style for invalid input */
-input.is-invalid {
-    border-color: red;
-}
-
-/* Common input field styles */
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="password"],
-select {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc; /* Default border color */
-    border-radius: 3px;
-    box-sizing: border-box;
-    width: 100%; 
-    font-size: 12px; 
-    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border color and shadow */
-}
-
-/* Style for input fields on focus */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    outline: 2px solid; /* Custom outline color and thickness */
-    box-shadow: 0 0 5px rgba(74, 74, 196, 0.5); /* Optional shadow for better visibility */
-}
-
-input[readonly] {
-    background-color: #f1f1f1; /* Light gray background */
-}
+    
+        :root {
+            --primary: #23adad;
+            --greyLight: #23adade1;
+            --greyLight-2: #cbe0dd;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #ccc;
+            --border-radius: 25px;
+            --transition-speed: 0.3s;
+            --hover-color: #4A4AC4;
+        }
 
 
-input[type="file"] {
-    display: none;
-}
+        body {
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            margin: 0;
+            padding-top: 0;
+            font-family: var(--font-family);
+        }
 
-.custom-file-upload {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px; 
-}
+        html {
+            box-sizing: border-box;
+            font-size: 70%;
+            overflow-y: scroll;
+            letter-spacing: 0.6px;
+            line-height: 1.4;
+            -webkit-user-select: none;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
 
-.custom-file-upload:hover {
-    background-color: #f1f1f1;
-}
 
-.btn-primary {
-    background-color: #5E5DF0;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    float: right;
-    font-size: 12px; 
-}
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            box-sizing: border-box;
+            font-size: 12px; 
+            margin-top: 100px;
+            margin-bottom: 30px;
+        }
 
-.btn-primary:hover {
-    background-color: #4A4AC4;
-}
+        .sidebar {
+            width: 25%;
+            padding-right: 20px;
+            border-right: 1px solid #e0e0e0;
+            font-size: 12px; 
+        }
 
-.delete-account {
-    color: red;
-    cursor: pointer;
-    display: block;
-    margin-top: 20px;
-    text-decoration: none;
-    font-size: 12px; 
-}
+        .sidebar a {
+            display: block;
+            padding: 10px 0;
+            color: #333;
+            text-decoration: none;
+            position: relative;
+            font-size: 12px; 
+        }
 
-.form-group .invalid-feedback {
-    color: red;
-    font-size: 12px; 
-    display: block;
-    margin-top: 0.25rem;
-}
+        .sidebar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px; 
+            background: #4A4AC4;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
 
-.password-toggle-container input {
-    width: 100%; /* Ensure it takes full width */
-    padding-right: 40px; /* Make space for the eye icon */
-    border-radius: 3px; /* Ensure consistent border-radius */
-    box-sizing: border-box; /* Ensure padding doesn’t affect width */
-}
+        .sidebar a:not(.active):hover::after {
+            width: 100%;
+        }
 
-.password-toggle-container {
-    position: relative;
-    flex: 1; /* Ensure the container stretches to the same width */
-}
+        .sidebar a.active {
+            font-weight: bold;
+            color: #4A4AC4;
+        }
 
-.password-toggle-container .toggle-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%); /* Center vertically */
-    cursor: pointer;
-    font-size: 18px;
-    color: #aaa;
-}
+        .sidebar a.active::after {
+            width: 100%; 
+        }
 
-.password-toggle-container .toggle-icon:hover {
-    color: #333;
-}
+        .sidebar .delete-account {
+            color: red;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            position: relative;
+        }
 
-/* Password requirements styling */
-.password-requirements {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-left: 4px solid #4A4AC4;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #666;
-}
+        .sidebar .delete-account::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px; 
+            background: red;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
 
-.password-requirements h6 {
-    color: #333;
-    margin: 0 0 8px 0;
-    font-size: 13px;
-    font-weight: 600;
-}
+        .sidebar .delete-account:hover::after {
+            width: 100%;
+        }
 
-.password-requirements ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
 
-.password-requirements li {
-    margin: 4px 0;
-    padding-left: 20px;
-    position: relative;
-}
+        .content {
+            width: 75%;
+            padding-left: 20px;
+            box-sizing: border-box;
+            font-size: 12px; 
+        }
 
-.password-requirements li::before {
-    content: "•";
-    position: absolute;
-    left: 8px;
-    color: #4A4AC4;
-}
+        .profile-header {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 12px; 
+        }
 
-/* Add margin before the submit button */
-.password-requirements + .btn-primary {
-    margin-top: 20px;
-}
+        .profile-header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-.btn-primary {
-    background-color: #4A4AC4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 12px;
-    float: right;
-}
+        .profile-pic {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 12px; 
+        }
+
+        .profile-pic img {
+            border-radius: 10%;
+            width: 100px;
+            height: 100px;
+        }
+
+        .profile-pic button {
+            background-color: #4A4AC4;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-pic button:hover {
+            background-color: #3737c1;
+        }
+
+        .profile-pic .delete-btn {
+            background-color: #ff4b4b;
+        }
+
+        .profile-pic .delete-btn:hover {
+            background-color: #ff1f1f;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            border: 1px solid #DDE3EC; 
+            background: #f9f9f9; 
+            transition: border-color 0.3s ease;
+            min-height: 40px; 
+            line-height: 1.2;
+            font-size: 12px; 
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .input-wrapper label {
+            min-width: 150px;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .input-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-container input,
+        .input-container select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 12px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .invalid-feedback {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        input.is-invalid {
+            border-color: red;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc; 
+            border-radius: 3px;
+            box-sizing: border-box;
+            width: 100%; 
+            font-size: 12px; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+            margin-left: 13px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            outline: 2px solid;
+            box-shadow: 0 0 5px rgba(74, 74, 196, 0.5); 
+        }
+
+        input[readonly] {
+            background-color: #f1f1f1; 
+        }
+
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc; 
+            border-radius: 3px;
+            box-sizing: border-box;
+            width: 100%; 
+            font-size: 12px; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn-primary {
+            background-color: #5E5DF0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            float: right;
+            font-size: 12px; 
+        }
+
+        .btn-primary:hover {
+            background-color: #4A4AC4;
+        }
+
+        .delete-account {
+            color: red;
+            cursor: pointer;
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 12px; 
+        }
+
+        .form-group .invalid-feedback {
+            color: red;
+            font-size: 12px; 
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .password-toggle-container input {
+            width: 100%; 
+            padding-right: 40px; 
+            border-radius: 3px; 
+            box-sizing: border-box; 
+        }
+
+        .password-toggle-container {
+            position: relative;
+            flex: 1;
+        }
+
+        .password-toggle-container .toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        .password-toggle-container .toggle-icon:hover {
+            color: #333;
+        }
+
+        .password-requirements {
+            margin-top: 15px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #4A4AC4;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .password-requirements h6 {
+            color: #333;
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .password-requirements li {
+            margin: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .password-requirements li::before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #4A4AC4;
+        }
+
+        .password-requirements + .btn-primary {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: #4A4AC4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 12px;
+            float: right;
+        }
+
 </style>
 @endsection
 @section('content')
@@ -408,7 +446,7 @@ input[type="file"] {
                         <label for="profilepicture">Tambah / Edit Foto Profil</label>
                         <div class="input-container">
                             <label for="profilepicture" class="custom-file-upload">
-                                <i class="fa fa-cloud-upload"></i> Upload File
+                                <i class="fa fa-cloud-upload"></i> Upload Gambar
                             </label>
                             <input type="file" id="profilepicture" name="profilepicture" accept="image/*" class="@error('profilepicture') is-invalid @enderror">
                             @error('profilepicture')
@@ -551,7 +589,7 @@ input[type="file"] {
                             <label for="old_password">Kata Sandi Lama</label>
                             <div class="input-container">
                                 <div class="password-toggle-container">
-                                    <input type="password" id="old_password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" placeholder="Old Password" required>
+                                    <input type="password" id="old_password" name="old_password" class="form-control @error('old_password') is-invalid @enderror" placeholder="Kata Sandi Lama" required>
                                     <span class="toggle-icon" onclick="togglePasswordVisibility('old_password', this)">
                                         <i class="fa fa-eye-slash"></i>
                                     </span>
@@ -571,7 +609,7 @@ input[type="file"] {
                         <label for="password">Kata Sandi Baru</label>
                         <div class="input-container">
                             <div class="password-toggle-container">
-                                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="New Password" required>
+                                <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Kata Sandi Baru" required>
                                 <span class="toggle-icon" onclick="togglePasswordVisibility('password', this)">
                                     <i class="fa fa-eye-slash"></i>
                                 </span>
@@ -590,7 +628,7 @@ input[type="file"] {
                         <label for="password_confirmation">Konfirmasi Kata Sandi</label>
                         <div class="input-container">
                             <div class="password-toggle-container">
-                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Confirm Password" required>
+                                <input type="password" id="password_confirmation" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Konfirmasi Kata Sandi" required>
                                 <span class="toggle-icon" onclick="togglePasswordVisibility('password_confirmation', this)">
                                     <i class="fa fa-eye-slash"></i>
                                 </span>
