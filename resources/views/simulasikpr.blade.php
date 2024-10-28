@@ -10,7 +10,7 @@
         <form action="{{ route('simulasikpr.calculate') }}" method="POST" class="kpr-form">
             @csrf
             <div class="form-group">
-                <label for="harga_rumah">Harga Property</label>
+                <label for="harga_rumah">Harga Properti</label>
                 <input type="number" class="form-control" id="harga_rumah" name="harga_rumah" required>
             </div>
             <div class="form-group">
@@ -33,13 +33,11 @@
 
 @section('styles')
 <style>
-
-.simulasikpr-page {
     .simulasi-kpr-container {
         width: 100%;
         max-width: 800px;
         background: #fff;
-        padding: 30px; 
+        padding: 30px; s
         border-radius: 8px;
         box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1); 
         margin: 0 auto;
@@ -91,7 +89,7 @@
     .simulasi-kpr-container button:hover {
         background-color: #4a4ac4;
     }
-}
+
 
 </style>
 @endsection

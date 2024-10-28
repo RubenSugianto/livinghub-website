@@ -275,7 +275,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: auto;
-            font-size: 10px;
+            font-size: 12px;
         }
 
         .footer-content {
@@ -489,7 +489,7 @@
    
     </style>
         @yield('styles')
- </head>
+    </head>
     <body>
         <header>
     <div class="navbar-container">
