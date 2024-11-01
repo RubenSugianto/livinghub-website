@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
+
 @section('title', 'My Favorites')
 
 @section('content')

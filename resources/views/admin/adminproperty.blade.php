@@ -1,51 +1,12 @@
 @extends('master')
 
+@section('navbar')
+    @include('partials.navbaradmin')
+@endsection
+
 @section('title', 'My Property')
 @section('content')
 @if (session('success'))
-
-<header>
-    <div class="navbar-container">
-        <a href="{{ route('home') }}" class="logo">
-            <img src="{{ asset('LogooB.png') }}" alt="Logo">
-        </a>
-        <nav>
-            <a href="{{ route('home') }}">Home</a>
-            <button class="navbutton" role="button" onclick="location.href='{{ route('property.add') }}'">Tambah Properti</button>
-        </nav>
-        <div class="search-container">
-            <i class="fa fa-search search-icon" aria-hidden="true" style="font-size: 20px; color: #000;" onclick="openSearchPopup()"></i>
-        </div>
-        <div class="dropdown">
-            <i class="fa fa-bars" style='font-size:25px;'></i>
-            <div class="dropdown-content">
-                <div class="auth-text">
-                    @auth
-                        @if(Auth::user()->avatar)
-                            <img id="dropdownProfilePicture" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
-                        @else
-                            <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
-                        @endif
-                        <div class="username">{{ auth::user()->username }}</div>
-                    @else
-                        <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
-                        <div class="username">Guest</div>
-                    @endauth
-                </div>
-                <a href="{{ route('admin.properties') }}"><i class="fa fa-check" aria-hidden="true"></i> Approve Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="{{ route('admin.documents') }}"><i class="fa fa-file" aria-hidden="true"></i> Approve Document <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                @auth
-                    <form action="/logout" method="post" style="margin: 0;">
-                        @csrf
-                        <button type="submit" class="logout-btn"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></button>
-                    </form>
-                @else
-                    <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                @endauth
-            </div>
-        </div>
-    </div>
-</header>
 
     <div id="successAlert" class="alert alert-success fade show" role="alert">
         <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
@@ -53,6 +14,23 @@
             <strong>{{ session('success') }}</strong>
         </span>
         <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
+@endif
+
+@if (session('error'))
+
+    <!-- <div id="successAlert" class="alert alert-success fade show" role="alert">
+        <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+        <span class="alert-content">
+            <strong>{{ session('error') }}</strong>
+        </span>
+        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div> -->
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+    <strong>{{ session('error') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
     </div>
 @endif
 

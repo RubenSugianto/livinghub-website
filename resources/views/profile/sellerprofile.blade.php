@@ -1,4 +1,8 @@
 @extends('master')
+
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
 @section('title', 'Seller Profile')
 @section('content')
 
