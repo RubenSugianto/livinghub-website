@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
+
 @section('title', 'Properti Dijual')
 
 @section('content')

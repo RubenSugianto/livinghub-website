@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
+
 @section('content')
 <div class="container">
     <!-- Back Button placed at the top-left corner inside the container -->

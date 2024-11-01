@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
+
 @section('title', 'Properti Saya')
 @section('content')
 @if (session('success'))

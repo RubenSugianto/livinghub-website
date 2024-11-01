@@ -1,4 +1,8 @@
-@extends('master') 
+@extends('master')
+
+@section('navbar')
+    @include('partials.navbaruser')
+@endsection
 
 @section('title', 'Detail Properti') 
 

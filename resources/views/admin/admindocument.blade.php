@@ -1,6 +1,12 @@
 @extends('admin.adminproperty')
 
+@section('navbar')
+    @include('partials.navbaradmin')
+@endsection
+
 @section('content')
+
+
 <div class="container">
     <h1>Pending Document</h1>
 
@@ -35,11 +41,11 @@
                 <tr data-document-id="{{ $document->id }}">
                     <td>{{ $document->id }}</td>
                     <td>{{ $document->name }}</td>
-                    <td>{{ $document->property->title }}</td>
+                    <td>{{ $document->property->name }}</td>
                     <td>{{ $document->status }}</td>
                     <td>
-                        <button class="btn btn-success approve-button" data-document-id="{{ $document->id }}">Setujui</button>
-                        <button class="btn btn-danger delete-button" data-document-id="{{ $document->id }}">Hapus</button>
+                        <button class="btn btn-success approve-button" data-document-id="{{ $document->id }}">Approve</button>
+                        <button class="btn btn-danger delete-button" data-document-id="{{ $document->id }}">Reject</button>
                     </td>
                 </tr>
             @endforeach
@@ -76,7 +82,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Hapus</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Reject</button>
             </div>
         </div>
     </div>
