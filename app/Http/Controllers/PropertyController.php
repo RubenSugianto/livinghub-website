@@ -131,7 +131,7 @@ class PropertyController extends Controller
      // Update a specific property
      public function update(Request $request, $id)
      {
-         $request->validate([
+        $request->validate([
              'name' => 'required|string|max:255',
              'price' => 'required|numeric|min:0', // Changed to numeric and removed max limit
              'city' => 'required|string',
@@ -148,8 +148,8 @@ class PropertyController extends Controller
              'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
              'existing_images' => 'array', // Array of existing image IDs (hidden inputs in the form)
          ]);
-         
 
+         
          $property = Property::findOrFail($id);
          $property->update($request->except('images', 'existing_images'));
      
@@ -181,7 +181,7 @@ class PropertyController extends Controller
              }
          }
      
-         return redirect()->route('myproperties.index')->with('success', 'Property updated successfully.');
+         return redirect()->route('myproperties')->with('success', 'Property updated successfully.');
      }
 
     public function destroy($id)
@@ -215,7 +215,7 @@ class PropertyController extends Controller
         // Delete the property
         $property->delete();
 
-        return redirect()->route('myproperties.index')->with('success', 'Property deleted successfully');
+        return redirect()->route('myproperties')->with('success', 'Property deleted successfully');
     }
 
 

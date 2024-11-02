@@ -343,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = event.target;
             if (!target.closest('.btn')) {
                 const propertyId = row.getAttribute('data-property-id');
-                window.location.href = `/property/${propertyId}`;
+                window.location.href = `/properties/${propertyId}`;
             }
         });
     });

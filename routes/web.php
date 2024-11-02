@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Route;
 
 // Home Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/property/{property}', [PropertyController::class, 'show'])->name('property.show');
 
 // Other Routes
 Route::get('/dijual', [DijualController::class, 'index'])->name('dijual');
@@ -32,94 +31,92 @@ Route::get('/disewa', [DisewaController::class, 'index'])->name('disewa');
 Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simulasikpr');
 Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
 
-// Auth Routes
-Route::get('/register', [RegisterController::class, 'index'])->name('register')->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
-Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('google.login')->middleware('guest');
-Route::get('/auth/google/call-back', [GoogleLoginController::class, 'callbackGoogle'])->middleware('guest');
+// Show Property
+Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
 
+// Search
+Route::get('/search', [PropertyController::class, 'search'])->name('search');
+
+// Profile Seller
+Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
+
+// LogOut
+Route::post('/logout', [LoginController::class, 'logout']);
 
 // Auth::routes(['verify' => true]);
 
-// Reset Password
-Route::get('/forgot-password', [PasswordController::class, 'forgotpassword'])->middleware('guest')->name('password.request');
-Route::post('/forgot-password', [PasswordController::class, 'verifyemail'])->middleware('guest')->name('password.email');
-Route::get('/reset-password/{token}', [PasswordController::class, 'resetpassword'])->middleware('guest')->name('password.reset');
-Route::post('/reset-password', [PasswordController::class, 'verifypassword'])->middleware('guest')->name('password.update');
+// Email Verification
+Route::get('/email/verify', [RegisterController::class, 'verifypage'])->middleware('auth')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyrequest'])->middleware(['auth', 'signed'])->name('verification.verify');
+Route::post('/email/verification-notification', [RegisterController::class, 'resendlink'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Route::middleware(['guest'])->group(function () {
+    // Auth Routes
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('google.login');
+    Route::get('/auth/google/call-back', [GoogleLoginController::class, 'callbackGoogle']);
 
-// profile page
-Route::middleware(['auth'])->group(function () {
+    // Reset Password
+    Route::get('/forgot-password', [PasswordController::class, 'forgotpassword'])->name('password.request');
+    Route::post('/forgot-password', [PasswordController::class, 'verifyemail'])->name('password.email');
+    Route::get('/reset-password/{token}', [PasswordController::class, 'resetpassword'])->name('password.reset');
+    Route::post('/reset-password', [PasswordController::class, 'verifypassword'])->name('password.update');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // profile page
     Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
     Route::delete('/lihatprofile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/lihatprofile/updateprofile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/lihatprofile/updatepassword', [PasswordController::class, 'changepassword'])->name('password.change');
     Route::put('/lihatprofile/setpassword', [PasswordController::class, 'setpassword'])->name('password.set');
-});
 
+    // Add Property Routes
+    Route::get('/property/add', [PropertyController::class, 'add'])->name('property.add');
+    Route::post('/propertysave', [PropertyController::class, 'store'])->name('property.store');
+    Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit');
+    Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('property.update');
+    Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('property.destroy');
 
-// Add Property Routes
-Route::get('/properties/add', [PropertyController::class, 'add'])->name('property.add')->middleware('auth');
-Route::post('/properties', [PropertyController::class, 'store'])->name('property.store')->middleware('auth');
-Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
-Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
-Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
-Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('property.destroy')->middleware('auth');
+    // Dashboard
+    Route::get('/myproperties', [DashboardController::class, 'showMyProperty']);
 
-// Search
-Route::get('/search', [PropertyController::class, 'search'])->name('search');
-
-// Dashboard
-Route::get('/myproperties', [DashboardController::class, 'showMyProperty'])->middleware('auth');
-
-// Favourite and Like Routes
-Route::middleware(['auth'])->group(function () {
+    // Favourite and Like Routes
     Route::prefix('properties')->group(function () {
         Route::post('/{property}/favorite', [PropertyController::class, 'favorite'])->name('properties.favorite');
         Route::post('/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
         Route::post('/{property}/like', [PropertyController::class, 'like'])->name('properties.like');
         Route::post('/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
     });
-}); 
 
-// Favorites Page Routes
-Route::middleware(['auth'])->group(function () {
+    // Favorites Page Routes
     Route::prefix('favorites')->group(function () {
         Route::get('/', [FavoritesController::class, 'index'])->name('favorites');
         Route::delete('/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
     });
-});
 
-Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
-
-// Likes Page Routes
-Route::middleware(['auth'])->group(function () {
+    // Favorites Page Routes
     Route::prefix('likes')->group(function () { 
         Route::get('/', [LikesController::class, 'index'])->name('likes');
         Route::delete('/{id}', [LikesController::class, 'destroy'])->name('likes.destroy');
     });
-});
+    Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
 
-//My property page
-
-Route::middleware(['auth'])->group(function () {
+    // My Property Page
     Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties');
     Route::get('/myproperties/search', [MyPropertyController::class, 'search'])->name('myproperties.search');
-    Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit')->middleware('auth');
-    Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('property.update')->middleware('auth');
+    Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit');
+    Route::put('/properties/{id}', [PropertyController::class, 'update'])->name('property.update');
     Route::delete('/properties/{id}', [PropertyController::class, 'destroy'])->name('properties.destroy');
     Route::get('/document/{property}/edit', [DocumentController::class, 'edit'])->name('document.edit');
     Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
+
+    // Comment
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
-
-// Comment
-Route::post('/comments', [CommentController::class, 'store'])->middleware('auth')->name('comments.store');
-
-// Profile Seller
-Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
 
 
 // Admin Property

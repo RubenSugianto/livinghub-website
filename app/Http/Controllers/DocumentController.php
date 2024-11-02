@@ -48,7 +48,7 @@ class DocumentController extends Controller
     
         $document->save();
     
-        return redirect()->route('myproperties.index')->with('success', 'Document updated successfully.');
+        return redirect()->route('myproperties')->with('success', 'Document updated successfully.');
     }
     
 }

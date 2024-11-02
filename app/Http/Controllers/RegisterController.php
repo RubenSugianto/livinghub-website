@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegisterController extends Controller
 {
@@ -14,7 +18,7 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
         $validatedData = $request->validate([
-            'name' => ['required', 'max:255', 'regex:/^[a-zA-Z\s]+$/', 'unique:users'],
+            'name' => ['required', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
             'username' => ['required', 'min:3', 'max:255', 'regex:/^[a-zA-Z0-9_\-]+$/', 'unique:users'],
             'email' => ['required', 'email:dns', 'unique:users'],
             'password' => ['required', 'min:8', 'max:255', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/'],
@@ -25,8 +29,30 @@ class RegisterController extends Controller
 
         $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
 
-        return redirect('/login')->with('success', 'Registration successful! Please login');
+        Auth::login($user);
+
+        event(new Registered($user));
+
+        return redirect()->route('verification.notice')
+                         ->with('message', 'Registration berhasil! Tolong verifikasi email anda.');
+    }
+
+    public function verifypage()
+    {
+        return view('auth.verify-email');
+    }
+
+    public function verifyrequest(EmailVerificationRequest $request)
+    {
+        $request->fulfill();  // This marks the user's email as verified
+        return redirect('/');  // Redirect the user after successful verification
+    }
+
+    public function resendlink(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();  // Resend the verification email
+        return back()->with('message', 'Link Verifikasi telah dikirim!');
     }
 }
