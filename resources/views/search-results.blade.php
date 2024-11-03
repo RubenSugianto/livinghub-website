@@ -4,7 +4,7 @@
     @include('partials.navbaruser')
 @endsection
 
-@section('title', 'Properti Dijual')
+@section('title', 'Properti Search')
 
 @section('content')
 <div class="container mt-4 dijual-page">
@@ -138,7 +138,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Cari</button>
             </div>
         </div>
     </div>
@@ -148,7 +148,7 @@
     <h1>Hasil Pencarian</h1>
     <div class="row justify-content-center flex-column">
         @if($properties->isEmpty())
-            <p>Property tidak ditemukan.</p>
+            <p>Properti tidak ditemukan.</p>
         @else
             <p>Terdapat {{ $properties->total() }} properti yang ditemukan</p>
             @foreach($properties as $property)

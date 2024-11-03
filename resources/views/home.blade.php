@@ -1014,7 +1014,7 @@ img {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Cari</button>
             </div>
         </div>
     </div>

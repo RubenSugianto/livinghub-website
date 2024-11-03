@@ -44,7 +44,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to delete this property? This action cannot be undone.
+                        Apakah Anda yakin ingin menghapus properti ini? Tindakan ini tidak dapat dibatalkan.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -59,11 +59,11 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="propertyModalLabel">Property Pending Status</h5>
+                        <h5 class="modal-title" id="propertyModalLabel">Status Properti</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        The status of this property is currently pending. Please review the property.
+                        Status properti ini saat ini sedang tertunda. Mohon tinjau properti ini.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -77,11 +77,11 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="pendingModalLabel">Document Pending Status</h5>
+                        <h5 class="modal-title" id="pendingModalLabel">Status Dokumen</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        The status of this document is currently pending. Please review the document.
+                         Status dokumen ini saat ini sedang tertunda. Mohon tinjau dokumen ini
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -95,7 +95,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="imagePreviewModalLabel">Image Preview</h5>
+                        <h5 class="modal-title" id="imagePreviewModalLabel">Preview Gambar</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <h1 class="mb-4">{{ $title }}</h1> 
+        <h1>Persetujuan Properti</h1>
 
         <div class="search-bar mb-5">
             <form action="{{ route('myproperties.search') }}" method="GET" class="input-group justify-content-center">
@@ -253,7 +253,7 @@
                             <th>Detail</th>
                             <th>Terakhir Update</th>
                             <th>Status</th>
-                            <th>Actions</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -425,7 +425,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                                    <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Search</button>
+                                    <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Cari</button>
                                 </div>
                             </div>
                         </div>
@@ -560,310 +560,333 @@ function resetFilters() {
 @section('styles')
 <style>
 
-:root {
-    --primary: #23adad;
-    --greyLight: #23adade1;
-    --greyLight-2: #cbe0dd;
-    --background-color: #f5f5f5;
-    --text-color: #333;
-    --border-color: #ccc;
-    --border-radius: 25px;
-    --transition-speed: 0.3s;
-    --hover-color: #4A4AC4;
-}
+        :root {
+            --primary-color: #5E5DF0;
+            --secondary-color: #4A4AC4;
+            --text-color: #393232;
+            --background-color: #f5f5f5;
+            --border-radius: 5px;
+            --transition-speed: 0.3s;
+            --font-family: "Poppins", sans-serif;
+        }
 
-H1{
-font-size: 2.2rem; 
-    font-weight: 700;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-}
+        body {
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            margin: 0;
+            padding-top: 0;
+            font-family: var(--font-family);
+        }
 
-.alert {
-    padding: 15px;
-    margin: 10px auto;
-    border-radius: 10px;
-    width: calc(100% - 40px);
-    position: relative;
-    top: -10px; 
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
+        html {
+            box-sizing: border-box;
+            font-size: 70%;
+            overflow-y: scroll;
+            letter-spacing: 0.6px;
+            line-height: 1.4;
+            -webkit-user-select: none;
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
 
-.alert-success {
-    background-color: #d4edda; 
-    border: 1px solid #c3e6cb; 
-    color: #155724; 
-}
+        h1{
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 100px;
+        }
 
-.alert .btn-close {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem; 
-    color: #155724; 
-    cursor: pointer;
-    margin-left: auto;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 15px; 
-    top: 50%;
-    transform: translateY(-50%); 
-}
+        .alert {
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: calc(100% - 40px);
+            position: relative;
+            top: -10px; 
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
 
-.alert .btn-close:hover {
-    color: #0d3c1e; 
-}
+        .alert-success {
+            background-color: #d4edda; 
+            border: 1px solid #c3e6cb; 
+            color: #155724; 
+        }
 
-.alert .btn-close:active {
-    transform: translateY(-50%) scale(1.1); 
-}
+        .alert .btn-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem; 
+            color: #155724; 
+            cursor: pointer;
+            margin-left: auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 15px; 
+            top: 50%;
+            transform: translateY(-50%); 
+        }
 
-.alert .alert-icon {
-    font-size: 2rem;
-    margin-right: 15px;
-    vertical-align: middle;
-}
+        .alert .btn-close:hover {
+            color: #0d3c1e; 
+        }
 
-.alert.fade {
-    opacity: 1;
-    transform: translateY(0);
-}
+        .alert .btn-close:active {
+            transform: translateY(-50%) scale(1.1); 
+        }
 
-.alert.fade.hide {
-    opacity: 0;
-    transform: translateY(-15px);
-}
+        .alert .alert-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
 
-.search-bar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
+        .alert.fade {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-.search-bar .input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    background-color: var(--background-color);
-    padding: 5px;
-}
+        .alert.fade.hide {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
 
-.search-bar input[type="text"] {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-    font-size: 1rem; 
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
+        .search-bar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
 
-.search-bar button,
-.search-bar .filter-button {
-    padding: 10px;
-    background: none;
-    color: black;
-    border: none;
-    cursor: pointer;
-    transition: color var(--transition-speed) ease;
-}
+        .search-bar .input-group {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background-color: var(--background-color);
+            padding: 5px;
+        }
 
-.search-bar button:hover,
-.search-bar .filter-button:hover {
-    color: var(--hover-color);
-}
+        .search-bar input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 1rem; 
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
 
-.search-bar button i,
-.search-bar .filter-button i {
-    font-size: 1rem; 
-}
+        .search-bar button,
+        .search-bar .filter-button {
+            padding: 10px;
+            background: none;
+            color: black;
+            border: none;
+            cursor: pointer;
+            transition: color var(--transition-speed) ease;
+        }
 
-.btn-group-toggle .btn {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 6px;
-  color: black;
-  background-color: white;
-  font-size: 12px;
-}
+        .search-bar button:hover,
+        .search-bar .filter-button:hover {
+            color: var(--hover-color);
+        }
 
-.btn-group-toggle .btn.active {
-  background-color: #4A4AC4;
-  color: white;
-}
+        .search-bar button i,
+        .search-bar .filter-button i {
+            font-size: 1rem; 
+        }
 
-.btn-group-toggle .btn:hover {
-  background-color: #4A4AC4;
-  color: white;
-}
+        .btn-group-toggle .btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 6px;
+        color: black;
+        background-color: white;
+        font-size: 12px;
+        }
 
-.modal-body {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
+        .btn-group-toggle .btn.active {
+        background-color: #4A4AC4;
+        color: white;
+        }
 
-.modal-body .form-group {
-  flex: 1 1 25%;
-}
+        .btn-group-toggle .btn:hover {
+        background-color: #4A4AC4;
+        color: white;
+        }
 
-.modal-body .form-group-full {
-  flex: 1 1 100%;
-}
+        .modal-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        }
 
-.input-range {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+        .modal-body .form-group {
+        flex: 1 1 25%;
+        }
 
-.btn-group-toggle .btn input[type="radio"] {
-  display: none;
-}
+        .modal-body .form-group-full {
+        flex: 1 1 100%;
+        }
 
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 3px;
-  font-size: 12px;
-}
+        .input-range {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        }
 
-.modal-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        .btn-group-toggle .btn input[type="radio"] {
+        display: none;
+        }
 
-.modal-body .btn-group-toggle .btn {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 6px;
-  color: black;
-  background-color: white;
-  font-size: 12px;
-}
+        label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 3px;
+        font-size: 12px;
+        }
 
-.modal-body .btn-group-toggle .btn.active {
-  background-color: #5E5DF0;
-  color: white;
-}
+        .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
 
-.modal-body .btn-group-toggle .btn:hover {
-  background-color: #4A4AC4;
-  color: white;
-}
+        .modal-body .btn-group-toggle .btn {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 6px;
+        color: black;
+        background-color: white;
+        font-size: 12px;
+        }
 
-.modal-dialog.modal-lg {
-  max-width: 50%;
-}
+        .modal-body .btn-group-toggle .btn.active {
+        background-color: #5E5DF0;
+        color: white;
+        }
 
-.table {
-    width: 100%;
-    margin-top: 20px;
-}
+        .modal-body .btn-group-toggle .btn:hover {
+        background-color: #4A4AC4;
+        color: white;
+        }
 
-.table thead th {
-    background-color: #7473f0;
-    color: white;
-    text-align: center;
-}
+        .modal-dialog.modal-lg {
+        max-width: 50%;
+        }
 
-.table tbody tr:nth-of-type(odd) {
-    background-color: var(--greyLight);
-}
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
 
-.table tbody tr:hover {
-    background-color: #f1f1f1;
-}
+        .table thead th {
+            background-color: #7473f0;
+            color: white;
+            text-align: center;
+        }
 
-.table img {
-    max-width: 100px;
-    border-radius: 4px;
-}
+        .table tbody tr:nth-of-type(odd) {
+            background-color: var(--greyLight);
+        }
 
-.table th, .table td {
-    vertical-align: middle;
-    text-align: center;
-    padding: 10px;
-}
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .table img {
+            max-width: 100px;
+            border-radius: 4px;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 10px;
+        }
 
 
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 3rem;
-  margin: 1rem auto;
-  border-radius: 0.4rem;
-  background: #ffffff;
-  box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
-  width: fit-content;
-}
+        .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        margin: 1rem auto;
+        border-radius: 0.4rem;
+        background: #ffffff;
+        box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+        width: fit-content;
+        }
 
-.page__numbers,
-.page__btn,
-.page__dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.4rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-}
+        .page__numbers,
+        .page__btn,
+        .page__dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.4rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+        }
 
-.page__dots {
-  width: 2rem;
-  height: 2rem;
-  color: var(--greyLight);
-  cursor: initial;
-}
+        .page__dots {
+        width: 2rem;
+        height: 2rem;
+        color: var(--greyLight);
+        cursor: initial;
+        }
 
-.page__numbers {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 0.2rem;
-  color: var(--greyDark);
+        .page__numbers {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.2rem;
+        color: var(--greyDark);
 
-  &:hover {
-    color: #ffffff !important;
-    background: #5E5DF0 !important;
-  }
+        &:hover {
+            color: #ffffff !important;
+            background: #5E5DF0 !important;
+        }
 
-  &.active {
-    color: #ffffff !important;
-    background: #5E5DF0 !important;
-    font-weight: 600 !important;
-    border: 1px solid var(--primary) !important;
-  }
-}
+        &.active {
+            color: #ffffff !important;
+            background: #5E5DF0 !important;
+            font-weight: 600 !important;
+            border: 1px solid var(--primary) !important;
+        }
+        }
 
-.page__btn {
-  color: var(--btnColor);
-  pointer-events: none;
+        .page__btn {
+        color: var(--btnColor);
+        pointer-events: none;
 
-  &.active {
-    color: var(--btnColor);
-    pointer-events: initial;
+        &.active {
+            color: var(--btnColor);
+            pointer-events: initial;
 
-    &:hover {
-      color: var(--primary) !important;
+            &:hover {
+            color: var(--primary) !important;
+            }
+         }
     }
-  }
-}
 
 </style>
 @endsection

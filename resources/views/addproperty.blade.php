@@ -168,10 +168,10 @@
         <div class="formbold-form-btn-wrapper">
             <button type="button" class="formbold-back-btn" id="back" style="display: none;">Sebelumnya</button>
             <button type="button" class="formbold-btn" id="next">Selanjutnya</button>
-            <button type="submit" class="formbold-btn" id="submit" style="display: none;">Submit</button>
+            <button type="submit" class="formbold-btn" id="submit" style="display: none;">Simpan</button>
         </div>
     </form>
-    <div id="form-alert" style="display:none;">Please fill all required fields.</div>
+    <div id="form-alert" style="display:none;">Harap isi semua kolom yang wajib diisi.</div>
      </div> 
          </div>
     <script>
