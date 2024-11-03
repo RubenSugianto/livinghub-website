@@ -28,8 +28,8 @@
                         <div class="username">Guest</div>
                     @endauth
                 </div>
-                <a href="{{ route('admin.property') }}"><i class="fa fa-check" aria-hidden="true"></i> Approve Property <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
-                <a href="{{ route('document.pending') }}"><i class="fa fa-file" aria-hidden="true"></i> Approve Document <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="{{ route('admin.property') }}"><i class="fa fa-check" aria-hidden="true"></i> Persetujuan Properti <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
+                <a href="{{ route('document.pending') }}"><i class="fa fa-file" aria-hidden="true"></i> Persetujuan Dokumen <i class="fa fa-chevron-right right-icon" aria-hidden="true"></i></a>
                 @auth
                     <form action="/logout" method="post" style="margin: 0;">
                         @csrf

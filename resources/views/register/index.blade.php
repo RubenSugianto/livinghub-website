@@ -15,7 +15,7 @@ body {
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 600px; 
+    padding-top: 780px; 
 }
 
 .container {

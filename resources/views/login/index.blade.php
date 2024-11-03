@@ -15,7 +15,7 @@ body {
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;
-    padding-top: 350px; 
+    padding-top: 400px; 
 }
 
 .container {
@@ -304,7 +304,7 @@ h2 {
                     </a>
 
                     <small class="d-block text-center mt-4">Belum memiliki akun? <a class="small-link" href="/register">Register</a></small>
-                    <small class="d-block text-center mt-4"><a class="small-link" href="/forgot-password">Lupa password?</a></small>
+                    <small class="d-block text-center mt-4"><a class="small-link" href="/forgot-password">Lupa kata sandi?</a></small>
                     <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Login</button>
                 </form>
             </main>
