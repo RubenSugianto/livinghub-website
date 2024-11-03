@@ -51,6 +51,17 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
         ]);
 
+        User::factory()->create([
+            'name' => 'Admin LivingHub',
+            'username' => 'admin123',
+            'email' => 'admin123@gmail.com',
+            'gender' => 'male',
+            'age' => 18,
+            'phone' => '098718271827',
+            'password' => 'admin',
+            'role' => 'admin',
+        ]);
+
         // Property::factory(20)->create();
 
         // Document::factory(20)->create();

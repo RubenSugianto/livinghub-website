@@ -106,6 +106,7 @@
                 <hr>
             </div>
 
+            @notadmin
             <!-- Profile Section -->
             <div class="profile-section d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
@@ -163,6 +164,9 @@
                 @endauth
 
              </div>
+             @endnotadmin
+
+             
                  <script>
 
                         document.addEventListener("DOMContentLoaded", function() {
