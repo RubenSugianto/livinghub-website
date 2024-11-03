@@ -118,16 +118,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin Property
+    Route::get('/adminproperty', [AdminController::class, 'showPendingProperties'])->name('admin.property'); 
+    Route::patch('/property/approve/{id}', [AdminController::class, 'approveProperty'])->name('property.approve');
+    Route::patch('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->name('property.reject');
 
-// Admin Property
-Route::get('/adminproperty', [AdminController::class, 'showPendingProperties'])->middleware('auth')->name('admin.property'); 
-Route::patch('/property/approve/{id}', [AdminController::class, 'approveProperty'])->middleware('auth')->name('property.approve');
-Route::patch('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->middleware('auth')->name('property.reject');
+    // Admin Document
+    Route::get('/admindocument', [AdminController::class, 'showDocuments'])->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
+    Route::patch('/document/{id}/approve', [AdminController::class, 'approveDocument'])->name('document.approve');
+    Route::patch('/document/{id}/decline', [AdminController::class, 'declineDocument'])->name('document.decline');
 
-// Admin Document
-Route::get('/admindocument', [AdminController::class, 'showDocuments'])->middleware('auth')->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
-Route::patch('/document/{id}/approve', [AdminController::class, 'approveDocument'])->middleware('auth')->name('document.approve');
-Route::patch('/document/{id}/decline', [AdminController::class, 'declineDocument'])->middleware('auth')->name('document.decline');
-
-// Admin Dashboard
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('admin.dashboard');
+    // Admin Dashboard
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
