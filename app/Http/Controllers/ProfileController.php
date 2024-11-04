@@ -55,7 +55,7 @@ class ProfileController extends Controller
     
         $user->save();
     
-        return redirect()->route('home')->with('success', 'Profile updated successfully.',);
+        return redirect()->route('home')->with('success', 'Profil berhasil diperbarui.',);
     }
 
     public function destroy()
@@ -80,7 +80,7 @@ class ProfileController extends Controller
 
         $user->delete();
 
-        return redirect()->route('home')->with('success', 'Profile deleted successfully.');
+        return redirect()->route('home')->with('success', 'Profil berhasil dihapus.');
     }
 
 }

@@ -91,13 +91,13 @@ class PasswordController extends Controller
         $user = Auth::user();
 
         if (!Hash::check($request->old_password, $user->password)) {
-            return back()->withErrors(['old_password' => 'Password yang diinput salah.']);
+            return back()->withErrors(['old_password' => 'Katas sandi yang diinput salah.']);
         }
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('home')->with('success', 'Password changed successfully.');
+        return redirect()->route('home')->with('success', 'Kata Sandi telah berhasil diubah.');
     }
 
     public function setpassword(Request $request)
@@ -116,6 +116,6 @@ class PasswordController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('home')->with('success', 'Password set successfully.');
+        return redirect()->route('home')->with('success', 'Kata sandi berhasil diatur.');
     }
 }
