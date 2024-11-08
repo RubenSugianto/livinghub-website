@@ -134,8 +134,6 @@ class PropertyController extends Controller
         $request->validate([
              'name' => 'required|string|max:255',
              'price' => 'required|numeric|min:0', // Changed to numeric and removed max limit
-             'city' => 'required|string',
-             'location' => 'required|string',
              'full_location' => 'required|string|max:255', 
              'description' => 'required|string',
              'bedroom' => 'required|integer',
@@ -159,27 +157,35 @@ class PropertyController extends Controller
      
          // Delete images that are no longer in the existing_images list
          foreach (array_diff($currentImageIds, $existingImageIds) as $imageId) {
-             $image = PropertyImage::find($imageId);
-             if ($image) {
-                 Storage::delete($image->images);
-                 $image->delete();
-             }
-         }
+            $image = PropertyImage::find($imageId);
+            if ($image) {
+                $imagePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $image->images));
+        
+                // Check if the file exists in the public directory
+                if (file_exists($imagePath)) {
+                    unlink($imagePath); // Use unlink instead of Storage::delete for public files
+                } 
+        
+                // Delete the database record after checking
+                $image->forceDelete();
+            }
+        }
      
          // Handle newly uploaded images
          if ($files = $request->file('images')) {
-             foreach ($files as $file) {
-                 $filename = time() . '-' . $file->getClientOriginalName();
-                 $path = 'uploads/properties/';
-                 $file->move($path, $filename);
-     
-                 PropertyImage::create([
-                     'property_id' => $property->id,
-                     'user_id' => auth()->id(),
-                     'images' => $path . $filename,
-                 ]);
-             }
-         }
+            foreach ($files as $key => $file) { // Add $key to match the store method approach
+                $extension = $file->getClientOriginalExtension();
+                $filename = $key . '-' . time() . '.' . $extension; // Match the naming convention
+                $path = 'uploads/properties/';
+                $file->move($path, $filename);
+        
+                PropertyImage::create([
+                    'property_id' => $property->id,
+                    'user_id' => auth()->id(),
+                    'images' => $path . $filename,
+                ]);
+            }
+        }
      
          return redirect()->route('myproperties')->with('success', 'Properti berhasil diperbarui.');
      }

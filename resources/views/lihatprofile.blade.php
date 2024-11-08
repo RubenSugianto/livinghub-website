@@ -495,7 +495,7 @@
                     <div class="input-wrapper">
                         <label for="email">Email</label>
                         <div class="input-container">
-                            <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}" class="@error('email') is-invalid @enderror">
+                            <input type="email" id="email" name="email" value="{{ old('email', $profile->email) }}" class="@error('email') is-invalid @enderror" readonly>
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}

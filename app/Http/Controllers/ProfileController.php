@@ -29,23 +29,30 @@ class ProfileController extends Controller
             'profilepicture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
     
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
-        $user->gender = $request->input('gender');
-        $user->age = $request->input('age');
+        $fieldsToUpdate = ['name', 'username', 'phone', 'gender', 'age'];
+
+        foreach ($fieldsToUpdate as $field) {
+            $newValue = $request->input($field);
+            if ($user->{$field} !== $newValue) {
+                $user->{$field} = $newValue;
+            }
+        }
 
         // Handle avatar removal
         if ($request->input('remove_picture') == '1') {
-            if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
-                Storage::delete('public/users-avatar/' . $user->avatar);
+            if ($user->avatar && Storage::exists('users-avatar/' . $user->avatar)) {
+                Storage::delete('users-avatar/' . $user->avatar);
             }
-            $user->avatar = null;
+            $user->avatar = 'default_' . md5($user->id) . '.png';
+            $defaultAvatarPath = 'users-avatar\\' . $user->avatar;
+
+            if (!Storage::exists($defaultAvatarPath)) {
+                copy(public_path('\defaultprofilepicture.png'), public_path('\storage\\' . $defaultAvatarPath));
+            }
         } else if ($request->hasFile('profilepicture')) {
             // Delete old avatar if exists
-            if ($user->avatar && Storage::exists('public/users-avatar/' . $user->avatar)) {
-                Storage::delete('public/users-avatar/' . $user->avatar);
+            if ($user->avatar && Storage::exists('users-avatar/' . $user->avatar)) {
+                Storage::delete('users-avatar/' . $user->avatar);
             }
     
             // Store the new avatar
