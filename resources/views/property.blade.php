@@ -1,7 +1,15 @@
 @extends('master')
 
-@section('navbar')
+<!-- @section('navbar')
     @include('partials.navbaruser')
+@endsection -->
+
+@section('navbar')
+    @if($fromAdmin)
+        @include('partials.navbaradmin')
+    @else
+        @include('partials.navbaruser')
+    @endif
 @endsection
 
 @section('title', 'Detail Properti') 
