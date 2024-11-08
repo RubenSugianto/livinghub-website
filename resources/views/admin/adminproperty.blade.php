@@ -1,13 +1,13 @@
 @extends('master')
 
-@section('navbar')
+<!-- @section('navbar')
     @include('partials.navbaradmin')
-@endsection
+@endsection -->
 
 @section('title', 'My Property')
 @section('content')
-@if (session('success'))
 
+@if (session('success'))
     <div id="successAlert" class="alert alert-success fade show" role="alert">
         <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
         <span class="alert-content">
@@ -18,18 +18,9 @@
 @endif
 
 @if (session('error'))
-
-    <!-- <div id="successAlert" class="alert alert-success fade show" role="alert">
-        <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
-        <span class="alert-content">
-            <strong>{{ session('error') }}</strong>
-        </span>
-        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
-    </div> -->
-
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
-    <strong>{{ session('error') }}</strong>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+        <strong>{{ session('error') }}</strong>
     <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
     </div>
 @endif
@@ -278,17 +269,18 @@
 
                                 <td>     
                                     <!-- Tombol View -->
-                                    <form action="{{ route('property.show', $property->id) }}" method="GET" class="btn">
+                                    <form action="{{ route('property.show', $property->id) }}" method="GET" class="btn" style="display:inline-block; margin: 3.5px;">
                                         @csrf
+                                        <input type="hidden" name="fromAdmin" value="true">
                                         <button type="submit" class="btn btn-info">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </button>
                                     </form>
 
                                     <!-- Tombol Approve -->
-                                    <form action="{{ route('property.approve', $property->id) }}" method="POST" class="btn" style="display:inline-block; margin: -22.5px;">
+                                    <form action="{{ route('property.approve', $property->id) }}" method="POST" class="btn" style="display:inline-block; margin: -20px;">
                                         @csrf
-                                        @method('patch')
+                                        @method('post')
                                         <button type="submit" class="btn btn-success">
                                             <i class="fa fa-check" aria-hidden="true"></i>
                                         </button>
@@ -297,7 +289,7 @@
                                     <!-- Tombol Reject -->
                                     <form action="{{ route('property.reject', $property->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: 12.5px;">
                                          @csrf
-                                        @method('patch')
+                                        @method('post')
                                         <button type="submit" class="btn btn-danger">
                                             <i class="fa fa-times" aria-hidden="true"></i>
                                         </button>

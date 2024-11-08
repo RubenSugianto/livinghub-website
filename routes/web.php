@@ -121,13 +121,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     // Admin Property
     Route::get('/adminproperty', [AdminController::class, 'showPendingProperties'])->name('admin.property'); 
-    Route::patch('/property/approve/{id}', [AdminController::class, 'approveProperty'])->name('property.approve');
-    Route::patch('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->name('property.reject');
+    Route::post('/property/approve/{id}', [AdminController::class, 'approveProperty'])->name('property.approve');
+    Route::post('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->name('property.reject');
 
     // Admin Document
     Route::get('/admindocument', [AdminController::class, 'showDocuments'])->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
-    Route::patch('/document/{id}/approve', [AdminController::class, 'approveDocument'])->name('document.approve');
-    Route::patch('/document/{id}/decline', [AdminController::class, 'declineDocument'])->name('document.decline');
+    Route::post('/document/approve/{id}', [AdminController::class, 'approveDocument'])->name('document.approve');
+    Route::post('/document/decline/{id}', [AdminController::class, 'declineDocument'])->name('document.decline');
 
     // Admin Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

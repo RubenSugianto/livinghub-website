@@ -1,21 +1,39 @@
 @extends('admin.adminproperty')
 
-@section('navbar')
+<!-- @section('navbar')
     @include('partials.navbaradmin')
-@endsection
+@endsection -->
 
 @section('content')
+
+@if (session('success'))
+    <div id="successAlert" class="alert alert-success fade show" role="alert">
+        <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
+        <span class="alert-content">
+            <strong>{{ session('success') }}</strong>
+        </span>
+        <button type="button" class="btn-close" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+        <strong>{{ session('error') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
+@endif
 
 
 <div class="container">
     <h1>Persetujuan Dokumen</h1>
 
-    @if (session('success'))
+    <!-- @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+    @endif -->
 
     <div class="search-bar">
         <div class="input-group">
@@ -43,26 +61,35 @@
                     <td>{{ $document->name }}</td>
                     <td>{{ $document->property->name }}</td>
                     <td>{{ $document->status }}</td>
+
                     <td>
+                        <!-- Tombol View document -->
+                        <form action="{{ route('document.edit', $document->id) }}" method="GET" class="btn" style="display:inline-block; margin: -35px;">
+                            @csrf
+                            <button type="submit" class="btn btn-info" target="_blank">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </form>
 
                         <!-- Tombol Approve -->
-                        <form action="{{ route('document.approve', $document->id) }}" method="POST" class="btn" style="display:inline-block; margin: -22.5px;">
+                        <form action="{{ route('document.approve', $document->id) }}" method="POST" class="btn" style="display:inline-block; margin: 6px;">
                             @csrf
-                            @method('patch')
+                            <!-- @method('post') -->
                             <button type="submit" class="btn btn-success">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </button>
                         </form>
 
                         <!-- Tombol Reject -->
-                        <form action="{{ route('document.decline', $document->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: 12.5px;">
+                        <form action="{{ route('document.decline', $document->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: -26px;">
                             @csrf
-                            @method('patch')
+                            <!-- @method('post') -->
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </button>
                         </form>
                     </td>
+
                 </tr>
             @endforeach
         </tbody>

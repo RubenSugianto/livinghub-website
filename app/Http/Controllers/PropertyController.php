@@ -23,11 +23,14 @@ class PropertyController extends Controller
     }
 
     // Menampilkan detail properti
-    public function show(Property $property)
+    public function show(Property $property, Request $request)
     {
         $propertyImages = PropertyImage::where('property_id', $property->id)->get();
         $document = $property->document;
-        return view('property', compact('property', 'propertyImages', 'document'));
+
+        $fromAdmin = $request->query('fromAdmin') == 'true';
+
+        return view('property', compact('property', 'propertyImages', 'document', 'fromAdmin'));
     }
 
     // Menampilkan form untuk menambahkan properti

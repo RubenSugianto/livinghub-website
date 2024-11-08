@@ -5,8 +5,8 @@
         </a>
         <nav>
             <a href="{{ route('home') }}">Home</a>
-            <a href="{{ route('admin.property') }}">Approve Property</a>
-            <a href="{{ route('document.pending') }}">Approve Document</a>
+            <a href="{{ route('admin.property') }}">Persetujuan Properti</a>
+            <a href="{{ route('document.pending') }}">Persetujuan Dokumen</a>
             <!-- <button class="navbutton" role="button" onclick="location.href='{{ route('property.add') }}'">Tambah Properti</button> -->
         </nav>
         <!-- <div class="search-container">

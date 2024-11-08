@@ -25,7 +25,7 @@ class AdminController extends Controller
     {
         $property = Property::find($id);
         if ($property) {
-            $property->status = 'Approved'; // Ubah status menjadi Approved
+            $property->check = 'Approved'; // Ubah status menjadi Approved
             $property->save();
             return redirect()->back()->with('success', 'Properti berhasil disetujui.');
         }
