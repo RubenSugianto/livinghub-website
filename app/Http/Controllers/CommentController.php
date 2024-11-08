@@ -18,7 +18,7 @@ class CommentController extends Controller
         ]);
 
         if (!Auth::check()) {
-            return redirect()->back()->withErrors(['error' => 'User is not logged in']);
+            return redirect()->back()->withErrors(['error' => 'User belum login']);
         }
         $userName = Auth::user()->username;
 

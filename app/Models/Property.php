@@ -42,10 +42,11 @@ class Property extends Model
         return $this->hasMany(PropertyImage::class);
     }
 
-    public function document()
+    public function documents()
     {
-        return $this->hasOne(Document::class); // Adjusted for one-to-one relationship
+        return $this->hasMany(Document::class, 'property_id');
     }
+    
 
     public function favoritedBy()
     {
@@ -71,12 +72,6 @@ class Property extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'property_id');
-    }
-
-
-    public function documents()
-    {
-        return $this->hasMany(Document::class, 'property_id');
     }
     
         public function propertyImages()

@@ -36,7 +36,7 @@ class RegisterController extends Controller
         event(new Registered($user));
 
         return redirect()->route('verification.notice')
-                         ->with('message', 'Registration berhasil! Tolong verifikasi email anda.');
+                         ->with('message', 'Registrasi berhasil! Tolong verifikasi email anda.');
     }
 
     public function verifypage()

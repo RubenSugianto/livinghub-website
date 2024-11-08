@@ -37,7 +37,7 @@ class GoogleLoginController extends Controller
                 return redirect()->to('/');
             }
         } catch (\Throwable $th) {
-            dd('Something went wrong!'. $th->getMessage());
+            dd('Ada yang salah!'. $th->getMessage());
         }
     }
 }

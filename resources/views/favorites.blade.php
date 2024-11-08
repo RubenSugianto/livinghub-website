@@ -276,7 +276,7 @@
                             selectedProperties.push(propertyId);
                         } else {
                             this.checked = false;
-                            alert('You can only compare 2 properties at a time.');
+                            alert('Anda hanya dapat membandingkan 2 properti sekaligus.');
                         }
                     } else {
                         selectedProperties = selectedProperties.filter(id => id !== propertyId);

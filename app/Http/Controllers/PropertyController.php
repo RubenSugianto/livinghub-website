@@ -114,7 +114,7 @@ class PropertyController extends Controller
             'status' => 'Not Uploaded'
         ]);
 
-        return redirect()->route('home')->with('success', 'Property added successfully.');
+        return redirect()->route('home')->with('success', 'Properti berhasil ditambahkan.');
     }
 
      // Show the form for editing a specific property
@@ -181,7 +181,7 @@ class PropertyController extends Controller
              }
          }
      
-         return redirect()->route('myproperties')->with('success', 'Property updated successfully.');
+         return redirect()->route('myproperties')->with('success', 'Properti berhasil diperbarui.');
      }
 
     public function destroy($id)
@@ -215,7 +215,7 @@ class PropertyController extends Controller
         // Delete the property
         $property->delete();
 
-        return redirect()->route('myproperties')->with('success', 'Property deleted successfully');
+        return redirect()->route('myproperties')->with('success', 'Properti berhasil dihapus.');
     }
 
 

@@ -120,6 +120,6 @@ class LikesController extends Controller
         // Detach the property from the user's likes
         $user->likes()->detach($property);
 
-        return redirect()->route('likes')->with('success', 'Property removed from likes.');
+        return redirect()->route('likes')->with('success', 'Properti dihapus dari suka.');
     }
 }

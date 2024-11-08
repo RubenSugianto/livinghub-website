@@ -27,9 +27,9 @@ class AdminController extends Controller
         if ($property) {
             $property->status = 'Approved'; // Ubah status menjadi Approved
             $property->save();
-            return redirect()->back()->with('success', 'Property approved successfully.');
+            return redirect()->back()->with('success', 'Properti berhasil disetujui.');
         }
-        return redirect()->back()->with('error', 'Property not found.');
+        return redirect()->back()->with('error', 'Properti tidak ditemukan.');
     }
 
     public function rejectProperty($id)
@@ -38,9 +38,9 @@ class AdminController extends Controller
         if ($property) {
             $property->status = 'Rejected'; // Ubah status menjadi Rejected
             $property->save();
-            return redirect()->back()->with('error', 'Property rejected.');
+            return redirect()->back()->with('error', 'Properti berhasil ditolak.');
         }
-        return redirect()->back()->with('error', 'Property not found.');
+        return redirect()->back()->with('error', 'Properti tidak ditemukan.');
     }
 
     public function showDocuments()
@@ -61,9 +61,9 @@ class AdminController extends Controller
         if ($document) {
             $document->status = 'Approved'; // Ubah status menjadi 'Approved'
             $document->save();
-            return redirect()->route('document.approve')->with('success', 'Document approved successfully.');
+            return redirect()->route('document.approve')->with('success', 'Dokumen berhasil disetujui.');
         }
-        return redirect()->route('document.approve')->with('error', 'Document not found.');
+        return redirect()->route('document.approve')->with('error', 'Dokumen tidak ditemukan.');
     }
 
     public function declineDocument($id)
@@ -72,9 +72,9 @@ class AdminController extends Controller
         if ($document) {
             $document->status = 'Declined'; // Ubah status menjadi 'Declined'
             $document->save();
-            return redirect()->route('document.approve')->with('success', 'Document declined successfully.');
+            return redirect()->route('document.approve')->with('success', 'Dokumen berhasil ditolak.');
         }
-        return redirect()->route('document.approve')->with('error', 'Document not found.');
+        return redirect()->route('document.approve')->with('error', 'Dokumen tidak ditemukan.');
     }
 
     public function dashboard()

@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Property::class, 'favorites', 'user_id', 'property_id')->withTimestamps();
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user_id');
+    }
 
     public function likes()
     {

@@ -25,7 +25,7 @@ class FavoritesController extends Controller
         
         $user->favorites()->detach($property);
 
-        return redirect()->route('favorites')->with('success', 'Property removed from favorites.');
+        return redirect()->route('favorites')->with('success', 'Properti dihapus dari favorit.');
     }
 
     // Search in favorites

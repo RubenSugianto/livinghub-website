@@ -424,7 +424,7 @@
 
 <div class="container">
     <div class="sidebar">
-        <a href="#" class="active" id="informasiPribadiLink">Informasi Pribadi</a>
+        <a href="#" class="active" id="informasiPribadiLink">Profil Saya</a>
         @if($profile->google_id != null && $profile->password == null)
             <a href="#" id="ubahKataSandiLink">Set Kata Sandi</a>
         @else
@@ -435,7 +435,7 @@
     <div class="content">
         <div id="informasiPribadiSection">
             <div class="profile-header">
-                <h1>Informasi Pribadi</h1>
+                <h1>Profil Saya</h1>
             </div>
             <div class="profile-pic">
             <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
