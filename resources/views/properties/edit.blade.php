@@ -316,7 +316,7 @@
 <style>
 
 .alert {
-    margin-top: 20px;
+    margin-top: 100px;
     padding: 15px;
     border-radius: 5px;
 }

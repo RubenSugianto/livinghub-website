@@ -248,7 +248,7 @@ h2 {
                 <div class="logo-container">
                     <img src="LogooB.png" alt="Logo">
                 </div>
-                <h1 class="h3 mb-5 fw-bold text-center">Lupa Password</h1>
+                <h1 class="h3 mb-5 fw-bold text-center">Lupa Kata Sandi?</h1>
 
                 <!-- Form action adjusted to match the route in web.php -->
                 <form action="{{ route('password.email') }}" method="post">
@@ -262,7 +262,7 @@ h2 {
                         </div>
                         @enderror
                     </div>
-                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Kirim Link Password</button>
+                    <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Kirim Link Verifikasi</button>
                 </form>
             </main>
         </div>
