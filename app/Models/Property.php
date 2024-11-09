@@ -47,6 +47,10 @@ class Property extends Model
         return $this->hasMany(Document::class, 'property_id');
     }
     
+    public function document()
+    {
+        return $this->hasOne(Document::class);
+    }
 
     public function favoritedBy()
     {
