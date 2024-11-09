@@ -9,30 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class FavoritesController extends Controller
 {
     // Display user's favorite properties
-    public function index()
-    {
-        $user = Auth::user();
-        $favorites = $user->favorites()->paginate(10);
-
-        return view('favorites', compact('favorites'));
-    }
-
-    // Remove a property from favorites
-    public function destroy($id)
-    {
-        $user = Auth::user();
-        $property = Property::findOrFail($id);
-        
-        $user->favorites()->detach($property);
-
-        return redirect()->route('favorites')->with('success', 'Properti dihapus dari favorit.');
-    }
-
-    // Search in favorites
-    public function search(Request $request)
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $query = $user->favorites(); 
+        
+        $query = $user->favorites()->with('user');
 
         // Search keyword
         $searchKeyword = $request->input('search');
@@ -131,5 +112,16 @@ class FavoritesController extends Controller
         $title = "Favorite Properties";
 
         return view('favorites', compact('favorites', 'title'));
+    }
+
+    // Remove a property from favorites
+    public function destroy($id)
+    {
+        $user = Auth::user();
+        $property = Property::findOrFail($id);
+        
+        $user->favorites()->detach($property);
+
+        return redirect()->route('favorites')->with('success', 'Properti dihapus dari favorit.');
     }
 }
