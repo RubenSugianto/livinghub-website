@@ -22,6 +22,11 @@ class DocumentFactory extends Factory
             'id' => (string) Str::uuid(),
             'property_id' => Property::factory(),
             'user_id' => User::factory(),
+            'name' => $this->faker->randomElement(['Dokumen', 'Sertifikat', 'Akta', 'Surat']) 
+                 . ' ' 
+                 . $this->faker->randomElement(['SHM', 'SHGB', 'SHGU', 'Hak Pakai']) 
+                 . ' ' 
+                 . $this->faker->numberBetween(100, 999),
             'type' => $this->faker->randomElement(['SHM', 'SHGB', 'SHGU', 'Hak Pakai']),
             'status' => $this->faker->randomElement(['Not Uploaded', 'Pending', 'Verified', 'Rejected']),
             'created_at' => now(),
