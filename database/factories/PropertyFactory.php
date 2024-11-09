@@ -21,7 +21,7 @@ class PropertyFactory extends Factory
         return [
             'id' => (string) Str::uuid(),
             'user_id' => User::factory(),
-            'name' => $this->faker->word,
+            'name' => $this->faker->city . ' ' . $this->faker->randomElement(['Rumah', 'Apartemen']),
             'price' => $this->faker->numberBetween(1000000, 1000000000),
             'city' => $this->faker->city,
             'location' => $this->faker->state,
