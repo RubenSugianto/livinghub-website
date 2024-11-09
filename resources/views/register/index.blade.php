@@ -305,9 +305,9 @@ hr {
 
         <div class="form-floating">
             <select name="gender" class="form-select @error('gender') is-invalid @enderror" id="gender" required>
-                <option value="__" disabled selected></option>
-                <option value="Laki-laki" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                <option value="Perempuan" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                <option value="" disabled {{ old('gender') ? '' : 'selected' }}>Select Gender</option>
+                <option value="Laki-laki" {{ old('gender') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                <option value="Perempuan" {{ old('gender') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
             </select>
             <label for="gender" style="font-size: 12px;">Jenis Kelamin</label>
             @error('gender')
