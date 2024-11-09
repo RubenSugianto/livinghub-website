@@ -41,6 +41,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            // Check if the logged-in user is an admin
+            if ($user->role === 'admin') {
+                return redirect()->intended('/adminproperty');  // Redirect to the admin dashboard
+            }
  
             return redirect()->intended('/');
         }
