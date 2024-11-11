@@ -74,7 +74,7 @@
                         <!-- Tombol Approve -->
                         <form action="{{ route('document.approve', $document->id) }}" method="POST" class="btn" style="display:inline-block; margin: 6px;">
                             @csrf
-                            <!-- @method('post') -->
+                            @method('post')
                             <button type="submit" class="btn btn-success">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </button>
@@ -83,7 +83,7 @@
                         <!-- Tombol Reject -->
                         <form action="{{ route('document.decline', $document->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: -26px;">
                             @csrf
-                            <!-- @method('post') -->
+                            @method('post')
                             <button type="submit" class="btn btn-danger">
                                 <i class="fa fa-times" aria-hidden="true"></i>
                             </button>
