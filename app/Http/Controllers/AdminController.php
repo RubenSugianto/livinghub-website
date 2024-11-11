@@ -61,20 +61,20 @@ class AdminController extends Controller
         if ($document) {
             $document->status = 'Approved'; // Ubah status menjadi 'Approved'
             $document->save();
-            return redirect()->route('document.approve')->with('success', 'Dokumen berhasil disetujui.');
+            return redirect()->route('document.pending')->with('success', 'Dokumen berhasil disetujui.');
         }
-        return redirect()->route('document.approve')->with('error', 'Dokumen tidak ditemukan.');
+        return redirect()->route('document.pending')->with('error', 'Dokumen tidak ditemukan.');
     }
 
     public function declineDocument($id)
     {
         $document = Document::find($id);
         if ($document) {
-            $document->status = 'Declined'; // Ubah status menjadi 'Declined'
+            $document->status = 'Rejected'; // Ubah status menjadi 'Rejected'
             $document->save();
-            return redirect()->route('document.approve')->with('success', 'Dokumen berhasil ditolak.');
+            return redirect()->route('document.pending')->with('success', 'Dokumen berhasil ditolak.');
         }
-        return redirect()->route('document.approve')->with('error', 'Dokumen tidak ditemukan.');
+        return redirect()->route('document.pending')->with('error', 'Dokumen tidak ditemukan.');
     }
 
     public function dashboard()
