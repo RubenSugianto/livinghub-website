@@ -128,6 +128,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admindocument', [AdminController::class, 'showDocuments'])->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
     Route::post('/document/approve/{id}', [AdminController::class, 'approveDocument'])->name('document.approve');
     Route::post('/document/decline/{id}', [AdminController::class, 'declineDocument'])->name('document.decline');
+    Route::get('/admin/document/search', [AdminController::class, 'searchDocuments'])->name('admin.document.search');
+    Route::get('/admin/document/filter', [AdminController::class, 'filterDocuments'])->name('admin.document.filter');
+
 
     // Admin Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
