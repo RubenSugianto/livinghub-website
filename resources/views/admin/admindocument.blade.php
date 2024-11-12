@@ -1,9 +1,5 @@
 @extends('admin.adminproperty')
 
-<!-- @section('navbar')
-    @include('partials.navbaradmin')
-@endsection -->
-
 @section('content')
 
 @if (session('success'))
@@ -25,75 +21,62 @@
 @endif
 
 
-<div class="container">
-    <h1>Persetujuan Dokumen</h1>
-
-    <!-- @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif -->
-
-    <div class="search-bar">
-        <div class="input-group">
-            <input type="text" placeholder="Cari dokumen disini.." class="form-control">
-            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-            <button type="submit" data-toggle="modal" data-target="#filterModal"><i class="fa fa-filter" aria-hidden="true"></i></button>
-        </div>
-    </div>
-
-    <!-- Tabel Dokumen -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Dokumen</th>
-                <th>Properti</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($documents as $document)
-                <tr data-document-id="{{ $document->id }}">
-                    <td>{{ $document->id }}</td>
-                    <td>{{ $document->name }}</td>
-                    <td>{{ $document->property->name }}</td>
-                    <td>{{ $document->status }}</td>
-
-                    <td>
-                        <!-- Tombol View document -->
-                        <form action="{{ route('document.edit', $document->id) }}" method="GET" class="btn" style="display:inline-block; margin: -35px;">
-                            @csrf
-                            <button type="submit" class="btn btn-info" target="_blank">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
-                        </form>
-
-                        <!-- Tombol Approve -->
-                        <form action="{{ route('document.approve', $document->id) }}" method="POST" class="btn" style="display:inline-block; margin: 6px;">
-                            @csrf
-                            @method('post')
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                            </button>
-                        </form>
-
-                        <!-- Tombol Reject -->
-                        <form action="{{ route('document.decline', $document->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: -26px;">
-                            @csrf
-                            @method('post')
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </form>
-                    </td>
-
+    <div class="container">
+        <h1>Persetujuan Dokumen</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Detail Properti</th>
+                    <th>Nama Properti</th>
+                    <th>Nama Dokumen</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($documents as $document)
+                    <tr data-document-id="{{ $document->id }}">
+                        <td>
+                            <!-- Tombol View Property -->
+                            <form action="{{ route('property.show', $document->property->id) }}" method="GET" style="display:inline-block;">
+                                @csrf
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>{{ $document->property->name }}</td>
+                        <td>{{ $document->name }}</td>
+                        <td>{{ $document->status }}</td>
+                        <td>
+                            <!-- Tombol View Document -->
+                            <form action="{{ route('document.edit', $document->id) }}" method="GET" style="display:inline-block;  margin: 10px;">
+                                @csrf
+                                <button type="submit" class="btn btn-info" target="_blank">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </form>
+
+                            <!-- Tombol Approve -->
+                            <form action="{{ route('document.approve', $document->id) }}" method="POST" style="display:inline-block; margin: -20px;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                </button>
+                            </form>
+
+                            <!-- Tombol Reject -->
+                            <form action="{{ route('document.decline', $document->id) }}" method="POST" style="display:inline-block; margin: 10px;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4 page">
@@ -161,7 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <style>
      
-        :root {
+       
+     :root {
             --primary-color: #5E5DF0;
             --secondary-color: #4A4AC4;
             --text-color: #393232;
@@ -195,6 +179,66 @@ document.addEventListener('DOMContentLoaded', function() {
             -webkit-font-smoothing: subpixel-antialiased;
         }
 
+        .alert {
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            width: calc(100% - 40px);
+            position: relative;
+            top: -10px; 
+            display: flex;
+            align-items: center;
+            margin-top:100px;
+        }
+
+        .alert-success {
+            background-color: #d4edda; 
+            border: 1px solid #c3e6cb; 
+            color: #155724; 
+        }
+
+        .alert .btn-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem; 
+            color: #155724; 
+            cursor: pointer;
+            margin-left: auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 15px; 
+            top: 50%;
+            transform: translateY(-50%); 
+        }
+
+        .alert .btn-close:hover {
+            color: #0d3c1e; 
+        }
+
+        .alert .btn-close:active {
+            transform: translateY(-50%) scale(1.1); 
+        }
+
+        .alert .alert-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .alert.fade {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .alert.fade.hide {
+            opacity: 0;
+            transform: translateY(-15px);
+        }
+
+
         h1{
             font-size: 2.2rem;
             font-weight: 700;
@@ -204,50 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-top: 100px;
         }
 
-        .container {
-            position: relative;
-        }
         
-        .popup-button {
-            background-color: #4CAF50; /* Hijau */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .popup {
-            display: none; /* Tersembunyi secara default */
-            position: absolute;
-            top: 40px; /* Posisi di bawah tombol */
-            right: 0; /* Menyesuaikan dengan tombol */
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
-            z-index: 1000;
-        }
-
-        .popup ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .popup li {
-            padding: 10px 20px;
-        }
-
-        .popup li a {
-            text-decoration: none;
-            color: black;
-            display: block;
-        }
-
-        .popup li:hover {
-            background-color: #f1f1f1; /* Warna latar saat hover */
-        }
-
         .btn {
             display: inline-block;
             padding: 10px 15px;
@@ -271,102 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #dc3545;
             color: white;
         }
-        
-        .search-bar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-        }
-
-           .input-group {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                max-width: 700px;
-                margin: 0 auto;
-                border: 2px solid var(--border-color) !important;
-                border-radius: var(--border-radius) !important;
-                overflow: hidden;
-                background-color: var(--background-color) !important;
-                padding: 5px !important;
-                height: 50px; 
-            }
-
-            .input-group input[type="text"] {
-                flex: 1;
-                padding: 0 10px !important; 
-                border: none !important;
-                outline: none !important;
-                font-size: 1rem;
-                background-color: var(--background-color) !important;
-                color: var(--text-color) !important;
-                box-shadow: none !important;
-                height: 100%; 
-            }
-
-            .input-group input[type="text"]:focus {
-                background-color: var(--background-color) !important;
-                border: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-            }
-
-            .input-group button {
-                padding: 0 10px !important; 
-                background: none !important;
-                color: black !important;
-                border: none !important;
-                cursor: pointer;
-                transition: color var(--transition-speed) ease !important;
-                box-shadow: none !important;
-                height: 100%; 
-            }
-
-            .input-group button i {
-                font-size: 1rem;
-            }
-
-            .input-group button:focus,
-            .input-group button:active {
-                background-color: transparent !important;
-                border: none !important;
-                outline: none !important;
-                box-shadow: none !important;
-            }
-
-            .input-group button:hover {
-                color: #4A4AC4 !important;
-                background-color: transparent !important;
-            }
-        
-            .close {
-                font-size: 24px;
-                color: #333;
-                opacity: 0.7;
-                transition: color 0.3s, opacity 0.3s;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: #4A4AC4;
-                opacity: 1;
-            }
-
-            .modal-body input[type="text"],
-            .modal-body input[type="number"],
-            .modal-body input[type="range"],
-            .modal-body select,
-            .modal-body textarea {
-                font-size: 14px;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                width: 100%;
-                box-sizing: border-box;
-                margin-bottom: 15px;
-                
-            }
 
             .modal-title {
                 font-size: 14px;
@@ -384,98 +289,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 margin-bottom: 3px;
             }
 
-            .modal-footer {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 14px;
-            }
-
-            .modal-footer .btn {
-                font-size: 14px;
-                padding: 8px 15px;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-
-            .modal-body {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px 0px;
-                justify-content: flex-start;
-                text-align: left;
-            }
-
-            .modal-body .form-group {
-                flex: 1 1 30%;
-            }
-
-            .input-range {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .btn-group-toggle .btn {
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                margin-right: 10px;
-                background-color: white;
-                color: black;
-            }
-
-            .btn-group-toggle .btn:hover,
-            .btn-group-toggle .btn:active,
-            .btn-group-toggle .btn:focus {
-                color: white;
-                background-color:#4A4AC4;
-                text-decoration: none;
-            }
-
-            .btn-group-toggle .btn input[type="radio"] {
-                background-color: #5E5DF0;
-                color: white;
-                font-weight: normal;
-            }
-
-            .modal-body .btn-group-toggle .btn.active {
-                background-color: #5E5DF0;
-                color: white;
-                font-weight: normal;
-            }
-
-            .modal-dialog.modal-lg {
-                max-width: 40%;
-            }
-
-            .btn-reset {
-                background-color: #FF5C5C;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-size: 14px;
-                transition: background-color 0.3s;
-            }
-
-            .btn-reset:hover {
-                background-color: #E04040;
-            }
-
-            .btn-search {
-                background-color: #5E5DF0;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-size: 16px;
-                transition: background-color 0.3s;
-            }
-
-            .btn-search:hover {
-                background-color: #4A4AC4;
-            }
-
             .table {
                 width: 100%;
                 margin-top: 20px;
@@ -488,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             .table tbody tr:nth-of-type(odd) {
-                background-color: var(--greyLight);
+                background-color: var(--greyLight) !important; 
             }
 
             .table tbody tr:hover {
@@ -505,6 +318,72 @@ document.addEventListener('DOMContentLoaded', function() {
                 text-align: center;
                 padding: 10px;
             }
+
+            .page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 3rem;
+            margin: 1rem auto;
+            border-radius: 0.4rem;
+            background: #ffffff;
+            box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+            width: fit-content;
+            }
+
+            .page__numbers,
+            .page__btn,
+            .page__dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.4rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            }
+
+            .page__dots {
+            width: 2rem;
+            height: 2rem;
+            color: var(--greyLight);
+            cursor: initial;
+            }
+
+            .page__numbers {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 0.2rem;
+            color: var(--greyDark);
+
+            &:hover {
+                color: #ffffff !important;
+                background: #5E5DF0 !important;
+            }
+
+            &.active {
+                color: #ffffff !important;
+                background: #5E5DF0 !important;
+                font-weight: 600 !important;
+                border: 1px solid var(--primary) !important;
+            }
+            }
+
+            .page__btn {
+            color: var(--btnColor);
+            pointer-events: none;
+
+            &.active {
+                color: var(--btnColor);
+                pointer-events: initial;
+
+                &:hover {
+                color: var(--primary) !important;
+                }
+            }
+        }
 
 
 </style>
