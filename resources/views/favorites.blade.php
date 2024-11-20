@@ -11,195 +11,221 @@
     <div class="container mt-4">
         <h1 class="mb-4">Properti Favorit</h1>
        
-<!-- Search and Filter Buttons -->
-<div class="search-bar mb-5">
-    <form action="{{ route('favorites') }}" method="GET" class="input-group">
-        <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Cari Properti..." class="form-control">
-        <div class="input-group-append">
-            <button type="submit" class="btn btn-outline-secondary">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn btn-outline-secondary filter-button" data-toggle="modal" data-target="#filterModal">
-                <i class="fa fa-filter" aria-hidden="true"></i>
-            </button>
+        <!-- Search and Filter Buttons -->
+        <div class="search-bar mb-5">
+            <form action="{{ route('favorites') }}" method="GET" class="input-group">
+                <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Cari Properti..." class="form-control">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary filter-button" data-toggle="modal" data-target="#filterModal">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
 
-<!-- Filter Modal Dialog Box -->
-<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="filterModalLabel">Filter</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+        <!-- Filter Modal Dialog Box -->
+        <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="filterModalLabel">Filter</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <div class="modal-body">
+                        <form action="{{ route('favorites') }}" method="GET" id="filterForm">
+                            <!-- Status Filter -->
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bedrooms">Kamar Tidur</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bathrooms">Kamar Mandi</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="land_size">Luas Tanah</label>
+                                <div class="input-range">
+                                    <input type="number" name="land_size_min" placeholder="0" class="form-control">
+                                    <span>m² -</span>
+                                    <input type="number" name="land_size_max" placeholder="0" class="form-control">
+                                    <span>m²</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="building_size">Luas Bangunan</label>
+                                <div class="input-range">
+                                    <input type="number" name="building_size_min" placeholder="0" class="form-control">
+                                    <span>m² -</span>
+                                    <input type="number" name="building_size_max" placeholder="0" class="form-control">
+                                    <span>m²</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="certificate">Sertifikat</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="property_type">Tipe Properti</label>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
+                                    </label>
+                                    <label class="btn btn-outline-primary">
+                                        <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
+                        <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Cari</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            @if($favorites->isEmpty())
+            <div class="col-12 text-center">
+                <p class="text-muted">Anda belum memiliki properti favorit</p>
+            </div>
+            @endif
+
+            <!-- Comparison Table -->
+            <div id="comparisonTableContainer" class="mt-4" style="display: none;">
+                <div class="table-container"> 
+                <button id="closeTableButton" class="btn btn-danger btn-sm float-right mb-2">✖</button>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Properti 1</th>
+                                <th>Properti 2</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTableBody">
+                            <!-- Comparison data will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="comparisonContainer">
+                <button id="compareButton" class="btn btn-primary mb-3 d-flex align-items-center" disabled>
+                    Bandingkan Properti
+                    <i class="fa fa-star ml-2" aria-hidden="true"></i>
                 </button>
             </div>
-           <div class="modal-body">
-                <form action="{{ route('favorites') }}" method="GET" id="filterForm">
-                    <!-- Status Filter -->
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="status" autocomplete="off" value="Dijual"> Dijual
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="status" autocomplete="off" value="Disewa"> Disewa
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bedrooms">Kamar Tidur</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bedrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="bathrooms">Kamar Mandi</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="1 Kamar"> 1 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="2 Kamar"> 2 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="3 Kamar"> 3 Kamar
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="bathrooms" autocomplete="off" value="3+ Kamar"> 3+ Kamar
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="land_size">Luas Tanah</label>
-                        <div class="input-range">
-                            <input type="number" name="land_size_min" placeholder="0" class="form-control">
-                            <span>m² -</span>
-                            <input type="number" name="land_size_max" placeholder="0" class="form-control">
-                            <span>m²</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="building_size">Luas Bangunan</label>
-                        <div class="input-range">
-                            <input type="number" name="building_size_min" placeholder="0" class="form-control">
-                            <span>m² -</span>
-                            <input type="number" name="building_size_max" placeholder="0" class="form-control">
-                            <span>m²</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="certificate">Sertifikat</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="SHM"> SHM
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="SHGB"> SHGB
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="SHGU"> SHGU
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="certificate" autocomplete="off" value="Hak Pakai"> Hak Pakai
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="property_type">Tipe Properti</label>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Rumah"> Rumah
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Apartemen"> Apartemen
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Ruko"> Ruko
-                            </label>
-                            <label class="btn btn-outline-primary">
-                                <input type="radio" name="property_type" autocomplete="off" value="Tanah"> Tanah
-                            </label>
-                        </div>
-                    </div>
-                </form>
+            @if($favorites->isEmpty())
+            <div class="col-12 text-center">
+                <p class="text-muted">Anda belum memiliki properti favorit</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="resetFilters()">Reset</button>
-                <button type="submit" form="filterForm" class="btn btn-primary" style="background-color: #5E5DF0; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#4A4AC4';" onmouseout="this.style.backgroundColor='#5E5DF0';">Cari</button>
-            </div>
-        </div>
-    </div>
-</div>
+            @endif
 
-    @if($favorites->isEmpty())
-    <div class="col-12 text-center">
-            <p class="text-muted">Anda belum memiliki properti favorit</p>
-    </div>
-    @endif
+        
 
-    <div id="comparisonContainer">
-        <button id="compareButton" class="btn btn-primary mb-3 d-flex align-items-center" disabled>
-            Bandingkan Properti
-            <i class="fa fa-star ml-2" aria-hidden="true"></i>
-        </button>
-    </div>
-
-    @foreach($favorites as $property)
-        <div class="col-md-10 mb-3 position-relative"> 
-            <div class="property-select d-flex align-items-center">
-                <div class="card property-card d-flex align-items-center">
-                    <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark d-flex align-items-center">
-                        <div class="card-image">
-                            @if($property->images->isNotEmpty())
-                                <img src="{{ asset($property->images->first()->images) }}" class="card-img-top" alt="{{ $property->name }}">
-                            @else
-                                <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Default Image">
-                            @endif
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">{{ $property->type }}</p>
-                            <h5 class="card-title">{{ $property->name }}</h5>
-                            <p class="property-location">
-                                <i class="fa fa-map-marker"></i> {{ $property->location }}
-                            </p>
-                            <p class="card-text">{{ $property->certificate }}</p>
-                            <p class="price mb-0">Rp {{ number_format($property->price, 0, ',', '.') }}</p>
-                        </div>
-                    </a>
-                
+            @foreach($favorites as $property)
+            <div class="col-md-10 mb-3 position-relative">
+                <div class="property-select d-flex align-items-center">
+                    <div class="card property-card d-flex align-items-center">
+                        <a href="{{ route('property.show', $property->id) }}" class="text-decoration-none text-dark d-flex align-items-center">
+                            <div class="card-image">
+                                @if($property->images->isNotEmpty())
+                                    <img src="{{ asset($property->images->first()->images) }}" class="card-img-top" alt="{{ $property->name }}">
+                                @else
+                                    <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Default Image">
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ $property->type }}</p>
+                                <h5 class="card-title">{{ $property->name }}</h5>
+                                <p class="property-location">
+                                    <i class="fa fa-map-marker"></i> {{ $property->location }}
+                                </p>
+                                <p class="card-text">{{ $property->certificate }}</p>
+                                <p class="price mb-0">Rp {{ number_format($property->price, 0, ',', '.') }}</p>
+                            </div>
+                        </a>
+                    
                         <!-- Star Checkbox -->
                         <input type="checkbox" id="star-checkbox-{{ $property->id }}" class="compare-checkbox star-checkbox" data-property-id="{{ $property->id }}">
                         <label for="star-checkbox-{{ $property->id }}"></label>
-                    </form>
-                </div>
-                <!-- Delete Button -->
+                    </div>
+                    <!-- Delete Button -->
                     <button type="button" class="btn btn-link delete-button" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $property->id }}').submit();">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
 
-                            <form id="delete-form-{{ $property->id }}" action="{{ route('favorites.destroy', $property->id) }}" method="POST" class="delete-form d-none">
-                                @csrf
-                                @method('DELETE')
-                            </form>
+                    <form id="delete-form-{{ $property->id }}" action="{{ route('favorites.destroy', $property->id) }}" method="POST" class="delete-form d-none">
+                        @csrf
+                        @method('DELETE')
+                    </form>
+                </div>
+            </div>
+            @endforeach
 
-                        </div>
-                    </div>
-                @endforeach
 
 
             <!-- Pagination buttons -->
@@ -236,11 +262,11 @@
         <!-- Comparison Table -->
         <div id="comparisonTableContainer" class="mt-4" style="display: none;">
             <div class="table-container"> <!-- Added container for background -->
-            <h2>Comparison Table</h2>
+            <h2>Tabel Perbandingan</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Feature</th>
+                            <th></th>
                             <th>Property 1</th>
                             <th>Property 2</th>
                         </tr>
@@ -262,11 +288,12 @@
         }
         
         document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.compare-checkbox');
-            const compareButton = document.getElementById('compareButton');
-            const comparisonTableContainer = document.getElementById('comparisonTableContainer');
-            const comparisonTableBody = document.getElementById('comparisonTableBody');
-            let selectedProperties = [];
+        const checkboxes = document.querySelectorAll('.compare-checkbox');
+        const compareButton = document.getElementById('compareButton');
+        const comparisonTableContainer = document.getElementById('comparisonTableContainer');
+        const comparisonTableBody = document.getElementById('comparisonTableBody');
+        const closeTableButton = document.getElementById('closeTableButton'); 
+        let selectedProperties = [];
 
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', function() {
@@ -298,44 +325,44 @@
                 .then(data => {
                     comparisonTableBody.innerHTML = `
                         <tr>
-                    <td>Name</td>
+                    <td>Nama Properti</td>
                     <td>${data[0].name}</td>
                     <td>${data[1].name}</td>
                 </tr>
                 <tr>
-                    <td>Price</td>
+                    <td>Harga</td>
                     <td>Rp ${data[0].price.toLocaleString()}</td>
                     <td>Rp ${data[1].price.toLocaleString()}</td>
                 </tr>
                 <tr>
-                    <td>Location</td>
+                    <td>Lokasi</td>
                     <td>${data[0].location}</td>
                     <td>${data[1].location}</td>
                 </tr>
                 <tr>
-                    <td>Surface Area</td>
+                    <td>Luas Tanah</td>
                     <td>${data[0].surfaceArea} m²</td>
                     <td>${data[1].surfaceArea} m²</td>
                 </tr>
                 <tr>
-                    <td>Building Area</td>
+                    <td>Luas Bangunan</td>
                     <td>${data[0].buildingArea} m²</td>
                     <td>${data[1].buildingArea} m²</td>
                 </tr>
                 <tr>
-                    <td>Bedrooms</td>
+                    <td>Kamar Tidur</td>
                     <td>${data[0].bedroom}</td>
                     <td>${data[1].bedroom}</td>
                 </tr>
                 <tr>
-                    <td>Bathrooms</td>
+                    <td>Kamar Mandi</td>
                     <td>${data[0].bathroom}</td>
                     <td>${data[1].bathroom}</td>
                 </tr>
                 <tr>
-                    <td>Electricity</td>
-                    <td>${data[0].electricity} Watts</td>
-                    <td>${data[1].electricity} Watts</td>
+                    <td>Listrik(W)</td>
+                    <td>${data[0].electricity} W/td>
+                    <td>${data[1].electricity} W</td>
                 </tr>
                 <tr>
                     <td>Status</td>
@@ -343,17 +370,17 @@
                     <td>${data[1].status}</td>
                 </tr>
                 <tr>
-                    <td>Type</td>
+                    <td>Tipe</td>
                     <td>${data[0].type}</td>
                     <td>${data[1].type}</td>
                 </tr>
                 <tr>
-                    <td>Document Type</td>
+                    <td>Sertifikat</td>
                     <td>${data[0].document ? data[0].document.type : '-'}</td>
                     <td>${data[1].document ? data[1].document.type : '-'}</td>
                 </tr>
                 <tr>
-                    <td>Document Status</td>
+                    <td>Status Sertifikat/td>
                     <td>${data[0].document ? data[0].document.status : '-'}</td>
                     <td>${data[1].document ? data[1].document.status : '-'}</td>
                 </tr>
@@ -361,7 +388,13 @@
                     comparisonTableContainer.style.display = 'block';
                 });
             });
-        });
+     
+
+                closeTableButton.addEventListener('click', function() {
+                    comparisonTableContainer.style.display = 'none';
+                });
+            });
+        
         </script>
         @endsection
 
@@ -514,6 +547,10 @@
             margin-bottom: 10px;
         }
 
+        #comparisonContainer {
+            margin-top: 20px; 
+        }
+
         #compareButton {
             background-color: #5E5DF0;
             color: #fff;
@@ -541,13 +578,13 @@
             background-color: #4A4AC4;
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
-
+        
         .table {
             width: 100%;
             max-width: 1200px;
             margin: 20px auto;
             border-collapse: collapse;
-            font-size: 16px;
+            font-size: 14px;
         }
         .property-select {
             position: relative;

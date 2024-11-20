@@ -4,7 +4,6 @@
             <img src="{{ asset('LogooB.png') }}" alt="Logo">
         </a>
         <nav>
-        <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('admin.property') }}">Persetujuan Properti</a>
             <a href="{{ route('document.pending') }}">Persetujuan Dokumen</a>
         </nav>
