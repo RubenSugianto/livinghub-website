@@ -80,8 +80,7 @@
         {{-- Custom Security Message --}}
         <div style="border: 1px solid #ccc; background-color: #f9f9f9; border-radius: 8px; padding: 10px 20px; max-width: 500px; margin: 20px auto; text-align: center;">
             <p style="font-size: 14px; color: #555; line-height: 1.4;">
-                <strong> Semua pesan dipantau untuk tujuan keamanan guna mencegah penipuan dan pelanggaran.
-                Mohon untuk tidak membagikan informasi pribadi.</strong>
+                <strong>Mohon untuk tidak membagikan informasi pribadi demi keamanan, guna mencegah penipuan dan pelanggaran.</strong>
             </p>
         </div>
 

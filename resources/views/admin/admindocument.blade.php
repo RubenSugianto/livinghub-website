@@ -1,5 +1,10 @@
-@extends('admin.adminproperty')
+@extends('master')
 
+<!-- @section('navbar')
+    @include('partials.navbaradmin')
+@endsection -->
+
+@section('title', 'My Property')
 @section('content')
 
 @if (session('success'))
@@ -19,10 +24,9 @@
     <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
     </div>
 @endif
-
-
-    <div class="container">
-        <h1>Persetujuan Dokumen</h1>
+<div class="container mt-4 text-center">
+    <h1>Persetujuan Dokumen</h1>
+    <div class="row justify-content-center flex-column" style="position: relative">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -49,16 +53,16 @@
                         <td>{{ $document->name }}</td>
                         <td>{{ $document->status }}</td>
                         <td>
-                            <!-- Tombol View Document -->
-                            <form action="{{ route('document.edit', $document->id) }}" method="GET" style="display:inline-block;  margin: 10px;">
+                            <!-- Tombol Downlaod Document -->
+                            <form action="{{ route('document.edit', $document->id) }}" method="GET" style="display:inline-block; margin: 35px;">
                                 @csrf
-                                <button type="submit" class="btn btn-info" target="_blank">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                <button type="submit" class="btn btn-info" style="background-color:grey ;color: white; border: 1px solid #ccc;" target="_blank">
+                                    <i class="fa fa-download" aria-hidden="true"></i>
                                 </button>
                             </form>
 
                             <!-- Tombol Approve -->
-                            <form action="{{ route('document.approve', $document->id) }}" method="POST" style="display:inline-block; margin: -20px;">
+                            <form action="{{ route('document.approve', $document->id) }}" method="POST" style="display:inline-block; margin: -30px;">
                                 @csrf
                                 <button type="submit" class="btn btn-success">
                                     <i class="fa fa-check" aria-hidden="true"></i>
@@ -66,7 +70,7 @@
                             </form>
 
                             <!-- Tombol Reject -->
-                            <form action="{{ route('document.decline', $document->id) }}" method="POST" style="display:inline-block; margin: 10px;">
+                            <form action="{{ route('document.decline', $document->id) }}" method="POST" style="display:inline-block; margin: 35px;">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">
                                     <i class="fa fa-times" aria-hidden="true"></i>
@@ -77,57 +81,67 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 
-    <!-- Pagination -->
+    <!-- Pagination buttons -->
     <div class="d-flex justify-content-center mt-4 page">
         <!-- Previous Page Button -->
-        <button class="page__btn {{ $documents->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $documents->previousPageUrl() }}'">&lt;</button>
+        <button class="page__btn {{ $pendingProperties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->previousPageUrl() }}'">&lt;</button>
 
         <!-- Pagination Elements -->
-        @for ($i = 1; $i <= $documents->lastPage(); $i++)
-            <button class="page__numbers {{ $documents->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $documents->url($i) }}'">{{ $i }}</button>
-        @endfor
+        @if ($pendingProperties->lastPage() > 1)
+            @if ($pendingProperties->currentPage() > 3)
+                <button class="page__numbers" onclick="window.location='{{ $pendingProperties->url(1) }}'">1</button>
+                @if ($pendingProperties->currentPage() > 4)
+                    <div class="page__dots">...</div>
+                @endif
+            @endif
+
+            @for ($i = max($pendingProperties->currentPage() - 2, 1); $i <= min($pendingProperties->currentPage() + 2, $pendingProperties->lastPage()); $i++)
+                <button class="page__numbers {{ $pendingProperties->currentPage() == $i ? 'active' : '' }}" onclick="window.location='{{ $pendingProperties->url($i) }}'">{{ $i }}</button>
+            @endfor
+
+            @if ($pendingProperties->currentPage() < $pendingProperties->lastPage() - 2)
+                @if ($pendingProperties->currentPage() < $pendingProperties->lastPage() - 3)
+                    <div class="page__dots">...</div>
+                @endif
+                <button class="page__numbers" onclick="window.location='{{ $pendingProperties->url($pendingProperties->lastPage()) }}'">{{ $pendingProperties->lastPage() }}</button>
+            @endif
+        @endif
 
         <!-- Next Page Button -->
-        <button class="page__btn {{ $documents->currentPage() == $documents->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $documents->nextPageUrl() }}'">&gt;</button>
-    </div>
-</div>
-
-<!-- Modal untuk Konfirmasi Hapus -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menghapus dokumen ini?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Reject</button>
-            </div>
-        </div>
+        <button class="page__btn {{ $pendingProperties->currentPage() == $pendingProperties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->nextPageUrl() }}'">&gt;</button>
     </div>
 </div>
 @endsection
 
+
 @section('scripts')
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const propertyRows = document.querySelectorAll('tr[data-property-id]');
+
+    propertyRows.forEach(row => {
+        row.addEventListener('click', function(event) {
+            const target = event.target;
+            if (!target.closest('.btn')) {
+                const propertyId = row.getAttribute('data-property-id');
+                window.location.href = `/property/${propertyId}`;
+            }
+        });
+    });
+
     var deleteModal = $('#deleteModal');
     var confirmDeleteButton = document.getElementById('confirmDelete');
-    var documentIdToDelete;
+    var propertyIdToDelete;
     var formToSubmit;
 
     document.querySelectorAll('.delete-button').forEach(function (button) {
         button.addEventListener('click', function () {
-            documentIdToDelete = this.getAttribute('data-document-id');
+            propertyIdToDelete = this.getAttribute('data-property-id');
             // Find the form associated with the delete button
-            formToSubmit = document.querySelector('.delete-form[data-document-id="' + documentIdToDelete + '"]');
+            formToSubmit = document.querySelector('.delete-form[data-property-id="' + propertyIdToDelete + '"]');
             deleteModal.modal('show');
         });
     });
@@ -138,14 +152,66 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         deleteModal.modal('hide');
     };
+
+    document.querySelectorAll('[data-dismiss="modal"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            deleteModal.modal('hide');
+        });
+    });
+
+    function hideAlert() {
+        const successAlert = document.getElementById('successAlert');
+        if (successAlert) {
+            successAlert.classList.add('hide');
+            setTimeout(() => {
+                successAlert.remove(); 
+            }, 500); 
+        }
+    }
+
+    var documentPendingModal = new bootstrap.Modal(document.getElementById('documentPendingModal'));
+    var propertyPendingModal = new bootstrap.Modal(document.getElementById('propertyPendingModal'));
+
+    document.querySelectorAll('[data-status="pending"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            documentPendingModal.show();
+            propertyPendingModal.show();
+        });
+    });
+
+    const imagePreviewModal = new bootstrap.Modal(document.getElementById('imagePreviewModal'));
+    const previewImage = document.getElementById('previewImage');
+    
+    document.querySelectorAll('.clickable-image').forEach(function (image) {
+        image.addEventListener('click', function (event) {
+            event.stopPropagation(); // Prevent row click event
+            const imageSrc = this.getAttribute('src');
+            previewImage.src = imageSrc;
+            imagePreviewModal.show();
+        });
+    });
+
+    // Add this new code for handling the close button
+    document.querySelector('#imagePreviewModal .btn-close').addEventListener('click', function () {
+        imagePreviewModal.hide();
+    });
+
 });
+
+function resetFilters() {
+    document.querySelectorAll('#filterForm input, #filterForm select').forEach(input => {
+        input.value = '';
+    });
+}
+
+
 </script>
 @endsection
 
+@section('styles')
 <style>
-     
-       
-     :root {
+
+        :root {
             --primary-color: #5E5DF0;
             --secondary-color: #4A4AC4;
             --text-color: #393232;
@@ -177,6 +243,15 @@ document.addEventListener('DOMContentLoaded', function() {
             -webkit-user-select: none;
             backface-visibility: hidden;
             -webkit-font-smoothing: subpixel-antialiased;
+        }
+
+        h1{
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 100px;
         }
 
         .alert {
@@ -239,151 +314,102 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
 
-        h1{
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #333;
+        .table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .table thead th {
+            background-color: #7473f0;
+            color: white;
             text-align: center;
-            margin-bottom: 30px;
-            margin-top: 100px;
         }
 
-        
-        .btn {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .table tbody tr:nth-of-type(odd) {
+            background-color: var(--greyLight);
         }
 
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
         }
 
-        .btn-success {
-            background-color: #28a745;
-            color: white;
+        .table img {
+            max-width: 100px;
+            border-radius: 4px;
         }
 
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+            padding: 10px;
         }
 
-            .modal-title {
-                font-size: 14px;
-                font-weight: bold;
-                color: #333;
-            }
 
-            .modal-header, .modal-body, .modal-dialog, label, .btn-group-toggle .btn {
-                font-size: 14px;
-            }
+        .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        margin: 1rem auto;
+        border-radius: 0.4rem;
+        background: #ffffff;
+        box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
+        width: fit-content;
+        }
 
-            label {
-                font-weight: bold;
-                display: block;
-                margin-bottom: 3px;
-            }
+        .page__numbers,
+        .page__btn,
+        .page__dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0.4rem;
+        font-size: 1.2rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: 0;
+        }
 
-            .table {
-                width: 100%;
-                margin-top: 20px;
-            }
+        .page__dots {
+        width: 2rem;
+        height: 2rem;
+        color: var(--greyLight);
+        cursor: initial;
+        }
 
-            .table thead th {
-                background-color: #7473f0;
-                color: white;
-                text-align: center;
-            }
+        .page__numbers {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.2rem;
+        color: var(--greyDark);
 
-            .table tbody tr:nth-of-type(odd) {
-                background-color: var(--greyLight) !important; 
-            }
+        &:hover {
+            color: #ffffff !important;
+            background: #5E5DF0 !important;
+        }
 
-            .table tbody tr:hover {
-                background-color: #f1f1f1;
-            }
+        &.active {
+            color: #ffffff !important;
+            background: #5E5DF0 !important;
+            font-weight: 600 !important;
+            border: 1px solid var(--primary) !important;
+        }
+        }
 
-            .table img {
-                max-width: 100px;
-                border-radius: 4px;
-            }
+        .page__btn {
+        color: var(--btnColor);
+        pointer-events: none;
 
-            .table th, .table td {
-                vertical-align: middle;
-                text-align: center;
-                padding: 10px;
-            }
-
-            .page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 3rem;
-            margin: 1rem auto;
-            border-radius: 0.4rem;
-            background: #ffffff;
-            box-shadow: 0 0.4rem 1rem rgba(90, 97, 129, 0.05);
-            width: fit-content;
-            }
-
-            .page__numbers,
-            .page__btn,
-            .page__dots {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0.4rem;
-            font-size: 1.2rem;
-            cursor: pointer;
-            border: none;
-            background: none;
-            padding: 0;
-            }
-
-            .page__dots {
-            width: 2rem;
-            height: 2rem;
-            color: var(--greyLight);
-            cursor: initial;
-            }
-
-            .page__numbers {
-            width: 2rem;
-            height: 2rem;
-            border-radius: 0.2rem;
-            color: var(--greyDark);
+        &.active {
+            color: var(--btnColor);
+            pointer-events: initial;
 
             &:hover {
-                color: #ffffff !important;
-                background: #5E5DF0 !important;
+            color: var(--primary) !important;
             }
-
-            &.active {
-                color: #ffffff !important;
-                background: #5E5DF0 !important;
-                font-weight: 600 !important;
-                border: 1px solid var(--primary) !important;
-            }
-            }
-
-            .page__btn {
-            color: var(--btnColor);
-            pointer-events: none;
-
-            &.active {
-                color: var(--btnColor);
-                pointer-events: initial;
-
-                &:hover {
-                color: var(--primary) !important;
-                }
-            }
-        }
-
+         }
+    }
 
 </style>
+@endsection
