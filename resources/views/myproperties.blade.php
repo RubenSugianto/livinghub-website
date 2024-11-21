@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         H1{
-            font-size: 2.2rem;
+            font-size: 25px;
             font-weight: 700;
             color: #333;
             text-align: center;
@@ -553,7 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
             padding: 0 10px !important; 
             border: none !important;
             outline: none !important;
-            font-size: 1rem;
+            font-size: 14px;
             background-color: var(--background-color) !important;
             color: var(--text-color) !important;
             box-shadow: none !important;
@@ -781,7 +781,7 @@ document.addEventListener('DOMContentLoaded', function() {
         justify-content: center;
         align-items: center;
         margin: 0.4rem;
-        font-size: 1.2rem;
+        font-size: 14px;
         cursor: pointer;
         border: none;
         background: none;

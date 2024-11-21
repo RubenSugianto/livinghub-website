@@ -246,7 +246,7 @@ function resetFilters() {
         }
 
         h1{
-            font-size: 2.2rem;
+            font-size: 25px;
             font-weight: 700;
             color: #333;
             text-align: center;
@@ -364,7 +364,7 @@ function resetFilters() {
         justify-content: center;
         align-items: center;
         margin: 0.4rem;
-        font-size: 1.2rem;
+        font-size: 14px;
         cursor: pointer;
         border: none;
         background: none;

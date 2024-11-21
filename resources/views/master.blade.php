@@ -143,7 +143,7 @@
         .dropdown i {
             cursor: pointer;
             color: #000000;
-            font-size: 18px;
+            font-size: 20px;
             padding: 5px;
             border-radius: 999px;
         }
@@ -394,7 +394,7 @@
 
         .search-popup h1 {
             color: #fff;
-            font-size: 40px; 
+            font-size: 45px; 
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -415,7 +415,7 @@
             border: none;
             background-color: white; 
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15); 
-            font-size: 1.2rem; 
+            font-size: 14px; 
         }
 
         .search-icon-input {
@@ -475,7 +475,7 @@
             padding: 8px 20px; 
             margin: 5px; 
             cursor: pointer;
-            font-size: 1.2rem; 
+            font-size: 14px; 
             font-weight: bold;   
             transition: background-color 0.3s, transform 0.2s; 
         }

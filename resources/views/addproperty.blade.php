@@ -484,7 +484,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1rem; 
+    font-size: 12px; 
 }
 
 .alert-success {
@@ -546,7 +546,7 @@
 }
 
 .helper-text {
-    font-size: 0.875rem; /* Small, but readable size */
+    font-size: 12px; /* Small, but readable size */
     color: #6c757d; /* Muted gray color */
     margin-top: 5px; /* Space between the input and helper text */
 }

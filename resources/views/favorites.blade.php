@@ -448,7 +448,7 @@
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 25px;
             font-weight: 700;
             color: #333;
             text-align: center;
@@ -458,7 +458,7 @@
 
 
         .text-normal {
-            font-size: 15px;
+            font-size: 16px;
             color: #555;
         }
 
@@ -512,7 +512,7 @@
         }
 
         .property-location {
-            font-size: 1rem;
+            font-size: 12px;
             color: #2c3e50;
             font-weight: 600;
             margin-bottom: 8px;
@@ -520,7 +520,7 @@
 
         .property-details {
             margin-top: 10px;
-            font-size: 0.9rem;
+            font-size: 12px;
             display: flex;
             gap: 15px;
         }
@@ -531,7 +531,7 @@
         }
 
         .property-card .price {
-            font-size: 1.2rem;
+            font-size: 14px;
             font-weight: 700;
             color: #e74c3c;
             margin-bottom: 8px;
@@ -558,7 +558,7 @@
             padding: 10px 20px;
             cursor: pointer;
             transition: background-color 0.3s, box-shadow 0.3s;
-            font-size: 0.9rem;
+            font-size: 14px;
             border: none;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -707,7 +707,7 @@
         justify-content: center;
         align-items: center;
         margin: 0.4rem;
-        font-size: 1.2rem;
+        font-size: 14px;
         cursor: pointer;
         border: none;
         background: none;
@@ -781,7 +781,7 @@
             padding: 0 10px !important; 
             border: none !important;
             outline: none !important;
-            font-size: 1rem;
+            font-size: 14px;
             background-color: var(--background-color) !important;
             color: var(--text-color) !important;
             box-shadow: none !important;

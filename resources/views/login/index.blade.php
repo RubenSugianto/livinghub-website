@@ -39,7 +39,7 @@ body {
 }
 
 h2 {
-    font-size: 20px; 
+    font-size: 25px; 
     text-align: center;
     margin-bottom: 15px; 
 }
