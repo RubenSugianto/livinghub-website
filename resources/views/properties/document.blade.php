@@ -155,7 +155,7 @@
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
@@ -164,7 +164,7 @@ h1 {
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     color: #444;
     margin-bottom: 20px;
@@ -206,7 +206,7 @@ h2 {
 }
 
 .helper-text {
-    font-size: 0.875rem;
+    font-size: 12px;
     color: #6c757d;
     margin-top: 5px;
 }

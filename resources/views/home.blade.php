@@ -217,7 +217,7 @@ img {
     left: 10px;
     color: #fff;
     padding: 0.5rem 1rem;
-    font-size: 1.25rem;
+    font-size: 16px;
     font-weight: bold;
     z-index: 2;
 }
@@ -236,7 +236,7 @@ img {
 
 .like-count-icon i,
 .card-footer i {
-    font-size: 1rem; 
+    font-size: 12px; 
     vertical-align: middle;
 }
 
@@ -331,7 +331,7 @@ img {
   justify-content: center;
   align-items: center;
   margin: 0.4rem;
-  font-size: 1.2rem;
+  font-size: 14px;
   cursor: pointer;
   border: none;
   background: none;
@@ -390,7 +390,7 @@ img {
 
     .price-badge {
         padding: 0.4rem 0.8rem;
-        font-size: 1rem;
+        font-size: 12px;
     }
 
     .card-footer {
@@ -490,7 +490,7 @@ img {
         padding: 10px;
         border: none;
         outline: none;
-        font-size: 1.2rem;
+        font-size: 14px;
         background-color: var(--background-color);
     }
 
@@ -502,7 +502,7 @@ img {
         border: none;
         cursor: pointer;
         transition: color var(--transition-speed) ease;
-        font-size: 1.2rem;
+        font-size: 14px;
     }
 
     .search-bar button:hover,
@@ -656,7 +656,7 @@ img {
         border: 1px solid #ddd;
         border-radius: 30px;
         padding: 10px 25px;
-        font-size: 1.25rem; 
+        font-size: 14px; 
         font-weight: bold;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.2s;

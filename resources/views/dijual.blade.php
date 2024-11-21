@@ -4,7 +4,7 @@
     @include('partials.navbaruser')
 @endsection
 
-@section('title', 'Properti Dijual')
+@section('title', 'Properti Jual')
 
 @section('content')
 <div class="container mt-4 dijual-page">
@@ -164,7 +164,7 @@
                          </div>
                             <div class="card-body">
                                 <div class="price mb-2">
-                                    <span class="font-weight-bold" style="font-size: 1.4em;">Rp {{ number_format($property->price, 0, ',', '.') }}</span>
+                                    <span class="font-weight-bold" style="font-size: 20px;">Rp {{ number_format($property->price, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="card-title d-flex justify-content-between align-items-center">
                                     <h5 style="font-size: 20px;">{{ $property->name }}</h5>
@@ -173,7 +173,7 @@
                                 <div class="d-flex justify-content-start">
                                 <span class="badge bg-secondary">{{ $property->status }}</span>
                                 <span class="badge bg-secondary">{{ $property->type }}</span>
-                                <span class="badge bg-secondary">{{ $property->document->type }}</span>
+                                <span class="badge bg-secondary">{{ $property->documents->first()->type }}</span>
 
                                 </div>
                                 <div class="property-details mt-2 d-flex flex-wrap align-items-center">
@@ -407,7 +407,7 @@ function resetFilters() {
     }
 
     .badge {
-        font-size: 1em;
+        font-size: 14px;
         padding: 0.3em 0.8em;
         margin-right: 8px;
     }
@@ -419,7 +419,7 @@ function resetFilters() {
     }
 
     .price {
-        font-size: 1.2em;
+        font-size: 14px;
         font-weight: bold;
     }
 
@@ -428,7 +428,7 @@ function resetFilters() {
     }
 
     .card-title h5 {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
     }
 
@@ -505,7 +505,7 @@ function resetFilters() {
         padding: 10px;
         border: none;
         outline: none;
-        font-size: 1.2rem;
+        font-size: 14px;
         background-color: var(--background-color);
     }
 
@@ -525,7 +525,7 @@ function resetFilters() {
     }
 
     .input-group button i {
-        font-size: 1.2rem;
+        font-size: 14px;
     }
 
     .input-group button:hover {

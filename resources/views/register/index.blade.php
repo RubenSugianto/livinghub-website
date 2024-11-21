@@ -8,6 +8,8 @@
 
 @section('styles')
 <style>
+
+    
 body {
     display: flex;
     justify-content: center;
@@ -39,7 +41,7 @@ body {
 }
 
 h2 {
-    font-size: 20px; 
+    font-size: 25px; 
     text-align: center;
     margin-bottom: 15px; 
 }
@@ -206,7 +208,7 @@ h2 {
 .password-requirements h6 {
     color: #333;
     margin: 0 0 8px 0;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
 }
 

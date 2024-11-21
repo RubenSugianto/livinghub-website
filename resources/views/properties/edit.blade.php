@@ -352,7 +352,7 @@
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 30px;
@@ -396,7 +396,7 @@ h1 {
 }
 
 .helper-text {
-    font-size: 0.875rem;
+    font-size: 12px;
     color: #6c757d;
     margin-top: 5px;
 }
@@ -458,7 +458,7 @@ h1 {
 }
 
 .image-label {
-    font-size: 2rem;
+    font-size: 14px;
     cursor: pointer;
     color: #aaa;
     transition: color 0.3s ease;

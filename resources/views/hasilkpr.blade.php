@@ -21,6 +21,42 @@
 
 @section('styles')
 <style>
+
+    
+:root {
+        --primary-color: #5E5DF0;
+        --secondary-color: #4A4AC4;
+        --text-color: #393232;
+        --background-color: #f5f5f5;
+        --border-radius: 5px;
+        --transition-speed: 0.3s;
+        --font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        margin: 0;
+        padding-top: 0;
+        font-family: var(--font-family);
+    }
+
+    html {
+        box-sizing: border-box;
+        font-size: 70%;
+        overflow-y: scroll;
+        letter-spacing: 0.6px;
+        line-height: 1.4;
+        -webkit-user-select: none;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+
     .simulasi-kpr-container {
         max-width: 600px;
         background: #fff;
@@ -29,17 +65,18 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin: 50px auto;
         border: 1px solid #ccc;
-        
+        margin-top: 100px;
     }
 
     .simulasi-kpr-container h1 {
         text-align: center;
         margin-bottom: 20px;
+        font-size: 20px;
     
     }
 
     .simulasi-kpr-container p {
-        font-size: 18px; 
+        font-size: 16px; 
         margin-bottom: 15px;
     }
 
