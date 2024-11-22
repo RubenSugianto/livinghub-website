@@ -54,7 +54,7 @@
                         <td>{{ $document->status }}</td>
                         <td>
                             <!-- Tombol Downlaod Document -->
-                            <form action="{{ route('document.edit', $document->id) }}" method="GET" style="display:inline-block; margin: 35px;">
+                            <form action="{{ route('document.download', urlencode($document->file)) }}" method="GET" style="display:inline-block; margin: 35px;">
                                 @csrf
                                 <button type="submit" class="btn btn-info" style="background-color:grey ;color: white; border: 1px solid #ccc;" target="_blank">
                                     <i class="fa fa-download" aria-hidden="true"></i>

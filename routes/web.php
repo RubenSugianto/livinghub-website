@@ -130,7 +130,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/document/decline/{id}', [AdminController::class, 'declineDocument'])->name('document.decline');
     Route::get('/admin/document/search', [AdminController::class, 'searchDocuments'])->name('admin.document.search');
     Route::get('/admin/document/filter', [AdminController::class, 'filterDocuments'])->name('admin.document.filter');
-
+    Route::get('/download/documents/{file}', [AdminController::class, 'downloadDocument'])->name('document.download');
 
     // Admin Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
