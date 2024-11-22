@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Models\Document;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -75,6 +76,19 @@ class AdminController extends Controller
             return redirect()->route('document.pending')->with('success', 'Dokumen berhasil ditolak.');
         }
         return redirect()->route('document.pending')->with('error', 'Dokumen tidak ditemukan.');
+    }
+
+    public function downloadDocument($file)
+    {
+        
+        $filePath = storage_path('app/public/documents/' . urlencode($file));
+
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('error', 'File dokumen tidak ditemukan di server.');
+        }
+    
+        return response()->download($filePath);
+
     }
 
     public function dashboard()

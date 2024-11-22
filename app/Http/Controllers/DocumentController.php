@@ -43,7 +43,8 @@ class DocumentController extends Controller
     
         if ($request->hasFile('document')) {
             $documentPath = $request->file('document')->store('documents');
-            $document->file = $documentPath;
+            $fileName = basename($documentPath);
+            $document->file = $fileName;
         }
     
         $document->save();
