@@ -133,7 +133,7 @@
             </div>
 
             <div>
-                <h3 class="section-title">Komentar</h3>
+                <h1 class="section-title">Komentar</h1>
                 @foreach ($property->comments as $comment)
                     <div class="comment">
                         <div class="comment-header">
@@ -147,7 +147,7 @@
                 <hr>
 
                 @auth
-                <h4>Tambahkan Komentar</h4>
+            
                 <form action="{{ route('comments.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="property_id" value="{{ $property->id }}">
@@ -389,14 +389,9 @@
             margin-right: 0.75rem;
         }
 
-        .comment-header strong {
-            font-size: 15px;
-            color: #333;
-            font-weight: bold;
-        }
-
+    
         .comment p {
-            font-size: 13px;
+            font-size: 14px;
             color: #555;
             margin: 0.375rem 0;
             word-wrap: break-word;
@@ -404,7 +399,7 @@
         }
 
         .comment small {
-            font-size: 0.75rem;
+            font-size: 12px;
             color: #aaa;
         }
 
@@ -539,9 +534,9 @@
         }
 
         .section-title {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 50px;
         }
 
         .property-info p {
@@ -594,12 +589,11 @@
             text-decoration: none;
         }
         .description-wrap {
-            word-wrap: break-word; /* Allows breaking of long words */
-            overflow-wrap: break-word; /* Breaks long words onto the next line */
-            white-space: normal; /* Normalizes whitespace handling */
-            max-width: 100%; /* Ensure it does not exceed the container */
-            text-align: justify; /* Justifies the text */
-            text-align: justify; /* Justifies the text */
+            word-wrap: break-word; 
+            overflow-wrap: break-word;
+            white-space: normal; 
+            max-width: 100%; 
+            text-align: justify;
             text-justify: inter-word;
         }
         </style>

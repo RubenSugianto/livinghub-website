@@ -104,7 +104,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Gambar</th>
                             <th>Nama Properti</th>
                             <th>Harga</th>
                             <th>Lokasi</th>
@@ -117,9 +116,7 @@
                     <tbody>
                         @foreach($pendingProperties as $property)
                             <tr data-property-id="{{ $property->id }}">
-                                <td>
-                                    <img src="{{ asset($property->images->first()) }}" alt="{{ $property->name }}" width="100" class="clickable-image">
-                                </td>
+                            
                                 <td>{{ $property->name }}</td>
                                 <td>Rp {{ number_format($property->price, 0, ',', '.') }}</td>
                                 <td>{{ $property->location }}</td>
