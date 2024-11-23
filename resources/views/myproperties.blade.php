@@ -477,7 +477,7 @@ document.addEventListener('DOMContentLoaded', function() {
             top: -10px; 
             display: flex;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 100px;
         }
 
         .alert-success {
