@@ -9,7 +9,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $properties = Property::with('images')->paginate(20); 
+        $properties = Property::where('check', 'Approved')
+                          ->with('images')
+                          ->paginate(20);
         return view('home', compact('properties'));
     }
 }
