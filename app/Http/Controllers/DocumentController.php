@@ -46,6 +46,11 @@ class DocumentController extends Controller
             $fileName = basename($documentPath);
             $document->file = $fileName;
         }
+
+        if ($document->status = 'Approved') {
+            $property->status = 'Pending';
+            $property->save();
+        }
     
         $document->save();
     
