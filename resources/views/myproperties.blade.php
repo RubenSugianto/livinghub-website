@@ -255,10 +255,22 @@
                                 <td>{{ \Carbon\Carbon::parse($property->updated_at)->format('d/m/Y') }}</td>
                                 <td>{{ $property->check }}</td>
                                 <td>{{ $property->document->status }}</td>
+
                                 <td>
-                                    <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                    </a>
+                                    @if($property->check === 'Rejected')
+                                        <a class="btn btn-primary" disabled title="Properti tidak dapat diedit karena properti telah ditolak.">
+                                            <i class="fa fa-lock"></i>
+                                        </a>
+                                    @elseif($property->check !== 'Pending' && $property->document->status !== "Pending")
+                                        <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </a>
+                                    @else
+                                        <a class="btn btn-primary" disabled title="Properti atau dokumen masih dalam peninjauan.">
+                                            <i class="fa fa-lock"></i>
+                                        </a>
+                                    @endif
+
                                     <form action="{{ route('property.destroy', $property->id) }}" method="POST" class="delete-form" style="display:inline-block;" data-property-id="{{ $property->id }}">
                                         @csrf
                                         @method('delete')
@@ -281,9 +293,15 @@
                                         </a>
                                     @else
                                         <!-- Button for non-pending status that navigates to document edit page, always using btn-secondary -->
-                                        <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
-                                            <i class="fa fa-file-text" aria-hidden="true"></i>
-                                        </a>
+                                         @if($property->check === 'Rejected')
+                                            <a class="btn btn-secondary" disabled title="Dokumen tidak dapat diunggah karena properti telah ditolak.">
+                                                <i class="fa fa-lock"></i>
+                                            </a>
+                                         @else
+                                            <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
+                                                <i class="fa fa-file-text" aria-hidden="true"></i>
+                                            </a>
+                                        @endif
                                     @endif
 
                                 </td>
