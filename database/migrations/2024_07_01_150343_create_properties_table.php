@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('electricity');
             $table->unsignedBigInteger('surfaceArea');
             $table->unsignedBigInteger('buildingArea');
-            $table->string('status')->default('Pending');
+            $table->string('status')->default('Dijual');
             $table->string('type');
             $table->string('check')->default('Pending');
             $table->integer('like_count')->default(0);
