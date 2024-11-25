@@ -156,6 +156,10 @@ class PropertyController extends Controller
 
          
          $property = Property::findOrFail($id);
+         if ($property->check = 'Approved') {
+            $property->check = 'Pending';
+            $property->save();
+         }
          $property->update($request->except('images', 'existing_images'));
      
          // Handle existing images
