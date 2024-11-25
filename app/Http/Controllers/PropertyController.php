@@ -128,6 +128,10 @@ class PropertyController extends Controller
         $imageIds = $propertyImages->pluck('id'); // Get only the IDs
         $document = $property->document;
 
+        if ($property->check === 'Pending' || $document->status === 'Pending') {
+            return redirect()->back()->with('error', 'Properti atau dokumen masih dalam peninjauan dan tidak dapat diedit.');
+        }
+
         return view('properties.edit', compact('property', 'propertyImages', 'imageIds', 'document')); // Update this line
     }
  
