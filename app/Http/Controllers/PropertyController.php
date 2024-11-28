@@ -326,7 +326,7 @@ class PropertyController extends Controller
         }
 
         // Paginasi hasil pencarian
-        $properties = $query->paginate(2);
+        $properties = $query->paginate(10);
 
         return view('search-results', compact('properties'));
     }
