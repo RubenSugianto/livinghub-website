@@ -17,7 +17,7 @@ class PreventAdminAccess
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check() && Auth::user()->isAdmin()) {
-            return redirect()->intended('/adminproperty')->with('error', 'Admins are not allowed to access this page.');
+            return redirect()->intended('/adminproperty')->with('alert', 'Admin tidak diperbolehkan untuk mengakses page ini.');
         }
 
         return $next($request);
