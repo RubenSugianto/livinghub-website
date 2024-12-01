@@ -21,6 +21,6 @@ class IsAdmin
             return $next($request);
         }
 
-        abort(403, 'You are not allowed to access this page.');
+        abort(403, 'Anda tidak memiliki akses ke page ini.');
     }
 }

@@ -25,6 +25,14 @@
     </div>
 @endif
 
+@if (session('alert'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+        <strong>{{ session('alert') }}</strong>
+    <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
+@endif
+
     <div class="container mt-4 text-center">
         <!-- Confirmation Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
