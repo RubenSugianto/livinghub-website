@@ -70,7 +70,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/reset-password', [PasswordController::class, 'verifypassword'])->name('password.update');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'preventAdmin'])->group(function () {
     // profile page
     Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
     Route::delete('/lihatprofile', [ProfileController::class, 'destroy'])->name('profile.destroy');
