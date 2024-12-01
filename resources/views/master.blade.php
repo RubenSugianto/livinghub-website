@@ -361,6 +361,10 @@
             color: #4A4AC4;
         }
 
+        .fa.fa-twitter::before{
+            content:"𝕏";
+            font-size:1.2em;
+        }
         .footer-bottom {
             width: 100%;
             border-top: 1px solid #444;
@@ -569,9 +573,17 @@
                 </div>
             </div>
             <div class="social-icons">
+            <a href="https://www.instagram.com/liv_hub/" target="_blank">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+            <a href="https://www.facebook.com/LivvHub/" target="_blank">
                 <i class="fa fa-facebook-square" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://x.com/liv_hub/" target="_blank">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Living HUB. All rights reserved.</p>
