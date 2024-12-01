@@ -34,10 +34,22 @@ class DocumentController extends Controller
         }
 
         $document->type = $documentType;
-    
         $document->name = $request->input('documentName');
     
         if ($document->status == 'Not Uploaded') {
+            $document->status = 'Pending';
+        }
+
+        if ($document->status == 'Approved') {
+            // Delete the existing file if it exists
+            if ($document->file) {
+                $filePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, 'storage/documents/' . $document->file));
+                if (file_exists($filePath)) {
+                    unlink($filePath); 
+                }
+                $document->file = null;
+            }
+    
             $document->status = 'Pending';
         }
     
@@ -45,11 +57,6 @@ class DocumentController extends Controller
             $documentPath = $request->file('document')->store('documents');
             $fileName = basename($documentPath);
             $document->file = $fileName;
-        }
-
-        if ($document->status = 'Approved') {
-            $property->status = 'Pending';
-            $property->save();
         }
     
         $document->save();
