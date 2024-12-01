@@ -20,7 +20,7 @@ class IsAdmin
         if (Auth::check() && Auth::user()->isAdmin()) {
             return $next($request);
         }
-        
-        abort(403);
+
+        abort(403, 'You are not allowed to access this page.');
     }
 }
