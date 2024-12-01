@@ -1,8 +1,8 @@
 @extends('master')
 
-<!-- @section('navbar')
+@section('navbar')
     @include('partials.navbaradmin')
-@endsection -->
+@endsection
 
 @section('title', 'My Property')
 @section('content')

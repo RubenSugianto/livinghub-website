@@ -12,6 +12,7 @@ use App\Models\Document;
 use App\Models\Like;
 use App\Models\Favourite;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
@@ -28,9 +29,8 @@ class PropertyController extends Controller
         $propertyImages = PropertyImage::where('property_id', $property->id)->get();
         $document = $property->document;
 
-        $fromAdmin = $request->query('fromAdmin') == 'true';
 
-        return view('property', compact('property', 'propertyImages', 'document', 'fromAdmin'));
+        return view('property', compact('property', 'propertyImages', 'document'));
     }
 
     // Menampilkan form untuk menambahkan properti

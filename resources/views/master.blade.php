@@ -495,18 +495,7 @@
         @yield('styles')
     </head>
     <body>
-        <!-- @yield('navbar') -->
-
-        @if(isset($fromAdmin) && $fromAdmin)
-            {{-- Jika diakses dari halaman admin untuk melihat detail properti --}}
-            @include('partials.navbaradmin')
-        @elseif(request()->is('admin*'))
-            {{-- Default navbar untuk semua halaman admin lainnya --}}
-            @include('partials.navbaradmin')
-        @else
-            {{-- Navbar user untuk halaman lain di luar admin --}}
-            @include('partials.navbaruser')
-        @endif
+        @yield('navbar')
 
 
 <div class="search-popup">
