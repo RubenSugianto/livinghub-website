@@ -22,33 +22,37 @@ use App\Http\Controllers\PasswordController;
 
 use Illuminate\Support\Facades\Route;
 
-// Home Routes
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Other Routes
-Route::get('/dijual', [DijualController::class, 'index'])->name('dijual');
-Route::get('/disewa', [DisewaController::class, 'index'])->name('disewa');
-Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simulasikpr');
-Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
+Route::middleware(['preventAdmin'])->group(function () {
+    // Home Routes
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    // Other Routes
+    Route::get('/dijual', [DijualController::class, 'index'])->name('dijual');
+    Route::get('/disewa', [DisewaController::class, 'index'])->name('disewa');
+    Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simulasikpr');
+    Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
+
+    // Email Verification
+    Route::get('/email/verify', [RegisterController::class, 'verifypage'])->middleware('auth')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyrequest'])->middleware(['auth', 'signed'])->name('verification.verify');
+    Route::post('/email/verification-notification', [RegisterController::class, 'resendlink'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+    // Search
+    Route::get('/search', [PropertyController::class, 'search'])->name('search');
+
+    // Profile Seller
+    Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
+
+    
+});
 
 // Show Property
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
 
-// Search
-Route::get('/search', [PropertyController::class, 'search'])->name('search');
-
-// Profile Seller
-Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
-
 // LogOut
 Route::post('/logout', [LoginController::class, 'logout']);
 
-// Auth::routes(['verify' => true]);
-
-// Email Verification
-Route::get('/email/verify', [RegisterController::class, 'verifypage'])->middleware('auth')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyrequest'])->middleware(['auth', 'signed'])->name('verification.verify');
-Route::post('/email/verification-notification', [RegisterController::class, 'resendlink'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::middleware(['guest'])->group(function () {
     // Auth Routes

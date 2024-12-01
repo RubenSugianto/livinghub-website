@@ -9,7 +9,7 @@ class DijualController extends Controller
 {
     public function index()
     {
-        $properties = Property::where('status', 'Disewa')
+        $properties = Property::where('status', 'Dijual')
                           ->where('check', 'Approved')
                           ->with('document')
                           ->paginate(10);

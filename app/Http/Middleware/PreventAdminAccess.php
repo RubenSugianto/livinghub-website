@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class PreventAdminAccess
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-
         if (Auth::check() && Auth::user()->isAdmin()) {
-            return $next($request);
+            return redirect()->intended('/adminproperty')->with('error', 'Admins are not allowed to access this page.');
         }
 
-        abort(403, 'You are not allowed to access this page.');
+        return $next($request);
     }
 }
