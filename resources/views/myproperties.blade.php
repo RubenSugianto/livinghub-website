@@ -312,9 +312,6 @@
 
                                 <td>
                                     @if($property->check === 'Rejected')
-                                        <!-- <a class="btn btn-primary" disabled title="Properti tidak dapat diedit karena properti telah ditolak.">
-                                            <i class="fa fa-lock"></i>
-                                        </a> -->
                                         <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#propertyRejectedModal">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
@@ -323,9 +320,6 @@
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     @else
-                                        <!-- <a class="btn btn-primary" disabled title="Properti atau dokumen masih dalam peninjauan.">
-                                            <i class="fa fa-lock"></i>
-                                        </a> -->
                                         <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#propertyReviewModal">
                                             <i class="fa fa-pencil-square-o"></i>
                                         </a>
@@ -354,11 +348,8 @@
                                     @else
                                         <!-- Button for non-pending status that navigates to document edit page, always using btn-secondary -->
                                          @if($property->check === 'Rejected')
-                                            <!-- <a class="btn btn-secondary" disabled title="Dokumen tidak dapat diunggah karena properti telah ditolak.">
-                                                <i class="fa fa-lock"></i>
-                                            </a> -->
                                             <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#propertyRejectedModal2">
-                                                <i class="fa fa-file-textb "></i>
+                                                <i class="fa fa-file-text"></i>
                                             </a>
                                          @else
                                             <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
