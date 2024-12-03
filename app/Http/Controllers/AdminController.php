@@ -39,7 +39,7 @@ class AdminController extends Controller
         if ($property) {
             $property->check = 'Rejected'; // Ubah status menjadi Rejected
             $property->save();
-            return redirect()->back()->with('error', 'Properti berhasil ditolak.');
+            return redirect()->back()->with('success', 'Properti berhasil ditolak.');
         }
         return redirect()->back()->with('error', 'Properti tidak ditemukan.');
     }

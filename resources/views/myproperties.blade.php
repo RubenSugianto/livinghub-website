@@ -216,7 +216,61 @@
     </div>
 </div>
 
-   
+<!-- Modal: Property Review Status -->
+<div class="modal fade" id="propertyReviewModal" tabindex="-1" aria-labelledby="propertyReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="propertyReviewModalLabel">Status Properti</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Properti atau dokumen masih dalam peninjauan. Anda tidak dapat mengedit properti ini saat ini.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Property Rejected Status -->
+<div class="modal fade" id="propertyRejectedModal" tabindex="-1" aria-labelledby="propertyRejectedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="propertyRejectedModalLabel">Properti Ditolak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Properti ini telah ditolak dan tidak dapat diedit.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Property Rejected -->
+<div class="modal fade" id="propertyRejectedModal2" tabindex="-1" aria-labelledby="propertyRejectedModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="propertyRejectedModalLabel">Properti Ditolak</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Properti ini telah ditolak. Anda tidak dapat mengunggah dokumen untuk properti yang ditolak.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
             @if($properties->isEmpty())
             <div class="col-12 text-center">
             <p class="text-muted">Properti tidak ditemukan.</p>
@@ -258,16 +312,22 @@
 
                                 <td>
                                     @if($property->check === 'Rejected')
-                                        <a class="btn btn-primary" disabled title="Properti tidak dapat diedit karena properti telah ditolak.">
+                                        <!-- <a class="btn btn-primary" disabled title="Properti tidak dapat diedit karena properti telah ditolak.">
                                             <i class="fa fa-lock"></i>
+                                        </a> -->
+                                        <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#propertyRejectedModal">
+                                            <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                     @elseif($property->check !== 'Pending' && $property->document->status !== "Pending")
                                         <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     @else
-                                        <a class="btn btn-primary" disabled title="Properti atau dokumen masih dalam peninjauan.">
+                                        <!-- <a class="btn btn-primary" disabled title="Properti atau dokumen masih dalam peninjauan.">
                                             <i class="fa fa-lock"></i>
+                                        </a> -->
+                                        <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#propertyReviewModal">
+                                            <i class="fa fa-pencil-square-o"></i>
                                         </a>
                                     @endif
 
@@ -294,8 +354,11 @@
                                     @else
                                         <!-- Button for non-pending status that navigates to document edit page, always using btn-secondary -->
                                          @if($property->check === 'Rejected')
-                                            <a class="btn btn-secondary" disabled title="Dokumen tidak dapat diunggah karena properti telah ditolak.">
+                                            <!-- <a class="btn btn-secondary" disabled title="Dokumen tidak dapat diunggah karena properti telah ditolak.">
                                                 <i class="fa fa-lock"></i>
+                                            </a> -->
+                                            <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#propertyRejectedModal2">
+                                                <i class="fa fa-file-textb "></i>
                                             </a>
                                          @else
                                             <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
