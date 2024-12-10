@@ -90,7 +90,7 @@
 
             <h3 class="section-title">Deskripsi Properti</h3>
             <article class="my-3 fs-5 description-wrap">
-                {!! $property->description !!}
+                {!! nl2br(e($property->description)) !!}
             </article>
 
             <h3 class="section-title">Informasi Properti</h3>
@@ -160,7 +160,7 @@
 
                     <div class="comment-input">
                         <textarea id="commentTextarea" name="comment" placeholder="Tulis komentar..."></textarea>
-                        <small id="wordCount" class="word-counter">0/200 characters</small>
+                        <small id="wordCount" class="word-counter">0/200 Karakter</small>
                     </div>
                     <button type="submit" id="submitButton">Komen</button>
                 </form>

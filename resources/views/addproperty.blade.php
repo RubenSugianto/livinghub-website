@@ -56,15 +56,18 @@
         </div>
 
         <div class="formbold-form-step-1 active">
-            <div class="formbold-input-flex">
-                <div>
-                    <label for="name" class="formbold-form-label">Nama Properti</label>
-                    <input type="text" class="formbold-form-input" id="name" name="name" required>
+            <div style="margin-bottom: 16px;">
+                <label for="name" class="formbold-form-label">Nama Properti</label>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="text" class="formbold-form-input" id="name" name="name" maxlength="20" required oninput="updateWordCounter(this)" style="flex: 1; margin-right: 8px;">
+                    <span id="wordCounter" style="font-size: 12px; color: gray; white-space: nowrap;">0/20</span>
                 </div>
-                <div>
+                    <p class="helper-text">Nama properti hanya bisa diisi dengan maksimum 20 karakter.</p>
+                </div>
+           
+                <div style="margin-bottom: 16px;">
                     <label for="price" class="formbold-form-label">Harga</label>
-                    <input type="number" class="formbold-form-input" id="price" name="price" required>
-                </div>
+                <input type="number" class="formbold-form-input" id="price" name="price" min="0" required>
             </div>
         </div>
 
@@ -175,6 +178,25 @@
      </div> 
          </div>
     <script>
+
+    const nameInput = document.getElementById('name');
+        const wordCounter = document.getElementById('wordCounter');
+        const maxLength = 20;
+
+        nameInput.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            wordCounter.textContent = `${currentLength}/${maxLength}`;
+
+            const warning = document.getElementById('nameWarning');
+            if (currentLength > maxLength) {
+                warning.style.display = 'block';
+                warning.textContent = `Nama properti tidak boleh lebih dari ${maxLength} karakter.`;
+            } else {
+                warning.style.display = 'none';
+                warning.textContent = '';
+            }
+        });
+        
     document.addEventListener('DOMContentLoaded', function () {
         const nextBtn = document.getElementById('next');
         const backBtn = document.getElementById('back');
@@ -434,9 +456,7 @@
     transition: background-color 0.3s ease;
 }
 
-.formbold-back-btn {
-    background-color: #ccc;
-}
+
 
 .formbold-btn:hover, 
 .formbold-submit-btn:hover {
