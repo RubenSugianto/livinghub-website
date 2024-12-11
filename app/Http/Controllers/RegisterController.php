@@ -22,7 +22,7 @@ class RegisterController extends Controller
             'username' => ['required', 'min:3', 'max:255', 'regex:/^[a-zA-Z0-9_\-]+$/', 'unique:users'],
             'email' => ['required', 'email:dns', 'unique:users'],
             'password' => ['required', 'min:8', 'max:255', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/'],
-            'phone' => ['required', 'unique:users', 'regex:/^\d{12}$/'],
+            'phone' => ['required', 'unique:users', 'regex:/^\d{10,13}$/'],
             'gender' => ['required'],
             'age' => ['required', 'integer', 'min:18', 'max:100']
         ]);
@@ -46,13 +46,13 @@ class RegisterController extends Controller
 
     public function verifyrequest(EmailVerificationRequest $request)
     {
-        $request->fulfill();  // This marks the user's email as verified
-        return redirect('/');  // Redirect the user after successful verification
+        $request->fulfill();  
+        return redirect('/');  
     }
 
     public function resendlink(Request $request)
     {
-        $request->user()->sendEmailVerificationNotification();  // Resend the verification email
+        $request->user()->sendEmailVerificationNotification(); 
         return back()->with('message', 'Link Verifikasi telah dikirim!');
     }
 }
