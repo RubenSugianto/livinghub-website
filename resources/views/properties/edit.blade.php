@@ -6,6 +6,16 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container">
     <!-- Back Button placed at the top-left corner inside the container -->
     <div class="row">
@@ -192,6 +202,27 @@
         </div>
     </div>
 </div>
+
+<!-- @if ($errors->has('images'))
+    <div class="alert alert-danger fade" id="form-alert">
+        <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+        <span class="alert-content">
+            <strong>{{ $errors->first('images') }}</strong>
+        </span>
+        <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
+    </div>
+@endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alertBox = document.getElementById('form-alert');
+        if (alertBox) {
+            // Tampilkan alert secara animasi
+            alertBox.style.display = 'block';
+            alertBox.classList.add('show'); // Tambahkan efek jika diperlukan
+        }
+    });
+</script> -->
 
 <script>
     function previewImage(event, index) {
@@ -507,6 +538,74 @@ h1 {
 
 .back-btn i {
     margin-right: 10px;
+}
+
+.alert {
+    padding: 15px;
+    margin: 10px auto;
+    border-radius: 10px;
+    width: calc(100% - 40px);
+    position: relative;
+    top: -10px; 
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px; 
+}
+
+.alert-success {
+    background-color: #d4edda; 
+    color: #155724; 
+    border: 1px solid #c3e6cb; 
+}
+
+.alert-warning {
+    background-color: #f8d7da; 
+    color: #721c24; 
+    border: 1px solid #f5c6cb; 
+}
+
+.alert .btn-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem; 
+    color: #721c24; 
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 15px; 
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+.alert .btn-close:hover {
+    color: #5a3b02; 
+}
+
+.alert .btn-close:active {
+    transform: translateY(-50%) scale(1.1);
+}
+
+
+.alert .alert-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.alert.fade {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.alert.fade.hide {
+    opacity: 0;
+    transform: translateY(-15px);
 }
 
 @media (max-width: 768px) {

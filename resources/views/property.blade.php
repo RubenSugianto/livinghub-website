@@ -40,7 +40,7 @@
 
             <div class="tags-favorite">
             <div class="tags">
-                <span class="tag">{{ $property->status }}</span>
+                <span class="tag">{{ ucwords($property->status) }}</span>
                 <span class="tag">{{ $property->type }}</span>
                 <span class="tag">{{ $document->type }}</span>
                 @if($document->status == 'Approved') 
