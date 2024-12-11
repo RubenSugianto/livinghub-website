@@ -42,6 +42,17 @@ class PropertyController extends Controller
     // Menyimpan properti baru
     public function store(Request $request)
     {
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                if ($file->getSize() > 2048 * 1024) { // 2MB dalam byte
+                    return redirect()->back()->withErrors([
+                        'images' => 'Ukuran setiap gambar tidak boleh lebih dari 2MB.',
+                    ]);
+                }
+            }
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:20'],
             'price' => ['required', 'numeric', 'min:0'], 
@@ -138,6 +149,17 @@ class PropertyController extends Controller
      // Update a specific property
      public function update(Request $request, $id)
      {
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                if ($file->getSize() > 2048 * 1024) { // Konversi ke byte
+                    return redirect()->back()->withErrors([
+                        'image' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
+                    ]);
+                }
+            }
+        }
+
         $request->validate([
              'name' => 'required|string|max:255',
              'price' => 'required|numeric|min:0', // Changed to numeric and removed max limit
