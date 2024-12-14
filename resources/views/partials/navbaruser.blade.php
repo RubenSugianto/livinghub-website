@@ -19,7 +19,7 @@
                 <div class="auth-text">
                     @auth
                     @if(Auth::user()->avatar)
-                        <img id="dropdownProfilePicture" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
+                        <img id="dropdownProfilePicture" src="{{ CustomChatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
                     @else
                         <i class="fa fa-user-o" style="font-size: 20px; color: grey;"></i>
                     @endif

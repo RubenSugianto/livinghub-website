@@ -438,7 +438,7 @@
                 <h1>Profil Saya</h1>
             </div>
             <div class="profile-pic">
-            <img id="profilePicturePreview" src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
+            <img id="profilePicturePreview" src="{{ CustomChatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture">
                 <button type="button" class="delete-btn" id="deletePictureBtn">Hapus Gambar</button>
             </div>
             <form id="profileForm" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">

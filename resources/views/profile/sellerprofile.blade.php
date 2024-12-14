@@ -13,7 +13,7 @@
     <div class="row align-items-center">
         <div class="col-md-3 text-center">
             @if($seller->avatar)
-                <img id="ProfilePicture" src="{{ Chatify::getUserWithAvatar($seller)->avatar }}" alt="Profile Picture" class="rounded-circle">
+                <img id="ProfilePicture" src="{{ CustomChatify::getUserWithAvatar($seller)->avatar }}" alt="Profile Picture" class="rounded-circle">
             @else
                 <i class="fa fa-user-o" aria-hidden="true" style="font-size: 150px;"></i>
             @endif

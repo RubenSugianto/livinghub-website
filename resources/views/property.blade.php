@@ -117,7 +117,7 @@
                 <div class="d-flex align-items-center">
                 <a href="{{ route('profileseller', $property->user->id) }}" class="d-flex align-items-center no-underline" style="text-decoration: none;">
                 @if($property->user->avatar) 
-                    <img id="ProfilePicture" src="{{ Chatify::getUserWithAvatar($property->user)->avatar }}" alt="Profile Picture" class="profile-picture">
+                    <img id="ProfilePicture" src="{{ CustomChatify::getUserWithAvatar($property->user)->avatar }}" alt="Profile Picture" class="profile-picture">
                 @else 
                     <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
                 @endif
@@ -151,7 +151,7 @@
 
                     <div class="comment-input d-flex align-items-center mb-3">
                         @if(Auth::user()->avatar)
-                            <img src="{{ Chatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture" class="profile-picture" />
+                            <img src="{{ CustomChatify::getUserWithAvatar(Auth::user())->avatar }}" alt="Profile Picture" class="profile-picture" />
                         @else
                             <i class="fa fa-user-o profile-icon" aria-hidden="true"></i>
                         @endif
