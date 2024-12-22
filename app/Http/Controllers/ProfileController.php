@@ -23,7 +23,7 @@ class ProfileController extends Controller
             'name' => ['required', 'min:8', 'max:255', 'regex:/^[a-zA-Z\s]+$/'],
             'username' => ['required', 'min:3', 'max:255', 'regex:/^[a-zA-Z0-9_\-]+$/', 'unique:users,username,' . $user->id],
             'email' => ['required', 'email:dns', 'unique:users,email,' . $user->id],
-            'phone' => ['required', 'string', 'max:20', 'regex:/^\d{12}$/', 'unique:users,phone,' . $user->id],
+            'phone' => ['required', 'string', 'max:20', 'regex:/^\d{10,13}$/', 'unique:users,phone,' . $user->id],
             'gender' => ['required', 'string', 'max:10'],
             'age' => ['required', 'integer', 'min:18', 'max:100'],
             'profilepicture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
@@ -43,11 +43,22 @@ class ProfileController extends Controller
             if ($user->avatar && Storage::exists('users-avatar/' . $user->avatar)) {
                 Storage::delete('users-avatar/' . $user->avatar);
             }
+        
+            // Set default avatar name based on user ID
             $user->avatar = 'default_' . md5($user->id) . '.png';
-            $defaultAvatarPath = 'users-avatar\\' . $user->avatar;
-
+            $defaultAvatarPath = 'users-avatar/' . $user->avatar;
+        
+            // Check if default avatar exists, otherwise copy it
             if (!Storage::exists($defaultAvatarPath)) {
-                copy(public_path('\defaultprofilepicture.png'), public_path('\storage\\' . $defaultAvatarPath));
+                $sourcePath = public_path('defaultprofilepicture.png');
+                $destinationPath = storage_path('app/public/' . $defaultAvatarPath);
+        
+                if (file_exists($sourcePath)) {
+                    // Copy the default profile picture to the destination path
+                    copy($sourcePath, $destinationPath);
+                } else {
+                    throw new \Exception("Default profile picture not found at: $sourcePath");
+                }
             }
         } else if ($request->hasFile('profilepicture')) {
             // Delete old avatar if exists
