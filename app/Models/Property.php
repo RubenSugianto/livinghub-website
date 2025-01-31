@@ -82,4 +82,9 @@ class Property extends Model
     {
         return $this->hasMany(PropertyImage::class, 'property_id', 'id');
     }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = ucfirst(strtolower($value));
+    }
 }
