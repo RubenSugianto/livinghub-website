@@ -10,6 +10,7 @@ class MyPropertyController extends Controller
     // Display the list of properties owned by the logged-in user
     public function index()
     {
+        dd("Ini di myproperty");
         $user = auth()->user();
         $properties = Property::where('user_id', $user->id)->with('document')->paginate(10);
         $title = "My Properties";

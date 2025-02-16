@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<!-- Search and filter buttons -->
+<!-- Search and filter -->
 <div class="search-bar mb-5">
     <h2 style="text-align: center; font-weight: bold;">Cari properti di agen ini</h2>
     <form action="{{ route('profileseller', $seller->id) }}" method="GET" class="input-group">
@@ -45,7 +45,7 @@
     </form>
 </div>
 
-<!-- Filter Modal Dialog Box -->
+<!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -186,7 +186,6 @@
                             </div>
                         </div>
 
-                        <!-- Like Button -->
                         <div class="like-button">
                             @auth
                                 <button data-property-id="{{ $property->id }}" class="like-btn btn @if(auth()->user()->likes && auth()->user()->likes->contains($property->id)) btn-danger @else btn-outline-danger @endif" aria-label="Like Property">
@@ -231,12 +230,10 @@
     @endif
 </div>
 
-<!-- Pagination buttons -->
+<!-- Pagination -->
 <div class="d-flex justify-content-center mt-4 page">
-    <!-- Previous Page Button -->
     <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
 
-    <!-- Pagination Elements -->
     @if ($properties->lastPage() > 1)
         @if ($properties->currentPage() > 3)
             <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
@@ -257,7 +254,6 @@
         @endif
     @endif
 
-    <!-- Next Page Button -->
     <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
     </div>
 </div>
@@ -289,20 +285,16 @@
                 return;
             }
 
-            // Tentukan URL berdasarkan status like/unlike
             if ($(this).hasClass('btn-danger')) {
                 url = '{{ route("properties.unlike", "__property_id__") }}'.replace('__property_id__', propertyId);
             } else {
                 url = '{{ route("properties.like", "__property_id__") }}'.replace('__property_id__', propertyId);
             }
 
-            // Nonaktifkan tombol untuk mencegah multiple clicks
             $(this).prop('disabled', true);
 
-            // Store reference to the button
             var $button = $(this); 
-
-            // Kirim permintaan AJAX
+   
             $.ajax({
                 url: url,
                 method: 'POST',
@@ -312,11 +304,9 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        // Ambil elemen like count yang hanya berisi angka
                         let likeCountElement = $button.closest('.property-card').find('.like-count');
                         let currentLikes = parseInt(likeCountElement.text());
 
-                        // Pastikan nilai currentLikes tidak NaN
                         if (isNaN(currentLikes)) {
                             currentLikes = 0;
                         }
@@ -324,16 +314,13 @@
                         if ($button.hasClass('btn-danger')) {
                             $button.removeClass('btn-danger').addClass('btn-outline-danger');
                             $button.find('i').removeClass('fa-heart').addClass('fa-heart-o');
-                            // Decrease like count
                             likeCountElement.text(currentLikes - 1);
                         } else {
                             $button.removeClass('btn-outline-danger').addClass('btn-danger');
                             $button.find('i').removeClass('fa-heart-o').addClass('fa-heart');
-                            // Increase like count
                             likeCountElement.text(currentLikes + 1);
                         }
                     } else if (response.status === 401) {
-                        // If the user is not logged in, redirect to login page
                         window.location.href = '{{ route("login") }}';
                     }
                 },
@@ -343,7 +330,6 @@
                     alert('An error occurred. Please try again.');
                 },
                 complete: function() {
-                    // Aktifkan kembali tombol setelah permintaan selesai
                     $button.prop('disabled', false);
                 }
             });

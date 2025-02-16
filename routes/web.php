@@ -24,38 +24,44 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['preventAdmin'])->group(function () {
-    // Home Routes
+    // Route ke home
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // Other Routes
+    // Route ke page Dijual
     Route::get('/dijual', [DijualController::class, 'index'])->name('dijual');
+
+    // Route ke page Disewa
     Route::get('/disewa', [DisewaController::class, 'index'])->name('disewa');
+
+    // Route simulasi kpr
     Route::get('/simulasikpr', [SimulasikprController::class, 'index'])->name('simulasikpr');
+
+    // Route ke kalkulasi simulasi kpr
     Route::post('/simulasikpr/calculate', [SimulasikprController::class, 'calculate'])->name('simulasikpr.calculate');
 
-    // Email Verification
+    // Route verifikasi email
     Route::get('/email/verify', [RegisterController::class, 'verifypage'])->middleware('auth')->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [RegisterController::class, 'verifyrequest'])->middleware(['auth', 'signed'])->name('verification.verify');
     Route::post('/email/verification-notification', [RegisterController::class, 'resendlink'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-    // Search
+    // Route Search
     Route::get('/search', [PropertyController::class, 'search'])->name('search');
 
-    // Profile Seller
+    // Route Profile Seller
     Route::get('/profileseller/{id}', [showSellerProfileController::class, 'showSellerProfile'])->name('profileseller');
 
     
 });
 
-// Show Property
+// Route Show Property
 Route::get('/properties/{property}', [PropertyController::class, 'show'])->name('property.show');
 
-// LogOut
+// Route LogOut
 Route::post('/logout', [LoginController::class, 'logout']);
 
 
 Route::middleware(['guest'])->group(function () {
-    // Auth Routes
+    // Route Authentication
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -63,7 +69,7 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/auth/google', [GoogleLoginController::class, 'redirect'])->name('google.login');
     Route::get('/auth/google/call-back', [GoogleLoginController::class, 'callbackGoogle']);
 
-    // Reset Password
+    // Route Reset Password
     Route::get('/forgot-password', [PasswordController::class, 'forgotpassword'])->name('password.request');
     Route::post('/forgot-password', [PasswordController::class, 'verifyemail'])->name('password.email');
     Route::get('/reset-password/{token}', [PasswordController::class, 'resetpassword'])->name('password.reset');
@@ -71,24 +77,24 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'preventAdmin'])->group(function () {
-    // profile page
+    // Route profile page
     Route::get('/lihatprofile', [ProfileController::class, 'index'])->name('profile.index');
     Route::delete('/lihatprofile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/lihatprofile/updateprofile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/lihatprofile/updatepassword', [PasswordController::class, 'changepassword'])->name('password.change');
     Route::put('/lihatprofile/setpassword', [PasswordController::class, 'setpassword'])->name('password.set');
 
-    // Add Property Routes
+    // Route add Property
     Route::get('/property/add', [PropertyController::class, 'add'])->name('property.add');
     Route::post('/propertysave', [PropertyController::class, 'store'])->name('property.store');
     Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit');
     Route::put('/properties/{property}', [PropertyController::class, 'update'])->name('property.update');
     Route::delete('/properties/{property}', [PropertyController::class, 'destroy'])->name('property.destroy');
 
-    // Dashboard
+    // Route my properties
     Route::get('/myproperties', [DashboardController::class, 'showMyProperty']);
 
-    // Favourite and Like Routes
+    // Routes Like & Favourite (Number)
     Route::prefix('properties')->group(function () {
         Route::post('/{property}/favorite', [PropertyController::class, 'favorite'])->name('properties.favorite');
         Route::post('/{property}/unfavorite', [PropertyController::class, 'unfavorite'])->name('properties.unfavorite');
@@ -96,20 +102,20 @@ Route::middleware(['auth', 'verified', 'preventAdmin'])->group(function () {
         Route::post('/{property}/unlike', [PropertyController::class, 'unlike'])->name('properties.unlike');
     });
 
-    // Favorites Page Routes
+    // Route Favorites
     Route::prefix('favorites')->group(function () {
         Route::get('/', [FavoritesController::class, 'index'])->name('favorites');
         Route::delete('/{id}', [FavoritesController::class, 'destroy'])->name('favorites.destroy');
     });
 
-    // Favorites Page Routes
+    // Route Like
     Route::prefix('likes')->group(function () { 
         Route::get('/', [LikesController::class, 'index'])->name('likes');
         Route::delete('/{id}', [LikesController::class, 'destroy'])->name('likes.destroy');
     });
     Route::post('/compare-properties', [PropertyController::class, 'compare'])->name('property.compare');
 
-    // My Property Page
+    // Route My Property
     Route::get('/myproperties', [MyPropertyController::class, 'index'])->name('myproperties');
     Route::get('/myproperties/search', [MyPropertyController::class, 'search'])->name('myproperties.search');
     Route::get('/properties/{property}/edit', [PropertyController::class, 'edit'])->name('property.edit');
@@ -118,17 +124,17 @@ Route::middleware(['auth', 'verified', 'preventAdmin'])->group(function () {
     Route::get('/document/{property}/edit', [DocumentController::class, 'edit'])->name('document.edit');
     Route::put('/document/{property_id}', [DocumentController::class, 'update'])->name('document.update');
 
-    // Comment
+    // Route Comment
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Admin Property
+    // Route Admin Property
     Route::get('/adminproperty', [AdminController::class, 'showPendingProperties'])->name('admin.property'); 
     Route::post('/property/approve/{id}', [AdminController::class, 'approveProperty'])->name('property.approve');
     Route::post('/property/reject/{id}', [AdminController::class, 'rejectProperty'])->name('property.reject');
 
-    // Admin Document
+    // Route Admin Document
     Route::get('/admindocument', [AdminController::class, 'showDocuments'])->name('document.pending'); // Mengubah nama rute untuk menampilkan dokumen pending
     Route::post('/document/approve/{id}', [AdminController::class, 'approveDocument'])->name('document.approve');
     Route::post('/document/decline/{id}', [AdminController::class, 'declineDocument'])->name('document.decline');
@@ -136,6 +142,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/document/filter', [AdminController::class, 'filterDocuments'])->name('admin.document.filter');
     Route::get('/download/documents/{file}', [AdminController::class, 'downloadDocument'])->name('document.download');
 
-    // Admin Dashboard
+    // Route Admin Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });

@@ -161,18 +161,14 @@
                 </div>
                 <h1 class="h3 mb-5 fw-bold text-center">Verifikasi Email</h1>
                 
-                <!-- Large icon between the title and paragraph -->
                 <i class="bi bi-envelope-check icon-envelope"></i>
-                <!-- <i class="bi bi-envelope-check-fill icon-envelope"></i> -->
 
                 <h6 class="mb-5 fw-bold text-center">Silahkan verifikasi email anda</h6>
                 
-                <!-- Informational text for email verification -->
                 <p class="text-center mb-4">
                     Kami telah mengirimkan link verifikasi ke email Anda. Silakan cek email Anda dan klik link untuk verifikasi.
                 </p>
 
-                <!-- Resend Verification Email Form -->
                 <form action="{{ route('verification.send') }}" method="post">
                     @csrf
                     <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Kirim Ulang Link Verifikasi</button>

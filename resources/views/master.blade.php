@@ -510,7 +510,7 @@
             </form>
         </div>
         <div class="search-keywords">
-            <!-- Keywords will be dynamically inserted here -->
+            <!-- kata-kata rekomendasi -->
         </div>
     </div>
 </div>
@@ -665,7 +665,6 @@
                 console.error('Close button not found');
             }
 
-            // Generate keywords initially
             generateKeywords();
         });
     </script>

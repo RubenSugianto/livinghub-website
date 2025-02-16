@@ -11,8 +11,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ganti dari center ke flex-start agar container berada di atas */
-    height: 100vh;
+    align-items: flex-start;
     background-color: #f8f9fa;
     margin: 0;
     padding-top: 500px; 
@@ -239,7 +238,6 @@ h2 {
     transform: translateY(-15px);
 }
 
-/* Password requirements styling */
 .password-requirements {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -277,7 +275,6 @@ h2 {
     color: #4A4AC4;
 }
 
-/* Add margin before the submit button */
 .password-requirements + .btn-primary {
     margin-top: 20px;
 }
@@ -313,10 +310,8 @@ h2 {
                 <form action="{{ route('password.update') }}" method="post">
                     @csrf
 
-                    <!-- Hidden token field -->
                     <input type="hidden" name="token" value="{{ $token }}">
 
-                    <!-- Email field -->
                     <div class="form-floating">
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" required value="{{ old('email') }}">
                         <label for="email">Email</label>
@@ -327,7 +322,6 @@ h2 {
                         @enderror
                     </div>
 
-                    <!-- Password field -->
                     <div class="form-floating password-toggle">
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="New Password" required>
                         <label for="password">Kata Sandi Baru</label>
@@ -339,7 +333,6 @@ h2 {
                         @enderror
                     </div>
 
-                    <!-- Password confirmation field -->
                     <div class="form-floating password-toggle">
                         <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" placeholder="Confirm Password" required>
                         <label for="password_confirmation">Konfirmasi Kata Sandi</label>
@@ -362,8 +355,6 @@ h2 {
                         </ul>
                     </div>
 
-
-                    <!-- Submit button -->
                     <button class="btn btn-primary w-100 py-2 mt-2" type="submit">Reset Kata Sandi</button>
                 </form>
             </main>

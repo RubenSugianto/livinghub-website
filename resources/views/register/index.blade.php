@@ -193,7 +193,7 @@ h2 {
     margin: 0 10px;
 }
 
-/* Password requirements styling - updated */
+
 .password-requirements {
     margin: 15px auto 25px;
     padding: 15px;
@@ -202,7 +202,7 @@ h2 {
     border-radius: 4px;
     font-size: 12px;
     color: #666;
-    max-width: 400px; /* Match your form width */
+    max-width: 400px;
 }
 
 .password-requirements h6 {
@@ -231,11 +231,11 @@ h2 {
     color: #4A4AC4;
 }
 
-/* Divider styling */
+
 .d-flex {
     display: flex;
     align-items: center;
-    max-width: 400px; /* Match your form width */
+    max-width: 400px; 
     margin: 20px auto;
 }
 
@@ -259,7 +259,6 @@ hr {
     border-top: 1px solid #9f9f9f;
 }
 
-/* Add margin before the submit button */
 .password-requirements + .btn-primary {
     margin-top: 20px;
 }

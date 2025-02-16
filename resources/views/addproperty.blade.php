@@ -59,10 +59,10 @@
             <div style="margin-bottom: 16px;">
                 <label for="name" class="formbold-form-label">Nama Properti</label>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <input type="text" class="formbold-form-input" id="name" name="name" maxlength="20" required oninput="updateWordCounter(this)" style="flex: 1; margin-right: 8px;">
-                    <span id="wordCounter" style="font-size: 12px; color: gray; white-space: nowrap;">0/20</span>
+                    <input type="text" class="formbold-form-input" id="name" name="name" maxlength="35" required oninput="updateWordCounter(this)" style="flex: 1; margin-right: 8px;">
+                    <span id="wordCounter" style="font-size: 12px; color: gray; white-space: nowrap;">0/35</span>
                 </div>
-                    <p class="helper-text">Nama properti hanya bisa diisi dengan maksimum 20 karakter.</p>
+                    <p class="helper-text">Nama properti hanya bisa diisi dengan maksimum 35 karakter.</p>
                 </div>
            
                 <div style="margin-bottom: 16px;">
@@ -178,10 +178,10 @@
      </div> 
          </div>
     <script>
-
+        // kasih limit untuk kolom
     const nameInput = document.getElementById('name');
         const wordCounter = document.getElementById('wordCounter');
-        const maxLength = 20;
+        const maxLength = 35;
 
         nameInput.addEventListener('input', function() {
             const currentLength = this.value.length;
@@ -562,13 +562,13 @@
 }
 
 .formgroup .formbold-form-input ~ .helper-text {
-    margin-top: -20px; /* Reduce space between the input and helper text */
+    margin-top: -20px; 
 }
 
 .helper-text {
-    font-size: 12px; /* Small, but readable size */
-    color: #6c757d; /* Muted gray color */
-    margin-top: 5px; /* Space between the input and helper text */
+    font-size: 12px;
+    color: #6c757d; 
+    margin-top: 5px; 
 }
 
 

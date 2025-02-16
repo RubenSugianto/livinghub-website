@@ -34,7 +34,7 @@ class Property extends Model
 
     public function getRouteKeyName()
     {
-        return 'id'; // Ensure this matches your primary key field
+        return 'id'; 
     } 
 
     public function images()
@@ -57,17 +57,15 @@ class Property extends Model
         return $this->belongsToMany(User::class, 'favorites', 'property_id', 'user_id')->withTimestamps();
     }
     public function favorites()
-{
-    return $this->belongsToMany(Property::class, 'favorites', 'user_id', 'property_id');
-}
+    {
+        return $this->belongsToMany(Property::class, 'favorites', 'user_id', 'property_id');
+    }
 
-    // Relasi likes
     public function likes()
     {
         return $this->belongsToMany(User::class, 'likes', 'property_id', 'user_id')->withTimestamps();
     }
 
-    // Menghitung jumlah like terkait dengan properti ini
     public function likeCount()
     {
         return $this->likes()->count(); 

@@ -10,6 +10,7 @@ class DashboardController extends Controller
 {
     public function showMyProperty()
     {
+        dd("Ini di dashboard");
         $user = Auth::user(); 
         $properties = Property::with('images')->where('user_id', $user->id)->paginate(20); 
         $title = 'My Properties';

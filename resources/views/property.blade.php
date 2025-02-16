@@ -54,7 +54,7 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-            <!-- Like Button -->
+           
             <div class="like-button">
                 @auth
                     <button data-property-id="{{ $property->id }}" class="like-btn btn @if(auth()->user()->likes && auth()->user()->likes->contains($property->id)) btn-danger @else btn-outline-danger @endif" aria-label="Like Property">
@@ -63,12 +63,11 @@
                     </button>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-outline-danger" aria-label="Login to Like Property">
-                        <i class="fa fa-heart-o" aria-hidden="true"></i> {{ $property->likeCount() }} <!-- Menampilkan jumlah like -->
+                        <i class="fa fa-heart-o" aria-hidden="true"></i> {{ $property->likeCount() }} 
                     </a>
                 @endauth
             </div>
 
-                    <!-- Favorite Button -->
                     <div class="favorite-button">
                         @auth
                             <button data-property-id="{{ $property->id }}" class="favorite-btn btn @if(auth()->user()->favorites && auth()->user()->favorites->contains($property->id)) btn-danger @else btn-outline-danger @endif" aria-label="Favorite Property">
@@ -112,7 +111,6 @@
             </div>
 
             @notadmin
-            <!-- Profile Section -->
             <div class="profile-section d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                 <a href="{{ route('profileseller', $property->user->id) }}" class="d-flex align-items-center no-underline" style="text-decoration: none;">
@@ -181,38 +179,34 @@
 
                         if (textarea) {
                             textarea.addEventListener("input", function() {
-                                let text = this.value.substring(0, 200); // Limit input to 200 characters
+                                let text = this.value.substring(0, 200); 
                                 textarea.value = text;
                                 wordCount.innerText = `${text.length}/200 characters`;
-                                submitButton.disabled = text.length === 0; // Disable if empty
+                                submitButton.disabled = text.length === 0; 
                             });
                         }
 
                         $(document).ready(function() {
-                        // Event untuk klik tombol like
+    
                         $('.like-btn').click(function(e) {
                             e.preventDefault();
 
                             var propertyId = $(this).data('property-id');
                             var url = '';
-                            var likeCountElement = $('#like-count-' + propertyId); // Elemen jumlah like
+                            var likeCountElement = $('#like-count-' + propertyId); 
 
                             if (!propertyId) {
                                 console.error('Property ID not found!');
                                 return;
                             }
 
-                            // Tentukan URL berdasarkan status like/unlike
                             if ($(this).hasClass('btn-danger')) {
                                 url = '{{ route("properties.unlike", "__property_id__") }}'.replace('__property_id__', propertyId);
                             } else {
                                 url = '{{ route("properties.like", "__property_id__") }}'.replace('__property_id__', propertyId);
                             }
-
-                            // Nonaktifkan tombol untuk mencegah multiple clicks
                             $(this).prop('disabled', true);
 
-                            // Kirim permintaan AJAX
                             $.ajax({
                                 url: url,
                                 method: 'POST',
@@ -222,38 +216,32 @@
                                 },
                                 success: function(response) {
                                     if (response.success) {
-                                        // Ubah status tombol (like/unlike)
                                         if ($(this).hasClass('btn-danger')) {
                                             $(this).removeClass('btn-danger').addClass('btn-outline-danger');
                                             $(this).find('i').removeClass('fa-heart').addClass('fa-heart-o');
-                                            // Kurangi jumlah like
                                             let currentLikes = parseInt(likeCountElement.text());
                                             likeCountElement.text(currentLikes - 1);
                                         } else {
                                             $(this).removeClass('btn-outline-danger').addClass('btn-danger');
                                             $(this).find('i').removeClass('fa-heart-o').addClass('fa-heart');
-                                            // Tambah jumlah like
                                             let currentLikes = parseInt(likeCountElement.text());
                                             likeCountElement.text(currentLikes + 1);
                                         }
                                     } else if (response.status === 401) {
-                                        // Jika pengguna belum login, arahkan ke halaman login
                                         window.location.href = '{{ route("login") }}';
                                     }
-                                }.bind(this), // Bind 'this' ke tombol yang diklik
+                                }.bind(this), 
                                 error: function(xhr, status, error) {
                                     console.error('Error:', error);
                                     alert('An error occurred. Please try again.');
                                 },
                                 complete: function() {
-                                    // Aktifkan kembali tombol setelah permintaan selesai
                                     $(this).prop('disabled', false);
-                                }.bind(this) // Bind 'this' ke tombol yang diklik
+                                }.bind(this)
                             });
                         });
                     });     
 
-                        // Favorite Button Click Event
                         $('.favorite-btn').click(function(e) {
                             e.preventDefault();
 
@@ -265,14 +253,12 @@
                                 return;
                             }
 
-                            // Determine URL based on favorite/unfavorite status
                             if ($(this).hasClass('btn-danger')) {
                                 url = '{{ route("properties.unfavorite", "__property_id__") }}'.replace('__property_id__', propertyId);
                             } else {
                                 url = '{{ route("properties.favorite", "__property_id__") }}'.replace('__property_id__', propertyId);
                             }
 
-                            // Disable button to prevent multiple clicks
                             $(this).prop('disabled', true);
 
                             $.ajax({
@@ -294,15 +280,14 @@
                                     } else if (response.status === 401) {
                                         window.location.href = '{{ route("login") }}';
                                     }
-                                }.bind(this), // Bind 'this' to the current button
+                                }.bind(this), 
                                 error: function(xhr, status, error) {
                                     console.error('Error:', error);
                                     alert('An error occurred. Please try again.');
                                 },
                                 complete: function() {
-                                    // Re-enable the button after request completion
                                     $(this).prop('disabled', false);
-                                }.bind(this) // Bind 'this' to the current button
+                                }.bind(this) 
                             });
                         });
                     });

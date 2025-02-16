@@ -11,23 +11,17 @@ class Favourite extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'favorites'; // Ensure table name matches the actual database table name
+    protected $table = 'favorites';
 
-    protected $guarded = ['id']; // Prevent 'id' from being mass-assigned
+    protected $guarded = ['id']; 
 
-    protected $fillable = ['user_id', 'property_id']; // Allow these fields to be mass-assigned
+    protected $fillable = ['user_id', 'property_id']; 
 
-    /**
-     * Define the relationship with the `User` model.
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Define the relationship with the `Property` model.
-     */
     public function property()
     {
         return $this->belongsTo(Property::class);

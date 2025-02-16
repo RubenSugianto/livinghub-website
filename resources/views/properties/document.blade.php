@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="container">
-    <!-- Back Button placed at the top-left corner inside the container -->
     <div class="row">
         <div class="col-md-12">
             <button type="button" class="btn btn-secondary back-btn" onclick="window.history.back();">
@@ -23,7 +22,6 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Document Type -->
                 <div class="form-group-row">
                     <label for="documentType">Jenis Sertifikat</label>
                     <div class="input-container">
@@ -54,7 +52,6 @@
                     @enderror
                 </div>
 
-                <!-- Document Name -->
                 <div class="form-group-row">
                     <label for="documentName">Nama Dokumen</label>
                     <div class="input-container">
@@ -67,7 +64,6 @@
                     @enderror
                 </div>
 
-                <!-- Upload Document -->
                 <div class="form-group-row">
                     <label for="document">Upload Dokumen PDF (Maksimal 1 Dokumen)</label>
                     <div class="input-container">
@@ -81,7 +77,6 @@
                     @enderror
                 </div>
 
-                <!-- Submit Button -->
                 <div class="form-group-row">
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
@@ -95,18 +90,16 @@
         const documentTypeSelect = document.getElementById('documentType');
         const customTypeInput = document.getElementById('customType');
 
-        // Initially check if the "Lainnya" option is selected, and show the input field if it is
         if (documentTypeSelect.value === 'Lainnya') {
             customTypeInput.style.display = 'block';
         }
 
-        // Event listener to toggle visibility of the custom input based on selection
         documentTypeSelect.addEventListener('change', function () {
             if (this.value === 'Lainnya') {
                 customTypeInput.style.display = 'block';
             } else {
                 customTypeInput.style.display = 'none';
-                customTypeInput.value = '';  // Reset custom input if it's hidden
+                customTypeInput.value = '';  
             }
         });
     });
