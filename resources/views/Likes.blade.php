@@ -27,7 +27,7 @@
     </form>
 </div>
 
-<!-- Filter Modal Dialog Box -->
+<!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -39,7 +39,7 @@
             </div>
             <div class="modal-body">
                 <form action="{{ route('likes') }}" method="GET" id="filterForm">
-                    <!-- Status Filter -->
+
                     <div class="form-group">
                         <label for="status">Status</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -52,7 +52,6 @@
                         </div>
                     </div>
 
-                    <!-- Bedrooms Filter -->
                     <div class="form-group">
                         <label for="bedrooms">Kamar Tidur</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -71,7 +70,6 @@
                         </div>
                     </div>
 
-                    <!-- Bathrooms Filter -->
                     <div class="form-group">
                         <label for="bathrooms">Kamar Mandi</label>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -90,7 +88,7 @@
                         </div>
                     </div>
 
-                    <!-- Land Size Filter -->
+
                     <div class="form-group">
                         <label for="land_size">Luas Tanah</label>
                         <div class="input-range">
@@ -101,7 +99,7 @@
                         </div>
                     </div>
 
-                    <!-- Building Size Filter -->
+
                     <div class="form-group">
                         <label for="building_size">Luas Bangunan</label>
                         <div class="input-range">
@@ -186,7 +184,6 @@
                     </form>
                 </div>
            
-                  <!-- Delete Button -->
                 <button type="button" class="btn btn-link delete-button" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $property->id }}').submit();">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
@@ -198,12 +195,10 @@
                     </div>
                 @endforeach
                     
-            <!-- Pagination buttons -->
+            <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $likes->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $likes->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($likes->lastPage() > 1)
                     @if ($likes->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $likes->url(1) }}'">1</button>
@@ -224,7 +219,6 @@
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                     <button class="page__btn {{ $likes->currentPage() == $likes->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $likes->nextPageUrl() }}'">&gt;</button>
                 </div>
             @endif

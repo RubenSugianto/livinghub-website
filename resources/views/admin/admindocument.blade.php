@@ -41,7 +41,6 @@
                 @foreach ($documents as $document)
                     <tr data-document-id="{{ $document->id }}">
                         <td>
-                            <!-- Tombol View Property -->
                             <form action="{{ route('property.show', $document->property->id) }}" method="GET" style="display:inline-block;">
                                 @csrf
                                 <button type="submit" class="btn btn-info">
@@ -53,7 +52,6 @@
                         <td>{{ $document->name }}</td>
                         <td>{{ $document->status }}</td>
                         <td>
-                            <!-- Tombol Downlaod Document -->
                             <form action="{{ route('document.download', urlencode($document->file)) }}" method="GET" style="display:inline-block; margin: 35px;">
                                 @csrf
                                 <button type="submit" class="btn btn-info" style="background-color:grey ;color: white; border: 1px solid #ccc;" target="_blank">
@@ -61,7 +59,6 @@
                                 </button>
                             </form>
 
-                            <!-- Tombol Approve -->
                             <form action="{{ route('document.approve', $document->id) }}" method="POST" style="display:inline-block; margin: -30px;">
                                 @csrf
                                 <button type="submit" class="btn btn-success">
@@ -69,7 +66,6 @@
                                 </button>
                             </form>
 
-                            <!-- Tombol Reject -->
                             <form action="{{ route('document.decline', $document->id) }}" method="POST" style="display:inline-block; margin: 35px;">
                                 @csrf
                                 <button type="submit" class="btn btn-danger">
@@ -83,12 +79,10 @@
         </table>
     </div>
 
-    <!-- Pagination buttons -->
+    <!-- Pagination -->
     <div class="d-flex justify-content-center mt-4 page">
-        <!-- Previous Page Button -->
         <button class="page__btn {{ $pendingProperties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->previousPageUrl() }}'">&lt;</button>
 
-        <!-- Pagination Elements -->
         @if ($pendingProperties->lastPage() > 1)
             @if ($pendingProperties->currentPage() > 3)
                 <button class="page__numbers" onclick="window.location='{{ $pendingProperties->url(1) }}'">1</button>
@@ -109,7 +103,6 @@
             @endif
         @endif
 
-        <!-- Next Page Button -->
         <button class="page__btn {{ $pendingProperties->currentPage() == $pendingProperties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->nextPageUrl() }}'">&gt;</button>
     </div>
 </div>
@@ -140,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.delete-button').forEach(function (button) {
         button.addEventListener('click', function () {
             propertyIdToDelete = this.getAttribute('data-property-id');
-            // Find the form associated with the delete button
             formToSubmit = document.querySelector('.delete-form[data-property-id="' + propertyIdToDelete + '"]');
             deleteModal.modal('show');
         });
@@ -184,14 +176,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.querySelectorAll('.clickable-image').forEach(function (image) {
         image.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent row click event
+            event.stopPropagation();
             const imageSrc = this.getAttribute('src');
             previewImage.src = imageSrc;
             imagePreviewModal.show();
         });
     });
 
-    // Add this new code for handling the close button
     document.querySelector('#imagePreviewModal .btn-close').addEventListener('click', function () {
         imagePreviewModal.hide();
     });

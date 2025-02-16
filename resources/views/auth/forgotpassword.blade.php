@@ -250,7 +250,6 @@ h2 {
                 </div>
                 <h1 class="h3 mb-5 fw-bold text-center">Lupa Kata Sandi?</h1>
 
-                <!-- Form action adjusted to match the route in web.php -->
                 <form action="{{ route('password.email') }}" method="post">
                     @csrf
                     <div class="form-floating">

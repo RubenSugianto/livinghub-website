@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <h1 class="mb-4">Properti Favorit</h1>
        
-        <!-- Search and Filter Buttons -->
+        <!-- Search and Filter -->
         <div class="search-bar mb-5">
             <form action="{{ route('favorites') }}" method="GET" class="input-group">
                 <input type="text" name="search" id="searchInput" value="{{ request('search') }}" placeholder="Cari Properti..." class="form-control">
@@ -26,7 +26,7 @@
             </form>
         </div>
 
-        <!-- Filter Modal Dialog Box -->
+        <!-- Filter Modal -->
         <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -38,7 +38,6 @@
                     </div>
                 <div class="modal-body">
                         <form action="{{ route('favorites') }}" method="GET" id="filterForm">
-                            <!-- Status Filter -->
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -153,7 +152,7 @@
             </div>
             @endif
 
-            <!-- Comparison Table -->
+            <!-- Tabel Comporison -->
             <div id="comparisonTableContainer" class="mt-4" style="display: none;">
                 <div class="table-container"> 
                 <button id="closeTableButton" class="btn btn-danger btn-sm float-right mb-2">✖</button>
@@ -166,7 +165,7 @@
                             </tr>
                         </thead>
                         <tbody id="comparisonTableBody">
-                            <!-- Comparison data will be inserted here -->
+                            <!-- Data Perbandingan -->
                         </tbody>
                     </table>
                 </div>
@@ -209,11 +208,9 @@
                             </div>
                         </a>
                     
-                        <!-- Star Checkbox -->
                         <input type="checkbox" id="star-checkbox-{{ $property->id }}" class="compare-checkbox star-checkbox" data-property-id="{{ $property->id }}">
                         <label for="star-checkbox-{{ $property->id }}"></label>
                     </div>
-                    <!-- Delete Button -->
                     <button type="button" class="btn btn-link delete-button" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $property->id }}').submit();">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </button>
@@ -228,12 +225,10 @@
 
 
 
-            <!-- Pagination buttons -->
+            <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $favorites->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $favorites->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($favorites->lastPage() > 1)
                     @if ($favorites->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $favorites->url(1) }}'">1</button>
@@ -254,14 +249,13 @@
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                 <button class="page__btn {{ $favorites->currentPage() == $favorites->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $favorites->nextPageUrl() }}'">&gt;</button>
             </div>
          </div>
 
-        <!-- Comparison Table -->
+        <!-- Tabel Perbandingan -->
         <div id="comparisonTableContainer" class="mt-4" style="display: none;">
-            <div class="table-container"> <!-- Added container for background -->
+            <div class="table-container"> 
             <h2>Tabel Perbandingan</h2>
                 <table class="table table-striped">
                     <thead>
@@ -272,7 +266,7 @@
                         </tr>
                     </thead>
                     <tbody id="comparisonTableBody">
-                        <!-- Comparison data will be inserted here -->
+                        <!-- Data Perbandingan -->
                     </tbody>
                 </table>
             </div>

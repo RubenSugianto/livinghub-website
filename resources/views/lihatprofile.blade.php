@@ -403,7 +403,6 @@
 @endsection
 @section('content')
 
-<!-- Delete Account Modal -->
 <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -702,7 +701,7 @@
             }
         }
 
-        // Close modal when clicking outside the modal content
+        // tutup modal klo klik selain dr modal 
         window.addEventListener('click', function(event) {
             if (event.target === document.getElementById('deleteAccountModal') || 
                 event.target.matches('#deleteAccountModal .btn-secondary') || 
@@ -720,7 +719,7 @@
 
         document.getElementById('informasiPribadiLink').addEventListener('click', function(event) {
             event.preventDefault();
-            // Show Informasi Pribadi section
+            // tunjukin section informasi pribadi
             document.getElementById('informasiPribadiSection').style.display = 'block';
             document.getElementById('ubahKataSandiSection').style.display = 'none';
             this.classList.add('active');
@@ -729,7 +728,7 @@
 
         document.getElementById('ubahKataSandiLink').addEventListener('click', function(event) {
             event.preventDefault();
-            // Show Ubah Kata Sandi section
+            // tunjukin section ubah kata sandi
             document.getElementById('informasiPribadiSection').style.display = 'none';
             document.getElementById('ubahKataSandiSection').style.display = 'block';
             this.classList.add('active');
@@ -748,11 +747,11 @@
         };
 
         @if ($errors->has('old_password') || $errors->has('password') || $errors->has('password_confirmation'))
-            // If there are errors in the password change form, show the ubahKataSandiSection
+            // kalau error saat ubah kata sandi, kembali ke section ubah kata sandi
             informasiPribadiSection.style.display = 'none';
             ubahKataSandiSection.style.display = 'block';
         @else
-            // Otherwise, show the informasiPribadiSection
+            // kalau ga balik ke section informasi pribadi
             informasiPribadiSection.style.display = 'block';
             ubahKataSandiSection.style.display = 'none';
         @endif

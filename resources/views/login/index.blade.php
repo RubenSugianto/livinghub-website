@@ -11,7 +11,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ganti dari center ke flex-start agar container berada di atas */
+    align-items: flex-start;
     height: 100vh;
     background-color: #f8f9fa;
     margin: 0;

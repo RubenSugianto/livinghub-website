@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container mt-4 dijual-page">
- <!-- Search and filter buttons -->
+ <!-- Search and filter -->
 
 <div class="search-bar mb-5">
     <form action="{{ route('search') }}" method="GET" class="input-group">
@@ -21,11 +21,11 @@
         </button>
     </form>
     <div class="keyword-suggestions mt-15">
-        <!-- Keyword suggestions will be dynamically inserted here -->
+        <!-- Kata Kata Rekomendasi -->
     </div>
 </div>
 
-<!-- Filter Modal Dialog Box -->
+<!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -208,12 +208,10 @@
                 </div>
             @endforeach
 
-            <!-- Pagination buttons -->
+            <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($properties->lastPage() > 1)
                     @if ($properties->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
@@ -234,7 +232,6 @@
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
             </div>
         @endif
@@ -257,7 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search-input');
     const searchForm = document.querySelector('.search-bar form');
 
-    // List of potential keywords (you can extend this list)
     const keywords = [
         'Rumah mewah', 'Rumah asri', 'Apartemen murah', 'Ruko disewa',
         'Tanah dijual', 'Rumah strategis', 'Apartemen dijual', 'Ruko minimalis',
@@ -266,13 +262,11 @@ document.addEventListener('DOMContentLoaded', function() {
         'Rumah luas', 'Kost eksklusif', 'Ruko ramai', 'Tanah strategis'
     ];
 
-    // Function to generate random keywords
     function getRandomKeywords(count) {
         const shuffled = keywords.sort(() => 0.5 - Math.random());
         return shuffled.slice(0, count);
     }
 
-    // Generate and display keyword suggestions
     function displayKeywordSuggestions() {
         const randomKeywords = getRandomKeywords(5);
         keywordSuggestions.innerHTML = randomKeywords.map(keyword => 
@@ -280,10 +274,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ).join('');
     }
 
-    // Initial display of keyword suggestions
     displayKeywordSuggestions();
 
-    // Event delegation for keyword buttons
     keywordSuggestions.addEventListener('click', function(event) {
         if (event.target.classList.contains('keyword-btn')) {
             searchInput.value = event.target.textContent;

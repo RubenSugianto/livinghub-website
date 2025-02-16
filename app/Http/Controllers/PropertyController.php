@@ -16,14 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PropertyController extends Controller
 {
-    // Mengambil semua properti
     public function index()
     {
         $properties = Property::all();
         return view('home', compact('properties'));
     }
 
-    // Menampilkan detail properti
     public function show(Property $property, Request $request)
     {
         $propertyImages = PropertyImage::where('property_id', $property->id)->get();
@@ -33,19 +31,17 @@ class PropertyController extends Controller
         return view('property', compact('property', 'propertyImages', 'document'));
     }
 
-    // Menampilkan form untuk menambahkan properti
     public function add()
     {
         return view('addproperty');
     }
 
-    // Menyimpan properti baru
     public function store(Request $request)
     {
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                if ($file->getSize() > 2048 * 1024) { // 2MB dalam byte
+                if ($file->getSize() > 2048 * 1024) { 
                     return redirect()->back()->withErrors([
                         'images' => 'Ukuran setiap gambar tidak boleh lebih dari 2MB.',
                     ]);
@@ -54,7 +50,7 @@ class PropertyController extends Controller
         }
 
         $request->validate([
-            'name' => ['required', 'string', 'max:20'],
+            'name' => ['required', 'string', 'max:35'],
             'price' => ['required', 'numeric', 'min:0'], 
             'province' => ['required', 'string'],
             'location' => ['required', 'string'],
@@ -74,16 +70,13 @@ class PropertyController extends Controller
         ]);
     
 
-        // Get the authenticated user
         $user = auth()->user();
 
-        // Check if the user is a buyer and update to seller if true
         if ($user->role === 'buyer') {
             $user->role = 'seller';
             $user->save();
         }
 
-        // Create a new property
         $property = Property::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
@@ -104,7 +97,6 @@ class PropertyController extends Controller
         ]);
 
 
-        // Menyimpan gambar properti
         if($files = $request->file('images')) {
             foreach($files as $key => $file) {
                 $extension = $file ->getClientOriginalExtension();
@@ -120,7 +112,6 @@ class PropertyController extends Controller
             }
         }
 
-        // Membuat dokumen properti
         Document::create([
             'property_id' => $property->id,
             'user_id' => auth()->id(),
@@ -131,28 +122,26 @@ class PropertyController extends Controller
         return redirect()->route('home')->with('success', 'Properti berhasil ditambahkan.');
     }
 
-     // Show the form for editing a specific property
     public function edit($id)
     {
         $property = Property::findOrFail($id);
-        $propertyImages = PropertyImage::where('property_id', $id)->get(); // Add this line
-        $imageIds = $propertyImages->pluck('id'); // Get only the IDs
+        $propertyImages = PropertyImage::where('property_id', $id)->get(); 
+        $imageIds = $propertyImages->pluck('id'); 
         $document = $property->document;
 
         if ($property->check === 'Pending' || $document->status === 'Pending') {
             return redirect()->back()->with('error', 'Properti atau dokumen masih dalam peninjauan dan tidak dapat diedit.');
         }
 
-        return view('properties.edit', compact('property', 'propertyImages', 'imageIds', 'document')); // Update this line
+        return view('properties.edit', compact('property', 'propertyImages', 'imageIds', 'document'));
     }
  
-     // Update a specific property
      public function update(Request $request, $id)
      {
 
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                if ($file->getSize() > 2048 * 1024) { // Konversi ke byte
+                if ($file->getSize() > 2048 * 1024) { 
                     return redirect()->back()->withErrors([
                         'image' => 'Ukuran gambar tidak boleh lebih dari 2MB.',
                     ]);
@@ -162,7 +151,7 @@ class PropertyController extends Controller
 
         $request->validate([
              'name' => 'required|string|max:255',
-             'price' => 'required|numeric|min:0', // Changed to numeric and removed max limit
+             'price' => 'required|numeric|min:0', 
              'full_location' => 'required|string|max:255', 
              'description' => 'required|string',
              'bedroom' => 'required|integer',
@@ -173,7 +162,7 @@ class PropertyController extends Controller
              'status' => 'required|string|max:50',
              'type' => 'required|string|max:50',
              'images.*' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
-             'existing_images' => 'array', // Array of existing image IDs (hidden inputs in the form)
+             'existing_images' => 'array', 
          ]);
 
          
@@ -184,31 +173,31 @@ class PropertyController extends Controller
          }
          $property->update($request->except('images', 'existing_images'));
      
-         // Handle existing images
+         // Menghandle Image Existing
          $existingImageIds = $request->input('existing_images', []);
          $currentImageIds = $property->images->pluck('id')->toArray();
-     
-         // Delete images that are no longer in the existing_images list
+
+         // hapus gambar yg gaada lg di existing_images list
          foreach (array_diff($currentImageIds, $existingImageIds) as $imageId) {
             $image = PropertyImage::find($imageId);
             if ($image) {
                 $imagePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $image->images));
-        
-                // Check if the file exists in the public directory
+
+                // cek file nya ada ga di public directory
                 if (file_exists($imagePath)) {
-                    unlink($imagePath); // Use unlink instead of Storage::delete for public files
+                    unlink($imagePath); // Gunakan Unlink, bukan Storage:delete untuk public file
                 } 
         
-                // Delete the database record after checking
+                // Delete di databse setelah pengecekan untuk image yang dihapus
                 $image->forceDelete();
             }
         }
      
-         // Handle newly uploaded images
+         // Handle image baru
          if ($files = $request->file('images')) {
-            foreach ($files as $key => $file) { // Add $key to match the store method approach
+            foreach ($files as $key => $file) { 
                 $extension = $file->getClientOriginalExtension();
-                $filename = $key . '-' . time() . '.' . $extension; // Match the naming convention
+                $filename = $key . '-' . time() . '.' . $extension; 
                 $path = 'uploads/properties/';
                 $file->move($path, $filename);
         
@@ -227,31 +216,27 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        // Check and delete related likes
+        // hapus data data yang berhubungan dengan properti
         $likes = Like::where('property_id', $property->id)->get();
         if ($likes->isNotEmpty()) {
             Like::where('property_id', $property->id)->delete();
         }
 
-        // Check and delete related favorites
         $favorites = Favourite::where('property_id', $property->id)->get();
         if ($favorites->isNotEmpty()) {
             Favourite::where('property_id', $property->id)->delete();
         }
 
-        // Check and delete related property images
         $propertyImages = PropertyImage::where('property_id', $property->id)->get();
         if ($propertyImages->isNotEmpty()) {
             PropertyImage::where('property_id', $property->id)->delete();
         }
 
-        // Check and delete related documents
         $documents = Document::where('property_id', $property->id)->get();
         if ($documents->isNotEmpty()) {
             Document::where('property_id', $property->id)->delete();
         }
 
-        // Delete the property
         $property->delete();
 
         return redirect()->route('myproperties')->with('success', 'Properti berhasil dihapus.');
@@ -263,11 +248,9 @@ class PropertyController extends Controller
     {
         $query = Property::query();
 
-       // Filter based on various fields, including document type
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($query) use ($search) {
-                // Filter properties based on property fields
                 $query->where('name', 'LIKE', "%{$search}%")
                     ->orWhere('location', 'LIKE', "%{$search}%")
                     ->orWhere('description', 'LIKE', "%{$search}%")
@@ -275,7 +258,6 @@ class PropertyController extends Controller
                     ->orWhere('status', 'LIKE', "%{$search}%")
                     ->orWhere('type', 'LIKE', "%{$search}%");
 
-                // Join with the documents table to filter based on document type
                 $query->orWhereHas('documents', function ($query) use ($search) {
                     $query->where('type', 'LIKE', "%{$search}%");
                 });
@@ -347,17 +329,12 @@ class PropertyController extends Controller
             });
         }
 
-        // Paginasi hasil pencarian
         $properties = $query->paginate(10);
 
         return view('search-results', compact('properties'));
     }
 
-    // Menambahkan properti ke favorit
-  // Add to Favorites
-
- 
-      // Add to Favorites
+      // Menambahkan ke favorit
       public function favorite(Property $property)
       {
           Favourite::firstOrCreate([
@@ -375,7 +352,7 @@ class PropertyController extends Controller
           ]);
       }
   
-      // Remove from Favorites
+      // Remove Dari Favorites
       public function unfavorite(Property $property)
       {
           $favourite = Favourite::where('user_id', auth()->id())
@@ -396,68 +373,69 @@ class PropertyController extends Controller
           ]);
       }
   
-      // View Favorite Properties
+      // View Properti Favorite
       public function favorites()
       {
           $favorites = auth()->user()->favorites()->get();
           return view('favourites', compact('favorites'));
       }
-  // Like a Property
-public function like(Property $property)
-{
-    Like::firstOrCreate([
-        'user_id' => auth()->id(),
-        'property_id' => $property->id,
-    ], [
-        'id' => (string) Str::uuid(),
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+      
+    // Like sebuah property
+    public function like(Property $property)
+    {
+        Like::firstOrCreate([
+            'user_id' => auth()->id(),
+            'property_id' => $property->id,
+        ], [
+            'id' => (string) Str::uuid(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-    return response()->json([
-        'success' => true,
-        'message' => 'Property liked successfully.'
-    ]);
-}
-
-// Unlike a Property
-public function unlike(Property $property)
-{
-    $like = Like::where('user_id', auth()->id())
-        ->where('property_id', $property->id)
-        ->first();
-
-    if ($like) {
-        $like->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Property unliked successfully.'
+            'message' => 'Property liked successfully.'
         ]);
     }
 
-    return response()->json([
-        'success' => false,
-        'message' => 'Property not found in likes.'
-    ]);
-}
+    // Unlike sebuah property
+    public function unlike(Property $property)
+    {
+        $like = Like::where('user_id', auth()->id())
+            ->where('property_id', $property->id)
+            ->first();
 
-// View Liked Properties
-public function likes()
-{
-    $likes = auth()->user()->likes()->get();
-    return view('likes', compact('likes'));
-}
+        if ($like) {
+            $like->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Property unliked successfully.'
+            ]);
+        }
 
-// Get Like Count for a Property
-public function likeCount(Property $property)
-{
-    $count = $property->likes()->count(); // Hitung jumlah like untuk properti ini
+        return response()->json([
+            'success' => false,
+            'message' => 'Property not found in likes.'
+        ]);
+    }
 
-    return response()->json([
-        'success' => true,
-        'count' => $count,
-    ]);
-}
+    // Lihat Properti Liked
+    public function likes()
+    {
+        $likes = auth()->user()->likes()->get();
+        return view('likes', compact('likes'));
+    }
+
+    // Dapatkan like count untuk properti
+    public function likeCount(Property $property)
+    {
+        $count = $property->likes()->count();
+
+        return response()->json([
+            'success' => true,
+            'count' => $count,
+        ]);
+    }
 
       // Compare properties
       public function compare(Request $request)
@@ -480,13 +458,13 @@ public function likeCount(Property $property)
                 'electricity' => $property->electricity,
                 'status' => $property->status,
                 'type' => $property->type,
-                'document' => $documents[$property->id] ?? null, // Get documents related to this property
+                'document' => $documents[$property->id] ?? null,
             ];
         }
         return response()->json($response);
       }
   
-      // Show comments of a property
+      // Show comments dari property
       public function showComment($id)
       {
           $property = Property::with('comments')->findOrFail($id);

@@ -17,7 +17,7 @@
 @endif
 
     <div class="container mt-4 text-center">
-        <!-- Confirmation Modal -->
+
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -36,7 +36,6 @@
             </div>
         </div>
 
-        <!-- Property Pending Status Modal -->
         <div class="modal fade" id="propertyPendingModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -54,7 +53,6 @@
             </div>
         </div>
 
-        <!-- Document Pending Status Modal -->
         <div class="modal fade" id="documentPendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -72,7 +70,6 @@
             </div>
         </div>
 
-        <!-- Modal for Image Preview -->
         <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -97,7 +94,7 @@
             </form>
         </div>
 
-        <!-- Filter Modal Dialog Box -->
+        <!-- Filter Modal -->
     <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -216,7 +213,6 @@
     </div>
 </div>
 
-<!-- Modal: Property Review Status -->
 <div class="modal fade" id="propertyReviewModal" tabindex="-1" aria-labelledby="propertyReviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -234,7 +230,6 @@
     </div>
 </div>
 
-<!-- Modal: Property Rejected Status -->
 <div class="modal fade" id="propertyRejectedModal" tabindex="-1" aria-labelledby="propertyRejectedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -252,7 +247,6 @@
     </div>
 </div>
 
-<!-- Modal: Property Rejected -->
 <div class="modal fade" id="propertyRejectedModal2" tabindex="-1" aria-labelledby="propertyRejectedModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -334,23 +328,22 @@
                                     </form>
                                     
                                     @if ($property->document->status === 'Pending' && $property->check != 'Pending')
-                                        <!-- Pending Status of Document -->
                                         <a href="javascript:void(0);" class="btn btn-warning"
                                         data-bs-toggle="modal" data-bs-target="#documentPendingModal">
                                             <i class="fa fa-file-text" aria-hidden="true"></i>
                                         </a>
                                     @elseif ($property->check === 'Pending')
-                                        <!-- Pending Status of Property -->
                                         <a href="javascript:void(0);" class="btn btn-warning"
                                         data-bs-toggle="modal" data-bs-target="#propertyPendingModal">
                                             <i class="fa fa-file-text" aria-hidden="true"></i>
                                         </a>
                                     @else
-                                        <!-- Button for non-pending status that navigates to document edit page, always using btn-secondary -->
+                                        <!-- kalo properti reject, kasih modal properti telah ditolak, selalu pake btn-secondary -->
                                          @if($property->check === 'Rejected')
                                             <a href="javascript:void(0);" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#propertyRejectedModal2">
                                                 <i class="fa fa-file-text"></i>
                                             </a>
+                                        <!-- kalo di accept, ke properti edit -->
                                          @else
                                             <a href="{{ route('document.edit', $property->id) }}" class="btn btn-secondary">
                                                 <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -364,12 +357,10 @@
                     </tbody>
                 </table>
 
-                <!-- Pagination buttons -->
+                <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($properties->lastPage() > 1)
                     @if ($properties->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
@@ -390,7 +381,6 @@
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
             </div>
         @endif
@@ -472,14 +462,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.querySelectorAll('.clickable-image').forEach(function (image) {
         image.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent row click event
+            event.stopPropagation();
             const imageSrc = this.getAttribute('src');
             previewImage.src = imageSrc;
             imagePreviewModal.show();
         });
     });
 
-    // Add this new code for handling the close button
     document.querySelector('#imagePreviewModal .btn-close').addEventListener('click', function () {
         imagePreviewModal.hide();
     });

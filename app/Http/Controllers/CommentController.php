@@ -22,14 +22,14 @@ class CommentController extends Controller
         }
         $userName = Auth::user()->username;
 
-        // Simpan komentar ke database
+        // Simpen komen ke db
         Comment::create([
             'property_id' => $request->property_id,
-            'user_name' => $userName, // Nama diambil dari user yang sedang login
+            'user_name' => $userName, // ambil nama user yg lg login
             'comment' => $request->comment,
         ]);
 
-        // Redirect kembali ke halaman properti
+        // Redirect ke halaman properti
         return redirect()->back()->with('success', 'Komentar berhasil ditambahkan!');
     }
 }

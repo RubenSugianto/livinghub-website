@@ -17,7 +17,6 @@
 @endif
 
 <div class="container">
-    <!-- Back Button placed at the top-left corner inside the container -->
     <div class="row">
         <div class="col-md-12">
             <button type="button" class="btn btn-secondary back-btn" onclick="goBack()">
@@ -33,7 +32,6 @@
                 @csrf
                 @method('PUT')
 
-             <!-- Property Images -->
         <div class="form-group">
             <label for="images">Foto Properti</label>
             <div class="image-upload">
@@ -45,7 +43,6 @@
         @for ($i = 0; $i < $maxImages; $i++)
             @if ($i < $existingImagesCount)
 
-                <!-- Display existing images -->
                 <div class="image-slot" data-index="{{ $i }}">
                     @php
                         $imagePath = $propertyImages[$i]->images;
@@ -55,7 +52,6 @@
                     <input type="hidden" name="existing_images[]" value="{{ $propertyImages[$i]->id }}">
                 </div>
             @else
-                <!-- Provide slots for new image uploads -->
                 <div class="image-slot" data-index="{{ $i }}">
                     <input type="file" id="image{{ $i }}" name="images[]" class="image-input" onchange="previewImage(event, {{ $i }})">
                     <label for="image{{ $i }}" class="image-label">+</label>
@@ -65,13 +61,11 @@
         @endfor
     </div>
 
-                <!-- Error message if no image is uploaded -->
                 <p id="imageError" class="text-danger" style="display: none;">Anda harus mengunggah setidaknya satu foto sebelum menyimpan.</p>
                 <p class="helper-text">Format foto harus .jpg, .jpeg, .png, .webp dan ukuran maksimal 2 MB. Maksimal 10 foto yang berbeda satu sama lain untuk menarik perhatian calon pembeli.</p>
                 </div>
 
 
-         <!-- Property Details -->
             <div class="form-group-row">
                 <label for="name">Nama Properti</label>
                 <div class="input-container">
@@ -114,7 +108,6 @@
                     <div class="input-container">
                         <select class="form-control" id="location" name="location" disabled>
                             <option value="" disabled>Pilih Kota</option>
-                            <!-- Dynamic city options will be populated here -->
                         </select>
                     </div>
                 </div>
@@ -203,26 +196,6 @@
     </div>
 </div>
 
-<!-- @if ($errors->has('images'))
-    <div class="alert alert-danger fade" id="form-alert">
-        <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
-        <span class="alert-content">
-            <strong>{{ $errors->first('images') }}</strong>
-        </span>
-        <button type="button" class="btn-close close-btn" aria-label="Close" onclick="this.parentElement.style.display='none';">✖</button>
-    </div>
-@endif
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const alertBox = document.getElementById('form-alert');
-        if (alertBox) {
-            // Tampilkan alert secara animasi
-            alertBox.style.display = 'block';
-            alertBox.classList.add('show'); // Tambahkan efek jika diperlukan
-        }
-    });
-</script> -->
 
 <script>
     function previewImage(event, index) {
@@ -306,39 +279,35 @@
         "Bekasi": ["Kota Bekasi"]
     };
 
-    const citySelect = document.getElementById('city'); // 'Provinsi' dropdown
-    const detailedLocationGroup = document.getElementById('detailed-location-group'); // 'Kota' dropdown group
-    const locationSelect = document.getElementById('location'); // 'Kota' dropdown
+    const citySelect = document.getElementById('city'); 
+    const detailedLocationGroup = document.getElementById('detailed-location-group'); 
+    const locationSelect = document.getElementById('location'); 
 
     function populateDetailedLocations(locations, defaultLocation = '') {
-        locationSelect.innerHTML = '<option value="" disabled>Pilih Kota</option>'; // Reset city options
+        locationSelect.innerHTML = '<option value="" disabled>Pilih Kota</option>';
         locations.forEach(location => {
             const option = document.createElement('option');
             option.value = location;
             option.textContent = location;
             if (location === defaultLocation) {
-                option.selected = true; // Set default selected option if matches
+                option.selected = true; 
             }
-            locationSelect.appendChild(option); // Add city options dynamically
+            locationSelect.appendChild(option); 
         });
     }
 
-    // Event listener for when the province is changed
     citySelect.addEventListener('change', function () {
         const selectedCity = citySelect.value;
-        // Always populate 'Kota' dropdown regardless of selection
         populateDetailedLocations(detailedLocations[selectedCity] || [], locationSelect.value);
     });
 
-    // Initial population of 'Kota' based on the default province
     if (citySelect.value) {
-        citySelect.dispatchEvent(new Event('change')); // Populate 'Kota' if a province is selected
+        citySelect.dispatchEvent(new Event('change')); 
     }
 
-    // Set the default value for location if available (from the database)
-    const defaultLocation = '{{ old('location', $property->location) }}'; // Get default from PHP
+    const defaultLocation = '{{ old('location', $property->location) }}'; 
     if (defaultLocation) {
-        populateDetailedLocations(detailedLocations[citySelect.value] || [], defaultLocation); // Populate 'Kota' dropdown
+        populateDetailedLocations(detailedLocations[citySelect.value] || [], defaultLocation); 
     }
 
 </script>

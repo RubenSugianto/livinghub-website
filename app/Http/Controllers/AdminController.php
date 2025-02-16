@@ -13,12 +13,11 @@ class AdminController extends Controller
 
     public function showPendingProperties()
     {
-        // Fetch properties where 'check' status is 'Pending' along with their images
+        // tampilin properti yg status nya pending
         $pendingProperties = Property::with('images')->where('check', 'Pending')->paginate(10);
 
         $title = "Pending Properties";
         
-        // Return view with the pending properties data
         return view('admin.adminproperty', compact('pendingProperties', 'title'));
     }
 
@@ -26,7 +25,7 @@ class AdminController extends Controller
     {
         $property = Property::find($id);
         if ($property) {
-            $property->check = 'Approved'; // Ubah status menjadi Approved
+            $property->check = 'Approved';
             $property->save();
             return redirect()->back()->with('success', 'Properti berhasil disetujui.');
         }
@@ -37,7 +36,7 @@ class AdminController extends Controller
     {
         $property = Property::find($id);
         if ($property) {
-            $property->check = 'Rejected'; // Ubah status menjadi Rejected
+            $property->check = 'Rejected';
             $property->save();
             return redirect()->back()->with('success', 'Properti berhasil ditolak.');
         }
@@ -46,13 +45,13 @@ class AdminController extends Controller
 
     public function showDocuments()
     {
-        $documents = Document::where('status', 'Pending')->with('property')->paginate(10); // Ambil dokumen dengan status Pending
+        $documents = Document::where('status', 'Pending')->with('property')->paginate(10);
         $pendingProperties = Property::with('images')->where('check', 'Pending')->paginate(10);
         
         return view('admin.admindocument', [
             'title' => 'Approve Documents',
             'documents' => $documents,
-            'pendingProperties' => $pendingProperties, // Kirim data ini ke view
+            'pendingProperties' => $pendingProperties,
         ]);
     }
 
@@ -60,7 +59,7 @@ class AdminController extends Controller
     {
         $document = Document::find($id);
         if ($document) {
-            $document->status = 'Approved'; // Ubah status menjadi 'Approved'
+            $document->status = 'Approved';
             $document->save();
             return redirect()->route('document.pending')->with('success', 'Dokumen berhasil disetujui.');
         }
@@ -71,7 +70,7 @@ class AdminController extends Controller
     {
         $document = Document::find($id);
         if ($document) {
-            $document->status = 'Rejected'; // Ubah status menjadi 'Rejected'
+            $document->status = 'Rejected';
             $document->save();
             return redirect()->route('document.pending')->with('success', 'Dokumen berhasil ditolak.');
         }

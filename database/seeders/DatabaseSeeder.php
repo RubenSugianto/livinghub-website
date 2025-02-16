@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
-        // user test so no need to register again
         User::factory()->create([
             'name' => 'tester123',
             'username' => 'tester123',
@@ -62,17 +61,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // Property::factory(20)->create();
-
-        // Document::factory(20)->create();
 
         Property::factory(20)
         ->create()
         ->each(function ($property) {
-            // Link a document to each property and assign a user
             Document::factory()->create([
-                'property_id' => $property->id, // Link the document to the property
-                'user_id' => User::inRandomOrder()->first()->id, // Assign a random user to the document
+                'property_id' => $property->id, 
+                'user_id' => User::inRandomOrder()->first()->id, 
             ]);
         });
     }

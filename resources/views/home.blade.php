@@ -683,24 +683,19 @@ img {
     </div>
 @endif
 
-<!-- Header Image -->
 <div class="header-pic-container">
     <img src="HeaderPic.png" alt="Header Image">
 
-    <!-- Button -->
     <a href="{{ route('search')}}" class="header-button">Jelajahi Properti</a>
 </div>
 
-<!-- Text Section -->
 <div class="container text-center mt-5" style="padding-top: 50px;">
     <h2 style="font-size: 5rem; font-weight: 700;">Yang kami sediakan</h2>
     <p style="font-size: 1.25rem; font-weight: 400;">Temukan properti impian Anda dengan mudah bersama kami, yang siap mendampingi Anda.</p>
 </div>
 
-<!-- Cards Section -->
 <div class="container mt-4">
     <div class="row text-center">
-        <!-- First Card -->
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
@@ -716,7 +711,6 @@ img {
             </div>
         </div>
 
-        <!-- Second Card -->
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
@@ -732,7 +726,6 @@ img {
             </div>
         </div>
 
-        <!-- Third Card -->
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body">
@@ -750,7 +743,7 @@ img {
     </div>
 </div>
 
-<!-- Carousel Section -->
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -786,7 +779,6 @@ img {
   </a>
 </div>
 
- <!-- Property Card-->
 <div class="container mt-4">
     <h2 class="latest-property-heading mb-4">Properti Terbaru</h2>
     <div class="row">
@@ -805,7 +797,6 @@ img {
                         </div>
                     </div>
 
-                    <!-- Like Button -->
                     <div class="like-button">
                         @auth
                             <button data-property-id="{{ $property->id }}" class="like-btn btn @if(auth()->user()->likes && auth()->user()->likes->contains($property->id)) btn-danger @else btn-outline-danger @endif" aria-label="Like Property">
@@ -851,12 +842,10 @@ img {
 </div>
 
 
-<!-- Pagination buttons -->
+<!-- Pagination -->
 <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $properties->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($properties->lastPage() > 1)
                     @if ($properties->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $properties->url(1) }}'">1</button>
@@ -877,12 +866,11 @@ img {
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                 <button class="page__btn {{ $properties->currentPage() == $properties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $properties->nextPageUrl() }}'">&gt;</button>
             </div>
 
 
-<!-- Search and filter buttons -->
+<!-- Search and filter -->
 <div class="search-bar mb-5">
     <h2 style="text-align: center; font-weight: bold;">Mencari sesuatu yang lain?</h2>
     <form action="{{ route('search') }}" method="GET" class="input-group">
@@ -893,12 +881,12 @@ img {
         </button>
     </form>
     <div class="keyword-suggestions">
-        <!-- Keyword suggestions will be dynamically inserted here -->
+        <!-- Kata Kata Rekomendasi -->
     </div>
 </div>
 
 
-<!-- Filter Modal Dialog Box -->
+<!-- Filter Modal -->
 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -1025,7 +1013,6 @@ img {
 <script>
     window.addEventListener("pageshow", function(event) {
     if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-        // Reload the page if it's from cache
         location.reload();
         }
     });
@@ -1063,7 +1050,6 @@ img {
     const searchInput = document.getElementById('searchInput');
     const searchForm = document.querySelector('.search-bar form');
 
-    // List of possible keywords
     const keywords = [
         'Rumah mewah', 'Rumah asri', 'Apartemen murah', 'Ruko disewa',
         'Tanah dijual', 'Rumah strategis', 'Apartemen dijual', 'Ruko minimalis',
@@ -1072,13 +1058,11 @@ img {
         'Rumah luas', 'Kost eksklusif', 'Ruko ramai', 'Tanah strategis'
     ];
 
-    // Function to generate random keywords
     function generateRandomKeywords(count) {
         const shuffled = keywords.sort(() => 0.5 - Math.random());
         return shuffled.slice(0, count);
     }
 
-    // Function to create keyword suggestion elements
     function createKeywordSuggestions() {
         const randomKeywords = generateRandomKeywords(5);
         keywordSuggestions.innerHTML = '';
@@ -1094,7 +1078,6 @@ img {
         });
     }
 
-    // Generate keyword suggestions on page load
         createKeywordSuggestions();
     });
 
@@ -1103,10 +1086,9 @@ img {
         document.querySelectorAll('.btn-group-toggle .btn').forEach(btn => btn.classList.remove('active'));
     }
     $(document).ready(function() {
-        // Event untuk klik tombol like
         $('.like-btn').click(function(e) {
             e.preventDefault();
-            e.stopPropagation(); // Stop the click event from bubbling up
+            e.stopPropagation();
 
             var propertyId = $(this).data('property-id');
             var url = '';
@@ -1116,20 +1098,17 @@ img {
                 return;
             }
 
-            // Tentukan URL berdasarkan status like/unlike
             if ($(this).hasClass('btn-danger')) {
                 url = '{{ route("properties.unlike", "__property_id__") }}'.replace('__property_id__', propertyId);
             } else {
                 url = '{{ route("properties.like", "__property_id__") }}'.replace('__property_id__', propertyId);
             }
 
-            // Nonaktifkan tombol untuk mencegah multiple clicks
+
             $(this).prop('disabled', true);
 
-            // Store reference to the button
             var $button = $(this); 
 
-            // Kirim permintaan AJAX
             $.ajax({
                 url: url,
                 method: 'POST',
@@ -1139,11 +1118,10 @@ img {
                 },
                 success: function(response) {
                     if (response.success) {
-                        // Ambil elemen like count yang hanya berisi angka
+                        
                         let likeCountElement = $button.closest('.property-card').find('.like-count');
                         let currentLikes = parseInt(likeCountElement.text());
 
-                        // Pastikan nilai currentLikes tidak NaN
                         if (isNaN(currentLikes)) {
                             currentLikes = 0;
                         }
@@ -1151,16 +1129,13 @@ img {
                         if ($button.hasClass('btn-danger')) {
                             $button.removeClass('btn-danger').addClass('btn-outline-danger');
                             $button.find('i').removeClass('fa-heart').addClass('fa-heart-o');
-                            // Decrease like count
                             likeCountElement.text(currentLikes - 1);
                         } else {
                             $button.removeClass('btn-outline-danger').addClass('btn-danger');
                             $button.find('i').removeClass('fa-heart-o').addClass('fa-heart');
-                            // Increase like count
                             likeCountElement.text(currentLikes + 1);
                         }
                     } else if (response.status === 401) {
-                        // If the user is not logged in, redirect to login page
                         window.location.href = '{{ route("login") }}';
                     }
                 },
@@ -1170,8 +1145,7 @@ img {
                     alert('An error occurred. Please try again.');
                 },
                 complete: function() {
-                    // Aktifkan kembali tombol setelah permintaan selesai
-                    $button.prop('disabled', false);
+                
                 }
             });
         });

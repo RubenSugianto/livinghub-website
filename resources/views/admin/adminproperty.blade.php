@@ -1,8 +1,5 @@
 @extends('master')
 
-<!-- @section('navbar')
-    @include('partials.navbaradmin')
-@endsection -->
 
 @section('title', 'My Property')
 @section('content')
@@ -34,7 +31,6 @@
 @endif
 
     <div class="container mt-4 text-center">
-        <!-- Confirmation Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -53,7 +49,6 @@
             </div>
         </div>
 
-        <!-- Property Pending Status Modal -->
         <div class="modal fade" id="propertyPendingModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -71,7 +66,6 @@
             </div>
         </div>
 
-        <!-- Document Pending Status Modal -->
         <div class="modal fade" id="documentPendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -89,7 +83,6 @@
             </div>
         </div>
 
-        <!-- Modal for Image Preview -->
         <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -140,7 +133,6 @@
 
 
                                 <td>     
-                                    <!-- Tombol View -->
                                     <form action="{{ route('property.show', $property->id) }}" method="GET" class="btn" style="display:inline-block; margin: 3.5px;">
                                         @csrf
                                         <input type="hidden" name="fromAdmin" value="true">
@@ -149,7 +141,6 @@
                                         </button>
                                     </form>
 
-                                    <!-- Tombol Approve -->
                                     <form action="{{ route('property.approve', $property->id) }}" method="POST" class="btn" style="display:inline-block; margin: -20px;">
                                         @csrf
                                         @method('post')
@@ -158,7 +149,6 @@
                                         </button>
                                     </form>
 
-                                    <!-- Tombol Reject -->
                                     <form action="{{ route('property.reject', $property->id) }}" method="POST" class="delete-form" style="display:inline-block; margin: 12.5px;">
                                          @csrf
                                         @method('post')
@@ -173,12 +163,10 @@
                     </tbody>
                 </table>
 
-                <!-- Pagination buttons -->
+                <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4 page">
-                <!-- Previous Page Button -->
                 <button class="page__btn {{ $pendingProperties->currentPage() == 1 ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->previousPageUrl() }}'">&lt;</button>
 
-                <!-- Pagination Elements -->
                 @if ($pendingProperties->lastPage() > 1)
                     @if ($pendingProperties->currentPage() > 3)
                         <button class="page__numbers" onclick="window.location='{{ $pendingProperties->url(1) }}'">1</button>
@@ -199,7 +187,6 @@
                     @endif
                 @endif
 
-                <!-- Next Page Button -->
                 <button class="page__btn {{ $pendingProperties->currentPage() == $pendingProperties->lastPage() ? '' : 'active' }}" onclick="window.location='{{ $pendingProperties->nextPageUrl() }}'">&gt;</button>
             </div>
         @endif
@@ -231,7 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.delete-button').forEach(function (button) {
         button.addEventListener('click', function () {
             propertyIdToDelete = this.getAttribute('data-property-id');
-            // Find the form associated with the delete button
             formToSubmit = document.querySelector('.delete-form[data-property-id="' + propertyIdToDelete + '"]');
             deleteModal.modal('show');
         });
@@ -275,14 +261,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.querySelectorAll('.clickable-image').forEach(function (image) {
         image.addEventListener('click', function (event) {
-            event.stopPropagation(); // Prevent row click event
+            event.stopPropagation(); 
             const imageSrc = this.getAttribute('src');
             previewImage.src = imageSrc;
             imagePreviewModal.show();
         });
     });
 
-    // Add this new code for handling the close button
     document.querySelector('#imagePreviewModal .btn-close').addEventListener('click', function () {
         imagePreviewModal.hide();
     });
