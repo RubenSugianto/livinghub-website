@@ -145,14 +145,7 @@
             </div>
         </div>
 
-
-            @if($favorites->isEmpty())
-            <div class="col-12 text-center">
-                <p class="text-muted">Anda belum memiliki properti favorit</p>
-            </div>
-            @endif
-
-            <!-- Tabel Comporison -->
+            <!-- Tabel Perbandingan -->
             <div id="comparisonTableContainer" class="mt-4" style="display: none;">
                 <div class="table-container"> 
                 <button id="closeTableButton" class="btn btn-danger btn-sm float-right mb-2">✖</button>
@@ -253,24 +246,6 @@
             </div>
          </div>
 
-        <!-- Tabel Perbandingan -->
-        <div id="comparisonTableContainer" class="mt-4" style="display: none;">
-            <div class="table-container"> 
-            <h2>Tabel Perbandingan</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Property 1</th>
-                            <th>Property 2</th>
-                        </tr>
-                    </thead>
-                    <tbody id="comparisonTableBody">
-                        <!-- Data Perbandingan -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
 
         @section('scripts')
@@ -287,6 +262,7 @@
         const comparisonTableContainer = document.getElementById('comparisonTableContainer');
         const comparisonTableBody = document.getElementById('comparisonTableBody');
         const closeTableButton = document.getElementById('closeTableButton'); 
+        
         let selectedProperties = [];
 
             checkboxes.forEach(checkbox => {

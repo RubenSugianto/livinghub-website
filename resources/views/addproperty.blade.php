@@ -282,6 +282,7 @@
 
         const propertyForm = document.getElementById('propertyForm');
         propertyForm.addEventListener('submit', function (event) {
+        
             const typeSelect = document.getElementById('typeDocument');
             const customTypeInput = document.getElementById('customType');
 
