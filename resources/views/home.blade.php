@@ -1026,15 +1026,7 @@ img {
             });
         });
 
-    function hideAlert() {
-        const successAlert = document.getElementById('successAlert');
-        if (successAlert) {
-            successAlert.classList.add('hide');
-            setTimeout(() => {
-                successAlert.remove(); 
-            }, 500); 
-        }
-    }
+  
 
     const successAlert = document.getElementById('successAlert');
     if (successAlert) {
@@ -1087,8 +1079,8 @@ img {
     }
     $(document).ready(function() {
         $('.like-btn').click(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); //Biar form gk kekirim
+            e.stopPropagation(); //Biar gk bubbling
 
             var propertyId = $(this).data('property-id');
             var url = '';

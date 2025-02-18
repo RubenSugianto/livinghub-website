@@ -683,13 +683,11 @@
             document.getElementById('removePicture').value = '1';
         });
         
-        // Show delete account modal
         document.querySelector('.delete-account').addEventListener('click', function(event) {
             event.preventDefault();
             document.getElementById('deleteAccountModal').style.display = 'block';
         });
 
-        // Close modal function
         function closeModal() {
             document.getElementById('deleteAccountModal').style.display = 'none';
         }
