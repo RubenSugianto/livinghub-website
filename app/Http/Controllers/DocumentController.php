@@ -30,7 +30,7 @@ class DocumentController extends Controller
 
         $documentType = $request->input('documentType');
         if ($documentType === 'Lainnya') {
-            $documentType = $request->input('customType');  // Use the custom document type
+            $documentType = $request->input('customType'); 
         }
 
         $document->type = $documentType;

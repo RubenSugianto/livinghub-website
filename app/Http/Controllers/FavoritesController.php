@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
 {
-    // Display user's favorite properties
+  
     public function index(Request $request)
     {
         $user = auth()->user();
         
         $query = $user->favorites()->with('user');
 
-        // Search keyword
+      
         $searchKeyword = $request->input('search');
         if ($searchKeyword) {
             $query->where(function ($query) use ($searchKeyword) {
@@ -32,12 +32,11 @@ class FavoritesController extends Controller
                 });
             }
             
-        // Filter by status
+ 
         if ($request->filled('status')) {
             $query->where('status', $request->input('status'));
         }
 
-        // Filter by bedrooms
         if ($request->filled('bedrooms')) {
             $bedrooms = $request->input('bedrooms');
             switch ($bedrooms) {
@@ -56,7 +55,6 @@ class FavoritesController extends Controller
             }
         }
 
-        // Filter by bathrooms
         if ($request->filled('bathrooms')) {
             $bathrooms = $request->input('bathrooms');
             switch ($bathrooms) {
@@ -75,26 +73,24 @@ class FavoritesController extends Controller
             }
         }
 
-        // Filter by land size
+       
         if (($request->filled('land_size_min') || $request->filled('land_size_max'))) {
             $landSizeMin = $request->input('land_size_min', 0);
             $landSizeMax = $request->input('land_size_max', PHP_INT_MAX);
             $query->whereBetween('surfaceArea', [$landSizeMin, $landSizeMax]);
         }
 
-        // Filter by building size
+       
         if (($request->filled('building_size_min') || $request->filled('building_size_max'))) {
             $buildingSizeMin = $request->input('building_size_min', 0);
             $buildingSizeMax = $request->input('building_size_max', PHP_INT_MAX);
             $query->whereBetween('buildingArea', [$buildingSizeMin, $buildingSizeMax]);
         }
 
-        // Filter by property type
         if ($request->filled('property_type')) {
             $query->where('type', $request->input('property_type'));
         }
 
-        // Filter by city
         if ($request->filled('kota')) {
             $kota = $request->input('kota');
             $query->where('location', 'LIKE', '%' . $kota . '%');
@@ -107,14 +103,13 @@ class FavoritesController extends Controller
                 $query->where('type', $certificateType);
             });
         }
-        // Paginate the results (default to 10 per page)
+
         $favorites = $query->paginate(10);
         $title = "Favorite Properties";
 
         return view('favorites', compact('favorites', 'title'));
     }
 
-    // Remove a property from favorites
     public function destroy($id)
     {
         $user = Auth::user();

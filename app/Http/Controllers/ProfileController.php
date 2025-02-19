@@ -38,35 +38,34 @@ class ProfileController extends Controller
             }
         }
 
-        // Handle avatar removal
+        //kl cuma remove tp gk ada foto jd dia replace pake default
         if ($request->input('remove_picture') == '1') {
             if ($user->avatar && Storage::exists('users-avatar/' . $user->avatar)) {
                 Storage::delete('users-avatar/' . $user->avatar);
             }
         
-            // Set default avatar name based on user ID
             $user->avatar = 'default_' . md5($user->id) . '.png';
             $defaultAvatarPath = 'users-avatar/' . $user->avatar;
         
-            // Check if default avatar exists, otherwise copy it
             if (!Storage::exists($defaultAvatarPath)) {
                 $sourcePath = public_path('defaultprofilepicture.png');
                 $destinationPath = storage_path('app/public/' . $defaultAvatarPath);
         
                 if (file_exists($sourcePath)) {
-                    // Copy the default profile picture to the destination path
                     copy($sourcePath, $destinationPath);
                 } else {
                     throw new \Exception("Default profile picture not found at: $sourcePath");
                 }
             }
+
         } else if ($request->hasFile('profilepicture')) {
-            // Delete old avatar if exists
+         
+            // hapus foto
             if ($user->avatar && Storage::exists('users-avatar/' . $user->avatar)) {
                 Storage::delete('users-avatar/' . $user->avatar);
             }
     
-            // Store the new avatar
+            // Simpen foto baru
             $avatarPath = $request->file('profilepicture')->store('users-avatar', 'public');
             $user->avatar = basename($avatarPath); 
         }
@@ -76,6 +75,7 @@ class ProfileController extends Controller
         return redirect()->route('home')->with('success', 'Profil berhasil diperbarui.',);
     }
 
+    //hapus akun
     public function destroy()
     {
         $user = Auth::user();

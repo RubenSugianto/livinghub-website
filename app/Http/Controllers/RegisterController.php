@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        event(new Registered($user));
+        event(new Registered($user)); //utk verifikasi
 
         return redirect()->route('verification.notice')
                          ->with('message', 'Registrasi berhasil! Tolong verifikasi email anda.');
@@ -41,7 +41,7 @@ class RegisterController extends Controller
 
     public function verifypage()
     {
-        return view('auth.verify-email');
+        return view('auth.verify-email'); 
     }
 
     public function verifyrequest(EmailVerificationRequest $request)

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class GoogleLoginController extends Controller
 {
     public function redirect() {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->redirect(); //utk munculin google login
     }
 
     public function callbackGoogle() {
@@ -21,15 +21,15 @@ class GoogleLoginController extends Controller
             $user = User::where('google_id', $google_user->getId())->first();
 
             if (!$user) {
-                // Check if a user exists with the same email as Google account
+                // cek user udh pernah login pake akun googlenya blm
                 $user = User::where('email', $google_user->getEmail())->first();
     
                 if ($user) {
-                    // If user exists, link the Google ID to the existing account
+                    // kalau pernah terdaftar ambil google id nya
                     $user->google_id = $google_user->getId();
                     $user->save();
                 } else {
-                    // If no user exists, create a new user with Google details
+                    // kl gk ada akun bikin akun baru
                     $user = User::create([
                         'name' => $google_user->getName(),
                         'email' => $google_user->getEmail(),
@@ -42,22 +42,7 @@ class GoogleLoginController extends Controller
             Auth::login($user);
             return redirect()->to('/');
 
-            // if (!$user) {
-            //     $new_user = User::create([
-            //         'name' => $google_user->getName(),
-            //         'email' => $google_user->getEmail(),
-            //         'google_id' => $google_user->getId(),
-            //         'username' => strtolower(str_replace(' ', '', $google_user->getName())) . '-' . uniqid(),
-            //     ]);
-
-            //     Auth::login($new_user);
-
-            //     return redirect()->to('/');
-
-            // } else {
-            //     Auth::login($user);
-            //     return redirect()->to('/');
-            // }
+           
         } catch (\Throwable $th) {
             dd('Ada yang salah!'. $th->getMessage());
         }

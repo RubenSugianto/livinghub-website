@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/PropertyController.php
 
 namespace App\Http\Controllers;
 
@@ -171,19 +170,21 @@ class PropertyController extends Controller
             $property->check = 'Pending';
             $property->save();
          }
+
+         //update properti kecuali gmbr
          $property->update($request->except('images', 'existing_images'));
      
-         // Menghandle Image Existing
+         // Ambil ID gmbr yg msh dipake
          $existingImageIds = $request->input('existing_images', []);
          $currentImageIds = $property->images->pluck('id')->toArray();
 
-         // hapus gambar yg gaada lg di existing_images list
+         // cek id perubahan gmbr yg dihapus
          foreach (array_diff($currentImageIds, $existingImageIds) as $imageId) {
             $image = PropertyImage::find($imageId);
             if ($image) {
                 $imagePath = public_path(str_replace('/', DIRECTORY_SEPARATOR, $image->images));
 
-                // cek file nya ada ga di public directory
+                //kl ada perbedaan lgsg hapus gmbr dr databse
                 if (file_exists($imagePath)) {
                     unlink($imagePath); // Gunakan Unlink, bukan Storage:delete untuk public file
                 } 
@@ -243,7 +244,6 @@ class PropertyController extends Controller
     }
 
 
-    // Mencari properti berdasarkan filter
     public function search(Request $request)
     {
         $query = Property::query();
@@ -437,7 +437,7 @@ class PropertyController extends Controller
         ]);
     }
 
-      // Compare properties
+     //membandingkan prop
       public function compare(Request $request)
       {
         $propertyIds = $request->input('propertyIds');
