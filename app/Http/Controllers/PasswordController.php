@@ -26,7 +26,7 @@ class PasswordController extends Controller
             return back()->withErrors(['email' => 'Email tidak ditemukan.']);
         }
     
-        // If the user has a Google login without a password
+        // Google login kl gk ada pw
         if ($user->google_id != null && $user->password == null) {
             return back()->withErrors(['email' => 'Kamu mendaftar dengan Google. Silahkan log in menggunakan Google Account anda.']);
         }

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Add this import
+use Illuminate\Support\Facades\Auth; 
 use App\Models\Property;
 
 class DashboardController extends Controller
 {
     public function showMyProperty()
     {
-        dd("Ini di dashboard");
         $user = Auth::user(); 
         $properties = Property::with('images')->where('user_id', $user->id)->paginate(20); 
         $title = 'My Properties';
